@@ -1,0 +1,112 @@
+[
+  {
+    "slug": "engineering",
+    "title": "Engineering & Systems",
+    "kicker": "Systems",
+    "family": "software",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt.",
+    "order": 1,
+    "status": "ready",
+    "audio": null,
+    "description": "Selected engineering work and contributions."
+  },
+  {
+    "slug": "cpp-standards",
+    "title": "C++ & Standards",
+    "kicker": "WG21",
+    "family": "software",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales augue non volutpat luctus.",
+    "order": 2,
+    "status": "ready",
+    "audio": null,
+    "description": "WG21 papers authored and co-authored, including P3817."
+  },
+  {
+    "slug": "talks",
+    "title": "Talks",
+    "kicker": "Stage",
+    "family": "software",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+    "order": 3,
+    "status": "ready",
+    "audio": null,
+    "description": "Public conference talks and presentations."
+  },
+  {
+    "slug": "birding",
+    "title": "Birding & Ringing",
+    "kicker": "Field work",
+    "family": "nature",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.",
+    "order": 4,
+    "status": "ready",
+    "audio": null,
+    "description": "Bird ringing and field observations."
+  },
+  {
+    "slug": "rescues",
+    "title": "Rescues",
+    "kicker": "Wildlife",
+    "family": "nature",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate.",
+    "order": 5,
+    "status": "ready",
+    "audio": null,
+    "description": "Short clips of birds rescued and released."
+  },
+  {
+    "slug": "podcast",
+    "title": "Podcast",
+    "kicker": "Audio",
+    "family": "nature",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.",
+    "order": 6,
+    "status": "ready",
+    "audio": null,
+    "description": "Conversations about birds with researchers, birders and conservationists."
+  },
+  {
+    "slug": "book",
+    "title": "The Book",
+    "kicker": "Print",
+    "family": "nature",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim.",
+    "order": 7,
+    "status": "coming-soon",
+    "audio": null,
+    "description": "A pocket book of the birds of Israel."
+  },
+  {
+    "slug": "learn",
+    "title": "Learning Aid",
+    "kicker": "In progress",
+    "family": "nature",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam libero tempore, cum soluta nobis est eligendi.",
+    "order": 8,
+    "status": "under-construction",
+    "audio": null,
+    "description": "A companion trainer for bird names, in development."
+  },
+  {
+    "slug": "about",
+    "title": "About & CV",
+    "kicker": "Profile",
+    "family": "neutral",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus autem quibusdam et aut officiis debitis.",
+    "order": 9,
+    "status": "placeholder",
+    "audio": null,
+    "description": "Biography and curriculum vitae."
+  },
+  {
+    "slug": "contact",
+    "title": "Contact",
+    "kicker": "Say hello",
+    "family": "neutral",
+    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. At vero eos et accusamus et iusto odio dignissimos.",
+    "order": 10,
+    "status": "ready",
+    "audio": null,
+    "description": "Email, phone and a short message form."
+  }
+]

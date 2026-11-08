@@ -1,0 +1,56 @@
+[
+  {
+    "group": "rescues",
+    "title": "Great Egret",
+    "species": "Ardea alba",
+    "src": "assets/rescues/ardea_alba.mp4",
+    "youtube": null,
+    "date": null,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  {
+    "group": "rescues",
+    "title": "White Stork",
+    "species": "Ciconia ciconia",
+    "src": "assets/rescues/ciconia_ciconia.mp4",
+    "youtube": null,
+    "date": null,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  {
+    "group": "rescues",
+    "title": "Pygmy Cormorant",
+    "species": "Microcarbo pygmaeus",
+    "src": "assets/rescues/microcarbo_pygmeus.mp4",
+    "youtube": null,
+    "date": null,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  {
+    "group": "rescues",
+    "title": "Great White Pelican",
+    "species": "Pelecanus onocrotalus",
+    "src": "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_video.mp4",
+    "youtube": null,
+    "date": null,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  {
+    "group": "podcast-promos",
+    "title": "Birds in the City - with Anat Gal",
+    "species": null,
+    "src": "assets/podcast/promo_anat_gal_birds_in_the_city.mp4",
+    "youtube": null,
+    "date": "2026-01-15",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  {
+    "group": "podcast-promos",
+    "title": "Ringing - with Shay Agmon",
+    "species": null,
+    "src": "assets/podcast/promo_shay_agmon_ringing.mp4",
+    "youtube": null,
+    "date": "2025-12-23",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  }
+]

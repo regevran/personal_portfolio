@@ -1,0 +1,20 @@
+# Generated site output
+dist/
+
+# ctags index (vim)
+tags
+
+# vim swap files
+*.swp
+*.swo
+.*.swp
+
+# Python
+__pycache__/
+*.pyc
+
+# OS noise
+.DS_Store
+
+# videos
+*.mp4

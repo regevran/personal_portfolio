@@ -1,0 +1,28 @@
+<section class="contact-panel">
+  <div class="contact-direct">
+    <h2>Write directly</h2>
+    <p class="contact-line">
+      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+      <button type="button" class="copy-button" data-copy="{{EMAIL}}">Copy</button>
+    </p>
+    <p class="contact-line"><a href="tel:{{PHONE_TEL}}">{{PHONE}}</a></p>
+  </div>
+
+  <form class="contact-form" data-email="{{EMAIL}}">
+    <h2>Leave a note</h2>
+    <label>
+      <span>Your name</span>
+      <input type="text" name="name" autocomplete="name">
+    </label>
+    <label>
+      <span>Your email</span>
+      <input type="email" name="email" autocomplete="email">
+    </label>
+    <label>
+      <span>Message</span>
+      <textarea name="message" rows="6" required></textarea>
+    </label>
+    <button type="submit">Open in mail app</button>
+    <p class="form-note">This opens your mail client with the message prefilled; nothing is sent from this page.</p>
+  </form>
+</section>
