@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img">
+  <title>Two interlocking pieces</title>
+  <g stroke="var(--interlock-line, #7A4E12)" stroke-width="3" stroke-linejoin="round">
+    <path d="M20 20 H200 V80 C170 80 170 120 200 120 C230 120 230 160 200 160 V220 C170 220 170 260 200 260 C230 260 230 300 200 300 V380 H20 Z" fill="var(--interlock-dark, #2F2714)"/>
+    <path d="M380 20 H200 V80 C170 80 170 120 200 120 C230 120 230 160 200 160 V220 C170 220 170 260 200 260 C230 260 230 300 200 300 V380 H380 Z" fill="var(--interlock-light, #EFDFC0)"/>
+  </g>
+</svg>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Direction A — Field Board</title>
+  <link rel="stylesheet" href="assets/design.css">
+</head>
+<body class="dir-a">
+
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-flight" viewBox="0 0 140 80">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 42 C30 20 52 18 70 30 C88 18 110 20 130 42 C108 38 90 42 70 54 C50 42 32 38 10 42 Z"/>
+      <path d="M70 30 C68 38 68 46 70 54"/>
+    </g>
+  </symbol>
+
+  <symbol id="i-songbird" viewBox="0 0 120 120">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M36 74 L10 94 L30 88"/>
+      <path d="M32 70 C30 52 48 40 68 43 C84 45 94 55 92 68 C90 82 72 90 54 87 C42 85 33 80 32 70 Z"/>
+      <circle cx="80" cy="48" r="13"/>
+      <path d="M92 46 L108 51 L92 55"/>
+      <circle cx="84" cy="46" r="1.8" fill="currentColor" stroke="none"/>
+      <path d="M48 62 C58 56 74 58 80 68 C72 74 58 75 48 70"/>
+      <path d="M52 88 L50 102 M62 89 L60 103 M46 102 H56 M56 103 H66"/>
+      <path d="M52 78 C60 82 70 82 78 78"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="topbar topbar--fixed">
+  <div class="wrap topbar-inner">
+    <a class="wordmark" href="index.html">Ran Regev</a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#nature">Nature</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="topbar-contact">
+      <a href="mailto:regev.ran@gmail.com">regev.ran@gmail.com</a>
+      <a href="tel:+972503891316">+972-50-389-1316</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero-a wrap">
+    <h1 class="visually-hidden">Ran Regev — software engineer, systems thinker, nature enthusiast</h1>
+
+    <div class="tagline-note scrap">
+      <p>Software engineer.<br>Systems thinker.<br>Nature enthusiast.</p>
+    </div>
+
+    <div class="intro-note scrap scrap--lined">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt.</p>
+    </div>
+
+    <svg class="doodle doodle--one" viewBox="0 0 140 80" aria-hidden="true"><use href="#i-flight"></use></svg>
+    <svg class="doodle doodle--two" viewBox="0 0 120 120" aria-hidden="true"><use href="#i-songbird"></use></svg>
+  </section>
+
+  <div class="collage-head wrap">
+    <p class="note">Software hangs from the C05 lanyard; every nature card hangs from an N03 robin perch. The robins are placeholders for the pending transparent PNG. Cards are still unlinked.</p>
+  </div>
+
+  <section id="sections" class="collage wrap" aria-label="Portfolio sections">
+    <div class="hang hang--lanyard pos-1" id="work" style="--tilt: -2.2deg;">
+      <svg class="hang-rig hang-rig--lanyard" viewBox="0 0 100 70" aria-hidden="true">
+        <path d="M22 -24 L42 44" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M78 -24 L58 44" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+        <rect x="40" y="44" width="20" height="14" rx="3" fill="#2F4F66" stroke="#1F3A4D" stroke-width="1.5"/>
+        <rect x="46" y="50" width="8" height="4" rx="1.5" fill="#B8B0A2"/>
+        <path d="M50 58 V76" fill="none" stroke="#2F2714" stroke-width="2"/>
+      </svg>
+      <article class="scrap scrap--monitor">
+        <span class="card-eye"></span>
+        <p class="card-kicker">Systems</p>
+        <h2 class="card-title">Engineering &amp; Systems</h2>
+        <p class="card-text">Selected engineering work and contributions.</p>
+      </article>
+    </div>
+
+    <div class="hang hang--lanyard pos-2" style="--tilt: 1.7deg;">
+      <svg class="hang-rig hang-rig--lanyard" viewBox="0 0 100 70" aria-hidden="true">
+        <path d="M22 -24 L42 44" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M78 -24 L58 44" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+        <rect x="40" y="44" width="20" height="14" rx="3" fill="#2F4F66" stroke="#1F3A4D" stroke-width="1.5"/>
+        <rect x="46" y="50" width="8" height="4" rx="1.5" fill="#B8B0A2"/>
+        <path d="M50 58 V76" fill="none" stroke="#2F2714" stroke-width="2"/>
+      </svg>
+      <article class="scrap scrap--monitor">
+        <span class="card-eye"></span>
+        <p class="card-kicker">WG21</p>
+        <h2 class="card-title">C++ &amp; Standards</h2>
+        <p class="card-text">Papers, contracts and structured binding assignment.</p>
+      </article>
+    </div>
+
+    <div class="hang hang--lanyard pos-3" style="--tilt: -1.2deg;">
+      <svg class="hang-rig hang-rig--lanyard" viewBox="0 0 100 70" aria-hidden="true">
+        <path d="M22 -24 L42 44" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M78 -24 L58 44" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+        <rect x="40" y="44" width="20" height="14" rx="3" fill="#2F4F66" stroke="#1F3A4D" stroke-width="1.5"/>
+        <rect x="46" y="50" width="8" height="4" rx="1.5" fill="#B8B0A2"/>
+        <path d="M50 58 V76" fill="none" stroke="#2F2714" stroke-width="2"/>
+      </svg>
+      <article class="scrap scrap--monitor">
+        <span class="card-eye"></span>
+        <p class="card-kicker">Stage</p>
+        <h2 class="card-title">Talks</h2>
+        <p class="card-text">Conference talks and presentations.</p>
+      </article>
+    </div>
+
+    <div class="hang hang--perch pos-4" id="nature" style="--tilt: 2.1deg;">
+      <div class="hang-rig hang-rig--perch">
+        <div class="robin-slot robin-slot--sm" role="img" aria-label="Robin PNG placeholder"></div>
+        <svg viewBox="0 0 120 36">
+          <path d="M8 4 C40 -4 86 10 112 2" fill="none" stroke="#5F6232" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M40 0 C46 -10 56 -12 62 -6" fill="none" stroke="#5F6232" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 -6 C54 -16 62 -22 68 -12 C72 -6 64 0 54 -6 Z" fill="#5F6232" opacity=".7"/>
+          <path d="M52 6 C54 20 54 30 55 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+          <path d="M68 6 C66 20 66 30 65 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <article class="scrap scrap--sign">
+        <span class="card-eye"></span>
+        <p class="card-kicker">Field work</p>
+        <h2 class="card-title">Birding &amp; Ringing</h2>
+        <p class="card-text">Birds in the hand, and the stories around them.</p>
+      </article>
+    </div>
+
+    <div class="hang hang--perch pos-5" style="--tilt: -2.6deg;">
+      <div class="hang-rig hang-rig--perch">
+        <div class="robin-slot robin-slot--sm" role="img" aria-label="Robin PNG placeholder"></div>
+        <svg viewBox="0 0 120 36">
+          <path d="M8 4 C40 -4 86 10 112 2" fill="none" stroke="#5F6232" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M40 0 C46 -10 56 -12 62 -6" fill="none" stroke="#5F6232" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 -6 C54 -16 62 -22 68 -12 C72 -6 64 0 54 -6 Z" fill="#5F6232" opacity=".7"/>
+          <path d="M52 6 C54 20 54 30 55 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+          <path d="M68 6 C66 20 66 30 65 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <article class="scrap scrap--sign">
+        <span class="card-eye"></span>
+        <p class="card-kicker">Wildlife</p>
+        <h2 class="card-title">Rescues</h2>
+        <p class="card-text">Short clips of birds rescued and released.</p>
+      </article>
+    </div>
+
+    <div class="hang hang--perch pos-6" style="--tilt: 1.4deg;">
+      <div class="hang-rig hang-rig--perch">
+        <!-- Drop the transparent PNG here: replace .robin-slot with
+             <img class="robin-img robin-img--sm" src="assets/img/robin-cutout.png" alt=""> -->
+        <div class="robin-slot robin-slot--sm" role="img" aria-label="Robin PNG placeholder"></div>
+        <svg viewBox="0 0 120 36">
+          <path d="M8 4 C40 -4 86 10 112 2" fill="none" stroke="#5F6232" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M40 0 C46 -10 56 -12 62 -6" fill="none" stroke="#5F6232" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 -6 C54 -16 62 -22 68 -12 C72 -6 64 0 54 -6 Z" fill="#5F6232" opacity=".7"/>
+          <path d="M52 6 C54 20 54 30 55 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+          <path d="M68 6 C66 20 66 30 65 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <article class="scrap scrap--sign">
+        <span class="card-eye"></span>
+        <p class="card-kicker">Audio</p>
+        <h2 class="card-title">Podcast</h2>
+        <p class="card-text">Conversations about birds and conservation.</p>
+      </article>
+    </div>
+
+    <div class="hang hang--perch pos-7" style="--tilt: 1.9deg;">
+      <div class="hang-rig hang-rig--perch">
+        <div class="robin-slot robin-slot--sm" role="img" aria-label="Robin PNG placeholder"></div>
+        <svg viewBox="0 0 120 36">
+          <path d="M8 4 C40 -4 86 10 112 2" fill="none" stroke="#5F6232" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M40 0 C46 -10 56 -12 62 -6" fill="none" stroke="#5F6232" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 -6 C54 -16 62 -22 68 -12 C72 -6 64 0 54 -6 Z" fill="#5F6232" opacity=".7"/>
+          <path d="M52 6 C54 20 54 30 55 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+          <path d="M68 6 C66 20 66 30 65 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <article class="scrap scrap--sign">
+        <span class="card-eye"></span>
+        <p class="card-kicker">Print</p>
+        <h2 class="card-title">The Book</h2>
+        <p class="card-text">A pocket guide to the birds of Israel.</p>
+        <span class="card-badge">Coming soon</span>
+      </article>
+    </div>
+
+    <div class="hang hang--perch pos-8" style="--tilt: -1.7deg;">
+      <div class="hang-rig hang-rig--perch">
+        <div class="robin-slot robin-slot--sm" role="img" aria-label="Robin PNG placeholder"></div>
+        <svg viewBox="0 0 120 36">
+          <path d="M8 4 C40 -4 86 10 112 2" fill="none" stroke="#5F6232" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M40 0 C46 -10 56 -12 62 -6" fill="none" stroke="#5F6232" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 -6 C54 -16 62 -22 68 -12 C72 -6 64 0 54 -6 Z" fill="#5F6232" opacity=".7"/>
+          <path d="M52 6 C54 20 54 30 55 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+          <path d="M68 6 C66 20 66 30 65 40" fill="none" stroke="#5F6232" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <article class="scrap scrap--sign">
+        <span class="card-eye"></span>
+        <p class="card-kicker">In progress</p>
+        <h2 class="card-title">Learning Aid</h2>
+        <p class="card-text">A companion trainer for bird names.</p>
+        <span class="card-badge">Under construction</span>
+      </article>
+    </div>
+
+    <article class="scrap scrap--plain pos-9" id="about" style="--tilt: 1.3deg;">
+      <p class="card-kicker">Profile</p>
+      <h2 class="card-title">About &amp; CV</h2>
+      <p class="card-text">Biography and curriculum vitae.</p>
+      <span class="card-badge">Placeholder</span>
+    </article>
+
+    <article class="scrap scrap--plain pos-10" id="contact" style="--tilt: -2.4deg;">
+      <p class="card-kicker">Say hello</p>
+      <h2 class="card-title">Contact</h2>
+      <p class="card-text">Email, phone and a note.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  <p>Design preview — the ten sections are intentionally not linked. Anchors: <a href="hooks.html">hook options</a>.</p>
+</footer>
+
+</body>
+</html>

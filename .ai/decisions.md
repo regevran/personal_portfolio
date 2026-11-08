@@ -16,7 +16,7 @@ data-driven, because it will be updated from time to time.
 | Hosting | **Deferred.** No hosting assumption yet. `dist/` is plain static with relative URLs so it can move to GitHub Pages, a custom domain, or elsewhere later. |
 | Build | `./render.sh` → `dist/`. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
 | Toolchain | `bash` + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
-| Visual design | **Deferred to a dedicated session.** Structure must stay metaphor-neutral: no yin-yang, puzzle, palette, or typography commitments in the markup. |
+| Visual design | Chosen: the yin-yang field board — one dirty composite background and the data on top. No separate page texture and no tape. Compact C05 lanyards hang above every software card; compact N03 robin perches hang above every nature card. The robins are 56 × 72 px placeholders until a transparent PNG arrives. The wooden name/Software/Nature signs were removed. Cards remain unlinked. |
 | Tone | Playful / illustrated, not childish. Employer-facing. |
 | Interaction | Cards lift on hover and focus; clicking opens a separate page per card. Keyboard and touch must work; honor `prefers-reduced-motion`. |
 | Voice-over | English, added at the very end. Every card reserves an `audio` field and a transcript slot in the template from the start. |
@@ -44,7 +44,47 @@ data-driven, because it will be updated from time to time.
 
 - The repository was renamed from `regevran`/`personal_protfolio` to
   `personal_portfolio`.
-- `assets/ringing/main_page_concept.jpeg` is a mood reference, not a spec.
+- `assets/documents/main_page_concept.{jpeg,svg}` is a mood reference, not a
+  spec. The SVG is a flattened Canva export (16,844 elements, no semantic
+  labels, text outlined, 15 embedded rasters) and is not usable as separable
+  production artwork. The cutout and ink background were extracted from it and
+  combined into `design/assets/textures/field-background.jpg`.
+- The page uses exactly two layers: the single composite background and the
+  data on top. The earlier paper-texture layer and taped photo frame were
+  removed; the tape metaphor was rejected because it read as a to-do sticker.
+  The cutout is baked into the background at 440 px wide, so the owl's eye stays
+  on the yin-yang's light eye at (646, 228).
+- The ten card anchors were studied in `design/hooks.html`. Selected: **C05
+  lanyard** (computer) and **N03 robin perch** (nature). On the board, compact
+  versions sit above every card in each family: the lanyard V points down
+  (apex at the badge clip) with the straps running up as if from the neck, and
+  the perch is a small branch with the robin above the card. The other studies
+  remain on the sheet for reference.
+- The robin is a **placeholder** on the board (56 × 72 px dashed box per nature
+  card; the enlarged study uses 104 × 132 px) until the book's creator supplies
+  a transparent PNG. A transparent PNG is sufficient; the image will replace
+  the box with `object-fit: contain`. The interim raster robin with the podcast
+  microphone is no longer used.
+- The wooden Ran Regev, Software, and Nature signs were removed from the hero:
+  they read as another anchor and added mass. The topbar wordmark carries the
+  name.
+- The title bar is sticky at the top: name, email, phone, and a provisional
+  About / Work / Nature / Contact navigation. The nav targets are anchors to
+  the cards for now; real page routes arrive with the card pages.
+- The C05 lanyard straps use the software blue and the N03 perch uses the nature
+  green, matching the card family rules. The perch's earlier ochre/green/ink
+  three-colour mix was collapsed to the one green. The straps are thinner and
+  the V opening a little wider.
+- Cards are still not linked to their pages; the board only mounts the chosen
+  anchors.
+- The book palette is the design base; Patrick Hand (OFL) is bundled for
+  handwritten labels.
+- The rejected `bird-circuit` motif was removed from the design assets.
+- Video files are excluded from git (`*.mp4`). A missing local video is a
+  **hard validation error**, never a warning or placeholder. Once an entry has
+  a `youtube` value, the local file is no longer required and the build uses
+  the iframe. A clean checkout cannot build until the clips are uploaded and
+  the data is switched.
 - Real email and phone live in `content/data/site.json` (supplied 2026-11-08).
 - All listings render latest-first. Undated entries go last and keep their
   source order. Photo and rescue-video capture dates are not embedded in the

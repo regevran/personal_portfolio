@@ -19,17 +19,32 @@
 | `assets/ringing/otus_scops_{1,2,3,4}.jpeg` | birding, photos.json | Eurasian Scops Owl |
 | `assets/ringing/saxicola_maurus.jpeg` | birding, photos.json | Siberian Stonechat |
 | `assets/ringing/upupa_epops_{1,2}.jpeg` | birding, photos.json | Eurasian Hoopoe |
-| `assets/ringing/main_page_concept.jpeg` | design session only | mood reference; not published |
+| `assets/documents/main_page_concept.{jpeg,svg}` | design session only | mood reference; not published. The SVG is a flattened Canva export: 3.1 MB, 16,844 elements, 15 embedded rasters, no semantic labels, text outlined. |
 
 ## Missing or pending
 
 | Item | Status |
 |---|---|
+| Robin PNG | pending; the book's creator is supplying a transparent PNG. The board reserves 56 × 72 px boxes above every nature card; the N03 study uses 104 × 132 px. |
 | CV PDF | pending; card shows a placeholder |
 | Bird book PDF | exists in `~/dev/ran/birds/book/out/` (2.3 MB) but not shareable yet |
 | Learning-aid build | design phase only in `~/dev/ran/birds/learn` |
 | Photo/video capture dates | not present in EXIF or QuickTime metadata; `date` fields are null until supplied |
 | YouTube URLs | local files for now |
+
+## Design assets
+
+| Path | Source | Notes |
+|---|---|---|
+| `design/assets/img/ran-otus.png` | concept SVG | cutout of Ran + scops owl; colour image + alpha mask |
+| `design/assets/textures/ink-yinyang.jpg` | concept SVG | dirty ink yin-yang background |
+| `design/assets/textures/field-background.jpg` | composite | **the single page background**: warm-blended ink image with the sharp cutout baked in; owl eye aligned to the yin-yang eye |
+| `design/assets/textures/paper-dirty.jpg` | concept SVG | clean wall patch; retained but no longer used (the separate paper layer was removed) |
+| `design/assets/img/robin.png` | book cover PDF | interim raster robin; no longer used on the board — waiting for the creator's transparent PNG |
+| `design/assets/img/robin-logo.png` | book cover PDF | full robin + microphone + Hebrew podcast mark; reference only |
+| `design/assets/img/anchors-preview.svg` | original | three anchor studies used on the design index |
+| `design/assets/fonts/PatrickHand-Regular.ttf` | Google Fonts (OFL) | handwritten labels; licence in `OFL.txt` |
+| `design/assets/motifs/*.svg` | original | line-art birds, sign, monitor, yin-yang, interlock |
 
 ## Hygiene
 

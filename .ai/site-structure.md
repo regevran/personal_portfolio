@@ -70,7 +70,8 @@ automatically.
   from the GitHub API by `fetch_repos.py` and is an ISO timestamp or null.
 - `videos.json`: `{group, title, species, src, youtube, date, description}`.
   `group` is `rescues` or `podcast-promos`; `youtube` takes precedence when set;
-  `date` is ISO `YYYY-MM-DD` or null.
+  `date` is ISO `YYYY-MM-DD` or null. Video files are not committed: a missing
+  local `src` (with no `youtube`) is a hard validation error.
 - `photos.json`: `{src, title, caption, date, audio}`. `date` is ISO
   `YYYY-MM-DD` or null.
 

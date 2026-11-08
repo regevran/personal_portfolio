@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" role="img">
+  <title>Three anchor studies: rope and nail, twig hook, cable loop</title>
+  <defs>
+    <style>
+      .card { fill: #fff9ec; stroke: #2f2714; stroke-width: 2.5; }
+      .grommet { fill: #efdfc0; stroke: #7a4e12; stroke-width: 2.5; }
+      .rope { fill: none; stroke: #7a4e12; stroke-width: 3; }
+      .leaf { fill: #9a9a5b; }
+      .cable { fill: none; stroke: #2f2714; stroke-width: 8; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- N01 rope and nail -->
+  <g>
+    <circle cx="80" cy="20" r="4" fill="#7a4e12"/>
+    <path class="rope" d="M80 24 C64 64 48 116 35 160"/>
+    <path class="rope" d="M80 24 C96 64 112 116 125 160"/>
+    <rect class="card" x="20" y="160" width="120" height="80" rx="3"/>
+    <path d="M35 160 V170 M125 160 V170" class="rope"/>
+    <circle class="grommet" cx="80" cy="166" r="4"/>
+    <path d="M34 190 H126 M34 208 H110" stroke="#b8a98c" stroke-width="2"/>
+  </g>
+
+  <!-- N02 twig hook -->
+  <g>
+    <path d="M230 60 C270 40 330 72 370 52" fill="none" stroke="#7a4e12" stroke-width="5" stroke-linecap="round"/>
+    <path d="M262 52 C268 40 280 38 288 44" fill="none" stroke="#5f6232" stroke-width="4" stroke-linecap="round"/>
+    <path class="leaf" d="M288 44 C282 32 292 22 300 30 C306 38 300 46 288 44 Z"/>
+    <path class="rope" d="M296 58 C278 96 278 138 300 166 C322 138 322 96 304 58"/>
+    <rect class="card" x="240" y="160" width="120" height="80" rx="3"/>
+    <circle class="grommet" cx="300" cy="166" r="4"/>
+    <path d="M254 190 H346 M254 208 H330" stroke="#b8a98c" stroke-width="2"/>
+  </g>
+
+  <!-- C01 cable loop -->
+  <g>
+    <rect x="510" y="16" width="20" height="14" rx="3" fill="#2f2714"/>
+    <path class="cable" d="M512 34 C470 96 486 140 520 166 C554 140 570 96 528 34"/>
+    <rect class="card" x="460" y="160" width="120" height="80" rx="3"/>
+    <circle class="grommet" cx="520" cy="166" r="4"/>
+    <path d="M474 190 H566 M474 208 H550" stroke="#b8a98c" stroke-width="2"/>
+  </g>
+</svg>

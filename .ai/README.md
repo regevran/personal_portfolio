@@ -10,6 +10,8 @@ Files:
   pipeline.
 - `asset-inventory.md` — what exists, what is missing, and where each asset is
   used.
+- `design-brief.md` — the chosen yin-yang field board, its single composite
+  background, palette, type, and the anchor studies.
 
 When a decision changes, update `decisions.md`; when the structure changes,
 update `site-structure.md`. Keep this directory as the source of context for

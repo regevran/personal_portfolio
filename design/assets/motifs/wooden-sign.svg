@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 140" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img">
+  <title>Hanging wooden sign</title>
+  <path d="M46 4 C50 34 58 46 66 54 M134 4 C130 34 122 46 114 54"/>
+  <circle cx="46" cy="4" r="3" fill="currentColor"/>
+  <circle cx="134" cy="4" r="3" fill="currentColor"/>
+  <g transform="rotate(-3 90 92)">
+    <rect x="18" y="50" width="144" height="74" rx="10" fill="var(--sign-fill, #E7C487)" stroke="currentColor"/>
+    <path d="M28 66 C60 62 120 70 152 66 M28 82 C66 78 116 86 152 82 M28 98 C58 94 122 102 152 98" stroke="var(--sign-grain, #B07A3A)" stroke-width="1.5" opacity=".6"/>
+  </g>
+</svg>

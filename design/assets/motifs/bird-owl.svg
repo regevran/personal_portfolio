@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img">
+  <title>Scops owl</title>
+  <path d="M34 40 L30 22 L46 32 M86 40 L90 22 L74 32"/>
+  <path d="M32 62 C32 40 50 28 60 28 C70 28 88 40 88 62 C88 84 74 98 60 98 C46 98 32 84 32 62 Z"/>
+  <circle cx="48" cy="56" r="10"/>
+  <circle cx="72" cy="56" r="10"/>
+  <circle cx="48" cy="56" r="3" fill="currentColor" stroke="none"/>
+  <circle cx="72" cy="56" r="3" fill="currentColor" stroke="none"/>
+  <path d="M60 62 L56 70 L64 70 Z"/>
+  <path d="M44 78 C50 82 58 84 60 84 C62 84 70 82 76 78"/>
+  <path d="M50 96 L48 108 M70 96 L72 108 M44 108 H54 M66 108 H76"/>
+</svg>

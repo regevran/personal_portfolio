@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img">
+  <title>Monitor</title>
+  <rect x="10" y="8" width="140" height="90" rx="9"/>
+  <path d="M10 26 H150"/>
+  <circle cx="22" cy="17" r="2.5" fill="currentColor" stroke="none"/>
+  <circle cx="31" cy="17" r="2.5" fill="currentColor" stroke="none"/>
+  <circle cx="40" cy="17" r="2.5" fill="currentColor" stroke="none"/>
+  <path d="M62 98 L58 116 H102 L98 98"/>
+  <path d="M46 120 H114"/>
+</svg>

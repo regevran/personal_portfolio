@@ -30,6 +30,29 @@ of the generated index.
 Missing listing dates are reported as warnings before the build; they never
 fail it. The affected entries sort last.
 
+## Design preview
+
+`design/index.html` links to the chosen direction and its anchor studies:
+
+- `direction-a.html` — the yin-yang field board. One dirty composite background
+  (`design/assets/textures/field-background.jpg`) carries a sharp Ran + owl
+  cutout with the owl's eye on the yin-yang eye; the tagline and intro notes
+  and ten section cards sit on top. Compact C05 lanyards hang above the
+  software cards; compact N03 robin perches hang above every nature card. The
+  robins are 56 × 72 px placeholders until the transparent PNG arrives. The
+  wooden name/Software/Nature signs were removed. A sticky title bar carries
+  the name, email, phone, and provisional About / Work / Nature / Contact
+  navigation. There is no separate paper layer and no tape.
+- `hooks.html` — ten anchor studies: five nature anchors (rope & nail, twig
+  hook, robin perch, vine loop, wooden peg) and five computer anchors (cable
+  loop, binder ring, pegboard hook, monitor arm, lanyard). N03 and C05 are
+  marked as the selected pair.
+
+The previews use the book palette, the motif library in `design/assets/motifs/`,
+and the single composite background. They are not part of `./render.sh` and are
+not linked from the site; they exist to settle the visual language before
+integrating it.
+
 Run the tests alone:
 
 ```sh
@@ -90,6 +113,12 @@ Videos are embedded from local files for now. Each video entry in
 `content/data/videos.json` may instead carry a `"youtube"` field (a video ID or
 embed URL); the renderer then emits a YouTube iframe and ignores `src`. That is
 the intended switch once the clips are uploaded.
+
+Video files are not committed (`*.mp4` is ignored). A missing local video is a
+**hard validation error**, not a warning or placeholder: the working copy needs
+the files until each entry has a `youtube` value. Once `youtube` is set, the
+local-file check is skipped and the iframe is used, so a clean checkout builds
+again.
 
 ### Placeholders
 

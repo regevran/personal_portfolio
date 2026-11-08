@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img">
+  <title>Songbird</title>
+  <path d="M36 74 L10 94 L30 88"/>
+  <path d="M32 70 C30 52 48 40 68 43 C84 45 94 55 92 68 C90 82 72 90 54 87 C42 85 33 80 32 70 Z"/>
+  <circle cx="80" cy="48" r="13"/>
+  <path d="M92 46 L108 51 L92 55"/>
+  <circle cx="84" cy="46" r="1.8" fill="currentColor" stroke="none"/>
+  <path d="M48 62 C58 56 74 58 80 68 C72 74 58 75 48 70"/>
+  <path d="M52 88 L50 102 M62 89 L60 103 M46 102 H56 M56 103 H66"/>
+  <path d="M52 78 C60 82 70 82 78 78"/>
+</svg>
