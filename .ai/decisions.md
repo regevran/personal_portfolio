@@ -14,9 +14,9 @@ data-driven, because it will be updated from time to time.
 |---|---|
 | Language | English only. Hebrew is deferred; the cost of retrofitting is accepted. |
 | Hosting | **Deferred.** No hosting assumption yet. `dist/` is plain static with relative URLs so it can move to GitHub Pages, a custom domain, or elsewhere later. |
-| Build | `./render.sh` → `dist/`. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
-| Toolchain | `bash` + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
-| Visual design | Chosen: the yin-yang field board — one dirty composite background and the data on top. No separate page texture and no tape. Compact C05 lanyards hang above every software card; compact N03 robin perches hang above every nature card. The robins are 56 × 72 px placeholders until a transparent PNG arrives. The wooden name/Software/Nature signs were removed. Cards remain unlinked. |
+| Build | **CMake** (same single build system as `../birds`) → `dist/`. `CMakeLists.txt` + `CMakePresets.json`; targets, tests and workflow presets. The default build is offline; repo-date refresh is an explicit target/workflow. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
+| Toolchain | `cmake` 3.25+ + Ninja + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
+| Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; ten title-only cards around it — nature left, software right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Cards remain unlinked. |
 | Tone | Playful / illustrated, not childish. Employer-facing. |
 | Interaction | Cards lift on hover and focus; clicking opens a separate page per card. Keyboard and touch must work; honor `prefers-reduced-motion`. |
 | Voice-over | English, added at the very end. Every card reserves an `audio` field and a transcript slot in the template from the start. |
@@ -48,12 +48,22 @@ data-driven, because it will be updated from time to time.
   spec. The SVG is a flattened Canva export (16,844 elements, no semantic
   labels, text outlined, 15 embedded rasters) and is not usable as separable
   production artwork. The cutout and ink background were extracted from it and
-  combined into `design/assets/textures/field-background.jpg`.
-- The page uses exactly two layers: the single composite background and the
-  data on top. The earlier paper-texture layer and taped photo frame were
-  removed; the tape metaphor was rejected because it read as a to-do sticker.
-  The cutout is baked into the background at 440 px wide, so the owl's eye stays
-  on the yin-yang's light eye at (646, 228).
+  combined into `design/assets/textures/board-background.jpg` (1600 × 900,
+  cutout 380 px wide).
+- The page is a poster with exactly two layers: the single composite background
+  and the data on top. The earlier paper-texture layer and taped photo frame
+  were removed; the tape metaphor was rejected because it read as a to-do
+  sticker. The cutout is baked into the background at 380 px wide and the whole
+  yin-yang group is shifted 120 px right, so the owl's eye stays on the
+  yin-yang's light eye at (927.5, 285); the extra left wall gives nature more
+  room.
+- The ten cards are title-only (kicker + title); descriptions, statuses and
+  content live in the card pages. The poster is laid out left (nature, two
+  columns), right (software, one column), with About and Contact as two flat,
+  bottom-aligned cards. Cards were enlarged to use the free wall space.
+- The poster scales to the viewport height and fits when the resulting width
+  fits; otherwise the board pans horizontally on both desktop and mobile. The
+  nav items are zone shortcuts (Nature left, Work right, About/Contact centre).
 - The ten card anchors were studied in `design/hooks.html`. Selected: **C05
   lanyard** (computer) and **N03 robin perch** (nature). On the board, compact
   versions sit above every card in each family: the lanyard V points down
@@ -65,12 +75,12 @@ data-driven, because it will be updated from time to time.
   a transparent PNG. A transparent PNG is sufficient; the image will replace
   the box with `object-fit: contain`. The interim raster robin with the podcast
   microphone is no longer used.
-- The wooden Ran Regev, Software, and Nature signs were removed from the hero:
-  they read as another anchor and added mass. The topbar wordmark carries the
-  name.
-- The title bar is sticky at the top: name, email, phone, and a provisional
-  About / Work / Nature / Contact navigation. The nav targets are anchors to
-  the cards for now; real page routes arrive with the card pages.
+- The wooden Ran Regev, Software, and Nature signs were removed: they read as
+  another anchor and added mass. The title bar and tagline note carry the name
+  and pitch.
+- The title bar is fixed at the top: name, email, phone, and a provisional
+  About / Work / Nature / Contact navigation. The nav targets are zone
+  shortcuts for now; real page routes arrive with the card pages.
 - The C05 lanyard straps use the software blue and the N03 perch uses the nature
   green, matching the card family rules. The perch's earlier ochre/green/ink
   three-colour mix was collapsed to the one green. The straps are thinner and
@@ -92,9 +102,14 @@ data-driven, because it will be updated from time to time.
 - Repositories sort by `pushed_at`, refreshed from the GitHub API by
   `fetch_repos.py` on every render (unless `--offline`). The value is cached in
   `repos.json` when the network is unavailable.
-- Missing dates are non-fatal: `render.sh` prints a warning per entry with the
-  file, index, title, and field to edit. Content tests only require the field to
-  exist (null allowed).
+- Missing dates are non-fatal: the date-warnings test prints a warning per entry
+  with the file, index, title, and field to edit. Content tests only require the
+  field to exist (null allowed).
+- The build is CMake-only. `cmake --workflow --preset site` configures, builds
+  and tests; `cmake --workflow --preset refresh` refreshes GitHub dates first.
+  The default build is offline, like the birds data pipeline. `render.sh` was
+  removed. `cmake --install build` stages a deploy copy; the host/upload step
+  remains deferred.
 - Cards carry a provisional `family` (`software`, `nature`, `neutral`) used only
   for colour-coding the structure preview. It is not a visual-design decision.
 - The `pelacanus_onocotalus_3.jpeg` filename typo was corrected by the user;

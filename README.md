@@ -1,31 +1,43 @@
 # Ran Regev — personal portfolio
 
 A static, data-driven portfolio. Content lives in `content/` and `assets/`;
-`./render.sh` builds the site into `dist/`. The generated output is plain
-static HTML with relative URLs, so it can be inspected locally or moved to any
-static host later.
+CMake builds the site into `dist/`. The generated output is plain static HTML
+with relative URLs, so it can be inspected locally or moved to any static host
+later.
 
 ## Requirements
 
-- `bash`
+- `cmake` 3.25+ and `ninja`
 - `python3` (3.11+; standard library only)
 - `pandoc` (tested with 3.9.0.2)
-- Network access for the GitHub last-push refresh (optional; see `--offline`)
+- Network access only for the explicit GitHub last-push refresh
 
 No Node, npm, or Python packages are required. Set `GITHUB_TOKEN` to raise the
-GitHub API rate limit if you render often.
+GitHub API rate limit when refreshing repo dates.
 
 ## Build
 
 ```sh
-./render.sh            # refresh repo dates, validate, build, validate
-./render.sh --serve    # same, then serve dist/ on http://localhost:8000
-./render.sh --offline  # skip the GitHub last-push refresh
-./render.sh --skip-tests
+cmake --preset default          # configure the build/ tree once
+cmake --build --preset default  # render dist/ (incremental)
+ctest --preset default          # validate content and generated output
+
+cmake --workflow --preset site    # configure, build, validate in one command
+cmake --workflow --preset refresh # refresh repo dates, build, validate
+cmake --build --preset serve      # build, then serve dist/ on :8000
+cmake --build --preset test      # build, then run ctest
+cmake --build --preset help      # print the available commands
+
+cmake --install build            # stage a deploy copy under build/install/
 ```
 
-Then open `dist/index.html` in a browser. `render.sh` prints the absolute path
-of the generated index.
+Then open `dist/index.html` in a browser. The build prints the absolute path of
+the generated index. The default build is **offline** and uses the cached dates
+in `content/data/repos.json`; the `refresh` workflow or the `site-refresh-repos`
+target updates them from GitHub.
+
+`cmake --install build --prefix <directory>` stages the generated site for a
+future deploy. The host and upload step are still deferred.
 
 Missing listing dates are reported as warnings before the build; they never
 fail it. The affected entries sort last.
@@ -34,32 +46,34 @@ fail it. The affected entries sort last.
 
 `design/index.html` links to the chosen direction and its anchor studies:
 
-- `direction-a.html` — the yin-yang field board. One dirty composite background
-  (`design/assets/textures/field-background.jpg`) carries a sharp Ran + owl
-  cutout with the owl's eye on the yin-yang eye; the tagline and intro notes
-  and ten section cards sit on top. Compact C05 lanyards hang above the
-  software cards; compact N03 robin perches hang above every nature card. The
-  robins are 56 × 72 px placeholders until the transparent PNG arrives. The
-  wooden name/Software/Nature signs were removed. A sticky title bar carries
-  the name, email, phone, and provisional About / Work / Nature / Contact
-  navigation. There is no separate paper layer and no tape.
+- `direction-a.html` — the 16:9 yin-yang poster. One dirty composite background
+  (`design/assets/textures/board-background.jpg`) carries a sharp Ran + owl
+  cutout with the owl's eye on the yin-yang eye. Ten title-only cards surround
+  it: nature on the left, software on the right, and About and Contact as two
+  flat, bottom-aligned cards. The yin-yang group sits right of centre to give
+  nature more room. Compact C05 lanyards sit above the software cards; compact
+  N03 robin perches above the nature cards. The robins are 56 × 72 px
+  placeholders until the transparent PNG arrives. The board fits the viewport
+  when it can and pans horizontally when it cannot; there is no vertical page
+  scroll. A fixed title bar carries the name, email, phone, and provisional
+  About / Work / Nature / Contact navigation.
 - `hooks.html` — ten anchor studies: five nature anchors (rope & nail, twig
   hook, robin perch, vine loop, wooden peg) and five computer anchors (cable
   loop, binder ring, pegboard hook, monitor arm, lanyard). N03 and C05 are
   marked as the selected pair.
 
 The previews use the book palette, the motif library in `design/assets/motifs/`,
-and the single composite background. They are not part of `./render.sh` and are
-not linked from the site; they exist to settle the visual language before
+and the single composite background. They are not part of the site build and
+are not linked from the site; they exist to settle the visual language before
 integrating it.
 
 Run the tests alone:
 
 ```sh
-python3 -m unittest discover -s tests -v
+ctest --preset default
 ```
 
-(`tests.test_output` requires a built `dist/`.)
+(`output-validation` requires a built `dist/`.)
 
 ## Layout
 
@@ -72,7 +86,9 @@ assets/         images, videos, documents, CSS and JS
 tests/          all content and output validation
 build.py        the renderer (Python standard library)
 fetch_repos.py  refreshes repo last-push dates from GitHub
-render.sh       build entry point
+CMakeLists.txt  build entry point and validation targets
+CMakePresets.json  configure/build/test/workflow presets
+build/          CMake build tree (ignored by git)
 dist/           generated output (ignored by git)
 ```
 
@@ -136,5 +152,5 @@ The site is intentionally a structural skeleton:
 `tests/validate.py` holds the validation logic. `tests/test_content.py` checks
 the source tree (card schema, datasets, referenced files, include names) and
 `tests/test_output.py` checks the built `dist/` (pages exist, internal links
-resolve, no unreplaced template tokens). `render.sh` runs content tests before
-the build and output tests after it.
+resolve, no unreplaced template tokens). The `site` workflow builds before
+running `ctest`, so output validation always sees a fresh `dist/`.

@@ -1,7 +1,7 @@
 """Validation for the portfolio source tree and built output.
 
-`render.sh` runs the content checks before building and the output checks
-after. Keeping the checks here means the build script stays a renderer.
+CMake runs the content checks before building and the output checks after.
+Keeping the checks here means the build script stays a renderer.
 """
 
 from __future__ import annotations
@@ -351,7 +351,10 @@ EXTERNAL_PREFIXES = (
 def validate_output() -> list[str]:
     errors: list[str] = []
     if not DIST.is_dir():
-        return [f"{DIST.relative_to(ROOT)}: missing; run ./render.sh first"]
+        return [
+            f"{DIST.relative_to(ROOT)}: missing; "
+            "run the site build first (cmake --build --preset default)"
+        ]
 
     cards_errors: list[str] = []
     cards = _load(cards_errors, "cards.json")

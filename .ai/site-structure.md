@@ -29,7 +29,9 @@ personal_portfolio/
 ├── tests/                    all validation and date warnings
 ├── build.py                  renderer
 ├── fetch_repos.py            refreshes repo last-push dates from GitHub
-├── render.sh                 build entry point
+├── CMakeLists.txt            build entry point and validation targets
+├── CMakePresets.json         configure/build/test/workflow presets
+├── build/                    CMake build tree (ignored)
 ├── .gitignore
 ├── README.md
 └── dist/                     generated (ignored)
@@ -87,21 +89,45 @@ Every listing renders **latest first**:
 Entries with a `null` date render after the dated entries and keep their source
 order. Repos are chronological now; cards remain a curated order.
 
-`tests/warnings.py` (run by `render.sh`, exit status 0) reports every undated
-entry with its data file, array index, title, and the field to add.
+`tests/warnings.py` (run by the build, exit status 0) reports every undated entry
+with its data file, array index, title, and the field to add.
 
 ## Build pipeline
 
-`render.sh`:
+CMake is the single build system (matching `../birds`). `CMakeLists.txt` checks
+for `python3` 3.11+ and `pandoc`, and `CMakePresets.json` defines the commands.
 
-1. Check `pandoc` and `python3`.
-2. Refresh repository `pushed_at` from GitHub (unless `--offline`); failures
-   warn and keep the cached values.
-3. Run `python3 -m unittest -q tests.test_content`.
-4. Print date warnings via `python3 -m tests.warnings`.
-5. Run `python3 build.py`.
-6. Run `python3 -m unittest -q tests.test_output`.
-7. Optionally serve `dist/` (`--serve`).
+Targets:
+
+- `site-build` (default `ALL`): render `dist/` with `build.py`. A stamp in
+  `build/` makes the render incremental; source changes rerun it.
+- `site-refresh-repos`: fetch repository `pushed_at` from GitHub. Explicit and
+  offline-by-default; failures warn and keep the cached values.
+- `site-serve`: build, then serve `dist/` on port 8000.
+- `site-test`: build, then `ctest`.
+- `usage`: print the command list.
+
+Baseline commands:
+
+```sh
+cmake --preset default
+cmake --build --preset default
+ctest --preset default
+cmake --workflow --preset site
+cmake --workflow --preset refresh
+```
+
+The `site` workflow configures, builds and tests. The `refresh` workflow adds
+`site-refresh-repos` before the build so the updated dates are rendered in the
+same run. The non-fatal date warnings print during the render. CTest defines
+two tests:
+
+1. `content-validation` — `python3 -m unittest -q tests.test_content`.
+2. `output-validation` — `python3 -m unittest -q tests.test_output`, ordered
+   after the content check; the workflow builds first so `dist/` is fresh.
+
+`cmake --install build` stages `dist/` under the install prefix (the preset
+uses `build/install`); the host and upload step for deployment are deferred.
 
 `build.py`:
 

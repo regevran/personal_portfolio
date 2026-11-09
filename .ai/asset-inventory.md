@@ -38,7 +38,8 @@
 |---|---|---|
 | `design/assets/img/ran-otus.png` | concept SVG | cutout of Ran + scops owl; colour image + alpha mask |
 | `design/assets/textures/ink-yinyang.jpg` | concept SVG | dirty ink yin-yang background |
-| `design/assets/textures/field-background.jpg` | composite | **the single page background**: warm-blended ink image with the sharp cutout baked in; owl eye aligned to the yin-yang eye |
+| `design/assets/textures/board-background.jpg` | composite | **the 1600 × 900 poster background**: ink image with the sharp cutout baked in at 380 px; owl eye aligned to the yin-yang eye |
+| `design/assets/textures/field-background.jpg` | composite | earlier 1280 × 720 composite for the scrolling board; retained but no longer used by the poster |
 | `design/assets/textures/paper-dirty.jpg` | concept SVG | clean wall patch; retained but no longer used (the separate paper layer was removed) |
 | `design/assets/img/robin.png` | book cover PDF | interim raster robin; no longer used on the board — waiting for the creator's transparent PNG |
 | `design/assets/img/robin-logo.png` | book cover PDF | full robin + microphone + Hebrew podcast mark; reference only |

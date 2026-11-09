@@ -1,13 +1,14 @@
 # Design phase — the yin-yang field board
 
 Date: 2026-11-08
-Status: one direction selected; anchors chosen (C05 lanyard + N03 robin perch); robin PNG pending.
+Status: 16:9 poster layout with title-only cards; anchors chosen (C05 lanyard +
+N03 robin perch); robin PNG pending.
 
 ## Goal
 
 Settle the visual language of the main page before wiring the card pages. The
-cards are shown but deliberately **not linked**. The next decision is which
-anchor each card family hangs from.
+cards are shown as a title-only index and deliberately **not linked**; content
+lives in the card pages.
 
 ## Direction of travel
 
@@ -57,8 +58,11 @@ it contains the exact pieces we need. Extracted from it:
 - `design/assets/img/ran-otus.png` — the cutout of Ran and the scops owl, with
   the colour image combined with its alpha mask.
 - `design/assets/textures/ink-yinyang.jpg` — the dirty ink yin-yang background.
-- `design/assets/textures/field-background.jpg` — **the single page
-  background**: the ink image, warm-blended, with the sharp cutout baked in.
+- `design/assets/textures/board-background.jpg` — **the 1600 × 900 poster
+  background**: the ink image scaled to 16:9 with the sharp cutout baked in at
+  380 px wide.
+- `design/assets/textures/field-background.jpg` — the earlier 1280 × 720
+  composite for the scrolling board; retained, no longer used by the poster.
 - `design/assets/textures/paper-dirty.jpg` — retained from the first pass but no
   longer used; the separate paper layer was removed.
 
@@ -71,39 +75,54 @@ The book cover contributed:
 - `design/assets/img/robin-logo.png` — the full robin + microphone + Hebrew
   podcast mark; reference only.
 
-**Eye alignment:** in the composite, the cutout is 440 px wide and placed at
-(321, 34); the owl's eye lands at (645.67, 227.72), on the yin-yang's light eye
-at (646, 228). Because the cutout is baked into the bitmap, the alignment cannot
-drift.
+**Eye alignment:** in `board-background.jpg` the cutout is 380 px wide and
+placed at (647, 118); the owl's eye lands at (927.5, 285), on the yin-yang's
+light eye (the ink image is 1600 × 900, shifted right by 120 px). Because the
+cutout is baked into the bitmap, the alignment cannot drift.
 
 The earlier `bird-circuit` vector was rejected and removed.
 
 ## Direction A — Field Board
 
-The concept direction, now with exactly two layers:
+The main page is a **16:9 poster**, not a scrolling document:
 
-1. `field-background.jpg` — the dirty ink yin-yang with the sharp Ran + owl
-   cutout baked in.
-2. The data on top — name sign, tagline and intro notes, Software/Nature signs,
-   the book robin, and the ten section notes.
+1. `board-background.jpg` — the dirty ink yin-yang with the sharp Ran + owl
+   cutout baked in at 380 px wide.
+2. The data on top — a tagline note and ten title-only cards placed around the
+   portrait.
 
-The background is fixed to the viewport on desktop; the notes scroll over it.
-The title bar is sticky at the top over that background and carries the name,
-email, phone, and a four-item navigation (About, Work, Nature, Contact). The nav
-targets are anchors to the corresponding cards for now; real page routes arrive
-with the card pages. The cards carry a family-coloured top rule: software
-`#3E6B89`, nature `#5F6232`, neutral ochre. The card surfaces stay cream so the
-text remains readable over the dark ink.
+The spatial grammar follows the original jpeg: **nature on the left** (Birding
+& Ringing, Rescues, Podcast, The Book, Learning Aid) in two columns, **software
+on the right** (Engineering & Systems, C++ & Standards, Talks) in one column,
+and the two neutral cards (About & CV, Contact) flat and bottom-aligned under
+the portrait. The whole yin-yang group is shifted 120 px right so nature gets
+more of the wall and software gets less. The tagline sits above the portrait.
+Cards are enlarged to use the free space. The card labels are kicker + title
+only; descriptions, statuses, and all other content live in the card pages.
+
+The board scales with the viewport height. When the resulting width fits, the
+whole poster is visible with no scroll; when it does not fit (narrow laptop,
+tablet, phone), the same board pans **horizontally** — never vertically. On
+desktop the wheel is mapped to horizontal pan; on touch it is native swipe.
+The nav items are zone shortcuts: Nature pans left, Work pans right, About and
+Contact pan to the centre.
+
+The title bar is fixed at the top and carries the name, email, phone, and the
+About / Work / Nature / Contact navigation. The nav targets are anchors to the
+corresponding cards for now; real page routes arrive with the card pages.
+
+The cards carry a family-coloured top rule: software `#3E6B89`, nature
+`#5F6232`, neutral ochre. The card surfaces stay cream so the text remains
+readable over the dark ink.
 
 The anchor colour follows the card: the C05 lanyard straps are software blue,
 matching the software card rule; the N03 branch, twine, and leaf are nature
 green, matching the nature card rule. The earlier three-colour perch (ochre
 branch, olive leaf, ink twine) was collapsed into that single green.
 
-On narrow screens the single background becomes a full-bleed hero panel that
-fades into sand; the notes and cards below sit on sand, because a fixed
-landscape background cannot be cropped meaningfully on a phone. The hero keeps
-the same composite, not a different one.
+The wooden Ran Regev, Software, and Nature signs were removed: they read as
+another anchor and added mass. The title bar and the tagline carry the name and
+pitch.
 
 ## Anchors
 
@@ -130,11 +149,6 @@ rectangle); the enlarged N03 study uses 104 × 132 px. The book's creator is
 supplying a transparent PNG; that is sufficient. The PNG will replace the
 rectangle at either size with `object-fit: contain`. The interim raster robin
 with the podcast microphone is no longer used.
-
-The wooden name, Software, and Nature signs were removed from the hero: they
-read as yet another anchor and added mass. The topbar wordmark and the tagline
-note carry the name and pitch; the hero is the cutout, the notes, and the two
-sketch birds.
 
 ## Files
 

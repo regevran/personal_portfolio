@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Refresh `pushed_at` for every repository in content/data/repos.json.
 
-The public GitHub API is queried at render time so the repo list reflects the
-last push seen when `./render.sh` runs. Failures are warnings, not errors: the
-cached `pushed_at` values stay in place and the build continues.
+The public GitHub API is queried when the refresh target runs so the repo list
+reflects the last push seen at that time. Failures are warnings, not errors:
+the cached `pushed_at` values stay in place and the build continues.
 
 Set GITHUB_TOKEN to use an authenticated request (higher rate limit).
-Run `./render.sh --offline` to skip this step entirely.
+The default site build is offline; run `cmake --build --preset refresh-repos`
+(or `cmake --workflow --preset refresh`) to update the dates.
 """
 
 from __future__ import annotations

@@ -1627,3 +1627,142 @@ p {
     transform: rotate(var(--tilt, 0deg));
   }
 }
+
+/* Poster board ----------------------------------------------------------- */
+
+body.dir-a {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  overflow: hidden;
+  background-image: none;
+  background-color: var(--sand);
+}
+
+.dir-a .topbar--fixed {
+  flex: 0 0 auto;
+}
+
+.page {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.board-viewport {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  min-height: 0;
+  padding: 16px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ochre) transparent;
+}
+
+.board-viewport:focus-visible {
+  outline: 2px dashed var(--ochre);
+  outline-offset: -6px;
+}
+
+.board {
+  position: relative;
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  background: url("textures/board-background.jpg") center / cover no-repeat;
+  container-type: size;
+}
+
+.board-item {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28cqh;
+}
+
+.board-item--software {
+  width: 27cqh;
+}
+
+.board-item--neutral {
+  width: 26cqh;
+}
+
+.board-item--bottom {
+  top: auto;
+  bottom: 4%;
+}
+
+.board-item .scrap {
+  width: 100%;
+  margin: 0;
+  padding: 2cqh 2.1cqh;
+}
+
+.board .scrap--monitor,
+.board .scrap--sign,
+.board .scrap--plain {
+  border-top-width: 0.6cqh;
+}
+
+.board .scrap .card-kicker {
+  margin: 0 0 0.5cqh;
+  font-size: 1.35cqh;
+  letter-spacing: 0.14em;
+}
+
+.board .scrap .card-title {
+  margin: 0;
+  font-size: 2.8cqh;
+  line-height: 1.02;
+}
+
+.board .card-eye {
+  top: 0.7cqh;
+  width: 1.7cqh;
+  height: 1.7cqh;
+  border-width: 0.38cqh;
+}
+
+.board .hang-rig--lanyard {
+  width: 11.1cqh;
+  height: 7.77cqh;
+}
+
+.board .hang-rig--perch {
+  width: 13.3cqh;
+}
+
+.board .hang-rig--perch svg {
+  width: 13.3cqh;
+  height: 3.99cqh;
+}
+
+.board .robin-slot--sm {
+  width: 6.2cqh;
+  height: 8cqh;
+}
+
+.board-tagline {
+  position: absolute;
+  top: 0.8%;
+  left: 44%;
+  z-index: 6;
+  width: 22%;
+  padding: 2cqh 2.1cqh;
+  font-family: var(--hand);
+  font-size: 2.1cqh;
+  line-height: 1.25;
+  transform: rotate(-2.5deg);
+}
+
+.board-tagline p {
+  margin: 0;
+}

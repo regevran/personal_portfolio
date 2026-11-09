@@ -1,6 +1,10 @@
 # Generated site output
 dist/
 
+# CMake build tree
+/build/
+CMakeUserPresets.json
+
 # ctags index (vim)
 tags
 
@@ -18,3 +22,6 @@ __pycache__/
 
 # videos
 *.mp4
+
+# design
+design/
