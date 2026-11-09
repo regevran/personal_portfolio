@@ -1,0 +1,1 @@
+Researcher and ornithologist Dr. Yael Lenard explores how human-generated noise affects birds, particularly songbirds. We discuss research methods involving field observations, bird ringing, sound recordings and tracking devices, the ecological consequences of noise pollution, and possible ways to reduce its impact.

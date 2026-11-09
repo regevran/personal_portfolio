@@ -79,56 +79,75 @@ ctest --preset default
 
 ```text
 content/
-  cards/        prose for each card/page (Markdown)
-  data/         the site map and structured content (JSON)
-templates/      page skeletons (base, index, card, partials)
-assets/         images, videos, documents, CSS and JS
-tests/          all content and output validation
-build.py        the renderer (Python standard library)
-fetch_repos.py  refreshes repo last-push dates from GitHub
-CMakeLists.txt  build entry point and validation targets
+  cards/
+    <slug>/
+      card.json    page metadata and ordered blocks
+      page.md      page prose (any number of prose files)
+  data/
+    *.json         canonical records (papers, talks, episodes, repos, videos, photos)
+    episodes/      per-episode description Markdown
+templates/         page skeletons (base, index, card, partials)
+assets/            images, videos, documents, CSS and JS
+tests/             all content and output validation
+src/               Python build package
+  __init__.py
+  build.py         the renderer (Python standard library)
+  site_schema.py   dataset registry and block-selection semantics
+  fetch_repos.py   refreshes repo last-push dates from GitHub
+CMakeLists.txt     build entry point and validation targets
 CMakePresets.json  configure/build/test/workflow presets
-build/          CMake build tree (ignored by git)
-dist/           generated output (ignored by git)
+build/             CMake build tree (ignored by git)
+dist/              generated output (ignored by git)
 ```
 
 ### Editing content
 
-- **Card list:** `content/data/cards.json` controls the hub order, titles,
-  summaries, statuses, colour family, and the optional voice-over field.
-- **Card prose:** `content/cards/<slug>.md`. Put `<!-- include:NAME -->` on its
-  own line to inject a structured block (see below).
+- **Card pages:** `content/cards/<slug>/card.json` holds the hub metadata
+  (title, kicker, order, status, family, summary, description, audio) and the
+  ordered `blocks` list. The directory name is the slug.
+- **Card prose:** Markdown files in the same directory, referenced by `prose`
+  blocks. A page can use any number of prose fragments.
 - **Structured data:** `content/data/*.json` — `papers`, `talks`, `episodes`,
-  `repos`, `videos`, `photos`.
+  `repos`, `videos`, `photos`. Every record has a stable `id` and a
+  `collections` list.
+- **Episode descriptions:** `content/data/episodes/<slug>.md`, referenced by
+  `"description_src"` in `episodes.json`.
 - **Identity and contact:** `content/data/site.json`.
+
+Blocks render **in array order**. To move a section, reorder the `blocks` array
+in `card.json`; no code changes are needed. A block selects records with
+`{"collection": "name"}` or, for explicit curation, `{"ids": [...]}`:
+
+| Block | Renders |
+|---|---|
+| `{"type": "prose", "src": "page.md"}` | one Markdown fragment |
+| `{"type": "papers", "select": {"collection": "cpp-standards"}}` | WG21 papers |
+| `{"type": "talks", "select": {"collection": "talks"}}` | talks |
+| `{"type": "episodes", "select": {"collection": "podcast"}}` | podcast episodes |
+| `{"type": "repos", "select": {"collection": "engineering"}}` | repositories |
+| `{"type": "videos", "select": {"collection": "rescues"}}` | video grid |
+| `{"type": "photos", "select": {"collection": "birding"}}` | photo gallery |
+| `{"type": "contact"}` | contact panel and form |
+
+Collection selection ignores records whose `collections` contains `hidden`, so
+soft-removing a record means adding `"hidden"`; remove it again to restore the
+record. Explicit `ids` selection is not affected by `hidden`.
 
 All listings render **latest first**: papers by `year`, talks and episodes by
 `sort_date`, videos and photos by `date`, repositories by `pushed_at`. A `null`
-date sorts to the end and keeps the source order. `fetch_repos.py` refreshes
-`pushed_at` from the GitHub API on every render (unless `--offline`), so the
-repository order reflects your latest pushes. Photos and rescue videos
-currently have no embedded capture dates; fill their `date` fields when known
-and the warnings will stop.
-
-Available includes:
-
-| Marker | Renders |
-|---|---|
-| `<!-- include:papers -->` | WG21 papers list |
-| `<!-- include:talks -->` | talks list |
-| `<!-- include:episodes -->` | podcast episodes |
-| `<!-- include:repos -->` | repositories |
-| `<!-- include:videos:rescues -->` | rescue videos |
-| `<!-- include:videos:podcast-promos -->` | podcast promo clips |
-| `<!-- include:photos -->` | ringing photographs |
-| `<!-- include:contact -->` | contact panel and form |
+date sorts to the end and keeps the source order. Explicit `ids` keep the order
+given. Use `cmake --build --preset refresh-repos` (or the `refresh` workflow) to
+refresh `pushed_at` from GitHub; the default build is offline. Photos and rescue
+videos currently have no embedded capture dates; fill their `date` fields when
+known and the warnings will stop.
 
 ### Videos
 
 Videos are embedded from local files for now. Each video entry in
 `content/data/videos.json` may instead carry a `"youtube"` field (a video ID or
 embed URL); the renderer then emits a YouTube iframe and ignores `src`. That is
-the intended switch once the clips are uploaded.
+the intended switch once the clips are uploaded. The `collections` field decides
+which card blocks include a clip.
 
 Video files are not committed (`*.mp4` is ignored). A missing local video is a
 **hard validation error**, not a warning or placeholder: the working copy needs
@@ -150,7 +169,8 @@ The site is intentionally a structural skeleton:
 ### Tests
 
 `tests/validate.py` holds the validation logic. `tests/test_content.py` checks
-the source tree (card schema, datasets, referenced files, include names) and
-`tests/test_output.py` checks the built `dist/` (pages exist, internal links
-resolve, no unreplaced template tokens). The `site` workflow builds before
-running `ctest`, so output validation always sees a fresh `dist/`.
+the source tree (card schema, block selectors, dataset ids/collections,
+referenced files) and `tests/test_output.py` checks the built `dist/` (pages
+exist, internal links resolve, no unreplaced template tokens). The `site`
+workflow builds before running `ctest`, so output validation always sees a
+fresh `dist/`.

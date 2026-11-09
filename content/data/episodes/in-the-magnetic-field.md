@@ -1,0 +1,1 @@
+Professor Yoni Vortman explores one of the most fascinating questions in bird biology: how birds navigate using Earth's magnetic field. We discuss the science behind magnetic orientation, the mechanisms involved and the research that helps us understand this remarkable ability.

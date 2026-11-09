@@ -1,0 +1,1 @@
+Professor Nir Sapir, an expert in animal flight and migration, takes us into the science of bird migration. We discuss differences between day and night migration, the decisions birds make during their journeys, how scientists study migration and how human activities affect it.

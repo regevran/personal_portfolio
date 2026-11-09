@@ -1,0 +1,1 @@
+A conversation about bird ringing: why birds are ringed, how ringing is conducted and what scientists can learn from recapturing birds. We explore the role of ringing in understanding migration, population dynamics and bird ecology.

@@ -15,6 +15,8 @@ data-driven, because it will be updated from time to time.
 | Language | English only. Hebrew is deferred; the cost of retrofitting is accepted. |
 | Hosting | **Deferred.** No hosting assumption yet. `dist/` is plain static with relative URLs so it can move to GitHub Pages, a custom domain, or elsewhere later. |
 | Build | **CMake** (same single build system as `../birds`) → `dist/`. `CMakeLists.txt` + `CMakePresets.json`; targets, tests and workflow presets. The default build is offline; repo-date refresh is an explicit target/workflow. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
+| Content model | `content/data/` holds canonical records, each with a stable `id` and a `collections` list. `content/cards/<slug>/card.json` holds page metadata and ordered `blocks`; page prose is sibling Markdown. Cards select data by collection or explicit ids — no duplicate membership index. `hidden` is a reserved collection for soft removal. |
+| Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and are referenced by `description_src`; the inline `description` remains the fallback for other datasets. |
 | Toolchain | `cmake` 3.25+ + Ninja + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
 | Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; ten title-only cards around it — nature left, software right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Cards remain unlinked. |
 | Tone | Playful / illustrated, not childish. Employer-facing. |
@@ -100,11 +102,11 @@ data-driven, because it will be updated from time to time.
   source order. Photo and rescue-video capture dates are not embedded in the
   files, so those `date` fields are null until the user supplies them.
 - Repositories sort by `pushed_at`, refreshed from the GitHub API by
-  `fetch_repos.py` on every render (unless `--offline`). The value is cached in
-  `repos.json` when the network is unavailable.
-- Missing dates are non-fatal: the date-warnings test prints a warning per entry
-  with the file, index, title, and field to edit. Content tests only require the
-  field to exist (null allowed).
+  `fetch_repos.py` only when the explicit refresh target/workflow runs. The
+  value is cached in `repos.json` when the network is unavailable.
+- Missing dates are non-fatal: the build prints a warning per entry with the
+  file, index, title, and field to edit. Content tests only require the field to
+  exist (null allowed).
 - The build is CMake-only. `cmake --workflow --preset site` configures, builds
   and tests; `cmake --workflow --preset refresh` refreshes GitHub dates first.
   The default build is offline, like the birds data pipeline. `render.sh` was
@@ -114,3 +116,8 @@ data-driven, because it will be updated from time to time.
   for colour-coding the structure preview. It is not a visual-design decision.
 - The `pelacanus_onocotalus_3.jpeg` filename typo was corrected by the user;
   the current file is `pelecanus_onocrotalus_3.jpeg`.
+- The content model was revised on 2026-11-09: `content/data/cards.json` was
+  removed; each card is now a directory with `card.json` + prose. Datasets
+  gained stable ids and collection tags. The podcast card's promo-video block
+  is initially first so the two placements can be compared by reordering the
+  `blocks` array; no code change is needed.

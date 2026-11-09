@@ -1,6 +1,10 @@
 [
   {
-    "id": "P3443R0",
+    "id": "paper-reflection-sg21-process",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P3443R0",
     "title": "Reflection on SG21's 2024 Process",
     "role": "Author",
     "year": "2024",
@@ -8,7 +12,11 @@
     "description": "A detailed investigation over public papers and meetings related to SG21 (contracts) within WG21. The paper summarizes the work and concludes that the process is rushed."
   },
   {
-    "id": "P3817R0-R1",
+    "id": "paper-structured-binding-assignment",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P3817R0-R1",
     "title": "Structured Binding Assignment",
     "role": "Co-author",
     "year": "2026",
@@ -16,7 +24,11 @@
     "description": "A proposal to allow assignment into existing variables within a structured binding declaration."
   },
   {
-    "id": "P2947R0",
+    "id": "paper-contracts-sensitive-information",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P2947R0",
     "title": "Contracts must avoid disclosing sensitive information",
     "role": "Co-author",
     "year": "2023",
@@ -24,7 +36,11 @@
     "description": "Asks to mandate the ability to opt out of comment() and source_location() from a contract-violation object."
   },
   {
-    "id": "P2213R0 / P2213R1",
+    "id": "paper-executors-naming",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P2213R0 / P2213R1",
     "title": "Executors Naming",
     "role": "Co-author",
     "year": "2020",
@@ -32,7 +48,11 @@
     "description": null
   },
   {
-    "id": "P2022R0-R3",
+    "id": "paper-rangified-lexicographical-compare",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P2022R0-R3",
     "title": "Rangified version of lexicographical_compare_three_way",
     "role": "Author (R0-R2); co-author of R3",
     "year": "2023",
@@ -40,7 +60,11 @@
     "description": null
   },
   {
-    "id": "P2791R0",
+    "id": "paper-mandate-concepts",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P2791R0",
     "title": "Mandate Concepts for new features",
     "role": "Author",
     "year": "2023",
@@ -48,7 +72,11 @@
     "description": null
   },
   {
-    "id": "P3101R0",
+    "id": "paper-violation-handlers",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P3101R0",
     "title": "Differentiating potentially throwing and nonthrowing violation handlers",
     "role": "Co-author",
     "year": "2024",
@@ -56,7 +84,11 @@
     "description": null
   },
   {
-    "id": "P3249R0",
+    "id": "paper-pattern-matching-contracts",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P3249R0",
     "title": "A unified syntax for Pattern Matching and Contracts when introducing a new name",
     "role": "Author",
     "year": "2024",
@@ -64,7 +96,11 @@
     "description": null
   },
   {
-    "id": "P3573R0",
+    "id": "paper-contract-concerns",
+    "collections": [
+      "cpp-standards"
+    ],
+    "wg21": "P3573R0",
     "title": "Contract concerns",
     "role": "Co-author",
     "year": "2025",

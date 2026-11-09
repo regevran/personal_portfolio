@@ -1,0 +1,1 @@
+Amnon Haan, founder of the Friends of Swifts association, shares his fascination with these remarkable aerial specialists. We discuss swift species in Israel, their migration, breeding biology, extraordinary flight capabilities, nesting sites and conservation efforts.

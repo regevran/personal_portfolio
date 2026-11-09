@@ -1,0 +1,1 @@
+Gidi Goldstein shares the story of how curiosity turned into a lifelong passion for birdwatching spanning four decades. We discuss his journey into birding, unexpected discoveries and his book Yes to Birds, a collection of articles about the world of birds.

@@ -1,0 +1,22 @@
+{
+  "title": "Talks",
+  "kicker": "Stage",
+  "family": "software",
+  "order": 3,
+  "status": "ready",
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+  "description": "Public conference talks and presentations.",
+  "audio": null,
+  "blocks": [
+    {
+      "type": "prose",
+      "src": "page.md"
+    },
+    {
+      "type": "talks",
+      "select": {
+        "collection": "talks"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Evolutionary biologist Dr. Joseph Khiat takes us into the fascinating world of feathers. We explore their structure, evolutionary origins, their importance to modern birds and non-avian dinosaurs, and the different strategies birds use to replace their feathers through moulting.

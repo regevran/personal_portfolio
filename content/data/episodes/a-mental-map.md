@@ -1,0 +1,1 @@
+A relaxed conversation with two passionate nature enthusiasts and conservationists. We discuss birdwatching, relationships, living near the Dead Sea, nature conservation and the different ways people connect with the natural world.

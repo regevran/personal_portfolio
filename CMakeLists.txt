@@ -29,7 +29,10 @@ file(GLOB_RECURSE PORTFOLIO_INPUTS CONFIGURE_DEPENDS
     "${PORTFOLIO_ROOT}/templates/*"
     "${PORTFOLIO_ROOT}/assets/*")
 list(APPEND PORTFOLIO_INPUTS
-    "${PORTFOLIO_ROOT}/build.py"
+    "${PORTFOLIO_ROOT}/src/__init__.py"
+    "${PORTFOLIO_ROOT}/src/build.py"
+    "${PORTFOLIO_ROOT}/src/site_schema.py"
+    "${PORTFOLIO_ROOT}/tests/test_content.py"
     "${PORTFOLIO_ROOT}/tests/warnings.py"
     "${PORTFOLIO_ROOT}/tests/validate.py")
 
@@ -39,8 +42,9 @@ list(APPEND PORTFOLIO_INPUTS
 # stamp behind.
 add_custom_command(
     OUTPUT  "${PORTFOLIO_STAMP}"
+    COMMAND "${Python3_EXECUTABLE}" -m unittest -q tests.test_content
     COMMAND "${Python3_EXECUTABLE}" -m tests.warnings
-    COMMAND "${Python3_EXECUTABLE}" "${PORTFOLIO_ROOT}/build.py"
+    COMMAND "${Python3_EXECUTABLE}" -m src.build
     COMMAND "${CMAKE_COMMAND}" -E touch "${PORTFOLIO_STAMP}"
     DEPENDS ${PORTFOLIO_INPUTS}
     WORKING_DIRECTORY "${PORTFOLIO_ROOT}"
@@ -53,7 +57,7 @@ add_custom_target(site-build ALL
 # Network access is explicit, matching the birds data pipeline: the default
 # build is offline and uses the cached dates in content/data/repos.json.
 add_custom_target(site-refresh-repos
-    COMMAND "${Python3_EXECUTABLE}" "${PORTFOLIO_ROOT}/fetch_repos.py"
+    COMMAND "${Python3_EXECUTABLE}" -m src.fetch_repos
     WORKING_DIRECTORY "${PORTFOLIO_ROOT}"
     COMMENT "Refreshing repository last-push dates from GitHub"
     USES_TERMINAL

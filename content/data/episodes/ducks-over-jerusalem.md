@@ -1,0 +1,1 @@
+Naturalist, photographer and urban nature specialist Amir Balaban takes us into Jerusalem's Gazelle Valley and its remarkable birdlife. We discuss urban nature conservation, the importance of water and wetland habitats, resident and migratory birds, and a particularly interesting little bittern.

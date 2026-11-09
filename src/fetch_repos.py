@@ -19,7 +19,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "content" / "data" / "repos.json"
 API = "https://api.github.com/repos/"
 TIMEOUT_SECONDS = 10

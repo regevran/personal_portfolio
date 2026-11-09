@@ -1,24 +1,29 @@
 #!/usr/bin/env python3
 """Render the static portfolio into dist/.
 
-The data lives in content/data/*.json, prose in content/cards/*.md, and the
-view in templates/. This script only composes them; validation lives in tests/.
+Card directories in content/cards/ define the pages and their ordered blocks;
+datasets in content/data/ are selected by collection or explicit id. This
+script only composes them; validation lives in tests/.
 """
 
 from __future__ import annotations
 
 import html
-import json
 import re
 import shutil
 import subprocess
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-CONTENT = ROOT / "content"
-CARDS_DIR = CONTENT / "cards"
-DATA_DIR = CONTENT / "data"
+from src.site_schema import (
+    DATA_DIR,
+    load_cards,
+    load_dataset,
+    load_site,
+    select_records,
+)
+
+ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = ROOT / "templates"
 ASSETS = ROOT / "assets"
 DIST = ROOT / "dist"
@@ -30,16 +35,9 @@ STATUS_LABELS = {
     "placeholder": "Placeholder",
 }
 
-INCLUDE_RE = re.compile(r"<!--\s*include:([\w:-]+)\s*-->")
-
 
 def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
-
-
-def load_json(name: str):
-    with (DATA_DIR / name).open(encoding="utf-8") as handle:
-        return json.load(handle)
 
 
 def read_template(relative: str) -> str:
@@ -106,89 +104,92 @@ def sort_latest(entries, key):
     return [entry for _, entry in dated] + undated
 
 
-def link_item(title: str, url: str | None, meta: str, description: str | None) -> str:
+def description_html(entry: dict) -> str:
+    """Render an inline description or a per-record Markdown description."""
+    source = entry.get("description_src")
+    if source:
+        return markdown_to_html(DATA_DIR / source)
+    description = entry.get("description")
+    return esc(description) if description else ""
+
+
+def link_item(title: str, url: str | None, meta: str, description: str) -> str:
     title_html = f'<a href="{esc(url)}">{esc(title)}</a>' if url else esc(title)
     meta_html = f' <span class="item-meta">{esc(meta)}</span>' if meta else ""
-    desc_html = f'<p class="item-desc">{esc(description)}</p>' if description else ""
+    desc_html = f'<div class="item-desc">{description}</div>' if description else ""
     return (
         f'<li class="item"><span class="item-title">{title_html}</span>'
         f"{meta_html}{desc_html}</li>"
     )
 
 
-def render_papers() -> str:
+def render_papers(records: list[dict], root: str) -> str:
     items = []
-    papers = sort_latest(
-        load_json("papers.json"),
-        lambda paper: date(int(paper["year"]), 1, 1),
-    )
-    for paper in papers:
+    for paper in records:
         meta = " · ".join(
-            str(part) for part in (paper.get("id"), paper.get("role"), paper.get("year")) if part
+            str(part)
+            for part in (paper.get("wg21"), paper.get("role"), paper.get("year"))
+            if part
         )
         items.append(
-            link_item(paper["title"], paper.get("link"), meta, paper.get("description"))
+            link_item(
+                paper["title"], paper.get("link"), meta, description_html(paper)
+            )
         )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def render_talks() -> str:
-    talks = sort_latest(
-        load_json("talks.json"),
-        lambda talk: iso_date(talk.get("sort_date")),
-    )
+def render_talks(records: list[dict], root: str) -> str:
     items = [
-        link_item(talk["title"], talk.get("url"), talk.get("date", ""), talk.get("description"))
-        for talk in talks
+        link_item(
+            talk["title"],
+            talk.get("url"),
+            talk.get("date", ""),
+            description_html(talk),
+        )
+        for talk in records
     ]
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def render_episodes() -> str:
-    episodes = sort_latest(
-        load_json("episodes.json"),
-        lambda episode: iso_date(episode.get("sort_date")),
-    )
+def render_episodes(records: list[dict], root: str) -> str:
     items = [
         link_item(
             episode["title"],
             episode.get("url"),
             episode.get("date", ""),
-            episode.get("description"),
+            description_html(episode),
         )
-        for episode in episodes
+        for episode in records
     ]
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def render_repos() -> str:
-    repos = sort_latest(
-        load_json("repos.json"),
-        lambda repo: iso_moment(repo.get("pushed_at")),
-    )
+def render_repos(records: list[dict], root: str) -> str:
     items = []
-    for repo in repos:
+    for repo in records:
         meta = ""
         pushed_at = repo.get("pushed_at")
         if pushed_at:
             meta = f"Last push: {str(pushed_at)[:10]}"
         items.append(
-            link_item(repo["name"], repo.get("url"), meta, repo.get("description"))
+            link_item(
+                repo["name"], repo.get("url"), meta, description_html(repo)
+            )
         )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def render_videos(root: str, group: str) -> str:
+def render_videos(records: list[dict], root: str) -> str:
     cards = []
-    videos = [
-        video for video in load_json("videos.json") if video.get("group") == group
-    ]
-    videos = sort_latest(videos, lambda video: iso_date(video.get("date")))
-    for video in videos:
-
+    for video in records:
         youtube = video.get("youtube")
         if youtube:
-            source = youtube if str(youtube).startswith("http") else f"https://www.youtube.com/embed/{youtube}"
+            source = (
+                youtube
+                if str(youtube).startswith("http")
+                else f"https://www.youtube.com/embed/{youtube}"
+            )
             media = (
                 f'<iframe src="{esc(source)}" title="{esc(video["title"])}" '
                 'loading="lazy" allowfullscreen></iframe>'
@@ -214,13 +215,9 @@ def render_videos(root: str, group: str) -> str:
     return '<div class="media-grid">' + "".join(cards) + "</div>"
 
 
-def render_photos(root: str) -> str:
+def render_photos(records: list[dict], root: str) -> str:
     cards = []
-    photos = sort_latest(
-        load_json("photos.json"),
-        lambda photo: iso_date(photo.get("date")),
-    )
-    for photo in photos:
+    for photo in records:
         media = (
             f'<img src="{esc(root + photo["src"])}" '
             f'alt="{esc(photo["title"])}" loading="lazy">'
@@ -256,29 +253,46 @@ def render_contact(site: dict) -> str:
     )
 
 
-INCLUDES = {
-    "papers": lambda root, site: render_papers(),
-    "talks": lambda root, site: render_talks(),
-    "episodes": lambda root, site: render_episodes(),
-    "repos": lambda root, site: render_repos(),
-    "photos": lambda root, site: render_photos(root),
-    "contact": lambda root, site: render_contact(site),
-    "videos:rescues": lambda root, site: render_videos(root, "rescues"),
-    "videos:podcast-promos": lambda root, site: render_videos(root, "podcast-promos"),
+SORT_KEYS = {
+    "papers": lambda paper: date(int(paper["year"]), 1, 1),
+    "talks": lambda talk: iso_date(talk.get("sort_date")),
+    "episodes": lambda episode: iso_date(episode.get("sort_date")),
+    "repos": lambda repo: iso_moment(repo.get("pushed_at")),
+    "videos": lambda video: iso_date(video.get("date")),
+    "photos": lambda photo: iso_date(photo.get("date")),
+}
+
+RENDERERS = {
+    "papers": render_papers,
+    "talks": render_talks,
+    "episodes": render_episodes,
+    "repos": render_repos,
+    "videos": render_videos,
+    "photos": render_photos,
 }
 
 
-def render_include(name: str, root: str, site: dict) -> str:
-    try:
-        renderer = INCLUDES[name]
-    except KeyError as exc:
-        raise SystemExit(f"build.py: unknown include '{name}'") from exc
-    return renderer(root, site)
+def render_dataset(name: str, select: dict, root: str) -> str:
+    records = select_records(load_dataset(name), select)
+    if "ids" not in select:
+        records = sort_latest(records, SORT_KEYS[name])
+    return RENDERERS[name](records, root)
+
+
+def render_block(block: dict, card_dir: Path, site: dict, root: str) -> str:
+    block_type = block.get("type")
+    if block_type == "prose":
+        return markdown_to_html(card_dir / block["src"])
+    if block_type == "contact":
+        return render_contact(site)
+    if block_type in RENDERERS:
+        return render_dataset(block_type, block["select"], root)
+    raise SystemExit(f"build.py: unknown block type {block_type!r}")
 
 
 def build() -> None:
-    site = load_json("site.json")
-    cards = sorted(load_json("cards.json"), key=lambda card: card["order"])
+    site = load_site()
+    cards = load_cards()
 
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -346,11 +360,9 @@ def build() -> None:
 
     for position, card in enumerate(cards):
         root = "../"
-        markdown = CARDS_DIR / f'{card["slug"]}.md'
-        body_html = markdown_to_html(markdown)
-        body_html = INCLUDE_RE.sub(
-            lambda match: render_include(match.group(1), root, site),
-            body_html,
+        body_html = "\n".join(
+            render_block(block, card["dir"], site, root)
+            for block in card["blocks"]
         )
 
         audio_html = ""

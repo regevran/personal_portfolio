@@ -1,135 +1,211 @@
 [
   {
+    "id": "episode-facing-extinction",
+    "collections": [
+      "podcast"
+    ],
     "title": "Facing Extinction - with Dr. Asaf Miroz",
     "url": "https://open.spotify.com/episode/06nHfviFcQA7Ann3Efb2FD",
-    "description": "A conversation with ornithologist and conservation ecologist Dr. Asaf Miroz about endangered bird species in Israel, the threats they face, and conservation efforts. We discuss illegal hunting, falconry, international cooperation and the challenges of protecting threatened species.",
     "date": "7 Nov 2026",
-    "sort_date": "2026-11-07"
+    "sort_date": "2026-11-07",
+    "description_src": "episodes/facing-extinction.md"
   },
   {
+    "id": "episode-swifts",
+    "collections": [
+      "podcast"
+    ],
     "title": "Swifts - with Amnon Haan",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000794658696",
-    "description": "Amnon Haan, founder of the Friends of Swifts association, shares his fascination with these remarkable aerial specialists. We discuss swift species in Israel, their migration, breeding biology, extraordinary flight capabilities, nesting sites and conservation efforts.",
     "date": "10 Oct 2026",
-    "sort_date": "2026-10-10"
+    "sort_date": "2026-10-10",
+    "description_src": "episodes/swifts.md"
   },
   {
+    "id": "episode-collision-course",
+    "collections": [
+      "podcast"
+    ],
     "title": "On a Collision Course - with the Israeli Air Force's Bird Division",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000790326471",
-    "description": "A conversation with an Israeli Air Force bird-ecology specialist about the challenges of preventing bird strikes. We explore bird migration, movement ecology, tracking technologies and the complex relationship between aviation safety and bird conservation, in both routine operations and wartime.",
     "date": "17 Sep 2026",
-    "sort_date": "2026-09-17"
+    "sort_date": "2026-09-17",
+    "description_src": "episodes/collision-course.md"
   },
   {
+    "id": "episode-feathers",
+    "collections": [
+      "podcast"
+    ],
     "title": "Feathers - with Dr. Joseph Khiat",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000786258051",
-    "description": "Evolutionary biologist Dr. Joseph Khiat takes us into the fascinating world of feathers. We explore their structure, evolutionary origins, their importance to modern birds and non-avian dinosaurs, and the different strategies birds use to replace their feathers through moulting.",
     "date": "27 Aug 2026",
-    "sort_date": "2026-08-27"
+    "sort_date": "2026-08-27",
+    "description_src": "episodes/feathers.md"
   },
   {
+    "id": "episode-yes-to-birds",
+    "collections": [
+      "podcast"
+    ],
     "title": "Yes to Birds - with Gidi Goldstein",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000780239867",
-    "description": "Gidi Goldstein shares the story of how curiosity turned into a lifelong passion for birdwatching spanning four decades. We discuss his journey into birding, unexpected discoveries and his book Yes to Birds, a collection of articles about the world of birds.",
     "date": "6 Aug 2026",
-    "sort_date": "2026-08-06"
+    "sort_date": "2026-08-06",
+    "description_src": "episodes/yes-to-birds.md"
   },
   {
+    "id": "episode-a-friend-for-life",
+    "collections": [
+      "podcast"
+    ],
     "title": "A Friend for Life - with Dr. Yoav Perlman",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000777044734",
-    "description": "Dr. Yoav Perlman, director of the Israeli Birding Center, discusses his lifelong involvement in ornithology and his work at the Society for the Protection of Nature in Israel. We explore conservation projects, habitat restoration and the importance of cooperation between people and organizations in protecting nature.",
     "date": "16 Jul 2026",
-    "sort_date": "2026-07-16"
+    "sort_date": "2026-07-16",
+    "description_src": "episodes/a-friend-for-life.md"
   },
   {
+    "id": "episode-feeling-like-a-bird",
+    "collections": [
+      "podcast"
+    ],
     "title": "Feeling Like a Bird - with Joshua Weilerstein",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000774171376",
-    "description": "An English-language conversation with internationally acclaimed conductor Joshua Weilerstein about the presence of birds in classical music. We explore musical imitation, descriptions and representations of birds, and the ways composers convey the experience of being a bird.",
     "date": "25 Jun 2026",
-    "sort_date": "2026-06-25"
+    "sort_date": "2026-06-25",
+    "description_src": "episodes/feeling-like-a-bird.md"
   },
   {
+    "id": "episode-whats-that-sound",
+    "collections": [
+      "podcast"
+    ],
     "title": "What's That Sound? - with Dr. Yael Lenard",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000771141569",
-    "description": "Researcher and ornithologist Dr. Yael Lenard explores how human-generated noise affects birds, particularly songbirds. We discuss research methods involving field observations, bird ringing, sound recordings and tracking devices, the ecological consequences of noise pollution, and possible ways to reduce its impact.",
     "date": "4 Jun 2026",
-    "sort_date": "2026-06-04"
+    "sort_date": "2026-06-04",
+    "description_src": "episodes/whats-that-sound.md"
   },
   {
+    "id": "episode-ducks-over-jerusalem",
+    "collections": [
+      "podcast"
+    ],
     "title": "Ducks Over Jerusalem - with Amir Balaban",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000767742247",
-    "description": "Naturalist, photographer and urban nature specialist Amir Balaban takes us into Jerusalem's Gazelle Valley and its remarkable birdlife. We discuss urban nature conservation, the importance of water and wetland habitats, resident and migratory birds, and a particularly interesting little bittern.",
     "date": "14 May 2026",
-    "sort_date": "2026-05-14"
+    "sort_date": "2026-05-14",
+    "description_src": "episodes/ducks-over-jerusalem.md"
   },
   {
+    "id": "episode-live-cameras",
+    "collections": [
+      "podcast"
+    ],
     "title": "Live Cameras - with Dr. Moti Charter",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000763231037",
-    "description": "Wildlife ecologist Dr. Moti Charter introduces his extensive network of live wildlife cameras and bird webcams. We discuss how continuous observation reveals fascinating aspects of bird behaviour, enables unexpected discoveries and contributes to scientific research and conservation.",
     "date": "23 Apr 2026",
-    "sort_date": "2026-04-23"
+    "sort_date": "2026-04-23",
+    "description_src": "episodes/live-cameras.md"
   },
   {
+    "id": "episode-where-do-they-roam",
+    "collections": [
+      "podcast"
+    ],
     "title": "Where Do They Roam? - with Prof. Or Spiegel",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000759376054",
-    "description": "Professor Or Spiegel discusses his research into animal movement, behaviour and individuality, with a particular focus on birds. We explore how precise location data and tracking technologies help scientists understand where animals go, how they move and what their movements can teach us.",
     "date": "5 Apr 2026",
-    "sort_date": "2026-04-05"
+    "sort_date": "2026-04-05",
+    "description_src": "episodes/where-do-they-roam.md"
   },
   {
+    "id": "episode-a-mental-map",
+    "collections": [
+      "podcast"
+    ],
     "title": "A Mental Map - with Keren Or and Eldad Golan",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000755721233",
-    "description": "A relaxed conversation with two passionate nature enthusiasts and conservationists. We discuss birdwatching, relationships, living near the Dead Sea, nature conservation and the different ways people connect with the natural world.",
     "date": "17 Mar 2026",
-    "sort_date": "2026-03-17"
+    "sort_date": "2026-03-17",
+    "description_src": "episodes/a-mental-map.md"
   },
   {
+    "id": "episode-the-400-club",
+    "collections": [
+      "podcast"
+    ],
     "title": "The 400 Club - with Gabriel Sider-Pres",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000749612121",
-    "description": "Meet Gabriel, a remarkably knowledgeable young Israeli birder who began birdwatching at an early age. We discuss his experiences in the field, rare bird discoveries, his involvement in the birding community and his ambition to reach the milestone of 400 species.",
     "date": "13 Feb 2026",
-    "sort_date": "2026-02-13"
+    "sort_date": "2026-02-13",
+    "description_src": "episodes/the-400-club.md"
   },
   {
+    "id": "episode-the-migrants-among-us",
+    "collections": [
+      "podcast"
+    ],
     "title": "The Migrants Among Us - with Prof. Nir Sapir",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000747572741",
-    "description": "Professor Nir Sapir, an expert in animal flight and migration, takes us into the science of bird migration. We discuss differences between day and night migration, the decisions birds make during their journeys, how scientists study migration and how human activities affect it.",
     "date": "1 Feb 2026",
-    "sort_date": "2026-02-01"
+    "sort_date": "2026-02-01",
+    "description_src": "episodes/the-migrants-among-us.md"
   },
   {
+    "id": "episode-between-the-houses",
+    "collections": [
+      "podcast"
+    ],
     "title": "Between the Houses - with Anat Gal",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192482",
-    "description": "Urban birder and nature guide Anat Gal introduces us to the surprising richness of birdlife in the heart of Tel Aviv. We discuss urban birdwatching, nature close to home and the opportunities to discover wildlife in places where people least expect it.",
     "date": "15 Jan 2026",
-    "sort_date": "2026-01-15"
+    "sort_date": "2026-01-15",
+    "description_src": "episodes/between-the-houses.md"
   },
   {
+    "id": "episode-in-the-magnetic-field",
+    "collections": [
+      "podcast"
+    ],
     "title": "In the (Magnetic) Field - with Prof. Yoni Vortman",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192346",
-    "description": "Professor Yoni Vortman explores one of the most fascinating questions in bird biology: how birds navigate using Earth's magnetic field. We discuss the science behind magnetic orientation, the mechanisms involved and the research that helps us understand this remarkable ability.",
     "date": "2 Jan 2026",
-    "sort_date": "2026-01-02"
+    "sort_date": "2026-01-02",
+    "description_src": "episodes/in-the-magnetic-field.md"
   },
   {
+    "id": "episode-in-this-ring",
+    "collections": [
+      "podcast"
+    ],
     "title": "In This Ring - with Shay Agmon",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192600",
-    "description": "A conversation about bird ringing: why birds are ringed, how ringing is conducted and what scientists can learn from recapturing birds. We explore the role of ringing in understanding migration, population dynamics and bird ecology.",
     "date": "23 Dec 2025",
-    "sort_date": "2025-12-23"
+    "sort_date": "2025-12-23",
+    "description_src": "episodes/in-this-ring.md"
   },
   {
+    "id": "episode-at-the-tip-of-the-wing",
+    "collections": [
+      "podcast"
+    ],
     "title": "At the Tip of the Wing - with Tuvia Kahan",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192459",
-    "description": "Tuvia Kahan shares his personal journey into birdwatching. We discuss bird counts, rare sightings, memorable discoveries and what the everyday life of a dedicated birder looks like.",
     "date": "10 Dec 2025",
-    "sort_date": "2025-12-10"
+    "sort_date": "2025-12-10",
+    "description_src": "episodes/at-the-tip-of-the-wing.md"
   },
   {
+    "id": "episode-the-birdwatchers-partner",
+    "collections": [
+      "podcast"
+    ],
     "title": "The Birdwatcher's Partner - with Asia Ladizhinskaya",
     "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192515",
-    "description": "What is it like to live with a passionate birdwatcher? Asia Ladizhinskaya, partner of an enthusiastic birder, shares her perspective on accompanying someone whose hobby involves spending hours outdoors looking for birds.",
     "date": "8 Dec 2025",
-    "sort_date": "2025-12-08"
+    "sort_date": "2025-12-08",
+    "description_src": "episodes/the-birdwatchers-partner.md"
   }
 ]

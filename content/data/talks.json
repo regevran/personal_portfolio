@@ -1,5 +1,9 @@
 [
   {
+    "id": "talk-programs-vs-puzzles",
+    "collections": [
+      "talks"
+    ],
     "title": "Programs Vs Puzzles",
     "url": "https://www.youtube.com/results?search_query=Ran+Regev+Programs+Vs+Puzzles+CppCon+2019",
     "description": "A short talk comparing software development to solving a 5,000-piece puzzle.",
@@ -7,6 +11,10 @@
     "sort_date": "2019-01-01"
   },
   {
+    "id": "talk-cpp26-contracts",
+    "collections": [
+      "talks"
+    ],
     "title": "C++26 Contracts",
     "url": "https://www.youtube.com/watch?v=-1syQN5_5D0",
     "description": "Introduction to C++26 Contracts, their design and usage.",
@@ -14,6 +22,10 @@
     "sort_date": "2024-01-01"
   },
   {
+    "id": "talk-known-pitfalls-cpp26-contracts",
+    "collections": [
+      "talks"
+    ],
     "title": "Known Pitfalls in C++26 Contracts",
     "url": "https://www.youtube.com/watch?v=tzXu5KZGMJk",
     "description": "Discussion of potential pitfalls and design considerations in C++26 Contracts.",
@@ -21,6 +33,10 @@
     "sort_date": "2025-01-01"
   },
   {
+    "id": "talk-structured-binding-assignments",
+    "collections": [
+      "talks"
+    ],
     "title": "Structured Binding Assignments (P3817)",
     "url": "https://corecpp.org/",
     "description": "Presentation of the proposal for assignment to structured bindings in C++.",
@@ -28,6 +44,10 @@
     "sort_date": "2026-10-20"
   },
   {
+    "id": "talk-object-storage-scylladb",
+    "collections": [
+      "talks"
+    ],
     "title": "Object Storage in ScyllaDB",
     "url": "https://www.scylladb.com/tech-talk/object-storage-in-scylladb/",
     "description": "Technical presentation about object storage architecture and implementation in ScyllaDB.",
@@ -35,6 +55,10 @@
     "sort_date": null
   },
   {
+    "id": "talk-object-storage-scylladb-slides",
+    "collections": [
+      "talks"
+    ],
     "title": "Object Storage in ScyllaDB - Slides",
     "url": "https://www.slideshare.net/slideshow/object-storage-in-scylladb-by-ran-regev-scylladb/276528885",
     "description": "Accompanying presentation slides.",

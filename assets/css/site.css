@@ -350,6 +350,14 @@ h2 {
   color: var(--muted);
 }
 
+.item-desc > :first-child {
+  margin-top: 0;
+}
+
+.item-desc > :last-child {
+  margin-bottom: 0;
+}
+
 /* Media ------------------------------------------------------------------- */
 
 .media-grid {

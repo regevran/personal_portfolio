@@ -1,0 +1,1 @@
+Urban birder and nature guide Anat Gal introduces us to the surprising richness of birdlife in the heart of Tel Aviv. We discuss urban birdwatching, nature close to home and the opportunities to discover wildlife in places where people least expect it.

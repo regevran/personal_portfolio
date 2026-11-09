@@ -1,0 +1,22 @@
+{
+  "title": "Birding & Ringing",
+  "kicker": "Field work",
+  "family": "nature",
+  "order": 4,
+  "status": "ready",
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.",
+  "description": "Bird ringing and field observations.",
+  "audio": null,
+  "blocks": [
+    {
+      "type": "prose",
+      "src": "page.md"
+    },
+    {
+      "type": "photos",
+      "select": {
+        "collection": "birding"
+      }
+    }
+  ]
+}

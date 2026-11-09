@@ -1,0 +1,16 @@
+{
+  "title": "The Book",
+  "kicker": "Print",
+  "family": "nature",
+  "order": 7,
+  "status": "coming-soon",
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim.",
+  "description": "A pocket book of the birds of Israel.",
+  "audio": null,
+  "blocks": [
+    {
+      "type": "prose",
+      "src": "page.md"
+    }
+  ]
+}

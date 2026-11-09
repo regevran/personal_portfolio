@@ -1,0 +1,1 @@
+A conversation with an Israeli Air Force bird-ecology specialist about the challenges of preventing bird strikes. We explore bird migration, movement ecology, tracking technologies and the complex relationship between aviation safety and bird conservation, in both routine operations and wartime.

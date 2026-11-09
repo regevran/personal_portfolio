@@ -1,0 +1,1 @@
+Dr. Yoav Perlman, director of the Israeli Birding Center, discusses his lifelong involvement in ornithology and his work at the Society for the Protection of Nature in Israel. We explore conservation projects, habitat restoration and the importance of cooperation between people and organizations in protecting nature.

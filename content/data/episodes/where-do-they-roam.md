@@ -1,0 +1,1 @@
+Professor Or Spiegel discusses his research into animal movement, behaviour and individuality, with a particular focus on birds. We explore how precise location data and tracking technologies help scientists understand where animals go, how they move and what their movements can teach us.

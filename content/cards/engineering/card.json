@@ -1,0 +1,22 @@
+{
+  "title": "Engineering & Systems",
+  "kicker": "Systems",
+  "family": "software",
+  "order": 1,
+  "status": "ready",
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt.",
+  "description": "Selected engineering work and contributions.",
+  "audio": null,
+  "blocks": [
+    {
+      "type": "prose",
+      "src": "page.md"
+    },
+    {
+      "type": "repos",
+      "select": {
+        "collection": "engineering"
+      }
+    }
+  ]
+}

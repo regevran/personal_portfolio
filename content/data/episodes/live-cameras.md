@@ -1,0 +1,1 @@
+Wildlife ecologist Dr. Moti Charter introduces his extensive network of live wildlife cameras and bird webcams. We discuss how continuous observation reveals fascinating aspects of bird behaviour, enables unexpected discoveries and contributes to scientific research and conservation.

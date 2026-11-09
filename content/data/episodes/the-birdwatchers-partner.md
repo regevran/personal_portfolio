@@ -1,0 +1,1 @@
+What is it like to live with a passionate birdwatcher? Asia Ladizhinskaya, partner of an enthusiastic birder, shares her perspective on accompanying someone whose hobby involves spending hours outdoors looking for birds.

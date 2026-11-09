@@ -1,0 +1,22 @@
+{
+  "title": "C++ & Standards",
+  "kicker": "WG21",
+  "family": "software",
+  "order": 2,
+  "status": "ready",
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales augue non volutpat luctus.",
+  "description": "WG21 papers authored and co-authored, including P3817.",
+  "audio": null,
+  "blocks": [
+    {
+      "type": "prose",
+      "src": "page.md"
+    },
+    {
+      "type": "papers",
+      "select": {
+        "collection": "cpp-standards"
+      }
+    }
+  ]
+}

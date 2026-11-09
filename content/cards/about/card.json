@@ -1,0 +1,16 @@
+{
+  "title": "About & CV",
+  "kicker": "Profile",
+  "family": "neutral",
+  "order": 9,
+  "status": "placeholder",
+  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus autem quibusdam et aut officiis debitis.",
+  "description": "Biography and curriculum vitae.",
+  "audio": null,
+  "blocks": [
+    {
+      "type": "prose",
+      "src": "page.md"
+    }
+  ]
+}

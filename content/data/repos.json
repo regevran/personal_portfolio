@@ -1,35 +1,59 @@
 [
   {
+    "id": "repo-birds",
+    "collections": [
+      "engineering"
+    ],
     "name": "regevran/birds",
     "url": "https://github.com/regevran/birds",
     "description": "Birds taxonomy - Israel.",
     "pushed_at": "2026-11-05T13:55:20Z"
   },
   {
+    "id": "repo-cpp-proposals",
+    "collections": [
+      "engineering"
+    ],
     "name": "regevran/cpp-proposals",
     "url": "https://github.com/regevran/cpp-proposals",
     "description": "P3817 work.",
     "pushed_at": "2026-10-19T05:37:45Z"
   },
   {
+    "id": "repo-llvm-project-fork",
+    "collections": [
+      "engineering"
+    ],
     "name": "regevran/llvm-project-fork",
     "url": "https://github.com/regevran/llvm-project-fork",
     "description": "P3817 implementation.",
     "pushed_at": "2026-09-28T17:08:19Z"
   },
   {
+    "id": "repo-infra",
+    "collections": [
+      "engineering"
+    ],
     "name": "regevran/infra",
     "url": "https://github.com/regevran/infra",
     "description": "Compiler Explorer infrastructure.",
     "pushed_at": "2026-07-17T15:40:15Z"
   },
   {
+    "id": "repo-contour",
+    "collections": [
+      "engineering"
+    ],
     "name": "regevran/contour",
     "url": "https://github.com/regevran/contour",
     "description": "Terminal.",
     "pushed_at": "2025-09-23T16:59:58Z"
   },
   {
+    "id": "repo-talks",
+    "collections": [
+      "engineering"
+    ],
     "name": "regevran/talks",
     "url": "https://github.com/regevran/talks",
     "description": "Contracts talks.",

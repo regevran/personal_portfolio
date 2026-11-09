@@ -1,0 +1,1 @@
+An English-language conversation with internationally acclaimed conductor Joshua Weilerstein about the presence of birds in classical music. We explore musical imitation, descriptions and representations of birds, and the ways composers convey the experience of being a bird.

@@ -1,6 +1,7 @@
 import unittest
 
-from build import iso_date, sort_latest
+from src.build import iso_date, sort_latest
+from src.site_schema import select_records
 from tests.validate import (
     date_warnings,
     validate_assets,
@@ -46,6 +47,32 @@ class SortTest(unittest.TestCase):
         ]
         ordered = sort_latest(entries, lambda entry: iso_date(entry["date"]))
         self.assertEqual([entry["id"] for entry in ordered], ["first", "second"])
+
+
+class SelectionTest(unittest.TestCase):
+    def setUp(self):
+        self.records = [
+            {"id": "visible", "collections": ["birding"]},
+            {"id": "hidden", "collections": ["birding", "hidden"]},
+            {"id": "other", "collections": ["rescues"]},
+        ]
+
+    def test_collection_excludes_hidden(self):
+        selected = select_records(self.records, {"collection": "birding"})
+        self.assertEqual([record["id"] for record in selected], ["visible"])
+
+    def test_ids_keep_explicit_order(self):
+        selected = select_records(
+            self.records, {"ids": ["other", "visible", "hidden"]}
+        )
+        self.assertEqual(
+            [record["id"] for record in selected],
+            ["other", "visible", "hidden"],
+        )
+
+    def test_hidden_collection_cannot_be_selected(self):
+        with self.assertRaises(ValueError):
+            select_records(self.records, {"collection": "hidden"})
 
 
 class DateWarningTest(unittest.TestCase):

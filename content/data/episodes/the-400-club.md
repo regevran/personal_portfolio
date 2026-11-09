@@ -1,0 +1,1 @@
+Meet Gabriel, a remarkably knowledgeable young Israeli birder who began birdwatching at an early age. We discuss his experiences in the field, rare bird discoveries, his involvement in the birding community and his ambition to reach the milestone of 400 species.

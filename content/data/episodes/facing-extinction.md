@@ -1,0 +1,1 @@
+A conversation with ornithologist and conservation ecologist Dr. Asaf Miroz about endangered bird species in Israel, the threats they face, and conservation efforts. We discuss illegal hunting, falconry, international cooperation and the challenges of protecting threatened species.
