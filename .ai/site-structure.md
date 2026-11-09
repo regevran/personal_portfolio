@@ -50,13 +50,18 @@ personal_portfolio/
 | 1 | engineering | Engineering & Systems | software | ready |
 | 2 | cpp-standards | C++ & Standards | software | ready |
 | 3 | talks | Talks | software | ready |
-| 4 | birding | Birding & Ringing | nature | ready |
-| 5 | rescues | Rescues | nature | ready |
-| 6 | podcast | Podcast | nature | ready |
-| 7 | book | The Book | nature | coming-soon |
-| 8 | learn | Learning Aid | nature | under-construction |
-| 9 | about | About & CV | neutral | placeholder |
-| 10 | contact | Contact | neutral | ready |
+| 4 | birding | Birding | nature | placeholder |
+| 5 | ringing | Ringing | nature | ready |
+| 6 | rescues | Rescues | nature | ready |
+| 7 | podcast | Podcast | nature | ready |
+| 8 | book | The Book | nature | coming-soon |
+| 9 | learn | Learning Aid | nature | under-construction |
+| 10 | about | About | neutral | placeholder |
+| 11 | contact | Contact | neutral | ready |
+
+Birding and Ringing were one card. Birding is now a placeholder for birding
+photographs and field stories; Ringing owns the existing ringing photographs
+(`"collections": ["ringing"]`).
 
 Adding a card: create `content/cards/<slug>/card.json` with the metadata and
 `blocks`, plus the prose files the prose blocks reference. The directory name is

@@ -2,7 +2,7 @@
   "title": "Contact",
   "kicker": "Say hello",
   "family": "neutral",
-  "order": 10,
+  "order": 11,
   "status": "ready",
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. At vero eos et accusamus et iusto odio dignissimos.",
   "description": "Email, phone and a short message form.",

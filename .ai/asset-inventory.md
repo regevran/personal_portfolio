@@ -15,17 +15,18 @@
 | `assets/rescues/microcarbo_pygmeus.mp4` | rescues | 576×1024, 28 s |
 | `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_video.mp4` | rescues | 848×478, 34 s |
 | `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_{1,2,3,4}.jpeg` | rescues (later) | not yet wired into a gallery |
-| `assets/ringing/alcedo_atthis_{1,2,3}.jpeg` | birding, photos.json | Common Kingfisher |
-| `assets/ringing/otus_scops_{1,2,3,4}.jpeg` | birding, photos.json | Eurasian Scops Owl |
-| `assets/ringing/saxicola_maurus.jpeg` | birding, photos.json | Siberian Stonechat |
-| `assets/ringing/upupa_epops_{1,2}.jpeg` | birding, photos.json | Eurasian Hoopoe |
+| `assets/ringing/alcedo_atthis_{1,2,3}.jpeg` | ringing, photos.json | Common Kingfisher |
+| `assets/ringing/otus_scops_{1,2,3,4}.jpeg` | ringing, photos.json | Eurasian Scops Owl |
+| `assets/ringing/saxicola_maurus.jpeg` | ringing, photos.json | Siberian Stonechat |
+| `assets/ringing/upupa_epops_{1,2}.jpeg` | ringing, photos.json | Eurasian Hoopoe |
 | `assets/documents/main_page_concept.{jpeg,svg}` | design session only | mood reference; not published. The SVG is a flattened Canva export: 3.1 MB, 16,844 elements, 15 embedded rasters, no semantic labels, text outlined. |
 
 ## Missing or pending
 
 | Item | Status |
 |---|---|
-| Robin PNG | pending; the book's creator is supplying a transparent PNG. The board reserves 56 × 72 px boxes above every nature card; the N03 study uses 104 × 132 px. |
+| Robin PNG | **integrated.** `assets/general/closing_on_birds_robin.png` (359 × 356 RGBA) is used at 56 × 72 px above every nature card and 104 × 132 px in the N03 study. |
+| Birding photos/stories | placeholder card `birding` has prose only; add the photos block and records when they arrive. |
 | CV PDF | pending; card shows a placeholder |
 | Bird book PDF | exists in `~/dev/ran/birds/book/out/` (2.3 MB) but not shareable yet |
 | Learning-aid build | design phase only in `~/dev/ran/birds/learn` |

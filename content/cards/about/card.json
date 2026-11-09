@@ -1,8 +1,8 @@
 {
-  "title": "About & CV",
+  "title": "About",
   "kicker": "Profile",
   "family": "neutral",
-  "order": 9,
+  "order": 10,
   "status": "placeholder",
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus autem quibusdam et aut officiis debitis.",
   "description": "Biography and curriculum vitae.",

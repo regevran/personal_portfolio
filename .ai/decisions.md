@@ -18,7 +18,7 @@ data-driven, because it will be updated from time to time.
 | Content model | `content/data/` holds canonical records, each with a stable `id` and a `collections` list. `content/cards/<slug>/card.json` holds page metadata and ordered `blocks`; page prose is sibling Markdown. Cards select data by collection or explicit ids — no duplicate membership index. `hidden` is a reserved collection for soft removal. |
 | Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and are referenced by `description_src`; the inline `description` remains the fallback for other datasets. |
 | Toolchain | `cmake` 3.25+ + Ninja + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
-| Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; ten title-only cards around it — nature left, software right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Cards remain unlinked. |
+| Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; eleven title-only cards around it — nature scattered on the left, software on the right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Cards remain unlinked. |
 | Tone | Playful / illustrated, not childish. Employer-facing. |
 | Interaction | Cards lift on hover and focus; clicking opens a separate page per card. Keyboard and touch must work; honor `prefers-reduced-motion`. |
 | Voice-over | English, added at the very end. Every card reserves an `audio` field and a transcript slot in the template from the start. |
@@ -59,10 +59,13 @@ data-driven, because it will be updated from time to time.
   yin-yang group is shifted 120 px right, so the owl's eye stays on the
   yin-yang's light eye at (927.5, 285); the extra left wall gives nature more
   room.
-- The ten cards are title-only (kicker + title); descriptions, statuses and
-  content live in the card pages. The poster is laid out left (nature, two
-  columns), right (software, one column), with About and Contact as two flat,
-  bottom-aligned cards. Cards were enlarged to use the free wall space.
+- The eleven cards are title-only (kicker + title); descriptions, statuses and
+  content live in the card pages. The poster is not a grid: nature cards are
+  scattered on the left in a zigzag, software cards vary their x position on the
+  right, and About and Contact stay flat and bottom-aligned. Card rotations run
+  to roughly ±6°, with hanging cards pivoting from their grommet. Robins are
+  rotated and mirrored per card and sit on the perch branch rather than above
+  it.
 - The poster scales to the viewport height and fits when the resulting width
   fits; otherwise the board pans horizontally on both desktop and mobile. The
   nav items are zone shortcuts (Nature left, Work right, About/Contact centre).
@@ -72,11 +75,12 @@ data-driven, because it will be updated from time to time.
   (apex at the badge clip) with the straps running up as if from the neck, and
   the perch is a small branch with the robin above the card. The other studies
   remain on the sheet for reference.
-- The robin is a **placeholder** on the board (56 × 72 px dashed box per nature
-  card; the enlarged study uses 104 × 132 px) until the book's creator supplies
-  a transparent PNG. A transparent PNG is sufficient; the image will replace
-  the box with `object-fit: contain`. The interim raster robin with the podcast
-  microphone is no longer used.
+- The robin uses the book's transparent PNG
+  (`assets/general/closing_on_birds_robin.png`, 359 × 356 RGBA) on the board:
+  56 × 72 px above every nature card and 104 × 132 px in the enlarged N03
+  study, with `object-fit: contain` and bottom alignment so the bird sits on the
+  perch. The interim raster robin with the podcast microphone is no longer
+  used.
 - The wooden Ran Regev, Software, and Nature signs were removed: they read as
   another anchor and added mass. The title bar and tagline note carry the name
   and pitch.
@@ -121,3 +125,8 @@ data-driven, because it will be updated from time to time.
   gained stable ids and collection tags. The podcast card's promo-video block
   is initially first so the two placements can be compared by reordering the
   `blocks` array; no code change is needed.
+- **Birding & Ringing was split** into two cards on 2026-11-09. `birding` is a
+  placeholder for photographs and field stories (order 4, status
+  `placeholder`, prose only); `ringing` owns the existing ringing photographs
+  (order 5, `"collections": ["ringing"]`). The board shows both with the robin
+  perch.

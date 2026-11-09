@@ -2,7 +2,7 @@
   {
     "id": "photo-alcedo-atthis-1",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/alcedo_atthis_1.jpeg",
     "title": "Common Kingfisher",
@@ -13,7 +13,7 @@
   {
     "id": "photo-alcedo-atthis-2",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/alcedo_atthis_2.jpeg",
     "title": "Common Kingfisher",
@@ -24,7 +24,7 @@
   {
     "id": "photo-alcedo-atthis-3",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/alcedo_atthis_3.jpeg",
     "title": "Common Kingfisher",
@@ -35,7 +35,7 @@
   {
     "id": "photo-otus-scops-1",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/otus_scops_1.jpeg",
     "title": "Eurasian Scops Owl",
@@ -46,7 +46,7 @@
   {
     "id": "photo-otus-scops-2",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/otus_scops_2.jpeg",
     "title": "Eurasian Scops Owl",
@@ -57,7 +57,7 @@
   {
     "id": "photo-otus-scops-3",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/otus_scops_3.jpeg",
     "title": "Eurasian Scops Owl",
@@ -68,7 +68,7 @@
   {
     "id": "photo-otus-scops-4",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/otus_scops_4.jpeg",
     "title": "Eurasian Scops Owl",
@@ -79,7 +79,7 @@
   {
     "id": "photo-saxicola-maurus",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/saxicola_maurus.jpeg",
     "title": "Siberian Stonechat",
@@ -90,7 +90,7 @@
   {
     "id": "photo-upupa-epops-1",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/upupa_epops_1.jpeg",
     "title": "Eurasian Hoopoe",
@@ -101,7 +101,7 @@
   {
     "id": "photo-upupa-epops-2",
     "collections": [
-      "birding"
+      "ringing"
     ],
     "src": "assets/ringing/upupa_epops_2.jpeg",
     "title": "Eurasian Hoopoe",

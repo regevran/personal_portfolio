@@ -2,7 +2,7 @@
 
 Date: 2026-11-08
 Status: 16:9 poster layout with title-only cards; anchors chosen (C05 lanyard +
-N03 robin perch); robin PNG pending.
+N03 robin perch); robin transparent PNG integrated.
 
 ## Goal
 
@@ -15,7 +15,7 @@ lives in the card pages.
 The first pass was too clean and grid-like. The language is now a **dirty field
 notebook collage**: one dirty ink image as the whole page, with the data placed
 on top of it. Nothing else: no separate page texture, no taped photo frame, no
-strips of tape. The ten sections are notes on the board, not a grid.
+strips of tape. The eleven sections are notes on the board, not a grid.
 
 Direction A (the field board) is the only direction. Directions B and C were
 dropped and their files deleted.
@@ -68,6 +68,10 @@ it contains the exact pieces we need. Extracted from it:
 
 The book cover contributed:
 
+- `assets/general/closing_on_birds_robin.png` — the transparent European robin
+  used on the board and the N03 study (359 × 356 RGBA); copied to
+  `design/assets/img/closing_on_birds_robin.png` so the preview is
+  self-contained.
 - `design/assets/img/robin.png` — the European robin, cropped from the cover's
   podcast mark. It is no longer used on the board because the podcast microphone
   is baked in under the bird's feet; the creator is supplying a transparent PNG
@@ -88,17 +92,20 @@ The main page is a **16:9 poster**, not a scrolling document:
 
 1. `board-background.jpg` — the dirty ink yin-yang with the sharp Ran + owl
    cutout baked in at 380 px wide.
-2. The data on top — a tagline note and ten title-only cards placed around the
-   portrait.
+2. The data on top — a tagline note and eleven title-only cards placed around
+   the portrait.
 
-The spatial grammar follows the original jpeg: **nature on the left** (Birding
-& Ringing, Rescues, Podcast, The Book, Learning Aid) in two columns, **software
-on the right** (Engineering & Systems, C++ & Standards, Talks) in one column,
-and the two neutral cards (About & CV, Contact) flat and bottom-aligned under
-the portrait. The whole yin-yang group is shifted 120 px right so nature gets
-more of the wall and software gets less. The tagline sits above the portrait.
-Cards are enlarged to use the free space. The card labels are kicker + title
-only; descriptions, statuses, and all other content live in the card pages.
+The spatial grammar follows the original jpeg but is deliberately **not a
+grid**: **nature is scattered on the left** (Birding, Ringing, Rescues,
+Podcast, The Book, Learning Aid) in a zigzag, **software is on the right**
+(Engineering & Systems, C++ & Standards, Talks) with varied x positions rather
+than one column, and the two neutral cards (About, Contact) stay flat and
+bottom-aligned under the portrait. Hanging cards rotate up to roughly ±6° and
+pivot from their grommet; the rest of the board does not move. The whole
+yin-yang group is shifted 120 px right so nature gets more of the wall and
+software gets less. The tagline sits above the portrait. Cards are enlarged to
+use the free space. The card labels are kicker + title only; descriptions,
+statuses, and all other content live in the card pages.
 
 The board scales with the viewport height. When the resulting width fits, the
 whole poster is visible with no scroll; when it does not fit (narrow laptop,
@@ -140,15 +147,16 @@ Instead the cards hang from anchors. Ten studies live in
 On the board, the C05 V is compact and points down (apex at the badge clip),
 with the straps running up as if from the neck; there is no nail. A small
 version sits above every software card. Each nature card carries a compact
-robin perch: a branch, twine, and a small robin slot above the card. The perch
-is repeated above Birding & Ringing, Rescues, Podcast, The Book, and Learning
-Aid.
+robin perch: a branch, twine, and a robin above the card. The perch is repeated
+above Birding, Ringing, Rescues, Podcast, The Book, and Learning Aid.
 
-The robin is currently a **56 × 72 px placeholder** on the board (a dashed
-rectangle); the enlarged N03 study uses 104 × 132 px. The book's creator is
-supplying a transparent PNG; that is sufficient. The PNG will replace the
-rectangle at either size with `object-fit: contain`. The interim raster robin
-with the podcast microphone is no longer used.
+The robin uses the book's transparent PNG
+(`assets/general/closing_on_birds_robin.png`, 359 × 356 RGBA). It is rendered
+at 56 × 72 px on the board and 104 × 132 px in the enlarged N03 study with
+`object-fit: contain`; the branch overlaps the bottom of the image and the bird
+is nudged onto it. Each board robin gets its own rotation and some are
+mirrored, so the perch does not look copied. The interim raster robin with the
+podcast microphone is no longer used.
 
 ## Files
 
@@ -161,7 +169,7 @@ with the podcast microphone is no longer used.
 
 ## Next step
 
-Drop in the transparent robin PNG when it arrives. Then integrate the board into
-`templates/`, `assets/css/site.css`, and the hub renderer; apply it to the card
-pages and build the contact power-line/notebook interaction. Cards stay
-unlinked until the integration step. Voice-over comes last.
+Integrate the board into `templates/`, `assets/css/site.css`, and the hub
+renderer; apply it to the card pages and build the contact
+power-line/notebook interaction. Cards stay unlinked until the integration
+step. Voice-over comes last.

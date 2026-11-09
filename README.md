@@ -48,12 +48,14 @@ fail it. The affected entries sort last.
 
 - `direction-a.html` — the 16:9 yin-yang poster. One dirty composite background
   (`design/assets/textures/board-background.jpg`) carries a sharp Ran + owl
-  cutout with the owl's eye on the yin-yang eye. Ten title-only cards surround
-  it: nature on the left, software on the right, and About and Contact as two
-  flat, bottom-aligned cards. The yin-yang group sits right of centre to give
+  cutout with the owl's eye on the yin-yang eye. Eleven title-only cards
+  surround it: nature scattered on the left, software on the right, and About
+  and Contact as two flat, bottom-aligned cards. Hanging cards use varied
+  rotations; the robins are rotated and mirrored and sit on their perches. The yin-yang group sits right of centre to give
   nature more room. Compact C05 lanyards sit above the software cards; compact
-  N03 robin perches above the nature cards. The robins are 56 × 72 px
-  placeholders until the transparent PNG arrives. The board fits the viewport
+  N03 robin perches above the nature cards. The robins use the transparent PNG
+  at `assets/general/closing_on_birds_robin.png` (56 × 72 px, `object-fit:
+  contain`, bottom-aligned). The board fits the viewport
   when it can and pans horizontally when it cannot; there is no vertical page
   scroll. A fixed title bar carries the name, email, phone, and provisional
   About / Work / Nature / Contact navigation.
@@ -126,7 +128,7 @@ in `card.json`; no code changes are needed. A block selects records with
 | `{"type": "episodes", "select": {"collection": "podcast"}}` | podcast episodes |
 | `{"type": "repos", "select": {"collection": "engineering"}}` | repositories |
 | `{"type": "videos", "select": {"collection": "rescues"}}` | video grid |
-| `{"type": "photos", "select": {"collection": "birding"}}` | photo gallery |
+| `{"type": "photos", "select": {"collection": "ringing"}}` | photo gallery |
 | `{"type": "contact"}` | contact panel and form |
 
 Collection selection ignores records whose `collections` contains `hidden`, so
@@ -160,6 +162,8 @@ again.
 The site is intentionally a structural skeleton:
 
 - All prose that is not yet written is lorem ipsum.
+- The Birding card is a placeholder for future photographs and field stories;
+  Ringing carries the current ringing photographs.
 - The CV link and the book PDF are placeholders until the real files arrive.
 - Cards are colour-coded by family (`software`, `nature`, `neutral`) as a
   structural aid, not a final design decision.

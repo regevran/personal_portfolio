@@ -420,18 +420,8 @@ p {
   display: block;
   width: 120px;
   height: 36px;
-  margin-top: -2px;
+  margin-top: -4px;
   overflow: visible;
-}
-
-.hang-rig--perch .robin-slot {
-  margin-top: 0;
-}
-
-.robin-slot--sm {
-  width: 56px;
-  height: 72px;
-  font-size: 0;
 }
 
 .card-eye {
@@ -1242,26 +1232,8 @@ p {
 .anchor-art--perch svg {
   width: 220px;
   height: 90px;
-  margin-top: -2px;
+  margin-top: -8px;
   overflow: visible;
-}
-
-.robin-slot {
-  display: grid;
-  place-items: center;
-  width: 104px;
-  height: 132px;
-  margin-top: 2px;
-  border: 1.5px dashed rgba(95, 98, 50, 0.5);
-  border-radius: 4px;
-  background: rgba(255, 249, 236, 0.72);
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.14em;
-  line-height: 1.5;
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .robin-img {
@@ -1269,6 +1241,11 @@ p {
   width: 104px;
   height: 132px;
   object-fit: contain;
+  object-position: bottom center;
+  transform: translateY(var(--robin-drop, 2px))
+             rotate(var(--robin-tilt, 0deg))
+             scaleX(var(--robin-flip, 1));
+  transform-origin: bottom center;
   filter: drop-shadow(0 6px 10px rgba(47, 39, 20, 0.16));
 }
 
@@ -1697,13 +1674,22 @@ body.dir-a {
 
 .board-item--bottom {
   top: auto;
-  bottom: 4%;
+  bottom: 2%;
+}
+
+.board-item--bottom .scrap {
+  transform-origin: bottom center;
 }
 
 .board-item .scrap {
   width: 100%;
   margin: 0;
   padding: 2cqh 2.1cqh;
+}
+
+/* Hanging cards pivot from the grommet, so the twine stays connected. */
+.board-item:not(.board-item--neutral) .scrap {
+  transform-origin: top center;
 }
 
 .board .scrap--monitor,
@@ -1745,7 +1731,7 @@ body.dir-a {
   height: 3.99cqh;
 }
 
-.board .robin-slot--sm {
+.board .robin-img--sm {
   width: 6.2cqh;
   height: 8cqh;
 }
