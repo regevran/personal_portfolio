@@ -83,7 +83,10 @@ data-driven, because it will be updated from time to time.
   used.
 - The wooden Ran Regev, Software, and Nature signs were removed: they read as
   another anchor and added mass. The title bar and tagline note carry the name
-  and pitch.
+  and pitch. The tagline uses the kicker's mono uppercase style, is sized to
+  its longest line with a small margin, sits left of centre above the yin-yang
+  curve with the same 2% spacing from the top that About/Contact have from the
+  bottom, and carries a full gold border.
 - The title bar is fixed at the top: name, email, phone, and a provisional
   About / Work / Nature / Contact navigation. The nav targets are zone
   shortcuts for now; real page routes arrive with the card pages.

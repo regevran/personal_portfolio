@@ -103,9 +103,13 @@ than one column, and the two neutral cards (About, Contact) stay flat and
 bottom-aligned under the portrait. Hanging cards rotate up to roughly ±6° and
 pivot from their grommet; the rest of the board does not move. The whole
 yin-yang group is shifted 120 px right so nature gets more of the wall and
-software gets less. The tagline sits above the portrait. Cards are enlarged to
-use the free space. The card labels are kicker + title only; descriptions,
-statuses, and all other content live in the card pages.
+software gets less. The tagline is a compact note in the kicker's mono
+uppercase style, sized to its longest line, placed left of centre above the
+yin-yang curve and outlined by a full gold border; its 2% top spacing matches
+the bottom row's 2% bottom spacing. Cards are enlarged to use the free space.
+The card
+labels are kicker + title only; descriptions, statuses, and all other content
+live in the card pages.
 
 The board scales with the viewport height. When the resulting width fits, the
 whole poster is visible with no scroll; when it does not fit (narrow laptop,
