@@ -3,7 +3,7 @@
 A static, data-driven portfolio. Content lives in `content/` and `assets/`;
 CMake builds the site into `dist/`. The generated output is plain static HTML
 with relative URLs, so it can be inspected locally or moved to any static host
-later.
+later. Open work is tracked in [`TODO.md`](TODO.md).
 
 ## Requirements
 
