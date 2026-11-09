@@ -1650,7 +1650,7 @@ body.dir-a {
   height: 100%;
   aspect-ratio: 16 / 9;
   margin: 0 auto;
-  background: url("textures/board-background.jpg") center / cover no-repeat;
+  background: url("../../assets/general/board-background.jpg") center / cover no-repeat;
   container-type: size;
 }
 

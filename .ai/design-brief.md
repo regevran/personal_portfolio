@@ -2,7 +2,9 @@
 
 Date: 2026-11-08
 Status: 16:9 poster layout with title-only cards; anchors chosen (C05 lanyard +
-N03 robin perch); robin transparent PNG integrated.
+N03 robin perch); robin transparent PNG integrated; the board is now the site
+hub, with each card linking to its page. Card-page styling and contact
+interaction remain.
 
 ## Goal
 
@@ -58,7 +60,7 @@ it contains the exact pieces we need. Extracted from it:
 - `design/assets/img/ran-otus.png` — the cutout of Ran and the scops owl, with
   the colour image combined with its alpha mask.
 - `design/assets/textures/ink-yinyang.jpg` — the dirty ink yin-yang background.
-- `design/assets/textures/board-background.jpg` — **the 1600 × 900 poster
+- `assets/general/board-background.jpg` — **the 1600 × 900 poster
   background**: the ink image scaled to 16:9 with the sharp cutout baked in at
   380 px wide.
 - `design/assets/textures/field-background.jpg` — the earlier 1280 × 720
@@ -109,7 +111,9 @@ yin-yang curve and outlined by a full gold border; its 2% top spacing matches
 the bottom row's 2% bottom spacing. Cards are enlarged to use the free space.
 The card
 labels are kicker + title only; descriptions, statuses, and all other content
-live in the card pages.
+live in the card pages. This placement is encoded per card in
+`content/cards/<slug>/card.json` under `board`; the hub renderer reads it when
+the board is integrated.
 
 The board scales with the viewport height. When the resulting width fits, the
 whole poster is visible with no scroll; when it does not fit (narrow laptop,
@@ -173,7 +177,8 @@ podcast microphone is no longer used.
 
 ## Next step
 
-Integrate the board into `templates/`, `assets/css/site.css`, and the hub
-renderer; apply it to the card pages and build the contact
-power-line/notebook interaction. Cards stay unlinked until the integration
-step. Voice-over comes last.
+The hub is integrated: `templates/base-board.html`, `templates/index.html`,
+`assets/css/board.css`, `assets/js/board.js`, and the `board` metadata in each
+`card.json`. Cards link to their pages. Next, apply the visual language to the
+card pages (`templates/card.html`, `assets/css/site.css`) and build the contact
+power-line/notebook interaction. Voice-over comes last.

@@ -7,6 +7,16 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam libero tempore, cum soluta nobis est eligendi.",
   "description": "A companion trainer for bird names, in development.",
   "audio": null,
+  "board": {
+    "x": 1,
+    "y": 70,
+    "tilt": 20,
+    "anchor": "perch",
+    "robin": {
+      "tilt": -15,
+      "flip": true
+    }
+  },
   "blocks": [
     {
       "type": "prose",

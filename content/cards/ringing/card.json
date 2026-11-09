@@ -7,6 +7,16 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.",
   "description": "Bird ringing and field observations.",
   "audio": null,
+  "board": {
+    "x": 16,
+    "y": 14,
+    "tilt": -25,
+    "anchor": "perch",
+    "robin": {
+      "tilt": 18,
+      "flip": false
+    }
+  },
   "blocks": [
     {
       "type": "prose",

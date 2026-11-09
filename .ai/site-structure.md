@@ -20,13 +20,18 @@ personal_portfolio/
 │       ├── photos.json       ringing photographs
 │       └── episodes/         per-episode description Markdown
 ├── templates/
-│   ├── base.html             document skeleton
-│   ├── index.html            hub fragment
+│   ├── base.html             card page shell
+│   ├── base-board.html       hub shell
+│   ├── index.html            hub board fragment
 │   ├── card.html             card page fragment
-│   └── partials/contact.html contact panel
-├── assets/                   existing topical layout kept
-│   ├── css/site.css
-│   ├── js/site.js
+│   └── partials/             board-card, perch, lanyard, contact
+├── assets/
+│   ├── css/board.css         hub board
+│   ├── css/site.css          card pages
+│   ├── js/board.js           horizontal pan and nav shortcuts
+│   ├── js/site.js            contact form
+│   ├── fonts/                Patrick Hand (OFL)
+│   ├── general/              board background, robin PNG, reference assets
 │   ├── documents/            CV and book PDF placeholders
 │   └── ringing/ rescues/ podcast/ ...
 ├── tests/                    all validation and date warnings
@@ -63,19 +68,20 @@ Birding and Ringing were one card. Birding is now a placeholder for birding
 photographs and field stories; Ringing owns the existing ringing photographs
 (`"collections": ["ringing"]`).
 
-Adding a card: create `content/cards/<slug>/card.json` with the metadata and
-`blocks`, plus the prose files the prose blocks reference. The directory name is
-the slug; the tests and hub pick it up automatically. No renderer change is
-needed for a new card.
+Adding a card: create `content/cards/<slug>/card.json` with the metadata,
+`board` placement and `blocks`, plus the prose files the prose blocks
+reference. The directory name is the slug; the tests and hub pick it up
+automatically. No renderer change is needed for a new card.
 
 ## Data model
 
 - `site.json`: `name`, `tagline`, `intro`, `email`, `phone`, `github`.
 - `cards/<slug>/card.json`: `{title, kicker, family, summary, order, status,
-  audio, description, blocks}`. `status` is one of `ready`,
+  audio, description, board, blocks}`. `status` is one of `ready`,
   `under-construction`, `coming-soon`, `placeholder`; `family` is one of
   `software`, `nature`, `neutral` and drives the provisional card colours.
   `audio` is `null` or a path under `assets/`. The slug is the directory name.
+  `board` holds the hub placement (see below).
 - Every dataset record has a stable `id` and a `collections` list. A collection
   is a selection tag, not an index: several records share one; a record can be
   in several. `hidden` is reserved — a record carrying it is excluded from
@@ -96,6 +102,26 @@ needed for a new card.
   (with no `youtube`) is a hard validation error.
 - `photos.json`: `{id, collections, src, title, caption, date, audio}`. `date`
   is ISO `YYYY-MM-DD` or null.
+
+## Board layout
+
+Every card carries its hub placement in `board`:
+
+- `x` — horizontal position in percent of board width; may be negative
+  (Birding deliberately drifts off the left edge).
+- `y` — top position in percent of board height for hanging cards.
+- `bottom` — distance from the bottom for the flat neutral cards; exactly one
+  of `y` or `bottom` is present.
+- `tilt` — card rotation in degrees; positive is clockwise.
+- `anchor` — `perch` for nature, `lanyard` for software, `none` for neutral.
+  Validation enforces the family match.
+- `id` — optional DOM id for the top-nav targets (`work`, `nature`, `about`,
+  `contact`).
+- `robin` — only for `perch`: `{tilt, flip}`. `tilt` is degrees; `flip`
+  mirrors the image horizontally.
+
+The values mirror the approved design preview in `design/direction-a.html`.
+The hub renderer will read them when the board is integrated.
 
 Blocks are `{type, ...}` objects rendered in order:
 
@@ -168,11 +194,15 @@ uses `build/install`); the host and upload step for deployment are deferred.
 1. Clear and recreate `dist/`.
 2. Copy `assets/` (skipping swap files).
 3. Read `site.json` and every `content/cards/*/card.json`, sorted by `order`.
-4. Render each card's blocks in order: prose via pandoc, contact from site
+4. Build the hub board: each card's `board` metadata produces its position,
+   tilt, perch/lanyard rig and robin transform via the `board-card`, `perch`
+   and `lanyard` partials. Cards are grouped nature → software → neutral and
+   sorted top-down for DOM/tab order; each card links to its page.
+5. Render each card's blocks in order: prose via pandoc, contact from site
    data, datasets selected by collection or id and sorted latest-first.
-5. Compose `dist/<slug>/index.html` from `card.html` + `base.html`.
-6. Compose `dist/index.html` from `index.html` + `base.html`.
-7. Write `.nojekyll` (harmless now, useful for GitHub Pages later).
+6. Compose `dist/<slug>/index.html` from `card.html` + `base.html`.
+7. Compose `dist/index.html` from `index.html` + `base-board.html`.
+8. Write `.nojekyll` (harmless now, useful for GitHub Pages later).
 
 ## Conventions
 

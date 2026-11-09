@@ -50,7 +50,7 @@ data-driven, because it will be updated from time to time.
   spec. The SVG is a flattened Canva export (16,844 elements, no semantic
   labels, text outlined, 15 embedded rasters) and is not usable as separable
   production artwork. The cutout and ink background were extracted from it and
-  combined into `design/assets/textures/board-background.jpg` (1600 × 900,
+  combined into `assets/general/board-background.jpg` (1600 × 900,
   cutout 380 px wide).
 - The page is a poster with exactly two layers: the single composite background
   and the data on top. The earlier paper-texture layer and taped photo frame
@@ -123,6 +123,15 @@ data-driven, because it will be updated from time to time.
   for colour-coding the structure preview. It is not a visual-design decision.
 - The `pelacanus_onocotalus_3.jpeg` filename typo was corrected by the user;
   the current file is `pelecanus_onocrotalus_3.jpeg`.
+- The approved hub placement is stored per card in `content/cards/<slug>/card.json`
+  under `board` (`x`, `y` or `bottom`, `tilt`, `anchor`, `robin` for the perch,
+  and optional nav `id`). Validation ties the anchor to the family. The values
+  mirror `design/direction-a.html`.
+- The board is the real hub as of 2026-11-09: `templates/base-board.html` +
+  `templates/index.html`, `assets/css/board.css`, `assets/js/board.js`, and the
+  `board-card`/`perch`/`lanyard` partials. Every board card links to its page.
+  Card pages still use the structural `site.css`; applying the visual language
+  there is the next design step.
 - The content model was revised on 2026-11-09: `content/data/cards.json` was
   removed; each card is now a directory with `card.json` + prose. Datasets
   gained stable ids and collection tags. The podcast card's promo-video block

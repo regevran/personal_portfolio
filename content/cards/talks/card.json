@@ -7,6 +7,12 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
   "description": "Public conference talks and presentations.",
   "audio": null,
+  "board": {
+    "x": 77,
+    "y": 60,
+    "tilt": 5.5,
+    "anchor": "lanyard"
+  },
   "blocks": [
     {
       "type": "prose",

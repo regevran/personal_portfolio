@@ -7,6 +7,17 @@
   "summary": "Birding photographs and the stories behind them are coming soon.",
   "description": "Birding photographs and field stories.",
   "audio": null,
+  "board": {
+    "x": -1,
+    "y": 1,
+    "tilt": 15,
+    "anchor": "perch",
+    "robin": {
+      "tilt": -10,
+      "flip": false
+    },
+    "id": "nature"
+  },
   "blocks": [
     {
       "type": "prose",

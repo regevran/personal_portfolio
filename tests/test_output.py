@@ -9,6 +9,13 @@ class OutputValidationTest(unittest.TestCase):
         errors = validate_output()
         self.assertEqual(errors, [], "\n".join(errors))
 
+    def test_hub_uses_board_layout(self):
+        hub = (DIST / "index.html").read_text(encoding="utf-8")
+        self.assertIn('class="board"', hub)
+        self.assertIn('class="board-item', hub)
+        self.assertIn("board-background", (DIST / "assets" / "css" / "board.css").read_text())
+        self.assertNotIn('class="card-grid"', hub)
+
     def test_listings_are_latest_first(self):
         cpp = (DIST / "cpp-standards" / "index.html").read_text(encoding="utf-8")
         self.assertLess(

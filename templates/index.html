@@ -1,15 +1,25 @@
-<section class="hero">
-  <p class="eyebrow">{{TAGLINE}}</p>
-  <h1>{{SITE_NAME}}</h1>
-  <p class="lede">{{INTRO}}</p>
-</section>
+<header class="topbar topbar--fixed">
+  <div class="wrap topbar-inner">
+    <a class="wordmark" href="index.html">{{SITE_NAME}}</a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#nature">Nature</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="topbar-contact">
+      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+      <a href="tel:{{PHONE_TEL}}">{{PHONE}}</a>
+    </div>
+  </div>
+</header>
 
-<div class="legend" aria-label="Card colour key">
-  <span class="legend-item legend-item--software"><span class="swatch"></span>Software</span>
-  <span class="legend-item legend-item--nature"><span class="swatch"></span>Nature</span>
-  <span class="legend-item legend-item--neutral"><span class="swatch"></span>General</span>
-</div>
-
-<nav class="card-grid" aria-label="Portfolio sections">
-{{CARDS}}
-</nav>
+<main class="page">
+  <h1 class="visually-hidden">{{SITE_NAME}} — {{TAGLINE}}</h1>
+  <div class="board-viewport" tabindex="0" aria-label="Portfolio board. Scroll horizontally to explore.">
+    <div class="board">
+      <p class="board-tagline scrap">{{TAGLINE_LINES}}</p>
+{{BOARD_CARDS}}
+    </div>
+  </div>
+</main>

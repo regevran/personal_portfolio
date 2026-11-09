@@ -7,6 +7,16 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate.",
   "description": "Short clips of birds rescued and released.",
   "audio": null,
+  "board": {
+    "x": 24,
+    "y": 34,
+    "tilt": -10,
+    "anchor": "perch",
+    "robin": {
+      "tilt": 8,
+      "flip": true
+    }
+  },
   "blocks": [
     {
       "type": "prose",

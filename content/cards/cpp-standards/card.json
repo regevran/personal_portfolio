@@ -7,6 +7,12 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales augue non volutpat luctus.",
   "description": "WG21 papers authored and co-authored, including P3817.",
   "audio": null,
+  "board": {
+    "x": 71,
+    "y": 31,
+    "tilt": -5,
+    "anchor": "lanyard"
+  },
   "blocks": [
     {
       "type": "prose",

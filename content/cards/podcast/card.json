@@ -7,6 +7,16 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.",
   "description": "Conversations about birds with researchers, birders and conservationists.",
   "audio": null,
+  "board": {
+    "x": 2,
+    "y": 40,
+    "tilt": 5,
+    "anchor": "perch",
+    "robin": {
+      "tilt": -25,
+      "flip": false
+    }
+  },
   "blocks": [
     {
       "type": "videos",

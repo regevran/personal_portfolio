@@ -47,7 +47,7 @@ fail it. The affected entries sort last.
 `design/index.html` links to the chosen direction and its anchor studies:
 
 - `direction-a.html` — the 16:9 yin-yang poster. One dirty composite background
-  (`design/assets/textures/board-background.jpg`) carries a sharp Ran + owl
+  (`assets/general/board-background.jpg`) carries a sharp Ran + owl
   cutout with the owl's eye on the yin-yang eye. Eleven title-only cards
   surround it: nature scattered on the left, software on the right, and About
   and Contact as two flat, bottom-aligned cards. Hanging cards use varied
@@ -65,9 +65,9 @@ fail it. The affected entries sort last.
   marked as the selected pair.
 
 The previews use the book palette, the motif library in `design/assets/motifs/`,
-and the single composite background. They are not part of the site build and
-are not linked from the site; they exist to settle the visual language before
-integrating it.
+and the single composite background. The approved board is now integrated as
+the site hub (`templates/index.html` + `assets/css/board.css`); the design pages
+themselves remain reference-only and are not part of the site build.
 
 Run the tests alone:
 
@@ -88,8 +88,11 @@ content/
   data/
     *.json         canonical records (papers, talks, episodes, repos, videos, photos)
     episodes/      per-episode description Markdown
-templates/         page skeletons (base, index, card, partials)
+templates/         base shells, the hub board, card pages and partials
 assets/            images, videos, documents, CSS and JS
+  css/board.css    the hub board
+  css/site.css     card pages
+  fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
   __init__.py
@@ -105,8 +108,11 @@ dist/              generated output (ignored by git)
 ### Editing content
 
 - **Card pages:** `content/cards/<slug>/card.json` holds the hub metadata
-  (title, kicker, order, status, family, summary, description, audio) and the
-  ordered `blocks` list. The directory name is the slug.
+  (title, kicker, order, status, family, summary, description, audio, board
+  placement) and the ordered `blocks` list. The directory name is the slug.
+- **Board placement:** the `board` object holds `x`, `y` (or `bottom`), `tilt`,
+  `anchor` (`perch`, `lanyard`, `none`) and, for perch cards, `robin` tilt/flip.
+  The hub renders directly from it; validation ties the anchor to the family.
 - **Card prose:** Markdown files in the same directory, referenced by `prose`
   blocks. A page can use any number of prose fragments.
 - **Structured data:** `content/data/*.json` — `papers`, `talks`, `episodes`,

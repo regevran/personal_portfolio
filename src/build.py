@@ -253,6 +253,64 @@ def render_contact(site: dict) -> str:
     )
 
 
+def fmt_num(value) -> str:
+    number = float(value)
+    return str(int(number)) if number.is_integer() else str(number)
+
+
+def tagline_lines(tagline: str) -> str:
+    parts = [part.strip() for part in tagline.split(".") if part.strip()]
+    return "<br>".join(esc(part + ".") for part in parts)
+
+
+def board_item_style(board: dict) -> str:
+    parts = [f"--x: {fmt_num(board['x'])}%"]
+    if "y" in board:
+        parts.append(f"--y: {fmt_num(board['y'])}%")
+    else:
+        parts.append(f"--bottom: {fmt_num(board['bottom'])}%")
+    parts.append(f"--tilt: {fmt_num(board['tilt'])}deg")
+    return "; ".join(parts) + ";"
+
+
+def render_board_card(card: dict, templates: dict[str, str]) -> str:
+    board = card["board"]
+    family = card["family"]
+    item_class = {
+        "nature": "",
+        "software": " board-item--software",
+        "neutral": " board-item--neutral board-item--bottom",
+    }[family]
+    item_id = f' id="{esc(board["id"])}"' if board.get("id") else ""
+    scrap = {"nature": "sign", "software": "monitor", "neutral": "plain"}[family]
+
+    anchor = board["anchor"]
+    if anchor == "perch":
+        robin = board["robin"]
+        robin_style = f"--robin-tilt: {fmt_num(robin['tilt'])}deg"
+        if robin["flip"]:
+            robin_style += "; --robin-flip: -1"
+        rig = render_template(templates["perch"], {"ROBIN_STYLE": robin_style})
+    elif anchor == "lanyard":
+        rig = templates["lanyard"]
+    else:
+        rig = ""
+
+    return render_template(
+        templates["board_card"],
+        {
+            "ITEM_CLASS": item_class,
+            "ITEM_ID": item_id,
+            "ITEM_STYLE": board_item_style(board),
+            "RIG": rig,
+            "SCRAP": scrap,
+            "SLUG": esc(card["slug"]),
+            "KICKER": esc(card["kicker"]),
+            "TITLE": esc(card["title"]),
+        },
+    )
+
+
 SORT_KEYS = {
     "papers": lambda paper: date(int(paper["year"]), 1, 1),
     "talks": lambda talk: iso_date(talk.get("sort_date")),
@@ -306,9 +364,14 @@ def build() -> None:
 
     year = str(date.today().year)
     base = read_template("base.html")
+    board_base = read_template("base-board.html")
     index_template = read_template("index.html")
     card_template = read_template("card.html")
-    card_link_template = read_template("partials/card-link.html")
+    board_templates = {
+        "board_card": read_template("partials/board-card.html"),
+        "perch": read_template("partials/perch.html"),
+        "lanyard": read_template("partials/lanyard.html"),
+    }
 
     def write_page(path: Path, title: str, description: str, body: str, root: str) -> None:
         page = render_template(
@@ -325,38 +388,41 @@ def build() -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(page, encoding="utf-8")
 
-    card_links = []
-    for card in cards:
-        card_links.append(
-            render_template(
-                card_link_template,
-                {
-                    "SLUG": esc(card["slug"]),
-                    "KICKER": esc(card["kicker"]),
-                    "FAMILY": esc(card["family"]),
-                    "TITLE": esc(card["title"]),
-                    "SUMMARY": esc(card["summary"]),
-                    "STATUS": status_badge(card["status"]),
-                },
-            )
+    board_order = {"nature": 0, "software": 1, "neutral": 2}
+    board_cards = "".join(
+        render_board_card(card, board_templates)
+        for card in sorted(
+            cards,
+            key=lambda card: (
+                board_order[card["family"]],
+                card["board"].get("y", 100),
+                card["board"]["x"],
+            ),
         )
-
+    )
+    phone = str(site["phone"])
+    phone_tel = re.sub(r"[^0-9+]", "", phone)
     index_body = render_template(
         index_template,
         {
-            "TAGLINE": esc(site["tagline"]),
             "SITE_NAME": esc(site["name"]),
-            "INTRO": esc(site["intro"]),
-            "CARDS": "".join(card_links),
+            "TAGLINE": esc(site["tagline"]),
+            "TAGLINE_LINES": tagline_lines(site["tagline"]),
+            "EMAIL": esc(site["email"]),
+            "PHONE": esc(phone),
+            "PHONE_TEL": esc(phone_tel),
+            "BOARD_CARDS": board_cards,
         },
     )
-    write_page(
-        DIST / "index.html",
-        f'{site["name"]} — Portfolio',
-        site["tagline"],
-        index_body,
-        "",
+    hub_page = render_template(
+        board_base,
+        {
+            "TITLE": esc(f'{site["name"]} — Portfolio'),
+            "DESCRIPTION": esc(site["tagline"]),
+            "BODY": index_body,
+        },
     )
+    (DIST / "index.html").write_text(hub_page, encoding="utf-8")
 
     for position, card in enumerate(cards):
         root = "../"

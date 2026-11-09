@@ -7,6 +7,13 @@
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus autem quibusdam et aut officiis debitis.",
   "description": "Biography and curriculum vitae.",
   "audio": null,
+  "board": {
+    "x": 36.5,
+    "bottom": 2,
+    "tilt": 0,
+    "anchor": "none",
+    "id": "about"
+  },
   "blocks": [
     {
       "type": "prose",

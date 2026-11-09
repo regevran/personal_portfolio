@@ -35,10 +35,17 @@ REQUIRED_CARD = (
     "status",
     "audio",
     "description",
+    "board",
     "blocks",
 )
 ALLOWED_STATUS = {"ready", "under-construction", "coming-soon", "placeholder"}
 ALLOWED_FAMILIES = {"software", "nature", "neutral"}
+BOARD_ANCHORS = {"perch", "lanyard", "none"}
+ANCHOR_BY_FAMILY = {
+    "nature": "perch",
+    "software": "lanyard",
+    "neutral": "none",
+}
 
 DATASET_FIELDS = {
     "papers": ("id", "collections", "wg21", "title", "role", "year", "link"),
@@ -175,6 +182,76 @@ def validate_site() -> list[str]:
     return errors
 
 
+def _is_number(value) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def _validate_board(errors: list[str], card: dict, label: str) -> None:
+    board = card.get("board")
+    if not isinstance(board, dict):
+        errors.append(f"{label}: 'board' must be an object")
+        return
+
+    extra = set(board) - {"id", "x", "y", "bottom", "tilt", "anchor", "robin"}
+    if extra:
+        errors.append(f"{label}: board has unknown fields {sorted(extra)}")
+
+    if "id" in board:
+        ident = board["id"]
+        if not isinstance(ident, str) or not re.fullmatch(r"[a-z][a-z0-9-]*", ident):
+            errors.append(f"{label}: board.id must be a lowercase slug")
+
+    if not _is_number(board.get("x")):
+        errors.append(f"{label}: board.x must be a number")
+
+    has_y = "y" in board
+    has_bottom = "bottom" in board
+    if has_y == has_bottom:
+        errors.append(f"{label}: board needs exactly one of 'y' or 'bottom'")
+    else:
+        key = "y" if has_y else "bottom"
+        if not _is_number(board.get(key)):
+            errors.append(f"{label}: board.{key} must be a number")
+
+    if not _is_number(board.get("tilt")):
+        errors.append(f"{label}: board.tilt must be a number")
+
+    anchor = board.get("anchor")
+    if anchor not in BOARD_ANCHORS:
+        errors.append(
+            f"{label}: board.anchor must be one of {sorted(BOARD_ANCHORS)}"
+        )
+
+    expected = ANCHOR_BY_FAMILY.get(card.get("family"))
+    if expected and anchor != expected:
+        errors.append(
+            f"{label}: board.anchor should be '{expected}' "
+            f"for family '{card.get('family')}'"
+        )
+
+    if anchor == "none" and not has_bottom:
+        errors.append(f"{label}: neutral cards need board.bottom")
+    if anchor in {"perch", "lanyard"} and not has_y:
+        errors.append(f"{label}: hanging cards need board.y")
+
+    robin = board.get("robin")
+    if anchor == "perch":
+        if not isinstance(robin, dict):
+            errors.append(f"{label}: perch cards need board.robin")
+            return
+        extra_robin = set(robin) - {"tilt", "flip"}
+        if extra_robin:
+            errors.append(
+                f"{label}: board.robin has unknown fields {sorted(extra_robin)}"
+            )
+        if not _is_number(robin.get("tilt")):
+            errors.append(f"{label}: board.robin.tilt must be a number")
+        if not isinstance(robin.get("flip"), bool):
+            errors.append(f"{label}: board.robin.flip must be a boolean")
+    elif "robin" in board:
+        errors.append(f"{label}: board.robin is only valid for the perch anchor")
+
+
 def _validate_block(
     errors: list[str], block, card_dir: Path, label: str
 ) -> None:
@@ -255,6 +332,9 @@ def validate_cards() -> list[str]:
 
         if card.get("audio"):
             _file_exists(errors, card["audio"], label)
+
+        if "board" in card:
+            _validate_board(errors, card, label)
 
         blocks = card.get("blocks")
         if not isinstance(blocks, list) or not blocks:
@@ -409,7 +489,12 @@ def validate_assets() -> list[str]:
     errors: list[str] = []
     for relative in (
         "assets/css/site.css",
+        "assets/css/board.css",
         "assets/js/site.js",
+        "assets/js/board.js",
+        "assets/fonts/PatrickHand-Regular.ttf",
+        "assets/general/board-background.jpg",
+        "assets/general/closing_on_birds_robin.png",
         "assets/documents/README.md",
     ):
         _file_exists(errors, relative, "assets")
