@@ -3,9 +3,10 @@
 Date: 2026-11-08
 Status: 16:9 poster layout with title-only cards; anchors chosen (C05 lanyard +
 N03 robin perch); robin transparent PNG integrated; the board is now the site
-hub, with each card linking to its page. The Podcast page has its own treatment:
-floating chapter cards on the dirty ink background. The other card pages keep
-the shared first-pass styling; contact interaction remains.
+hub, with each card linking to its page. Podcast has floating chapter cards;
+Public GitHub has a conference badge and straight, pull-out repository cards,
+both on the dirty ink background. The other card pages keep the shared
+first-pass styling; contact interaction remains.
 
 ## Goal
 
@@ -29,7 +30,8 @@ dropped and their files deleted.
 - Static HTML/CSS. No runtime network requests.
 - English.
 - Book palette and book typography as the base.
-- One bundled OFL font for handwritten labels: Patrick Hand.
+- One bundled OFL font for handwritten labels: Patrick Hand. Software uses
+  the formal serif instead.
 - Motion stays light: hover lift and small shifts, with a reduced-motion
   fallback.
 
@@ -50,7 +52,8 @@ dropped and their files deleted.
 
 - Display, kickers, metadata: `Noto Sans Mono`.
 - Prose: `Noto Serif`.
-- Handwritten names, card titles, sign labels: Patrick Hand (bundled, OFL).
+- Handwritten names, nature/neutral card titles, sign labels: Patrick Hand
+  (bundled, OFL). Software titles use the formal serif (Noto Serif / Georgia).
 - Fallbacks: `ui-monospace`, Georgia, cursive.
 
 ## Source artwork
@@ -101,7 +104,7 @@ The main page is a **16:9 poster**, not a scrolling document:
 The spatial grammar follows the original jpeg but is deliberately **not a
 grid**: **nature is scattered on the left** (Birding, Ringing, Rescues,
 Podcast, The Book, Learning Aid) in a zigzag, **software is on the right**
-(Engineering & Systems, C++ & Standards, Talks) with varied x positions rather
+(Public GitHub, C++ & Standards, Talks) with varied x positions rather
 than one column, and the two neutral cards (About, Contact) stay flat and
 bottom-aligned under the portrait. Hanging cards rotate up to roughly ±6° and
 pivot from their grommet; the rest of the board does not move. The whole
@@ -184,9 +187,9 @@ The card page is the **opened note** from the board:
 - The topbar and footer are shared with the hub and stay fixed; the sheet
   scrolls between them. The footer sentence lives in `site.json`.
 - The header uses the board's kicker/title pairing: mono uppercase kicker,
-  Patrick Hand title, serif summary. The sheet's top edge carries the family
-  colour (software blue, nature olive, neutral ochre); the status badge is a
-  small dashed stamp.
+  Patrick Hand title (formal serif on software pages), serif summary. The
+  sheet's top edge carries the family colour (software blue, nature olive,
+  neutral ochre); the status badge is a small dashed stamp.
 - Prose is serif at a readable measure. Papers, talks, episodes and repos
   render as ledger rows with meta on the left. Videos and photos sit in framed
   prints; photo frames carry a slight rotation. The contact panel is a
@@ -195,8 +198,9 @@ The card page is the **opened note** from the board:
   `assets/css/site.css` holds the card-page rules only.
 
 The first target was Podcast because it combines a video grid, prose and an
-episode list. Ringing, C++ & Standards, Engineering, Contact and About were
-checked as the other block types.
+episode list. Public GitHub followed for the repository list and the software
+variant. Ringing, C++ & Standards, Contact and About were checked as the other
+block types.
 
 ### Podcast page
 
@@ -227,6 +231,45 @@ card page:
   fall back to the show page.
 - Static text rectangles (header, intro notes, pager) get a soft gold glow on
   hover; tilted episode cards straighten and lift instead.
+
+### Public GitHub page
+
+Public GitHub (`engineering`) shares the dirty field and cream notes with
+Podcast but reads as software. Its rules live in
+`assets/css/pages/engineering.css`.
+
+- The background is the same dirty ink texture, fixed on desktop; there is no
+  full-page sheet. The title uses the formal serif, not Patrick Hand.
+- The header is a portrait **conference badge**, based on the mini badge used
+  on repository cards: a cream card with a software-blue top edge, a narrow
+  lanyard whose clip sits directly on the top edge (no punched hole), and the
+  real GitHub QR code at the top left. The kicker, title and summary sit under
+  the QR, mirroring the QR-then-text layout of a real badge. The QR
+  (`assets/general/github-qr.svg`) was generated for
+  `https://github.com/regevran`; it sits in a white quiet-zone frame and scans
+  to the profile. The repository cards below carry the clickable links. The
+  badge is narrower than the notes and repository cards below it.
+- Intro paragraphs are straight cream notes with a software-blue left rule.
+- Repositories are straight cream cards with a software-blue top edge. The
+  repository name sits left and the last-push date is centred on the first
+  line; the description follows. A small conference badge
+  (`assets/icons/conference-badge.svg`) occupies an absolutely positioned
+  right-hand rail, mirroring the robin rail on Podcast cards. Instead of
+  Podcast's tilt-and-straighten, hovering or focusing a card pulls it out and
+  enlarges it slightly (`translateY(-6px) scale(1.02)`) with a blue glow.
+  There is no rotation. Mobile stacks the date under the name.
+- Static text notes (header, intro notes, back link, pager) get a soft blue
+  glow. `prefers-reduced-motion` removes the pull-out transform.
+
+### Software badges on the hub
+
+The hub's three software notes now use the same badge template as the mini
+badges: narrower and taller than the nature notes, with a narrow C05 lanyard
+whose clip meets the blue top edge, no punched-hole circle, and a small QR
+mark (`assets/icons/badge-mark.svg`) above the kicker and title. Nature and
+neutral notes keep the landscape note and their robin/perch treatment. The
+other software page titles still use the wide note header for now; extending
+the portrait badge there is the next decision.
 
 The generic card page remains the fallback for the other cards. Per-page
 stylesheets are auto-discovered from `assets/css/pages/<slug>.css`; a page

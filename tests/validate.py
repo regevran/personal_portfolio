@@ -518,6 +518,7 @@ def validate_assets() -> list[str]:
         "assets/css/site.css",
         "assets/css/board.css",
         "assets/css/pages/podcast.css",
+        "assets/css/pages/engineering.css",
         "assets/js/site.js",
         "assets/js/board.js",
         "assets/fonts/PatrickHand-Regular.ttf",
@@ -526,9 +527,13 @@ def validate_assets() -> list[str]:
         "assets/general/closing_on_birds_circle.png",
         "assets/general/closing_on_birds_logo.png",
         "assets/general/closing_on_birds_robin.png",
+        "assets/general/github-qr.svg",
         "assets/icons/spotify.svg",
         "assets/icons/applepodcasts.svg",
         "assets/icons/pocketcasts.svg",
+        "assets/icons/lanyard.svg",
+        "assets/icons/conference-badge.svg",
+        "assets/icons/badge-mark.svg",
         "assets/documents/README.md",
     ):
         _file_exists(errors, relative, "assets")

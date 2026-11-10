@@ -1,11 +1,13 @@
 {
-  "title": "Engineering & Systems",
+  "title": "Public GitHub",
   "kicker": "Systems",
   "family": "software",
   "order": 1,
   "status": "ready",
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt.",
   "description": "Selected engineering work and contributions.",
+  "logo": "assets/general/github-qr.svg",
+  "logo_alt": "QR code for github.com/regevran",
   "audio": null,
   "board": {
     "x": 80,

@@ -105,6 +105,15 @@ body.card-shell {
   line-height: 0.92;
 }
 
+/* Software titles use the formal serif, matching the board. */
+.card-page--software .card-page-header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
 .lede {
   max-width: 62ch;
   margin: 0;
@@ -586,6 +595,11 @@ body.card-shell {
 .pager-next {
   margin-left: auto;
   text-align: right;
+}
+
+.card-page--software .pager {
+  font-family: var(--serif);
+  font-weight: 600;
 }
 
 /* Placeholders and focus -------------------------------------------------- */

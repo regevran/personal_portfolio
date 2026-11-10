@@ -29,7 +29,7 @@ personal_portfolio/
 │   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
 │   ├── css/site.css          shared card pages
-│   ├── css/pages/            optional per-page styles (podcast.css)
+│   ├── css/pages/            optional per-page styles (podcast.css, engineering.css)
 │   ├── js/board.js           horizontal pan and nav shortcuts
 │   ├── js/site.js            contact form
 │   ├── fonts/                Patrick Hand (OFL)
@@ -54,7 +54,7 @@ personal_portfolio/
 
 | Order | Slug | Title | Family | Status |
 |---|---|---|---|---|
-| 1 | engineering | Engineering & Systems | software | ready |
+| 1 | engineering | Public GitHub | software | ready |
 | 2 | cpp-standards | C++ & Standards | software | ready |
 | 3 | talks | Talks | software | ready |
 | 4 | birding | Birding | nature | placeholder |

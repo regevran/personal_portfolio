@@ -44,6 +44,38 @@ class OutputValidationTest(unittest.TestCase):
         self.assertNotIn("pages/podcast.css", talks)
         self.assertNotIn("card-page-logo", talks)
 
+    def test_engineering_page_specific_design(self):
+        engineering = (DIST / "engineering" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("assets/css/pages/engineering.css", engineering)
+        self.assertIn("card-page--engineering", engineering)
+        self.assertIn("github-qr.svg", engineering)
+
+        engineering_css = (DIST / "assets/css/pages/engineering.css").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("icons/lanyard.svg", engineering_css)
+        self.assertIn("icons/conference-badge.svg", engineering_css)
+        self.assertIn("translateY(-6px) scale(1.02)", engineering_css)
+        self.assertNotIn("rotate(", engineering_css)
+        self.assertNotIn("card-page-header::after", engineering_css)
+        self.assertIn("repo-badge", engineering)
+        self.assertIn("repo-rail", engineering)
+
+        site_css = (DIST / "assets/css/site.css").read_text(encoding="utf-8")
+        board_css = (DIST / "assets/css/board.css").read_text(encoding="utf-8")
+        self.assertIn(".card-page--software .card-page-header h1", site_css)
+        self.assertIn(".scrap--monitor .card-title", board_css)
+        self.assertIn(".board-item--software .scrap", board_css)
+        self.assertIn("badge-mark.svg", board_css)
+
+        qr = (DIST / "assets/general/github-qr.svg").read_text(encoding="utf-8")
+        self.assertIn("https://github.com/regevran", qr)
+
+        podcast = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("pages/engineering.css", podcast)
+
     def test_listings_are_latest_first(self):
         cpp = (DIST / "cpp-standards" / "index.html").read_text(encoding="utf-8")
         self.assertLess(

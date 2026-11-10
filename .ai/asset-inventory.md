@@ -11,6 +11,10 @@
 | `assets/icons/spotify.svg` | podcast episode cards | Spotify platform logo |
 | `assets/icons/applepodcasts.svg` | podcast episode cards | Apple Podcasts platform logo |
 | `assets/icons/pocketcasts.svg` | podcast episode cards | Pocket Casts platform logo |
+| `assets/icons/lanyard.svg` | hub software badges, Public GitHub page header | narrow C05 lanyard + clip, no string |
+| `assets/icons/conference-badge.svg` | Public GitHub repository cards | small lanyard badge rail motif |
+| `assets/icons/badge-mark.svg` | hub software badges | decorative QR mark above the card text |
+| `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; white background, quiet zone added by CSS |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
 | `assets/rescues/ardea_alba.mp4` | rescues | 576×1024, 24 s |
@@ -43,7 +47,7 @@
 | `design/assets/img/ran-otus.png` | concept SVG | cutout of Ran + scops owl; colour image + alpha mask |
 | `design/assets/textures/ink-yinyang.jpg` | concept SVG | dirty ink yin-yang background |
 | `assets/general/board-background.jpg` | composite | **the 1600 × 900 poster background**: ink image with the sharp cutout baked in at 380 px; owl eye aligned to the yin-yang eye |
-| `assets/general/dirty-background.jpg` | podcast page | dirty ink yin-yang texture without the cutout, 1280 × 720 |
+| `assets/general/dirty-background.jpg` | podcast and Public GitHub pages | dirty ink yin-yang texture without the cutout, 1280 × 720 |
 | `assets/general/closing_on_birds_circle.png` | podcast title | full circular podcast logo, 2025 × 2531 RGBA |
 | `assets/general/closing_on_birds_logo.png` | podcast chapter cards | robin on the vintage microphone, 720 × 884 RGBA |
 | `design/assets/textures/field-background.jpg` | composite | earlier 1280 × 720 composite for the scrolling board; retained but no longer used by the poster |

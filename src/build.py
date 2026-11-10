@@ -210,6 +210,14 @@ def render_episodes(records: list[dict], root: str) -> str:
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
+def repo_rail() -> str:
+    return (
+        '<span class="repo-rail">'
+        '<span class="repo-badge" aria-hidden="true"></span>'
+        "</span>"
+    )
+
+
 def render_repos(records: list[dict], root: str) -> str:
     items = []
     for repo in records:
@@ -217,10 +225,20 @@ def render_repos(records: list[dict], root: str) -> str:
         pushed_at = repo.get("pushed_at")
         if pushed_at:
             meta = f"Last push: {str(pushed_at)[:10]}"
+        name_html = (
+            f'<a href="{esc(repo["url"])}">{esc(repo["name"])}</a>'
+            if repo.get("url")
+            else esc(repo["name"])
+        )
+        meta_html = f'<span class="item-meta">{esc(meta)}</span>' if meta else ""
+        description = description_html(repo)
         items.append(
-            link_item(
-                repo["name"], repo.get("url"), meta, description_html(repo)
-            )
+            '<li class="item">'
+            '<span class="item-head">'
+            f'<span class="item-title">{name_html}</span>'
+            f"{meta_html}</span>"
+            f'<div class="item-desc">{description}</div>'
+            f"{repo_rail()}</li>"
         )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 

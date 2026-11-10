@@ -94,8 +94,9 @@ data-driven, because it will be updated from time to time.
   three-colour mix was collapsed to the one green. The straps are thinner and
   the V opening a little wider.
 - Every board card links to its page. The card pages now use the board's
-  visual language: a cream note on the sand field, Patrick Hand titles, mono
-  kickers, family-coloured top edges, ledger-style lists, framed media, and a
+  visual language: a cream note on the sand field, Patrick Hand titles for
+  nature and neutral cards, formal serif titles for software, mono kickers,
+  family-coloured top edges, ledger-style lists, framed media, and a
   notebook-style contact panel. The contact panel is visual only for now.
 - The topbar and footer are shared by the hub and the card pages and stay
   fixed; the content scrolls between them. The footer sentence lives in
@@ -103,7 +104,8 @@ data-driven, because it will be updated from time to time.
   type, topbar and footer live in `assets/css/theme.css`; `board.css` and
   `site.css` hold only their page-specific rules.
 - The book palette is the design base; Patrick Hand (OFL) is bundled for
-  handwritten labels.
+  handwritten labels. Software titles use the formal serif instead, both on the
+  board and on card pages; nature and neutral titles keep Patrick Hand.
 - The rejected `bird-circuit` motif was removed from the design assets.
 - Video files are excluded from git (`*.mp4`). A missing local video is a
   **hard validation error**, never a warning or placeholder. Once an entry has
@@ -163,6 +165,28 @@ data-driven, because it will be updated from time to time.
   stylesheets are auto-discovered from `assets/css/pages/<slug>.css`; pages
   without one get only the shared styles. The rest of the card pages keep the
   shared first-pass design for now.
+- The **Public GitHub page** (`engineering`) got its treatment on 2026-11-10:
+  the same dirty ink background and cream notes, with software-blue accents.
+  The header is a portrait conference badge: a narrow C05 lanyard
+  (`assets/icons/lanyard.svg`) whose clip sits on the blue top edge, with no
+  punched hole, and the real GitHub QR
+  (`assets/general/github-qr.svg`, generated for `https://github.com/regevran`)
+  in a white quiet-zone frame. The kicker, formal-serif title and summary sit
+  under the QR, like a real badge. Intro notes are straight with a blue left
+  rule. Repository cards are straight with a blue top edge; the last-push date
+  is centred on the first line and a small conference badge
+  (`assets/icons/conference-badge.svg`) sits in a right-hand rail, like the
+  robin rail on Podcast cards. Hovering or focusing pulls the card out and
+  enlarges it (`translateY(-6px) scale(1.02)`) with a blue glow instead of
+  Podcast's rotation. The rules live in
+  `assets/css/pages/engineering.css`.
+- The hub's software notes became portrait **conference badges** on 2026-11-10:
+  narrower and taller than the nature notes, with the narrow lanyard clip on
+  the top edge, no punched-hole circle, a small QR mark
+  (`assets/icons/badge-mark.svg`) above the kicker and title, and the group
+  aligned to the top of the card. Nature and neutral notes keep the landscape
+  note treatment. The badge template has not yet been extended to the C++ &
+  Standards and Talks page titles.
 - The content model was revised on 2026-11-09: `content/data/cards.json` was
   removed; each card is now a directory with `card.json` + prose. Datasets
   gained stable ids and collection tags. The podcast card's promo-video block

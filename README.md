@@ -94,8 +94,8 @@ assets/            images, videos, documents, CSS and JS
   css/theme.css    palette, type, topbar and footer
   css/board.css    the hub board
   css/site.css     shared card pages
-  css/pages/       optional per-page styles (podcast.css)
-  icons/           platform logos (Spotify, Apple Podcasts, Pocket Casts)
+  css/pages/       optional per-page styles (podcast.css, engineering.css)
+  icons/           platform logos, lanyard and conference badge
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
@@ -118,7 +118,8 @@ dist/              generated output (ignored by git)
 - **Per-page styling:** if `assets/css/pages/<slug>.css` exists, the build
   links it after `site.css` on that page only. Podcast uses
   `assets/css/pages/podcast.css` for its dirty background and floating chapter
-  cards.
+  cards; Public GitHub uses `assets/css/pages/engineering.css` for its
+  conference badge and pull-out repository cards.
 - **Board placement:** the `board` object holds `x`, `y` (or `bottom`), `tilt`,
   `anchor` (`perch`, `lanyard`, `none`) and, for perch cards, `robin` tilt/flip.
   The hub renders directly from it; validation ties the anchor to the family.
@@ -186,9 +187,14 @@ The site is intentionally a structural skeleton:
   Ringing carries the current ringing photographs.
 - The CV link and the book PDF are placeholders until the real files arrive.
 - Cards are colour-coded by family (`software`, `nature`, `neutral`).
+- Software cards on the hub are portrait conference badges: narrow lanyard,
+  no punched hole, a QR mark and the text grouped at the top, with space below.
+  Nature and neutral cards remain landscape notes with their robin/perch
+  treatment.
 - The hub and card pages share the board's visual language: sand and cream,
-  Patrick Hand titles, mono kickers, family-coloured edges, and a fixed topbar
-  and footer. The card-page pass is still being reviewed.
+  Patrick Hand titles for nature and neutral, formal serif titles for software,
+  mono kickers, family-coloured edges, and a fixed topbar and footer. The
+  card-page pass is still being reviewed.
 
 ### Tests
 

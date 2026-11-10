@@ -7,7 +7,7 @@
     "src": "assets/ringing/alcedo_atthis_1.jpeg",
     "title": "Common Kingfisher",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -18,7 +18,7 @@
     "src": "assets/ringing/alcedo_atthis_2.jpeg",
     "title": "Common Kingfisher",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -29,7 +29,7 @@
     "src": "assets/ringing/alcedo_atthis_3.jpeg",
     "title": "Common Kingfisher",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -40,7 +40,7 @@
     "src": "assets/ringing/otus_scops_1.jpeg",
     "title": "Eurasian Scops Owl",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -51,7 +51,7 @@
     "src": "assets/ringing/otus_scops_2.jpeg",
     "title": "Eurasian Scops Owl",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -62,7 +62,7 @@
     "src": "assets/ringing/otus_scops_3.jpeg",
     "title": "Eurasian Scops Owl",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -73,7 +73,7 @@
     "src": "assets/ringing/otus_scops_4.jpeg",
     "title": "Eurasian Scops Owl",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2027-10-30",
     "audio": null
   },
   {
@@ -84,7 +84,7 @@
     "src": "assets/ringing/saxicola_maurus.jpeg",
     "title": "Siberian Stonechat",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2026-11-03",
     "audio": null
   },
   {
@@ -95,7 +95,7 @@
     "src": "assets/ringing/upupa_epops_1.jpeg",
     "title": "Eurasian Hoopoe",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2026-11-18",
     "audio": null
   },
   {
@@ -106,7 +106,7 @@
     "src": "assets/ringing/upupa_epops_2.jpeg",
     "title": "Eurasian Hoopoe",
     "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": null,
+    "date": "2026-11-18",
     "audio": null
   }
 ]

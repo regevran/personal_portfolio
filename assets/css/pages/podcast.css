@@ -108,12 +108,15 @@ body[data-page="podcast"] {
 }
 
 .card-page--podcast .card-page-header,
+.card-page--podcast .back-link,
 .card-page--podcast .prose > p,
 .card-page--podcast .pager {
   transition: box-shadow 180ms ease;
 }
 
 .card-page--podcast .card-page-header:hover,
+.card-page--podcast .back-link:hover,
+.card-page--podcast .back-link:focus-visible,
 .card-page--podcast .prose > p:hover,
 .card-page--podcast .pager:hover {
   box-shadow: 0 0 0 0.22rem rgba(236, 182, 82, 0.55),

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 112">
+  <!-- C05 lanyard: two straps running up out of the frame -->
+  <path d="M18 0 L34 30" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M54 0 L38 30" fill="none" stroke="#3E6B89" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- clip -->
+  <rect x="29" y="28" width="14" height="11" rx="3" fill="#2F4F66" stroke="#1F3A4D" stroke-width="1.2"/>
+  <rect x="33" y="33" width="6" height="3" rx="1" fill="#B8B0A2"/>
+
+  <!-- badge card -->
+  <rect x="10" y="41" width="52" height="66" rx="5" fill="#FFF9EC" stroke="#3E6B89" stroke-width="2"/>
+  <path d="M10 46 a5 5 0 0 1 5 -5 h42 a5 5 0 0 1 5 5 v6 H10 z" fill="#3E6B89"/>
+
+  <!-- mini QR -->
+  <rect x="18" y="58" width="14" height="14" fill="#2F2714"/>
+  <rect x="21" y="61" width="3" height="3" fill="#FFF9EC"/>
+  <rect x="26" y="66" width="3" height="3" fill="#FFF9EC"/>
+  <rect x="36" y="58" width="4" height="4" fill="#2F2714"/>
+  <rect x="42" y="58" width="4" height="4" fill="#2F2714"/>
+  <rect x="36" y="64" width="4" height="4" fill="#2F2714"/>
+  <rect x="43" y="64" width="3" height="3" fill="#2F2714"/>
+  <rect x="36" y="69" width="3" height="3" fill="#2F2714"/>
+  <rect x="41" y="70" width="5" height="2" fill="#2F2714"/>
+
+  <!-- name and role lines -->
+  <rect x="18" y="81" width="36" height="3" rx="1.5" fill="#2F2714" opacity="0.72"/>
+  <rect x="18" y="88" width="26" height="3" rx="1.5" fill="#2F2714" opacity="0.42"/>
+  <rect x="18" y="96" width="32" height="2" rx="1" fill="#2F2714" opacity="0.2"/>
+</svg>

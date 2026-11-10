@@ -48,6 +48,15 @@
   line-height: 1.05;
 }
 
+/* Software reads as the formal half of the board. */
+.scrap--monitor .card-title {
+  font-family: var(--serif);
+  font-size: 1.32rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
 .hang-rig {
   display: block;
   flex: 0 0 auto;
@@ -161,7 +170,7 @@ body.dir-a {
 }
 
 .board-item--software {
-  width: 27cqh;
+  width: 20cqh;
 }
 
 .board-item--neutral {
@@ -198,6 +207,32 @@ body.dir-a {
   border-top-width: 0.6cqh;
 }
 
+/* Software notes are conference badges: narrow, tall, no punched hole,
+   with a QR mark above the text. */
+.board-item--software .scrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  aspect-ratio: 0.92;
+  padding: 2.4cqh 2.1cqh 2.2cqh;
+}
+
+.board .scrap--monitor {
+  border-top-width: 0.9cqh;
+}
+
+.board-item--software .scrap::before {
+  content: "";
+  width: 6.2cqh;
+  height: 3.1cqh;
+  margin-bottom: 0.8cqh;
+  background: url("../icons/badge-mark.svg") left top / contain no-repeat;
+}
+
+.board-item--software .card-eye {
+  display: none;
+}
+
 .board .scrap .card-kicker {
   margin: 0 0 0.5cqh;
   font-size: 1.35cqh;
@@ -218,8 +253,8 @@ body.dir-a {
 }
 
 .board .hang-rig--lanyard {
-  width: 11.1cqh;
-  height: 7.77cqh;
+  width: 9cqh;
+  height: 7.5cqh;
 }
 
 .board .hang-rig--perch {

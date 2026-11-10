@@ -5,7 +5,16 @@ Open work only. Details and rationale live in the linked docs.
 ## Site
 
 - [x] Style the Podcast page in the board's visual language — [details](.ai/design-brief.md#podcast-page)
-- [ ] Design the remaining card pages individually — [details](.ai/design-brief.md#next-step)
+- [ ] Style the Public GitHub page in the board's visual language — [details](.ai/design-brief.md#public-github-page)
+- [ ] Style the C++ & Standards page in the board's visual language
+- [ ] Style the Talks page in the board's visual language
+- [ ] Style the Birding page in the board's visual language
+- [ ] Style the Ringing page in the board's visual language
+- [ ] Style the Rescues page in the board's visual language
+- [ ] Style The Book page in the board's visual language
+- [ ] Style the Learning Aid page in the board's visual language
+- [ ] Style the About page in the board's visual language
+- [ ] Style the Contact page in the board's visual language
 - [ ] Build the contact notebook / power-line interaction — [details](.ai/design-brief.md#next-step)
 - [ ] Choose host and domain, then add a deploy step around `cmake --install` — [details](.ai/decisions.md#deferred-items)
 
@@ -22,3 +31,8 @@ Open work only. Details and rationale live in the linked docs.
 - [ ] Add the gallery as a card — [details](.ai/decisions.md#deferred-items)
 - [ ] Decide the learning-aid hosting strategy — [details](.ai/asset-inventory.md#missing-or-pending)
 - [ ] Replace all Lorem Ipsum with real content
+- [ ] Add more content to each github repository
+
+## Bugs
+
+- [ ] Not all podcast links are correct, it seems that old episodes were not fetched correctly, should be fixed
