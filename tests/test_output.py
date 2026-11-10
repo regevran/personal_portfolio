@@ -16,6 +16,34 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn("board-background", (DIST / "assets" / "css" / "board.css").read_text())
         self.assertNotIn('class="card-grid"', hub)
 
+    def test_shared_chrome_and_footer_data(self):
+        hub = (DIST / "index.html").read_text(encoding="utf-8")
+        card = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
+        expected = "Static, data-driven, rebuilt with cmake."
+
+        for page in (hub, card):
+            self.assertIn('class="topbar', page)
+            self.assertIn('class="site-footer"', page)
+            self.assertIn(expected, page)
+
+        self.assertIn('href="../index.html#nature"', card)
+
+    def test_podcast_page_specific_design(self):
+        podcast = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("assets/css/pages/podcast.css", podcast)
+        self.assertIn("card-page--podcast", podcast)
+        self.assertIn("closing_on_birds_circle.png", podcast)
+        podcast_css = (DIST / "assets/css/pages/podcast.css").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("closing_on_birds_logo.png", podcast_css)
+        for platform in ("spotify", "apple", "pocketcasts"):
+            self.assertIn(f"episode-link--{platform}", podcast)
+
+        talks = (DIST / "talks" / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("pages/podcast.css", talks)
+        self.assertNotIn("card-page-logo", talks)
+
     def test_listings_are_latest_first(self):
         cpp = (DIST / "cpp-standards" / "index.html").read_text(encoding="utf-8")
         self.assertLess(

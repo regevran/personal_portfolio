@@ -25,7 +25,15 @@ from src.site_schema import (
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
 
-REQUIRED_SITE = ("name", "tagline", "intro", "email", "phone", "github")
+REQUIRED_SITE = (
+    "name",
+    "tagline",
+    "intro",
+    "email",
+    "phone",
+    "github",
+    "footer",
+)
 REQUIRED_CARD = (
     "title",
     "kicker",
@@ -333,6 +341,9 @@ def validate_cards() -> list[str]:
         if card.get("audio"):
             _file_exists(errors, card["audio"], label)
 
+        if card.get("logo"):
+            _file_exists(errors, card["logo"], label)
+
         if "board" in card:
             _validate_board(errors, card, label)
 
@@ -429,6 +440,21 @@ def _validate_dataset_entry(
             errors.append(f"{label}: 'url' must be an http(s) URL")
         if not _valid_iso_date(entry.get("sort_date")):
             errors.append(f"{label}: 'sort_date' must be YYYY-MM-DD or null")
+        links = entry.get("links")
+        if links is not None:
+            if not isinstance(links, dict):
+                errors.append(f"{label}: 'links' must be an object")
+            else:
+                extra = set(links) - {"spotify", "apple", "pocketcasts"}
+                if extra:
+                    errors.append(
+                        f"{label}: 'links' has unknown platforms {sorted(extra)}"
+                    )
+                for platform, url in links.items():
+                    if not _is_http(url):
+                        errors.append(
+                            f"{label}: links.{platform} must be an http(s) URL"
+                        )
 
     elif dataset == "repos":
         if not _is_http(entry.get("url")):
@@ -488,13 +514,21 @@ def validate_datasets() -> list[str]:
 def validate_assets() -> list[str]:
     errors: list[str] = []
     for relative in (
+        "assets/css/theme.css",
         "assets/css/site.css",
         "assets/css/board.css",
+        "assets/css/pages/podcast.css",
         "assets/js/site.js",
         "assets/js/board.js",
         "assets/fonts/PatrickHand-Regular.ttf",
         "assets/general/board-background.jpg",
+        "assets/general/dirty-background.jpg",
+        "assets/general/closing_on_birds_circle.png",
+        "assets/general/closing_on_birds_logo.png",
         "assets/general/closing_on_birds_robin.png",
+        "assets/icons/spotify.svg",
+        "assets/icons/applepodcasts.svg",
+        "assets/icons/pocketcasts.svg",
         "assets/documents/README.md",
     ):
         _file_exists(errors, relative, "assets")

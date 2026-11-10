@@ -8,7 +8,12 @@
     "url": "https://open.spotify.com/episode/06nHfviFcQA7Ann3Efb2FD",
     "date": "7 Nov 2026",
     "sort_date": "2026-11-07",
-    "description_src": "episodes/facing-extinction.md"
+    "description_src": "episodes/facing-extinction.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/06nHfviFcQA7Ann3Efb2FD",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%91%D7%A1%D7%9B%D7%A0%D7%AA-%D7%94%D7%9B%D7%97%D7%93%D7%94-%D7%A2%D7%9D-%D7%93-%D7%A8-%D7%90%D7%A1%D7%A3-%D7%9E%D7%99%D7%A8%D7%95%D7%96/id1871143410?i=1000799594313",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%91%D7%A1%D7%9B%D7%A0%D7%AA-%D7%94%D7%9B%D7%97%D7%93%D7%94-%D7%A2%D7%9D-%D7%93%D7%A8-%D7%90%D7%A1%D7%A3-%D7%9E%D7%99%D7%A8%D7%95%D7%96/f32f9f70-f7a5-44e1-ac4f-ae8f8d888241"
+    }
   },
   {
     "id": "episode-swifts",
@@ -16,10 +21,15 @@
       "podcast"
     ],
     "title": "Swifts - with Amnon Haan",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000794658696",
+    "url": "https://open.spotify.com/episode/6pfkXdyhCULEl0Y26HYlc7",
     "date": "10 Oct 2026",
     "sort_date": "2026-10-10",
-    "description_src": "episodes/swifts.md"
+    "description_src": "episodes/swifts.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/6pfkXdyhCULEl0Y26HYlc7",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000794658696",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%A1%D7%99%D7%A1%D7%99%D7%9D-%D7%A2%D7%9D-%D7%90%D7%9E%D7%A0%D7%95%D7%9F-%D7%94%D7%90%D7%9F/f867dfe9-5d43-4beb-b05e-c546f9fe4fcc"
+    }
   },
   {
     "id": "episode-collision-course",
@@ -27,10 +37,15 @@
       "podcast"
     ],
     "title": "On a Collision Course - with the Israeli Air Force's Bird Division",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000790326471",
+    "url": "https://open.spotify.com/episode/2XyHYkVDZcp3OsrHR4x1Pt",
     "date": "17 Sep 2026",
     "sort_date": "2026-09-17",
-    "description_src": "episodes/collision-course.md"
+    "description_src": "episodes/collision-course.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/2XyHYkVDZcp3OsrHR4x1Pt",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000790326471",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%91%D7%9E%D7%A1%D7%9C%D7%95%D7%9C-%D7%94%D7%AA%D7%A0%D7%92%D7%A9%D7%95%D7%AA-%D7%A2%D7%9D-%D7%99-%D7%A8%D7%9E%D7%93-%D7%A6%D7%A4%D7%A8%D7%95%D7%AA-%D7%91%D7%97%D7%99%D7%9C-%D7%94%D7%90%D7%95%D7%99%D7%A8/b6cae30d-78da-406c-96cd-8b823679c79b"
+    }
   },
   {
     "id": "episode-feathers",
@@ -38,10 +53,15 @@
       "podcast"
     ],
     "title": "Feathers - with Dr. Joseph Khiat",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000786258051",
+    "url": "https://open.spotify.com/episode/3bBFFQlHSYbNxonsVkgvG0",
     "date": "27 Aug 2026",
     "sort_date": "2026-08-27",
-    "description_src": "episodes/feathers.md"
+    "description_src": "episodes/feathers.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/3bBFFQlHSYbNxonsVkgvG0",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000786258051",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%A0%D7%95%D7%A6%D7%95%D7%AA-%D7%A2%D7%9D-%D7%93%D7%A8-%D7%99%D7%95%D7%A1%D7%A3-%D7%9B%D7%99%D7%90%D7%98/c58211b3-3529-45d5-9c10-2e3a6632d378"
+    }
   },
   {
     "id": "episode-yes-to-birds",
@@ -49,10 +69,15 @@
       "podcast"
     ],
     "title": "Yes to Birds - with Gidi Goldstein",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000780239867",
+    "url": "https://open.spotify.com/episode/5KotXbGbZ1wHqycTcV4fMW",
     "date": "6 Aug 2026",
     "sort_date": "2026-08-06",
-    "description_src": "episodes/yes-to-birds.md"
+    "description_src": "episodes/yes-to-birds.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/5KotXbGbZ1wHqycTcV4fMW",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000780239867",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%9B%D7%9F-%D7%9C%D7%A6%D7%99%D7%A4%D7%95%D7%A8-%D7%A2%D7%9D-%D7%92%D7%99%D7%93%D7%99-%D7%92%D7%95%D7%9C%D7%93%D7%A9%D7%98%D7%99%D7%99%D7%9F/cd739306-b0bf-470c-b9e8-e2fac71376bc"
+    }
   },
   {
     "id": "episode-a-friend-for-life",
@@ -60,10 +85,15 @@
       "podcast"
     ],
     "title": "A Friend for Life - with Dr. Yoav Perlman",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000777044734",
+    "url": "https://open.spotify.com/episode/4BWOcg3nEueq5frpt6QUTx",
     "date": "16 Jul 2026",
     "sort_date": "2026-07-16",
-    "description_src": "episodes/a-friend-for-life.md"
+    "description_src": "episodes/a-friend-for-life.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/4BWOcg3nEueq5frpt6QUTx",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000777044734",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%97%D7%91%D7%A8-%D7%A9%D7%9C-%D7%A7%D7%91%D7%A2-%D7%A2%D7%9D-%D7%93%D7%A8-%D7%99%D7%95%D7%90%D7%91-%D7%A4%D7%A8%D7%9C%D7%9E%D7%9F/ae112e79-15e7-4589-a499-f25a3da031a5"
+    }
   },
   {
     "id": "episode-feeling-like-a-bird",
@@ -71,10 +101,15 @@
       "podcast"
     ],
     "title": "Feeling Like a Bird - with Joshua Weilerstein",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000774171376",
+    "url": "https://open.spotify.com/episode/5CSVhV3xZf4kjyXgN7wNCc",
     "date": "25 Jun 2026",
     "sort_date": "2026-06-25",
-    "description_src": "episodes/feeling-like-a-bird.md"
+    "description_src": "episodes/feeling-like-a-bird.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/5CSVhV3xZf4kjyXgN7wNCc",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000774171376",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%AA%D7%97%D7%95%D7%A9%D7%94-%D7%A9%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8-%D7%A2%D7%9D-%D7%92%D7%95%D7%A9%D7%95%D7%A2-%D7%95%D7%95%D7%99%D7%9C%D7%A8%D7%A9%D7%98%D7%99%D7%99%D7%9F/819084f6-aadc-41e4-b196-de7891226399"
+    }
   },
   {
     "id": "episode-whats-that-sound",
@@ -82,10 +117,15 @@
       "podcast"
     ],
     "title": "What's That Sound? - with Dr. Yael Lenard",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000771141569",
+    "url": "https://open.spotify.com/episode/6ZOko7f3bS7aAoKO2oLm9S",
     "date": "4 Jun 2026",
     "sort_date": "2026-06-04",
-    "description_src": "episodes/whats-that-sound.md"
+    "description_src": "episodes/whats-that-sound.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/6ZOko7f3bS7aAoKO2oLm9S",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000771141569",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%9E%D7%94-%D7%A0%D7%A9%D7%9E%D7%A2-%D7%A2%D7%9D-%D7%93%D7%A8-%D7%99%D7%A2%D7%9C-%D7%9C%D7%A0%D7%A8%D7%93/a0f8a3a6-5dc2-44e9-b492-2e5257aea9ce"
+    }
   },
   {
     "id": "episode-ducks-over-jerusalem",
@@ -93,10 +133,15 @@
       "podcast"
     ],
     "title": "Ducks Over Jerusalem - with Amir Balaban",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000767742247",
+    "url": "https://open.spotify.com/episode/0ERUMqbQJQMUdv7EE60PtO",
     "date": "14 May 2026",
     "sort_date": "2026-05-14",
-    "description_src": "episodes/ducks-over-jerusalem.md"
+    "description_src": "episodes/ducks-over-jerusalem.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/0ERUMqbQJQMUdv7EE60PtO",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000767742247",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%91%D7%A8%D7%95%D7%95%D7%96%D7%99%D7%9D-%D7%91%D7%A9%D7%9E%D7%99-%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D-%D7%A2%D7%9D-%D7%A2%D7%9E%D7%99%D7%A8-%D7%91%D7%9C%D7%91%D7%9F/c08c3e7d-1432-4e7e-a59b-62b442e1ab65"
+    }
   },
   {
     "id": "episode-live-cameras",
@@ -104,10 +149,15 @@
       "podcast"
     ],
     "title": "Live Cameras - with Dr. Moti Charter",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000763231037",
+    "url": "https://open.spotify.com/episode/3o4w6QSurhoh7SbzErZGFy",
     "date": "23 Apr 2026",
     "sort_date": "2026-04-23",
-    "description_src": "episodes/live-cameras.md"
+    "description_src": "episodes/live-cameras.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/3o4w6QSurhoh7SbzErZGFy",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000763231037",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%9E%D7%A6%D7%9C%D7%9E%D7%95%D7%AA-%D7%97%D7%99%D7%95%D7%AA-%D7%A2%D7%9D-%D7%93%D7%A8-%D7%9E%D7%95%D7%98%D7%99-%D7%A6%D7%90%D7%A8%D7%98%D7%A8/242ae166-1d56-4fc5-9b62-b68b5269f1c6"
+    }
   },
   {
     "id": "episode-where-do-they-roam",
@@ -115,10 +165,15 @@
       "podcast"
     ],
     "title": "Where Do They Roam? - with Prof. Or Spiegel",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000759376054",
+    "url": "https://open.spotify.com/episode/2WOiU2ILUsCTw8LZSm97g5",
     "date": "5 Apr 2026",
     "sort_date": "2026-04-05",
-    "description_src": "episodes/where-do-they-roam.md"
+    "description_src": "episodes/where-do-they-roam.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/2WOiU2ILUsCTw8LZSm97g5",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000759376054",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%90%D7%99%D7%A4%D7%94-%D7%94%D7%9D-%D7%9E%D7%A1%D7%AA%D7%95%D7%91%D7%91%D7%99%D7%9D-%D7%A2%D7%9D-%D7%A4%D7%A8%D7%95%D7%A4-%D7%90%D7%95%D7%A8-%D7%A9%D7%A4%D7%99%D7%92%D7%9C/fe806196-5978-43a7-add5-d9e1cea80a88"
+    }
   },
   {
     "id": "episode-a-mental-map",
@@ -126,10 +181,15 @@
       "podcast"
     ],
     "title": "A Mental Map - with Keren Or and Eldad Golan",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000755721233",
+    "url": "https://open.spotify.com/episode/6imm6FRK8To5bBwAPeEjmZ",
     "date": "17 Mar 2026",
     "sort_date": "2026-03-17",
-    "description_src": "episodes/a-mental-map.md"
+    "description_src": "episodes/a-mental-map.md",
+    "links": {
+      "spotify": "https://open.spotify.com/episode/6imm6FRK8To5bBwAPeEjmZ",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000755721233",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   },
   {
     "id": "episode-the-400-club",
@@ -137,10 +197,15 @@
       "podcast"
     ],
     "title": "The 400 Club - with Gabriel Sider-Pres",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000749612121",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "13 Feb 2026",
     "sort_date": "2026-02-13",
-    "description_src": "episodes/the-400-club.md"
+    "description_src": "episodes/the-400-club.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000749612121",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   },
   {
     "id": "episode-the-migrants-among-us",
@@ -148,10 +213,15 @@
       "podcast"
     ],
     "title": "The Migrants Among Us - with Prof. Nir Sapir",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000747572741",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "1 Feb 2026",
     "sort_date": "2026-02-01",
-    "description_src": "episodes/the-migrants-among-us.md"
+    "description_src": "episodes/the-migrants-among-us.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000747572741",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07/%D7%94%D7%A0%D7%95%D7%93%D7%93%D7%99%D7%9D-%D7%A9%D7%91%D7%99%D7%A0%D7%99%D7%A0%D7%95-%D7%A2%D7%9D-%D7%A4%D7%A8%D7%95%D7%A4-%D7%A0%D7%99%D7%A8-%D7%A1%D7%A4%D7%99%D7%A8/4f954399-7b7c-47b8-845e-cf8b08c28136"
+    }
   },
   {
     "id": "episode-between-the-houses",
@@ -159,10 +229,15 @@
       "podcast"
     ],
     "title": "Between the Houses - with Anat Gal",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192482",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "15 Jan 2026",
     "sort_date": "2026-01-15",
-    "description_src": "episodes/between-the-houses.md"
+    "description_src": "episodes/between-the-houses.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192482",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   },
   {
     "id": "episode-in-the-magnetic-field",
@@ -170,10 +245,15 @@
       "podcast"
     ],
     "title": "In the (Magnetic) Field - with Prof. Yoni Vortman",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192346",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "2 Jan 2026",
     "sort_date": "2026-01-02",
-    "description_src": "episodes/in-the-magnetic-field.md"
+    "description_src": "episodes/in-the-magnetic-field.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192346",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   },
   {
     "id": "episode-in-this-ring",
@@ -181,10 +261,15 @@
       "podcast"
     ],
     "title": "In This Ring - with Shay Agmon",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192600",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "23 Dec 2025",
     "sort_date": "2025-12-23",
-    "description_src": "episodes/in-this-ring.md"
+    "description_src": "episodes/in-this-ring.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192600",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   },
   {
     "id": "episode-at-the-tip-of-the-wing",
@@ -192,10 +277,15 @@
       "podcast"
     ],
     "title": "At the Tip of the Wing - with Tuvia Kahan",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192459",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "10 Dec 2025",
     "sort_date": "2025-12-10",
-    "description_src": "episodes/at-the-tip-of-the-wing.md"
+    "description_src": "episodes/at-the-tip-of-the-wing.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192459",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   },
   {
     "id": "episode-the-birdwatchers-partner",
@@ -203,9 +293,14 @@
       "podcast"
     ],
     "title": "The Birdwatcher's Partner - with Asia Ladizhinskaya",
-    "url": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192515",
+    "url": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
     "date": "8 Dec 2025",
     "sort_date": "2025-12-08",
-    "description_src": "episodes/the-birdwatchers-partner.md"
+    "description_src": "episodes/the-birdwatchers-partner.md",
+    "links": {
+      "spotify": "https://open.spotify.com/show/40oA3G1rCrAwuR0gYO0h75",
+      "apple": "https://podcasts.apple.com/il/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/id1871143410?i=1000746192515",
+      "pocketcasts": "https://pocketcasts.com/podcast/%D7%A6%D7%A8%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A6%D7%99%D7%A4%D7%95%D7%A8%D7%99%D7%9D/891eda00-c238-013e-16be-0eb214331a07"
+    }
   }
 ]

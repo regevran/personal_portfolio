@@ -4,5 +4,6 @@
   "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt. Curabitur sodales, augue non volutpat luctus, ipsum arcu consequat erat, at luctus velit massa vitae dui.",
   "email": "regev.ran@gmail.com",
   "phone": "+972-50-389-1316",
-  "github": "https://github.com/regevran"
+  "github": "https://github.com/regevran",
+  "footer": "Static, data-driven, rebuilt with cmake."
 }

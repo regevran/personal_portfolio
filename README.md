@@ -57,7 +57,7 @@ fail it. The affected entries sort last.
   at `assets/general/closing_on_birds_robin.png` (56 × 72 px, `object-fit:
   contain`, bottom-aligned). The board fits the viewport
   when it can and pans horizontally when it cannot; there is no vertical page
-  scroll. A fixed title bar carries the name, email, phone, and provisional
+  scroll. A fixed title bar carries the name, email, phone, and the
   About / Work / Nature / Contact navigation.
 - `hooks.html` — ten anchor studies: five nature anchors (rope & nail, twig
   hook, robin perch, vine loop, wooden peg) and five computer anchors (cable
@@ -66,7 +66,8 @@ fail it. The affected entries sort last.
 
 The previews use the book palette, the motif library in `design/assets/motifs/`,
 and the single composite background. The approved board is now integrated as
-the site hub (`templates/index.html` + `assets/css/board.css`); the design pages
+the site hub (`templates/index.html` + `assets/css/board.css`); the card pages
+use the same palette and type through `assets/css/theme.css`. The design pages
 themselves remain reference-only and are not part of the site build.
 
 Run the tests alone:
@@ -90,8 +91,11 @@ content/
     episodes/      per-episode description Markdown
 templates/         base shells, the hub board, card pages and partials
 assets/            images, videos, documents, CSS and JS
+  css/theme.css    palette, type, topbar and footer
   css/board.css    the hub board
-  css/site.css     card pages
+  css/site.css     shared card pages
+  css/pages/       optional per-page styles (podcast.css)
+  icons/           platform logos (Spotify, Apple Podcasts, Pocket Casts)
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
@@ -109,7 +113,12 @@ dist/              generated output (ignored by git)
 
 - **Card pages:** `content/cards/<slug>/card.json` holds the hub metadata
   (title, kicker, order, status, family, summary, description, audio, board
-  placement) and the ordered `blocks` list. The directory name is the slug.
+  placement, optional `logo`/`logo_alt`) and the ordered `blocks` list. The
+  directory name is the slug.
+- **Per-page styling:** if `assets/css/pages/<slug>.css` exists, the build
+  links it after `site.css` on that page only. Podcast uses
+  `assets/css/pages/podcast.css` for its dirty background and floating chapter
+  cards.
 - **Board placement:** the `board` object holds `x`, `y` (or `bottom`), `tilt`,
   `anchor` (`perch`, `lanyard`, `none`) and, for perch cards, `robin` tilt/flip.
   The hub renders directly from it; validation ties the anchor to the family.
@@ -120,7 +129,12 @@ dist/              generated output (ignored by git)
   `collections` list.
 - **Episode descriptions:** `content/data/episodes/<slug>.md`, referenced by
   `"description_src"` in `episodes.json`.
-- **Identity and contact:** `content/data/site.json`.
+- **Episode links:** `episodes.json` records carry `links` with `spotify`,
+  `apple`, and `pocketcasts` URLs. Episode titles are not links; each card
+  renders the three platform logos. A missing direct link falls back to the
+  platform show page.
+- **Identity and contact:** `content/data/site.json`; it also holds the footer
+  sentence under `footer`.
 
 Blocks render **in array order**. To move a section, reorder the `blocks` array
 in `card.json`; no code changes are needed. A block selects records with
@@ -171,10 +185,10 @@ The site is intentionally a structural skeleton:
 - The Birding card is a placeholder for future photographs and field stories;
   Ringing carries the current ringing photographs.
 - The CV link and the book PDF are placeholders until the real files arrive.
-- Cards are colour-coded by family (`software`, `nature`, `neutral`) as a
-  structural aid, not a final design decision.
-- The visual design (metaphor, typography, palette) is deliberately neutral and
-  will be decided in a separate design session.
+- Cards are colour-coded by family (`software`, `nature`, `neutral`).
+- The hub and card pages share the board's visual language: sand and cream,
+  Patrick Hand titles, mono kickers, family-coloured edges, and a fixed topbar
+  and footer. The card-page pass is still being reviewed.
 
 ### Tests
 

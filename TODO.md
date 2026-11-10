@@ -4,7 +4,8 @@ Open work only. Details and rationale live in the linked docs.
 
 ## Site
 
-- [ ] Style the card pages in the board's visual language — [details](.ai/design-brief.md#next-step)
+- [x] Style the Podcast page in the board's visual language — [details](.ai/design-brief.md#podcast-page)
+- [ ] Design the remaining card pages individually — [details](.ai/design-brief.md#next-step)
 - [ ] Build the contact notebook / power-line interaction — [details](.ai/design-brief.md#next-step)
 - [ ] Choose host and domain, then add a deploy step around `cmake --install` — [details](.ai/decisions.md#deferred-items)
 

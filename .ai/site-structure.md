@@ -24,10 +24,12 @@ personal_portfolio/
 │   ├── base-board.html       hub shell
 │   ├── index.html            hub board fragment
 │   ├── card.html             card page fragment
-│   └── partials/             board-card, perch, lanyard, contact
+│   └── partials/             topbar, footer, board-card, perch, lanyard, contact
 ├── assets/
+│   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
-│   ├── css/site.css          card pages
+│   ├── css/site.css          shared card pages
+│   ├── css/pages/            optional per-page styles (podcast.css)
 │   ├── js/board.js           horizontal pan and nav shortcuts
 │   ├── js/site.js            contact form
 │   ├── fonts/                Patrick Hand (OFL)
@@ -75,13 +77,15 @@ automatically. No renderer change is needed for a new card.
 
 ## Data model
 
-- `site.json`: `name`, `tagline`, `intro`, `email`, `phone`, `github`.
+- `site.json`: `name`, `tagline`, `intro`, `email`, `phone`, `github`, `footer`.
+  `footer` is the sentence rendered after the copyright line on every page.
 - `cards/<slug>/card.json`: `{title, kicker, family, summary, order, status,
   audio, description, board, blocks}`. `status` is one of `ready`,
   `under-construction`, `coming-soon`, `placeholder`; `family` is one of
-  `software`, `nature`, `neutral` and drives the provisional card colours.
-  `audio` is `null` or a path under `assets/`. The slug is the directory name.
-  `board` holds the hub placement (see below).
+  `software`, `nature`, `neutral` and drives the card colours and anchors.
+  `audio` is `null` or a path under `assets/`; optional `logo` and `logo_alt`
+  add a page logo. The slug is the directory name. `board` holds the hub
+  placement (see below).
 - Every dataset record has a stable `id` and a `collections` list. A collection
   is a selection tag, not an index: several records share one; a record can be
   in several. `hidden` is reserved — a record carrying it is excluded from
@@ -91,8 +95,10 @@ automatically. No renderer change is needed for a new card.
 - `talks.json`: `{id, collections, title, url, description, date, sort_date}`.
   `date` is the display label; `sort_date` is ISO `YYYY-MM-DD` or null.
 - `episodes.json`: `{id, collections, title, url, date, sort_date,
-  description_src}`. `description_src` points into `content/data/episodes/`; an
-  inline `description` is the fallback for other datasets.
+  description_src, links}`. `url` is the primary (Spotify) link; `links` holds
+  the per-platform URLs `spotify`, `apple`, `pocketcasts`. `description_src`
+  points into `content/data/episodes/`; an inline `description` is the fallback
+  for other datasets.
 - `repos.json`: `{id, collections, name, url, description, pushed_at}`.
   `pushed_at` is refreshed from the GitHub API by `fetch_repos.py` and is an ISO
   timestamp or null.
@@ -200,14 +206,20 @@ uses `build/install`); the host and upload step for deployment are deferred.
    sorted top-down for DOM/tab order; each card links to its page.
 5. Render each card's blocks in order: prose via pandoc, contact from site
    data, datasets selected by collection or id and sorted latest-first.
-6. Compose `dist/<slug>/index.html` from `card.html` + `base.html`.
-7. Compose `dist/index.html` from `index.html` + `base-board.html`.
+6. Compose `dist/<slug>/index.html` from `card.html` + `base.html`, including
+   the shared topbar and footer. If `assets/css/pages/<slug>.css` exists, link
+   it after `site.css`; only that page loads it.
+7. Compose `dist/index.html` from `index.html` + `base-board.html`, including
+   the same topbar and footer.
 8. Write `.nojekyll` (harmless now, useful for GitHub Pages later).
 
 ## Conventions
 
 - **Relative URLs only.** No leading `/`. Card pages use `../` as their root
   prefix; the hub uses `""`.
+- **Fixed chrome.** The topbar and footer are shared partials and stay fixed;
+  the main column scrolls between them. The footer sentence comes from
+  `site.json`, not from a template.
 - **Data and view are separate.** `content/data/` holds domain records and the
   prose that belongs to a record (episode show notes). `content/cards/` holds
   page metadata, page prose and composition. A card points at data; it does not

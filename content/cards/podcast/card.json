@@ -6,6 +6,8 @@
   "status": "ready",
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.",
   "description": "Conversations about birds with researchers, birders and conservationists.",
+  "logo": "assets/general/closing_on_birds_circle.png",
+  "logo_alt": "Closing on Birds podcast logo",
   "audio": null,
   "board": {
     "x": 2,
@@ -19,12 +21,6 @@
   },
   "blocks": [
     {
-      "type": "videos",
-      "select": {
-        "collection": "podcast-promos"
-      }
-    },
-    {
       "type": "prose",
       "src": "page.md"
     },
@@ -32,6 +28,12 @@
       "type": "episodes",
       "select": {
         "collection": "podcast"
+      }
+    },
+    {
+      "type": "videos",
+      "select": {
+        "collection": "podcast-promos"
       }
     }
   ]

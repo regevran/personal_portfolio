@@ -8,6 +8,9 @@
 | `assets/iso/wg21/links.md` | cpp-standards, papers.json | three highlighted papers + full list |
 | `assets/talks/links.md` | talks, talks.json | six entries |
 | `assets/podcast/links.md` | podcast, episodes.json | 19 episodes |
+| `assets/icons/spotify.svg` | podcast episode cards | Spotify platform logo |
+| `assets/icons/applepodcasts.svg` | podcast episode cards | Apple Podcasts platform logo |
+| `assets/icons/pocketcasts.svg` | podcast episode cards | Pocket Casts platform logo |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
 | `assets/rescues/ardea_alba.mp4` | rescues | 576×1024, 24 s |
@@ -40,6 +43,9 @@
 | `design/assets/img/ran-otus.png` | concept SVG | cutout of Ran + scops owl; colour image + alpha mask |
 | `design/assets/textures/ink-yinyang.jpg` | concept SVG | dirty ink yin-yang background |
 | `assets/general/board-background.jpg` | composite | **the 1600 × 900 poster background**: ink image with the sharp cutout baked in at 380 px; owl eye aligned to the yin-yang eye |
+| `assets/general/dirty-background.jpg` | podcast page | dirty ink yin-yang texture without the cutout, 1280 × 720 |
+| `assets/general/closing_on_birds_circle.png` | podcast title | full circular podcast logo, 2025 × 2531 RGBA |
+| `assets/general/closing_on_birds_logo.png` | podcast chapter cards | robin on the vintage microphone, 720 × 884 RGBA |
 | `design/assets/textures/field-background.jpg` | composite | earlier 1280 × 720 composite for the scrolling board; retained but no longer used by the poster |
 | `design/assets/textures/paper-dirty.jpg` | concept SVG | clean wall patch; retained but no longer used (the separate paper layer was removed) |
 | `design/assets/img/robin.png` | book cover PDF | interim raster robin; no longer used on the board — waiting for the creator's transparent PNG |

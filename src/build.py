@@ -35,6 +35,18 @@ STATUS_LABELS = {
     "placeholder": "Placeholder",
 }
 
+PLATFORM_LABELS = {
+    "spotify": "Spotify",
+    "apple": "Apple Podcasts",
+    "pocketcasts": "Pocket Casts",
+}
+PLATFORM_ICONS = {
+    "spotify": "assets/icons/spotify.svg",
+    "apple": "assets/icons/applepodcasts.svg",
+    "pocketcasts": "assets/icons/pocketcasts.svg",
+}
+PLATFORM_ORDER = ("spotify", "apple", "pocketcasts")
+
 
 def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
@@ -152,16 +164,49 @@ def render_talks(records: list[dict], root: str) -> str:
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def render_episodes(records: list[dict], root: str) -> str:
-    items = [
-        link_item(
-            episode["title"],
-            episode.get("url"),
-            episode.get("date", ""),
-            description_html(episode),
+def episode_links(episode: dict, root: str) -> str:
+    links = episode.get("links")
+    if not isinstance(links, dict):
+        return ""
+    anchors = []
+    for platform in PLATFORM_ORDER:
+        url = links.get(platform)
+        if not url:
+            continue
+        label = PLATFORM_LABELS[platform]
+        icon = PLATFORM_ICONS[platform]
+        anchors.append(
+            f'<a class="episode-link episode-link--{platform}" '
+            f'href="{esc(url)}" aria-label="{esc(label)}" '
+            f'title="{esc(label)}" target="_blank" rel="noopener">'
+            f'<img src="{esc(root + icon)}" alt="" aria-hidden="true">'
+            "</a>"
         )
-        for episode in records
-    ]
+    return '<span class="episode-links">' + "".join(anchors) + "</span>"
+
+
+def episode_rail(episode: dict, root: str) -> str:
+    return (
+        '<span class="episode-rail">'
+        '<span class="episode-mic" aria-hidden="true"></span>'
+        f'{episode_links(episode, root)}'
+        "</span>"
+    )
+
+
+def render_episodes(records: list[dict], root: str) -> str:
+    items = []
+    for episode in records:
+        description = description_html(episode)
+        items.append(
+            '<li class="item">'
+            '<span class="item-head">'
+            f'<span class="item-title">{esc(episode["title"])}</span>'
+            f'<span class="item-meta">{esc(episode.get("date", ""))}</span>'
+            "</span>"
+            f'<div class="item-desc">{description}</div>'
+            f'{episode_rail(episode, root)}</li>'
+        )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
@@ -212,7 +257,7 @@ def render_videos(records: list[dict], root: str) -> str:
             f'<span class="media-title">{esc(video["title"])}</span>'
             f"{species}{description}</figcaption></figure>"
         )
-    return '<div class="media-grid">' + "".join(cards) + "</div>"
+    return '<div class="media-grid media-grid--videos">' + "".join(cards) + "</div>"
 
 
 def render_photos(records: list[dict], root: str) -> str:
@@ -235,20 +280,71 @@ def render_photos(records: list[dict], root: str) -> str:
             f'<span class="media-meta">{esc(caption)}</span>{audio}'
             "</figcaption></figure>"
         )
-    return '<div class="media-grid">' + "".join(cards) + "</div>"
+    return '<div class="media-grid media-grid--photos">' + "".join(cards) + "</div>"
+
+
+def phone_tel(phone: object) -> str:
+    return re.sub(r"[^0-9+]", "", str(phone))
+
+
+def render_topbar(site: dict, home: str, nav_root: str) -> str:
+    template = read_template("partials/topbar.html")
+    return render_template(
+        template,
+        {
+            "SITE_NAME": esc(site["name"]),
+            "HOME": esc(home),
+            "NAV_ABOUT": esc(f"{nav_root}#about"),
+            "NAV_WORK": esc(f"{nav_root}#work"),
+            "NAV_NATURE": esc(f"{nav_root}#nature"),
+            "NAV_CONTACT": esc(f"{nav_root}#contact"),
+            "EMAIL": esc(site["email"]),
+            "PHONE": esc(site["phone"]),
+            "PHONE_TEL": esc(phone_tel(site["phone"])),
+        },
+    )
+
+
+def render_footer(site: dict, year: str) -> str:
+    template = read_template("partials/footer.html")
+    return render_template(
+        template,
+        {
+            "YEAR": esc(year),
+            "SITE_NAME": esc(site["name"]),
+            "FOOTER": esc(site["footer"]),
+        },
+    )
+
+
+def render_logo(card: dict, root: str) -> str:
+    source = card.get("logo")
+    if not source:
+        return ""
+    alt = card.get("logo_alt") or f'{card["title"]} logo'
+    return (
+        f'<img class="card-page-logo" src="{esc(root + source)}" '
+        f'alt="{esc(alt)}">'
+    )
+
+
+def page_stylesheet(slug: str, root: str) -> str:
+    if not (ASSETS / "css" / "pages" / f"{slug}.css").is_file():
+        return ""
+    relative = f"assets/css/pages/{slug}.css"
+    return f'<link rel="stylesheet" href="{esc(root + relative)}">'
 
 
 def render_contact(site: dict) -> str:
     template = read_template("partials/contact.html")
     phone = str(site["phone"])
-    phone_tel = re.sub(r"[^0-9+]", "", phone)
     return render_template(
         template,
         {
             "NAME": esc(site["name"]),
             "EMAIL": esc(site["email"]),
             "PHONE": esc(phone),
-            "PHONE_TEL": esc(phone_tel),
+            "PHONE_TEL": esc(phone_tel(phone)),
         },
     )
 
@@ -373,16 +469,28 @@ def build() -> None:
         "lanyard": read_template("partials/lanyard.html"),
     }
 
-    def write_page(path: Path, title: str, description: str, body: str, root: str) -> None:
+    def write_page(
+        path: Path,
+        title: str,
+        description: str,
+        body: str,
+        root: str,
+        topbar: str,
+        footer: str,
+        page_slug: str,
+        page_css: str,
+    ) -> None:
         page = render_template(
             base,
             {
                 "TITLE": esc(title),
                 "DESCRIPTION": esc(description),
                 "ROOT": root,
-                "SITE_NAME": esc(site["name"]),
-                "YEAR": year,
+                "TOPBAR": topbar,
                 "BODY": body,
+                "FOOTER": footer,
+                "PAGE": esc(page_slug),
+                "PAGE_CSS": page_css,
             },
         )
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -400,17 +508,12 @@ def build() -> None:
             ),
         )
     )
-    phone = str(site["phone"])
-    phone_tel = re.sub(r"[^0-9+]", "", phone)
     index_body = render_template(
         index_template,
         {
             "SITE_NAME": esc(site["name"]),
             "TAGLINE": esc(site["tagline"]),
             "TAGLINE_LINES": tagline_lines(site["tagline"]),
-            "EMAIL": esc(site["email"]),
-            "PHONE": esc(phone),
-            "PHONE_TEL": esc(phone_tel),
             "BOARD_CARDS": board_cards,
         },
     )
@@ -419,10 +522,15 @@ def build() -> None:
         {
             "TITLE": esc(f'{site["name"]} — Portfolio'),
             "DESCRIPTION": esc(site["tagline"]),
+            "TOPBAR": render_topbar(site, "index.html", ""),
             "BODY": index_body,
+            "FOOTER": render_footer(site, year),
         },
     )
     (DIST / "index.html").write_text(hub_page, encoding="utf-8")
+
+    card_topbar = render_topbar(site, "../index.html", "../index.html")
+    card_footer = render_footer(site, year)
 
     for position, card in enumerate(cards):
         root = "../"
@@ -464,10 +572,12 @@ def build() -> None:
             card_template,
             {
                 "ROOT": root,
+                "SLUG": esc(card["slug"]),
                 "KICKER": esc(card["kicker"]),
                 "FAMILY": esc(card["family"]),
                 "TITLE": esc(card["title"]),
                 "SUMMARY": esc(card["summary"]),
+                "LOGO": render_logo(card, root),
                 "STATUS": status_badge(card["status"]),
                 "BODY": body_html,
                 "AUDIO": audio_html,
@@ -481,6 +591,10 @@ def build() -> None:
             card.get("description", card["summary"]),
             card_body,
             root,
+            card_topbar,
+            card_footer,
+            card["slug"],
+            page_stylesheet(card["slug"], root),
         )
 
     (DIST / ".nojekyll").write_text("", encoding="utf-8")

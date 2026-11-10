@@ -5,22 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{TITLE}}</title>
   <meta name="description" content="{{DESCRIPTION}}">
+  <link rel="stylesheet" href="{{ROOT}}assets/css/theme.css">
   <link rel="stylesheet" href="{{ROOT}}assets/css/site.css">
+{{PAGE_CSS}}
 </head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="{{ROOT}}index.html">{{SITE_NAME}}</a>
-    <span class="site-note">structure preview</span>
-  </header>
-
-  <main class="site-main">
+<body class="card-shell" data-page="{{PAGE}}">
+{{TOPBAR}}
+  <main class="site-main" id="main">
+    <div class="wrap">
 {{BODY}}
+    </div>
   </main>
-
-  <footer class="site-footer">
-    <p>&copy; {{YEAR}} {{SITE_NAME}}. Static, data-driven, rebuilt with <code>cmake</code>.</p>
-  </footer>
-
+{{FOOTER}}
   <script src="{{ROOT}}assets/js/site.js" defer></script>
 </body>
 </html>

@@ -3,14 +3,15 @@
 Date: 2026-11-08
 Status: 16:9 poster layout with title-only cards; anchors chosen (C05 lanyard +
 N03 robin perch); robin transparent PNG integrated; the board is now the site
-hub, with each card linking to its page. Card-page styling and contact
-interaction remain.
+hub, with each card linking to its page. The Podcast page has its own treatment:
+floating chapter cards on the dirty ink background. The other card pages keep
+the shared first-pass styling; contact interaction remains.
 
 ## Goal
 
-Settle the visual language of the main page before wiring the card pages. The
-cards are shown as a title-only index and deliberately **not linked**; content
-lives in the card pages.
+Settle the visual language of the board, then carry it into the card pages. The
+board is a title-only index; every card links to its page, where the content
+lives.
 
 ## Direction of travel
 
@@ -24,7 +25,7 @@ dropped and their files deleted.
 
 ## Constraints
 
-- Main page only; cards are non-interactive.
+- The board was the first surface; card pages now reuse its palette and type.
 - Static HTML/CSS. No runtime network requests.
 - English.
 - Book palette and book typography as the base.
@@ -175,10 +176,64 @@ podcast microphone is no longer used.
 - `design/assets/design.css`.
 - `design/assets/img/`, `design/assets/textures/`, `design/assets/fonts/`.
 
+## Card pages
+
+The card page is the **opened note** from the board:
+
+- The sand field is the page; one large cream sheet carries the content.
+- The topbar and footer are shared with the hub and stay fixed; the sheet
+  scrolls between them. The footer sentence lives in `site.json`.
+- The header uses the board's kicker/title pairing: mono uppercase kicker,
+  Patrick Hand title, serif summary. The sheet's top edge carries the family
+  colour (software blue, nature olive, neutral ochre); the status badge is a
+  small dashed stamp.
+- Prose is serif at a readable measure. Papers, talks, episodes and repos
+  render as ledger rows with meta on the left. Videos and photos sit in framed
+  prints; photo frames carry a slight rotation. The contact panel is a
+  notebook-style pair of notes, with underlined fields.
+- Palette, type, topbar and footer are shared in `assets/css/theme.css`.
+  `assets/css/site.css` holds the card-page rules only.
+
+The first target was Podcast because it combines a video grid, prose and an
+episode list. Ringing, C++ & Standards, Engineering, Contact and About were
+checked as the other block types.
+
+### Podcast page
+
+Podcast gets a page-specific treatment in `assets/css/pages/podcast.css`,
+loaded only for that page. It follows the hub more closely than the generic
+card page:
+
+- The page background is the dirty ink texture
+  (`assets/general/dirty-background.jpg`), fixed on desktop. There is no
+  full-page cream sheet.
+- The header is one cream note with the full circular logo
+  (`assets/general/closing_on_birds_circle.png`) floating in its top-right.
+- The intro paragraphs are notes.
+- The header and the promo-video cards are straight. The videos sit at the
+  bottom of the page, after the episode list.
+- Each episode is a compact cream card matching the header width, with a
+  nature-green top edge. The title and date share the first line (date after
+  the title); the description follows and uses the full width up to a narrow
+  right-hand rail. The cards alternate `rotate(3deg)` / `rotate(-3deg)`, sit
+  `-0.1rem` apart, use `2.2rem` bottom padding, and have an `11.5rem` minimum
+  height so the rail always fits; mobile uses 2.5°, `1.2rem`, and `9.2rem`.
+- Episode titles are not links. The small robin/mic logo heads an absolutely
+  positioned right-hand rail whose top aligns with the title row; the Spotify,
+  Apple Podcasts, and Pocket Casts logo links stack beneath it with a small
+  clear gap. The mic is a CSS background image, not an `<img>`, because
+  Chromium draws an opaque box around the transparent PNG in this context.
+  Per-episode URLs live in `links` in `episodes.json`; missing direct links
+  fall back to the show page.
+- Static text rectangles (header, intro notes, pager) get a soft gold glow on
+  hover; tilted episode cards straighten and lift instead.
+
+The generic card page remains the fallback for the other cards. Per-page
+stylesheets are auto-discovered from `assets/css/pages/<slug>.css`; a page
+without one gets only `theme.css` + `site.css`.
+
 ## Next step
 
-The hub is integrated: `templates/base-board.html`, `templates/index.html`,
-`assets/css/board.css`, `assets/js/board.js`, and the `board` metadata in each
-`card.json`. Cards link to their pages. Next, apply the visual language to the
-card pages (`templates/card.html`, `assets/css/site.css`) and build the contact
-power-line/notebook interaction. Voice-over comes last.
+Design the remaining card pages individually, starting with whichever card
+matters next. Then build the contact power-line/notebook interaction.
+Voice-over comes last.
