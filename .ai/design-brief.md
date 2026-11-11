@@ -252,9 +252,21 @@ Podcast but reads as software. Its rules live in
 - Intro paragraphs are straight cream notes with a software-blue left rule.
 - Repositories are straight cream cards with a software-blue top edge. The
   repository name sits left and the last-push date is centred on the first
-  line; the description follows. A small conference badge
-  (`assets/icons/conference-badge.svg`) occupies an absolutely positioned
-  right-hand rail, mirroring the robin rail on Podcast cards. Instead of
+  line; the description follows. An absolutely positioned right-hand rail
+  mirrors the robin rail on Podcast cards: the small conference badge
+  (`assets/icons/conference-badge.svg`) sits on top and a GitHub mark
+  (`assets/icons/github.svg`) sits directly below it in a cream circle,
+  linking to the repository in a new tab. The repository name keeps its own
+  link. The body comes from `content/data/repos/<name>.md` and is styled for
+  long-form Markdown: the first paragraph is the scan line, followed by small
+  serif subheadings, lists, blue underlined links and tinted inline code. The
+  measure is capped at `72ch` so paragraphs stay readable inside the wide
+  card. The card starts as a clamped preview (about four lines, with a soft
+  fade) and a small `More…` pill at the bottom left. It expands the card down
+  to its full height over 240 ms (the height transition is disabled under
+  `prefers-reduced-motion`), turns into `Less…`, and opening another
+  repository closes the previous one. Short descriptions get no toggle.
+  Instead of
   Podcast's tilt-and-straighten, hovering or focusing a card pulls it out and
   enlarges it slightly (`translateY(-6px) scale(1.02)`) with a blue glow.
   There is no rotation. Mobile stacks the date under the name.

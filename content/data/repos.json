@@ -6,7 +6,7 @@
     ],
     "name": "regevran/birds",
     "url": "https://github.com/regevran/birds",
-    "description": "Birds taxonomy - Israel.",
+    "description_src": "repos/birds.md",
     "pushed_at": "2026-11-05T13:55:20Z"
   },
   {
@@ -16,7 +16,7 @@
     ],
     "name": "regevran/cpp-proposals",
     "url": "https://github.com/regevran/cpp-proposals",
-    "description": "P3817 work.",
+    "description_src": "repos/cpp-proposals.md",
     "pushed_at": "2026-10-19T05:37:45Z"
   },
   {
@@ -26,7 +26,7 @@
     ],
     "name": "regevran/llvm-project-fork",
     "url": "https://github.com/regevran/llvm-project-fork",
-    "description": "P3817 implementation.",
+    "description_src": "repos/llvm-project-fork.md",
     "pushed_at": "2026-09-28T17:08:19Z"
   },
   {
@@ -36,7 +36,7 @@
     ],
     "name": "regevran/infra",
     "url": "https://github.com/regevran/infra",
-    "description": "Compiler Explorer infrastructure.",
+    "description_src": "repos/infra.md",
     "pushed_at": "2026-07-17T15:40:15Z"
   },
   {
@@ -46,7 +46,7 @@
     ],
     "name": "regevran/contour",
     "url": "https://github.com/regevran/contour",
-    "description": "Terminal.",
+    "description_src": "repos/contour.md",
     "pushed_at": "2025-09-23T16:59:58Z"
   },
   {
@@ -56,7 +56,7 @@
     ],
     "name": "regevran/talks",
     "url": "https://github.com/regevran/talks",
-    "description": "Contracts talks.",
+    "description_src": "repos/talks.md",
     "pushed_at": "2025-02-28T20:28:04Z"
   }
 ]

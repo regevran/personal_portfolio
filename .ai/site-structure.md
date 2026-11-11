@@ -18,7 +18,8 @@ personal_portfolio/
 │       ├── repos.json        selected GitHub repositories
 │       ├── videos.json       rescue clips and podcast promos
 │       ├── photos.json       ringing photographs
-│       └── episodes/         per-episode description Markdown
+│       ├── episodes/         per-episode description Markdown
+│       └── repos/            per-repository description Markdown
 ├── templates/
 │   ├── base.html             card page shell
 │   ├── base-board.html       hub shell
@@ -99,9 +100,12 @@ automatically. No renderer change is needed for a new card.
   the per-platform URLs `spotify`, `apple`, `pocketcasts`. `description_src`
   points into `content/data/episodes/`; an inline `description` is the fallback
   for other datasets.
-- `repos.json`: `{id, collections, name, url, description, pushed_at}`.
-  `pushed_at` is refreshed from the GitHub API by `fetch_repos.py` and is an ISO
-  timestamp or null.
+- `repos.json`: `{id, collections, name, url, description_src, pushed_at}`.
+  `description_src` points into `content/data/repos/`; an inline `description`
+  is still accepted as a fallback (`description_src` is preferred now). The
+  Markdown body renders inside the repository card, including headings,
+  lists, links and inline code. `pushed_at` is refreshed from the GitHub API by
+  `fetch_repos.py` and is an ISO timestamp or null.
 - `videos.json`: `{id, collections, title, species, src, youtube, date,
   description}`. `youtube` takes precedence when set; `date` is ISO
   `YYYY-MM-DD` or null. Video files are not committed: a missing local `src`

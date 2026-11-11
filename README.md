@@ -89,13 +89,14 @@ content/
   data/
     *.json         canonical records (papers, talks, episodes, repos, videos, photos)
     episodes/      per-episode description Markdown
+    repos/         per-repository description Markdown
 templates/         base shells, the hub board, card pages and partials
 assets/            images, videos, documents, CSS and JS
   css/theme.css    palette, type, topbar and footer
   css/board.css    the hub board
   css/site.css     shared card pages
   css/pages/       optional per-page styles (podcast.css, engineering.css)
-  icons/           platform logos, lanyard and conference badge
+  icons/           platform logos, GitHub mark, lanyard and conference badge
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
@@ -120,16 +121,31 @@ dist/              generated output (ignored by git)
   `assets/css/pages/podcast.css` for its dirty background and floating chapter
   cards; Public GitHub uses `assets/css/pages/engineering.css` for its
   conference badge and pull-out repository cards.
+- **Repository cards:** a full description is clamped to a preview with a
+  `More…` toggle at the bottom of the card. Opening one expands it to its full
+  height, changes the label to `Less…`, and closes any other open repository
+  card. The height animates over 240 ms, and `prefers-reduced-motion` turns
+  the animation off. The toggle is only shown when the description actually
+  overflows; with JavaScript disabled the full text stays visible. The
+  behaviour lives in `assets/js/site.js`.
 - **Board placement:** the `board` object holds `x`, `y` (or `bottom`), `tilt`,
   `anchor` (`perch`, `lanyard`, `none`) and, for perch cards, `robin` tilt/flip.
   The hub renders directly from it; validation ties the anchor to the family.
 - **Card prose:** Markdown files in the same directory, referenced by `prose`
-  blocks. A page can use any number of prose fragments.
+  blocks. A page can use any number of prose fragments. Links and images in
+  Markdown are written relative to the site root (`assets/...`); the renderer
+  adds the page prefix (`../` on card pages) so the same path works from
+  source and from `dist/`. Leave absolute URLs, anchors and `../` paths as
+  they are.
 - **Structured data:** `content/data/*.json` — `papers`, `talks`, `episodes`,
   `repos`, `videos`, `photos`. Every record has a stable `id` and a
   `collections` list.
 - **Episode descriptions:** `content/data/episodes/<slug>.md`, referenced by
   `"description_src"` in `episodes.json`.
+- **Repository descriptions:** `content/data/repos/<name>.md`, referenced by
+  `"description_src"` in `repos.json`. Each file holds the full Markdown body
+  for the repository card; the first paragraph doubles as its one-line
+  summary. Use `##` and below for subheadings, not `#`.
 - **Episode links:** `episodes.json` records carry `links` with `spotify`,
   `apple`, and `pocketcasts` URLs. Episode titles are not links; each card
   renders the three platform logos. A missing direct link falls back to the

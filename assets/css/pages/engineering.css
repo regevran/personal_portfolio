@@ -152,6 +152,7 @@ body[data-page="engineering"] {
 .card-page--engineering .item-list .item {
   position: relative;
   display: grid;
+  grid-template-areas: none;
   grid-template-columns: minmax(0, 1fr);
   align-items: baseline;
   row-gap: 0.3rem;
@@ -213,15 +214,168 @@ body[data-page="engineering"] {
 }
 
 .card-page--engineering .item-desc {
+  --repo-preview: 7.5rem;
+
+  grid-area: auto;
   grid-column: 1;
-  margin-top: 0.1rem;
+  max-width: 72ch;
+  max-height: var(--repo-preview);
+  margin-top: 0.3rem;
+  overflow: hidden;
   color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.55;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  transition: max-height 240ms ease;
+}
+
+.card-page--engineering .item.has-more .item-desc {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - 1.9rem),
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.9rem), transparent);
+}
+
+.card-page--engineering .item.is-open .item-desc {
+  max-height: none;
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.card-page--engineering .item-desc > :first-child {
+  margin-top: 0;
+}
+
+.card-page--engineering .item-desc > :last-child {
+  margin-bottom: 0;
 }
 
 .card-page--engineering .item-desc p {
+  margin: 0.5rem 0 0;
+}
+
+.card-page--engineering .item-desc h2,
+.card-page--engineering .item-desc h3,
+.card-page--engineering .item-desc h4 {
+  margin: 1.1rem 0 0.3rem;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.card-page--engineering .item-desc h2 {
+  font-size: 1.14rem;
+}
+
+.card-page--engineering .item-desc h3 {
+  font-size: 1.02rem;
+}
+
+.card-page--engineering .item-desc h4 {
+  font-size: 0.95rem;
+}
+
+.card-page--engineering .item-desc ul,
+.card-page--engineering .item-desc ol {
+  margin: 0.45rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.card-page--engineering .item-desc li + li {
+  margin-top: 0.18rem;
+}
+
+.card-page--engineering .item-desc a {
+  color: var(--software);
+  text-decoration: underline;
+  text-decoration-color: rgba(62, 107, 137, 0.35);
+  text-underline-offset: 0.14em;
+}
+
+.card-page--engineering .item-desc a:hover,
+.card-page--engineering .item-desc a:focus-visible {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.card-page--engineering .item-desc strong {
+  color: var(--ink);
+}
+
+.card-page--engineering .item-desc code {
+  padding: 0.06em 0.28em;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: rgba(239, 223, 192, 0.55);
+  font-size: 0.86em;
+}
+
+.card-page--engineering .item-desc blockquote {
+  margin: 0.7rem 0 0;
+  padding: 0.3rem 0 0.3rem 0.9rem;
+  border-left: 0.2rem solid var(--software);
+}
+
+.card-page--engineering .item-desc hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.card-page--engineering .item-desc table {
+  width: 100%;
+  margin-top: 0.7rem;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.card-page--engineering .item-desc th,
+.card-page--engineering .item-desc td {
+  padding: 0.32rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+
+.card-page--engineering .item-desc th {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* More / less ------------------------------------------------------------- */
+
+.card-page--engineering .repo-toggle {
+  display: none;
+  justify-self: start;
   margin: 0.2rem 0 0;
+  padding: 0.18rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--software);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.card-page--engineering .item.has-more .repo-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-page--engineering .repo-toggle:hover,
+.card-page--engineering .repo-toggle:focus-visible {
+  border-color: var(--software);
+  color: var(--ink);
+  box-shadow: 0 0 0 0.18rem rgba(62, 107, 137, 0.3),
+    0 4px 10px rgba(47, 39, 20, 0.16);
 }
 
 .card-page--engineering .repo-rail {
@@ -229,7 +383,9 @@ body[data-page="engineering"] {
   top: 0.55rem;
   right: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
   width: 2.9rem;
 }
 
@@ -239,6 +395,32 @@ body[data-page="engineering"] {
   height: 4.05rem;
   background: url("../../icons/conference-badge.svg") center top / contain
     no-repeat;
+}
+
+.card-page--engineering .repo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--cream);
+  transition: transform 160ms ease, box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.card-page--engineering .repo-link img {
+  width: 0.76rem;
+  height: 0.76rem;
+}
+
+.card-page--engineering .repo-link:hover,
+.card-page--engineering .repo-link:focus-visible {
+  border-color: var(--software);
+  box-shadow: 0 4px 10px rgba(47, 39, 20, 0.18),
+    0 0 0 0.18rem rgba(62, 107, 137, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Pager ------------------------------------------------------------------- */
@@ -317,18 +499,45 @@ body[data-page="engineering"] {
     width: 2.15rem;
     height: 3.35rem;
   }
+
+  .card-page--engineering .repo-link {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .card-page--engineering .repo-link img {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+}
+
+@media print {
+  .card-page--engineering .item-desc {
+    max-height: none;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .card-page--engineering .repo-toggle {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card-page--engineering .item-list .item,
   .card-page--engineering .prose > p,
-  .card-page--engineering .pager {
+  .card-page--engineering .pager,
+  .card-page--engineering .repo-link,
+  .card-page--engineering .item-desc {
     transform: none;
     transition: none;
   }
 
   .card-page--engineering .item-list .item:hover,
-  .card-page--engineering .item-list .item:focus-within {
+  .card-page--engineering .item-list .item:focus-within,
+  .card-page--engineering .repo-link:hover,
+  .card-page--engineering .repo-link:focus-visible {
     transform: none;
   }
 }

@@ -16,7 +16,7 @@ data-driven, because it will be updated from time to time.
 | Hosting | **Deferred.** No hosting assumption yet. `dist/` is plain static with relative URLs so it can move to GitHub Pages, a custom domain, or elsewhere later. |
 | Build | **CMake** (same single build system as `../birds`) → `dist/`. `CMakeLists.txt` + `CMakePresets.json`; targets, tests and workflow presets. The default build is offline; repo-date refresh is an explicit target/workflow. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
 | Content model | `content/data/` holds canonical records, each with a stable `id` and a `collections` list. `content/cards/<slug>/card.json` holds page metadata and ordered `blocks`; page prose is sibling Markdown. Cards select data by collection or explicit ids — no duplicate membership index. `hidden` is a reserved collection for soft removal. |
-| Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and are referenced by `description_src`; the inline `description` remains the fallback for other datasets. |
+| Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and repository descriptions in `content/data/repos/<name>.md`, both referenced by `description_src`; the inline `description` remains the fallback for other datasets. An episode or repository needs one of the two. |
 | Toolchain | `cmake` 3.25+ + Ninja + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
 | Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; eleven title-only cards around it — nature scattered on the left, software on the right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Every card links to its page. |
 | Tone | Playful / illustrated, not childish. Employer-facing. |
@@ -176,10 +176,42 @@ data-driven, because it will be updated from time to time.
   rule. Repository cards are straight with a blue top edge; the last-push date
   is centred on the first line and a small conference badge
   (`assets/icons/conference-badge.svg`) sits in a right-hand rail, like the
-  robin rail on Podcast cards. Hovering or focusing pulls the card out and
+  robin rail on Podcast cards. A GitHub mark
+  (`assets/icons/github.svg`) sits in that same rail directly under the
+  conference badge and links to the repository in a new tab; the repository
+  title keeps its own link. Hovering or focusing pulls the card out and
   enlarges it (`translateY(-6px) scale(1.02)`) with a blue glow instead of
   Podcast's rotation. The rules live in
   `assets/css/pages/engineering.css`.
+- Markdown links and images use **site-root-relative** paths (`assets/...`).
+  `markdown_to_html()` rewrites relative `href`/`src` values with the page
+  root (`../` on card pages), so `assets/documents/book.pdf` works both from
+  the source file and from `dist/engineering/index.html`. Absolute URLs,
+  anchors, query-only links and paths already starting with `/` or `../` are
+  left alone. This applies to card prose and to every `description_src`
+  dataset (papers, talks, episodes, repos).
+- Repository cards became **accordion cards** on 2026-11-11: the description is
+  clamped to a preview (`max-height: 7.5rem`) with a soft bottom fade, and a
+  `More…` pill expands the card to its full height (`Less…` collapses it).
+  Only one repository is open at a time; opening another closes the previous
+  one. `site.js` adds `.has-more` only when the text overflows, so short
+  descriptions get no toggle, and a `<noscript>` rule disables the clamp when
+  JavaScript is off. The toggle uses `aria-expanded`/`aria-controls`. The
+  expansion is animated: `site.js` seeds the start and end pixel heights,
+  toggles `is-open`, and clears the inline values after the 240 ms
+  `max-height` transition. `prefers-reduced-motion` removes the transition,
+  and the JS reads the resulting zero duration so it still completes. The
+  grid reset (`grid-template-areas: none`, `grid-area: auto` on
+  `.item-desc`) prevents the shared two-column `site.css` areas from leaking
+  into the engineering cards.
+- Repository descriptions moved out of `repos.json` into
+  `content/data/repos/<name>.md` on 2026-11-11, referenced by
+  `description_src`. This keeps the card one-liner from being the whole story
+  and lets each repository carry Markdown subheadings, lists, links and inline
+  code without touching the build. The first paragraph doubles as the scan
+  line. `.item-desc` styles this body and caps it at a readable `72ch`.
+  Validation now requires every repository to have an inline `description` or
+  a `description_src`, and still rejects using both.
 - The hub's software notes became portrait **conference badges** on 2026-11-10:
   narrower and taller than the nature notes, with the narrow lanyard clip on
   the top edge, no punched-hole circle, a small QR mark

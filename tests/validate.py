@@ -79,7 +79,6 @@ DATASET_FIELDS = {
         "collections",
         "name",
         "url",
-        "description",
         "pushed_at",
     ),
     "videos": (
@@ -394,7 +393,7 @@ def _validate_description(
         errors.append(f"{label}: use either 'description' or 'description_src', not both")
         return
 
-    if dataset == "episodes" and not has_inline and not has_source:
+    if dataset in {"episodes", "repos"} and not has_inline and not has_source:
         errors.append(f"{label}: needs 'description' or 'description_src'")
 
     if not has_source:
@@ -534,6 +533,7 @@ def validate_assets() -> list[str]:
         "assets/icons/lanyard.svg",
         "assets/icons/conference-badge.svg",
         "assets/icons/badge-mark.svg",
+        "assets/icons/github.svg",
         "assets/documents/README.md",
     ):
         _file_exists(errors, relative, "assets")

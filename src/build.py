@@ -69,14 +69,49 @@ def status_badge(status: str) -> str:
     return f'<span class="badge badge-{esc(status)}">{esc(label)}</span>'
 
 
-def markdown_to_html(path: Path) -> str:
+MARKDOWN_LINK_ATTR = re.compile(r'(?P<attr>\s(?:href|src)=")(?P<url>[^"]*)(?P<quote>")')
+ABSOLUTE_URL = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
+
+
+def root_relative_url(url: str, root: str) -> str:
+    """Turn a source-root-relative path into a page-relative URL."""
+    if not root:
+        return url
+    if url.startswith(("#", "?", "/")) or url.startswith("../") or ABSOLUTE_URL.match(url):
+        return url
+    if url.startswith("./"):
+        url = url[2:]
+    return root + url
+
+
+def rewrite_markdown_links(page: str, root: str) -> str:
+    """Prefix relative links in rendered Markdown with the page root.
+
+    Content paths are written relative to the site root (`assets/foo.pdf`),
+    while card pages live one directory down (`engineering/`), so the render
+    has to add `../` to keep downloads and cross-links working.
+    """
+    if not root:
+        return page
+
+    def replace(match: re.Match) -> str:
+        url = html.unescape(match.group("url"))
+        rewritten = root_relative_url(url, root)
+        if rewritten == url:
+            return match.group(0)
+        return match.group("attr") + esc(rewritten) + match.group("quote")
+
+    return MARKDOWN_LINK_ATTR.sub(replace, page)
+
+
+def markdown_to_html(path: Path, root: str = "") -> str:
     result = subprocess.run(
         ["pandoc", "-f", "markdown+smart", "-t", "html5", "--wrap=none", str(path)],
         check=True,
         capture_output=True,
         text=True,
     )
-    return result.stdout
+    return rewrite_markdown_links(result.stdout, root)
 
 
 def iso_date(value):
@@ -116,11 +151,11 @@ def sort_latest(entries, key):
     return [entry for _, entry in dated] + undated
 
 
-def description_html(entry: dict) -> str:
+def description_html(entry: dict, root: str = "") -> str:
     """Render an inline description or a per-record Markdown description."""
     source = entry.get("description_src")
     if source:
-        return markdown_to_html(DATA_DIR / source)
+        return markdown_to_html(DATA_DIR / source, root)
     description = entry.get("description")
     return esc(description) if description else ""
 
@@ -145,7 +180,10 @@ def render_papers(records: list[dict], root: str) -> str:
         )
         items.append(
             link_item(
-                paper["title"], paper.get("link"), meta, description_html(paper)
+                paper["title"],
+                paper.get("link"),
+                meta,
+                description_html(paper, root),
             )
         )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
@@ -157,7 +195,7 @@ def render_talks(records: list[dict], root: str) -> str:
             talk["title"],
             talk.get("url"),
             talk.get("date", ""),
-            description_html(talk),
+            description_html(talk, root),
         )
         for talk in records
     ]
@@ -197,7 +235,7 @@ def episode_rail(episode: dict, root: str) -> str:
 def render_episodes(records: list[dict], root: str) -> str:
     items = []
     for episode in records:
-        description = description_html(episode)
+        description = description_html(episode, root)
         items.append(
             '<li class="item">'
             '<span class="item-head">'
@@ -210,12 +248,23 @@ def render_episodes(records: list[dict], root: str) -> str:
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def repo_rail() -> str:
-    return (
-        '<span class="repo-rail">'
-        '<span class="repo-badge" aria-hidden="true"></span>'
-        "</span>"
+GITHUB_ICON = "assets/icons/github.svg"
+
+
+def repo_rail(repo: dict, root: str) -> str:
+    badge = '<span class="repo-badge" aria-hidden="true"></span>'
+    url = repo.get("url")
+    if not url:
+        return f'<span class="repo-rail">{badge}</span>'
+    name = repo.get("name", "")
+    link = (
+        f'<a class="repo-link" href="{esc(url)}" '
+        f'aria-label="{esc(name)} on GitHub" '
+        f'title="{esc(name)} on GitHub" target="_blank" rel="noopener">'
+        f'<img src="{esc(root + GITHUB_ICON)}" alt="" aria-hidden="true">'
+        "</a>"
     )
+    return f'<span class="repo-rail">{badge}{link}</span>'
 
 
 def render_repos(records: list[dict], root: str) -> str:
@@ -231,14 +280,18 @@ def render_repos(records: list[dict], root: str) -> str:
             else esc(repo["name"])
         )
         meta_html = f'<span class="item-meta">{esc(meta)}</span>' if meta else ""
-        description = description_html(repo)
+        description = description_html(repo, root)
+        repo_id = esc(repo["id"])
+        desc_id = f"repo-desc-{repo_id}"
         items.append(
-            '<li class="item">'
+            f'<li class="item" data-repo="{repo_id}">'
             '<span class="item-head">'
             f'<span class="item-title">{name_html}</span>'
             f"{meta_html}</span>"
-            f'<div class="item-desc">{description}</div>'
-            f"{repo_rail()}</li>"
+            f'<div class="item-desc" id="{desc_id}">{description}</div>'
+            '<button class="repo-toggle" type="button" aria-expanded="false" '
+            f'aria-controls="{desc_id}">More…</button>'
+            f"{repo_rail(repo, root)}</li>"
         )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
@@ -454,7 +507,7 @@ def render_dataset(name: str, select: dict, root: str) -> str:
 def render_block(block: dict, card_dir: Path, site: dict, root: str) -> str:
     block_type = block.get("type")
     if block_type == "prose":
-        return markdown_to_html(card_dir / block["src"])
+        return markdown_to_html(card_dir / block["src"], root)
     if block_type == "contact":
         return render_contact(site)
     if block_type in RENDERERS:

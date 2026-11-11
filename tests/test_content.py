@@ -1,6 +1,6 @@
 import unittest
 
-from src.build import iso_date, sort_latest
+from src.build import iso_date, rewrite_markdown_links, sort_latest
 from src.site_schema import select_records
 from tests.validate import (
     date_warnings,
@@ -26,6 +26,31 @@ class ContentValidationTest(unittest.TestCase):
 
     def test_assets(self):
         self.assert_valid(validate_assets())
+
+
+class MarkdownLinkTest(unittest.TestCase):
+    def test_relative_links_get_the_page_root(self):
+        page = (
+            '<p><a href="assets/documents/book.pdf">book</a> '
+            '<img src="./assets/icons/github.svg" alt=""></p>'
+        )
+        rewritten = rewrite_markdown_links(page, "../")
+        self.assertIn('href="../assets/documents/book.pdf"', rewritten)
+        self.assertIn('src="../assets/icons/github.svg"', rewritten)
+
+    def test_non_relative_links_are_untouched(self):
+        page = (
+            '<a href="https://example.com/x">https</a>'
+            '<a href="mailto:ran@example.com">mail</a>'
+            '<a href="#section">anchor</a>'
+            '<a href="/root">root</a>'
+            '<a href="../sibling">sibling</a>'
+        )
+        self.assertEqual(rewrite_markdown_links(page, "../"), page)
+
+    def test_no_root_leaves_the_page_unchanged(self):
+        page = '<a href="assets/x.pdf">x</a>'
+        self.assertEqual(rewrite_markdown_links(page, ""), page)
 
 
 class SortTest(unittest.TestCase):
