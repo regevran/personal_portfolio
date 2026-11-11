@@ -36,6 +36,10 @@ the generated index. The default build is **offline** and uses the cached dates
 in `content/data/repos.json`; the `refresh` workflow or the `site-refresh-repos`
 target updates them from GitHub.
 
+The pages work from `file://`. YouTube playback does not: YouTube refuses its
+player without an HTTP referrer. Use `cmake --build --preset serve` when
+reviewing the Talks videos; the deployed site plays them inline.
+
 `cmake --install build --prefix <directory>` stages the generated site for a
 future deploy. The host and upload step are still deferred.
 
@@ -95,8 +99,8 @@ assets/            images, videos, documents, CSS and JS
   css/theme.css    palette, type, topbar and footer
   css/board.css    the hub board
   css/site.css     shared card pages
-  css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css)
-  icons/           platform, GitHub, C++ logo and paper marks; lanyard
+  css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css, talks.css)
+  icons/           platform, GitHub, C++ logo, conference-badge, document and video marks; lanyard
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
@@ -122,7 +126,8 @@ dist/              generated output (ignored by git)
   cards; Public GitHub uses `assets/css/pages/engineering.css` for its
   GitHub-logo header and pull-out repository cards; C++ & Standards uses
   `assets/css/pages/cpp-standards.css` for its C++ logo header and paper
-  cards.
+  cards; Talks uses `assets/css/pages/talks.css` for its conference-badge
+  header, embedded-video talk boxes and click-to-play thumbnails.
 - **Repository cards:** a full description is clamped to a preview with a
   `More…` toggle at the bottom of the card. Opening one expands it to its full
   height, changes the label to `Less…`, and closes any other open repository
@@ -156,6 +161,10 @@ dist/              generated output (ignored by git)
   `apple`, and `pocketcasts` URLs. Episode titles are not links; each card
   renders the three platform logos. A missing direct link falls back to the
   platform show page.
+- **Talk videos and slides:** `talks.json` entries may carry `youtube` (a
+  video ID or URL) and `slides` (a URL). The card renders a click-to-play
+  YouTube thumbnail and icon links; slides live in the same box as the
+  recording, and `url` is the fallback origin link.
 - **Identity and contact:** `content/data/site.json`; it also holds the footer
   sentence under `footer`.
 
@@ -212,10 +221,9 @@ The site is intentionally a structural skeleton:
 - Software cards on the hub are portrait notes hanging from narrow lanyards,
   with a per-page artifact mark and the text grouped at the top, with space
   below. Public GitHub uses the GitHub logo; C++ & Standards uses the official
-  C++ logo; Talks still uses the conference-badge QR mark until its artifact
-  pass. The repository rail keeps the small CMake build tag above the GitHub
-  link. Nature and neutral cards remain landscape notes with their
-  robin/perch treatment.
+  C++ logo; Talks uses the conference badge. The repository rail keeps the
+  small CMake build tag above the GitHub link. Nature and neutral cards remain
+  landscape notes with their robin/perch treatment.
 - The hub and card pages share the board's visual language: sand and cream,
   Patrick Hand titles for nature and neutral, formal serif titles for software,
   mono kickers, family-coloured edges, and a fixed topbar and footer. The

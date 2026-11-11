@@ -45,8 +45,9 @@ data-driven, because it will be updated from time to time.
 
 - The repository was renamed from `regevran`/`personal_protfolio` to
   `personal_portfolio`.
-- `assets/documents/main_page_concept.{jpeg,svg}` is a mood reference, not a
-  spec. The SVG is a flattened Canva export (16,844 elements, no semantic
+- `design/assets/img/main_page_concept.{jpeg,svg}` is a mood reference, not a
+  spec, and lives outside `assets/` so it is not published. The SVG is a
+  flattened Canva export (16,844 elements, no semantic
   labels, text outlined, 15 embedded rasters) and is not usable as separable
   production artwork. The cutout and ink background were extracted from it and
   combined into `assets/general/board-background.jpg` (1600 × 900,
@@ -234,8 +235,8 @@ data-driven, because it will be updated from time to time.
   title, and the group aligned to the top of the card. Public GitHub uses the
   GitHub logo (`assets/icons/github.svg`); C++ & Standards uses the official
   C++ logo (`assets/icons/cpp-logo.svg`) and the full
-  `ISO/IEC JTC1/SC22/WG21` kicker; Talks still uses the QR mark
-  (`assets/icons/badge-mark.svg`) until its artifact pass. Nature and neutral
+  `ISO/IEC JTC1/SC22/WG21` kicker; Talks uses the conference-badge name tag
+  (`assets/icons/conference-badge-mark.svg`). Nature and neutral
   notes keep the landscape note treatment.
 - The **software page artifact system** was agreed on 2026-11-11. The shared
   container stays the portrait cream note, lanyard, software-blue edge and
@@ -250,7 +251,18 @@ data-driven, because it will be updated from time to time.
   drafts, provided it does not imply endorsement; we use the official SVG
   unchanged. No ISO logo. The hub cards keep the container and swap only the top mark;
   page headers follow the same artifact. Public GitHub is committed; C++ &
-  Standards is implemented and awaiting review; Talks follows.
+  Standards is implemented; Talks is implemented and awaiting review.
+- **Talks became embedded video boxes** on 2026-11-11. The title-and-link list
+  was replaced with boxes: the badge name-tag stamp at the top left, copy
+  (date, serif title, description) on the left, an icon row underneath, and a
+  16:9 YouTube video on the right. `talks.json` gained optional `youtube` and
+  `slides` fields; the slides for the ScyllaDB talk moved into the recording's
+  box, as did the P3817 Core C++ deck. The player is a click-to-play thumbnail
+  facade, so the page stays light; over HTTP(S) the click swaps in an
+  autoplaying iframe, while `file://` opens the watch page because YouTube
+  rejects a player without an HTTP referrer. The icon row uses the YouTube
+  mark and a document mark, not the `Open origin` text; `url` is the fallback
+  origin icon when a talk has neither.
 - The content model was revised on 2026-11-09: `content/data/cards.json` was
   removed; each card is now a directory with `card.json` + prose. Datasets
   gained stable ids and collection tags. The podcast card's promo-video block

@@ -172,4 +172,24 @@
       }
     });
   });
+
+  // YouTube refuses to configure a player without an HTTP referrer, so file://
+  // previews keep the link behaviour and open the watch page instead. Over
+  // HTTP(S) the click swaps the thumbnail for an inline player.
+  var talkVideos = document.querySelectorAll("[data-embed]");
+  talkVideos.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      if (window.location.protocol === "file:") {
+        return;
+      }
+      event.preventDefault();
+
+      var iframe = document.createElement("iframe");
+      iframe.src = link.getAttribute("data-embed") + "?autoplay=1&rel=0";
+      iframe.title = link.getAttribute("data-title") || "Talk video";
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+      iframe.allowFullscreen = true;
+      link.replaceWith(iframe);
+    });
+  });
 })();

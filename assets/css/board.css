@@ -226,7 +226,13 @@ body.dir-a {
   width: 6.2cqh;
   height: 3.1cqh;
   margin-bottom: 0.8cqh;
-  background: url("../icons/badge-mark.svg") left top / contain no-repeat;
+  background: url("../icons/conference-badge-mark.svg") left top / contain
+    no-repeat;
+}
+
+.board-item--software .scrap[data-mark="conference-badge"]::before {
+  width: 4.2cqh;
+  height: 5.3cqh;
 }
 
 .board-item--software .scrap[data-mark="github-logo"]::before {

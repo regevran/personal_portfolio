@@ -433,6 +433,14 @@ def _validate_dataset_entry(
             errors.append(f"{label}: 'url' must be an http(s) URL")
         if not _valid_iso_date(entry.get("sort_date")):
             errors.append(f"{label}: 'sort_date' must be YYYY-MM-DD or null")
+        youtube = entry.get("youtube")
+        if youtube is not None and (
+            not isinstance(youtube, str) or not youtube.strip()
+        ):
+            errors.append(f"{label}: 'youtube' must be a non-empty string or null")
+        slides = entry.get("slides")
+        if slides is not None and not _is_http(slides):
+            errors.append(f"{label}: 'slides' must be an http(s) URL or null")
 
     elif dataset == "episodes":
         if not _is_http(entry.get("url")):
@@ -518,6 +526,8 @@ def validate_assets() -> list[str]:
         "assets/css/board.css",
         "assets/css/pages/podcast.css",
         "assets/css/pages/engineering.css",
+        "assets/css/pages/cpp-standards.css",
+        "assets/css/pages/talks.css",
         "assets/js/site.js",
         "assets/js/board.js",
         "assets/fonts/PatrickHand-Regular.ttf",
@@ -532,11 +542,12 @@ def validate_assets() -> list[str]:
         "assets/icons/pocketcasts.svg",
         "assets/icons/lanyard.svg",
         "assets/icons/conference-badge.svg",
-        "assets/icons/badge-mark.svg",
+        "assets/icons/conference-badge-mark.svg",
         "assets/icons/cpp-logo.svg",
         "assets/icons/paper.svg",
+        "assets/icons/external.svg",
+        "assets/icons/youtube.svg",
         "assets/icons/github.svg",
-        "assets/documents/README.md",
     ):
         _file_exists(errors, relative, "assets")
     return errors

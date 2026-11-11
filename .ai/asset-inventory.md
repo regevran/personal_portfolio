@@ -4,18 +4,16 @@
 
 | Path | Used by | Notes |
 |---|---|---|
-| `assets/github/links.md` | engineering, repos.json | six repositories |
-| `assets/iso/wg21/links.md` | cpp-standards, papers.json | three highlighted papers + full list |
-| `assets/talks/links.md` | talks, talks.json | six entries |
-| `assets/podcast/links.md` | podcast, episodes.json | 19 episodes |
 | `assets/icons/spotify.svg` | podcast episode cards | Spotify platform logo |
 | `assets/icons/applepodcasts.svg` | podcast episode cards | Apple Podcasts platform logo |
 | `assets/icons/pocketcasts.svg` | podcast episode cards | Pocket Casts platform logo |
-| `assets/icons/lanyard.svg` | hub software notes, Public GitHub and C++ & Standards headers | narrow C05 lanyard + clip, no string |
-| `assets/icons/conference-badge.svg` | reserved for the Talks page | small lanyard badge motif; no longer used on Public GitHub |
-| `assets/icons/badge-mark.svg` | hub Talks card | interim QR mark above the card text; the Talks artifact |
+| `assets/icons/lanyard.svg` | hub software notes, Public GitHub, C++ & Standards and Talks headers | narrow C05 lanyard + clip, no string |
+| `assets/icons/conference-badge.svg` | Talks page header | full speaker badge: lanyard, clip, name tag, QR and name lines |
+| `assets/icons/conference-badge-mark.svg` | hub Talks card and talk-card rail | name-tag crop of the conference badge |
 | `assets/icons/cpp-logo.svg` | C++ & Standards header and paper rail, hub C++ & Standards card | official C++ hexagon logo, used unaltered; created by Jeremy Kratz, licensed by The Standard C++ Foundation; source `github.com/isocpp/logos` |
 | `assets/icons/paper.svg` | C++ & Standards paper cards | document link icon beside the C++ logo |
+| `assets/icons/external.svg` | Talks fallback cards | external-link icon for a talk with no video or slides |
+| `assets/icons/youtube.svg` | Talks video cards | YouTube play mark for the watch link |
 | `assets/icons/github.svg` | Public GitHub header and hub card, repository-card rail | GitHub mark; the page/hub artifact and the repository link |
 | `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the GitHub logo, white background and CSS quiet zone |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
@@ -29,7 +27,7 @@
 | `assets/ringing/otus_scops_{1,2,3,4}.jpeg` | ringing, photos.json | Eurasian Scops Owl |
 | `assets/ringing/saxicola_maurus.jpeg` | ringing, photos.json | Siberian Stonechat |
 | `assets/ringing/upupa_epops_{1,2}.jpeg` | ringing, photos.json | Eurasian Hoopoe |
-| `assets/documents/main_page_concept.{jpeg,svg}` | design session only | mood reference; not published. The SVG is a flattened Canva export: 3.1 MB, 16,844 elements, 15 embedded rasters, no semantic labels, text outlined. |
+| `design/assets/img/main_page_concept.{jpeg,svg}` | design session only | mood reference, moved out of `assets/` so it is not published. The SVG is a flattened Canva export: 3.1 MB, 16,844 elements, 15 embedded rasters, no semantic labels, text outlined. |
 
 ## Missing or pending
 
@@ -63,8 +61,8 @@
 
 ## Hygiene
 
-- `assets/podcast/.links.md.swp` is a vim swap file; ignored by git and skipped
-  by the asset copy. Delete it once the vim session is closed.
+- The one-shot `links.md` import lists and the vim swap file are gone; `assets/`
+  now contains only files that are published.
 - Root `tags` is a universal-ctags index; ignored and regenerable.
 - The pelican filename typo was fixed by the user.
 - No LFS: all binaries are small enough; GitHub Pages does not serve LFS anyway.

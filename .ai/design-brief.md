@@ -300,17 +300,50 @@ instead of the GitHub logo. Its rules live in
 - Paper descriptions can use `description_src` Markdown. The current cards use
   the inline one-liners.
 
+### Talks page
+
+Talks (`talks`) shares the dirty field and cream notes with Public GitHub and
+C++ & Standards; its rules live in `assets/css/pages/talks.css`.
+
+- The header is a portrait cream note with the software-blue top edge and the
+  narrow lanyard, carrying the full conference badge
+  (`assets/icons/conference-badge.svg`) at the top: badge card, QR, name lines
+  and its own lanyard. Below it are the `Stage` kicker, the formal-serif title
+  `Talks` and the summary. The note lanyard and the badge lanyard read as one
+  hanging object.
+- Intro paragraphs are straight cream notes with a software-blue left rule,
+  like the other software pages.
+- Talks are straight cream video boxes with a software-blue top edge. Each
+  box carries the badge name-tag stamp at the top left, then the uppercase
+  date, formal-serif title and description in the copy column, with a 16:9
+  video on the right. Under the copy is a small icon row: a YouTube mark for
+  the watch link and, when the talk has a deck, a document mark for the
+  slides. The ScyllaDB slides live in the same box as the recording; the
+  P3817 slides point at `https://regevran.github.io/p3817-presentatin/`. The
+  video is a click-to-play thumbnail: clicking it swaps in the YouTube player
+  over HTTP(S); from `file://` it opens the watch page because YouTube refuses
+  a player without an HTTP referrer. The `youtube` field in `talks.json`
+  supplies the video id; `url` stays the origin link (the watch page for
+  direct videos, the talk page for the ScyllaDB recording) and is used only
+  as a fallback icon when a talk has neither video nor slides. The Core C++
+  2026 box has no recording, so its copy spans the full box and the slides
+  icon sits under it. Hovering or focusing a card lifts it
+  (`translateY(-4px)`) with a blue glow. Mobile stacks the copy, the video and
+  then the icon row.
+- Static text notes (header, intro notes, back link, pager) get a soft blue
+  glow; `prefers-reduced-motion` removes the pull-out transform.
+
 ### Software badges on the hub
 
 The hub's three software notes use the same portrait container: narrower and
 taller than the nature notes, with a narrow C05 lanyard whose clip meets the
 blue top edge, no punched-hole circle, and a per-page artifact mark above the
-kicker and title. Public GitHub now uses the GitHub logo
+kicker and title. Public GitHub uses the GitHub logo
 (`assets/icons/github.svg`); C++ & Standards uses the official C++ logo
 (`assets/icons/cpp-logo.svg`) and the full `ISO/IEC JTC1/SC22/WG21` kicker;
-Talks still uses the QR mark (`assets/icons/badge-mark.svg`) until its
-artifact pass. Nature and neutral notes keep the landscape note and their
-robin/perch treatment.
+Talks uses the conference-badge name tag
+(`assets/icons/conference-badge-mark.svg`). Nature and neutral notes keep the
+landscape note and their robin/perch treatment.
 
 ### Software page artifacts
 
@@ -338,11 +371,11 @@ it becomes the **Talks** identity. Each page gets its own artifact at the top:
 
 Public GitHub is implemented and committed: the page header and hub card use
 the GitHub logo, and the repository rail carries the CMake build tag above the
-GitHub link. C++ & Standards is implemented and awaiting review: the header
-and hub card use the official C++ logo and the full designation kicker. The hub cards
-keep the same portrait note and lanyard; only the top mark changes per page,
-and the page headers follow the same artifact. Talks remains the last artifact
-pass.
+GitHub link. C++ & Standards is implemented. Talks is implemented and awaiting
+review: the page header uses the full conference badge, the hub card and the
+talk rail use the badge name tag, and the talk cards follow the same straight
+pull-out rhythm. The hub cards keep the same portrait note and lanyard; only
+the top mark changes per page, and the page headers follow the same artifact.
 The C++ kicker becomes `ISO/IEC JTC1/SC22/WG21` while the title stays
 `C++ & Standards`; the string is long for the narrow hub card, so test its
 wrapping and adjust the kicker size/tracking or use a deliberate two-line

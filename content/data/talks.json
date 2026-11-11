@@ -5,7 +5,8 @@
       "talks"
     ],
     "title": "Programs Vs Puzzles",
-    "url": "https://www.youtube.com/results?search_query=Ran+Regev+Programs+Vs+Puzzles+CppCon+2019",
+    "url": "https://www.youtube.com/watch?v=B788kH9jO-s",
+    "youtube": "B788kH9jO-s",
     "description": "A short talk comparing software development to solving a 5,000-piece puzzle.",
     "date": "2019",
     "sort_date": "2019-01-01"
@@ -17,6 +18,7 @@
     ],
     "title": "C++26 Contracts",
     "url": "https://www.youtube.com/watch?v=-1syQN5_5D0",
+    "youtube": "-1syQN5_5D0",
     "description": "Introduction to C++26 Contracts, their design and usage.",
     "date": "Jan 2024",
     "sort_date": "2024-01-01"
@@ -28,6 +30,7 @@
     ],
     "title": "Known Pitfalls in C++26 Contracts",
     "url": "https://www.youtube.com/watch?v=tzXu5KZGMJk",
+    "youtube": "tzXu5KZGMJk",
     "description": "Discussion of potential pitfalls and design considerations in C++26 Contracts.",
     "date": "2025",
     "sort_date": "2025-01-01"
@@ -39,6 +42,7 @@
     ],
     "title": "Structured Binding Assignments (P3817)",
     "url": "https://corecpp.org/",
+    "slides": "https://regevran.github.io/p3817-presentatin/",
     "description": "Presentation of the proposal for assignment to structured bindings in C++.",
     "date": "20-21 Oct 2026",
     "sort_date": "2026-10-20"
@@ -50,19 +54,10 @@
     ],
     "title": "Object Storage in ScyllaDB",
     "url": "https://www.scylladb.com/tech-talk/object-storage-in-scylladb/",
+    "youtube": "ClezrL78boo",
+    "slides": "https://www.slideshare.net/slideshow/object-storage-in-scylladb-by-ran-regev-scylladb/276528885",
     "description": "Technical presentation about object storage architecture and implementation in ScyllaDB.",
-    "date": "Date to verify",
-    "sort_date": null
-  },
-  {
-    "id": "talk-object-storage-scylladb-slides",
-    "collections": [
-      "talks"
-    ],
-    "title": "Object Storage in ScyllaDB - Slides",
-    "url": "https://www.slideshare.net/slideshow/object-storage-in-scylladb-by-ran-regev-scylladb/276528885",
-    "description": "Accompanying presentation slides.",
-    "date": "Date to verify",
-    "sort_date": null
+    "date": "2025-03-11",
+    "sort_date": "2025-03-11"
   }
 ]

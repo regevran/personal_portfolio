@@ -4,6 +4,7 @@
   "family": "software",
   "order": 3,
   "status": "ready",
+  "mark": "conference-badge",
   "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
   "description": "Public conference talks and presentations.",
   "audio": null,

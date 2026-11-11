@@ -191,22 +191,11 @@ def description_html(entry: dict, root: str = "") -> str:
     return esc(description) if description else ""
 
 
-def link_item(title: str, url: str | None, meta: str, description: str) -> str:
-    title_html = (
-        f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(title)}</a>'
-        if url
-        else esc(title)
-    )
-    meta_html = f' <span class="item-meta">{esc(meta)}</span>' if meta else ""
-    desc_html = f'<div class="item-desc">{description}</div>' if description else ""
-    return (
-        f'<li class="item"><span class="item-title">{title_html}</span>'
-        f"{meta_html}{desc_html}</li>"
-    )
-
-
 CPP_LOGO = "assets/icons/cpp-logo.svg"
 PAPER_ICON = "assets/icons/paper.svg"
+TALK_BADGE = "assets/icons/conference-badge.svg"
+EXTERNAL_ICON = "assets/icons/external.svg"
+YOUTUBE_ICON = "assets/icons/youtube.svg"
 
 
 def paper_rail(paper: dict, root: str) -> str:
@@ -257,16 +246,96 @@ def render_papers(records: list[dict], root: str) -> str:
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
-def render_talks(records: list[dict], root: str) -> str:
-    items = [
-        link_item(
-            talk["title"],
-            talk.get("url"),
-            talk.get("date", ""),
-            description_html(talk, root),
+YOUTUBE_ID = re.compile(r"(?:v=|youtu\.be/|embed/)([A-Za-z0-9_-]{11})")
+
+
+def youtube_id(value: object) -> str:
+    text = str(value or "")
+    if re.fullmatch(r"[A-Za-z0-9_-]{11}", text):
+        return text
+    match = YOUTUBE_ID.search(text)
+    return match.group(1) if match else ""
+
+
+def talk_media(talk: dict) -> str:
+    video_id = youtube_id(talk.get("youtube"))
+    if not video_id:
+        return ""
+    title = talk.get("title", "")
+    watch = f"https://www.youtube.com/watch?v={video_id}"
+    embed = f"https://www.youtube.com/embed/{video_id}"
+    return (
+        '<div class="talk-media">'
+        f'<a class="talk-video" href="{esc(watch)}" '
+        f'aria-label="Play {esc(title)}" '
+        f'data-embed="{esc(embed)}" data-title="{esc(title)}" '
+        'target="_blank" rel="noopener">'
+        f'<img src="https://i.ytimg.com/vi/{esc(video_id)}/hqdefault.jpg" '
+        'alt="" loading="lazy">'
+        '<span class="talk-play" aria-hidden="true"></span>'
+        "</a></div>"
+    )
+
+
+def talk_links(talk: dict, root: str) -> str:
+    title = talk.get("title", "")
+    links = []
+
+    video_id = youtube_id(talk.get("youtube"))
+    if video_id:
+        links.append(
+            f'<a class="talk-link talk-link--youtube" '
+            f'href="https://www.youtube.com/watch?v={esc(video_id)}" '
+            f'aria-label="Watch {esc(title)} on YouTube" '
+            f'title="Watch on YouTube" target="_blank" rel="noopener">'
+            f'<img src="{esc(root + YOUTUBE_ICON)}" alt="" aria-hidden="true">'
+            "</a>"
         )
-        for talk in records
-    ]
+
+    slides = talk.get("slides")
+    if slides:
+        links.append(
+            f'<a class="talk-link talk-link--slides" href="{esc(slides)}" '
+            f'aria-label="Open {esc(title)} slides" title="Slides" '
+            'target="_blank" rel="noopener">'
+            f'<img src="{esc(root + PAPER_ICON)}" alt="" aria-hidden="true">'
+            "<span>Slides</span></a>"
+        )
+
+    if not links and talk.get("url"):
+        links.append(
+            f'<a class="talk-link talk-link--origin" '
+            f'href="{esc(talk["url"])}" '
+            f'aria-label="Open {esc(title)} at its origin" '
+            f'title="Open origin" target="_blank" rel="noopener">'
+            f'<img src="{esc(root + EXTERNAL_ICON)}" alt="" aria-hidden="true">'
+            "</a>"
+        )
+
+    if not links:
+        return ""
+    return '<div class="talk-links">' + "".join(links) + "</div>"
+
+
+def render_talks(records: list[dict], root: str) -> str:
+    items = []
+    for talk in records:
+        title = talk.get("title", "")
+        media = talk_media(talk)
+        date = talk.get("date", "")
+        meta_html = f'<span class="item-meta">{esc(date)}</span>' if date else ""
+        description = description_html(talk, root)
+        desc_html = f'<div class="item-desc">{description}</div>' if description else ""
+        variant = "talk-card--video" if media else "talk-card--text"
+        items.append(
+            f'<li class="item talk-card {variant}" data-talk="{esc(talk["id"])}">'
+            '<div class="talk-copy">'
+            '<span class="talk-stamp" aria-hidden="true"></span>'
+            f"{meta_html}"
+            f'<h2 class="item-title">{esc(title)}</h2>'
+            f"{desc_html}</div>"
+            f"{media}{talk_links(talk, root)}</li>"
+        )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
@@ -487,6 +556,11 @@ def render_card_mark(card: dict, root: str) -> str:
     if mark == "cpp-logo":
         return (
             f'<img class="cpp-logo" src="{esc(root + CPP_LOGO)}" '
+            'alt="" aria-hidden="true">'
+        )
+    if mark == "conference-badge":
+        return (
+            f'<img class="conference-mark" src="{esc(root + TALK_BADGE)}" '
             'alt="" aria-hidden="true">'
         )
     return ""
