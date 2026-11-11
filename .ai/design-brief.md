@@ -240,24 +240,24 @@ Podcast but reads as software. Its rules live in
 
 - The background is the same dirty ink texture, fixed on desktop; there is no
   full-page sheet. The title uses the formal serif, not Patrick Hand.
-- The header is a portrait **conference badge**, based on the mini badge used
-  on repository cards: a cream card with a software-blue top edge, a narrow
-  lanyard whose clip sits directly on the top edge (no punched hole), and the
-  real GitHub QR code at the top left. The kicker, title and summary sit under
-  the QR, mirroring the QR-then-text layout of a real badge. The QR
+- The header is a portrait cream note with the software-blue top edge and the
+  narrow lanyard, now carrying the **build-log artifact**: a dark ink terminal
+  panel with the `cmake --build` command and the `Building CXX object
+  portfolio` / `Linking CXX executable portfolio` lines, beside the real
+  GitHub QR code in a white quiet-zone frame. The kicker, formal-serif title
+  and summary sit under the terminal. The QR
   (`assets/general/github-qr.svg`) was generated for
-  `https://github.com/regevran`; it sits in a white quiet-zone frame and scans
-  to the profile. The repository cards below carry the clickable links. The
-  badge is narrower than the notes and repository cards below it.
+  `https://github.com/regevran` and still scans to the profile.
 - Intro paragraphs are straight cream notes with a software-blue left rule.
 - Repositories are straight cream cards with a software-blue top edge. The
   repository name sits left and the last-push date is centred on the first
   line; the description follows. An absolutely positioned right-hand rail
-  mirrors the robin rail on Podcast cards: the small conference badge
-  (`assets/icons/conference-badge.svg`) sits on top and a GitHub mark
-  (`assets/icons/github.svg`) sits directly below it in a cream circle,
-  linking to the repository in a new tab. The repository name keeps its own
-  link. The body comes from `content/data/repos/<name>.md` and is styled for
+  mirrors the robin rail on Podcast cards: the CMake build mark
+  (`assets/icons/build-mark.svg`) sits above the GitHub mark
+  (`assets/icons/github.svg`) in a cream circle, which links to the
+  repository in a new tab; the conference badge has moved to Talks. The
+  repository name keeps its own link. The body comes from
+  `content/data/repos/<name>.md` and is styled for
   long-form Markdown: the first paragraph is the scan line, followed by small
   serif subheadings, lists, blue underlined links and tinted inline code. The
   measure is capped at `72ch` so paragraphs stay readable inside the wide
@@ -275,13 +275,44 @@ Podcast but reads as software. Its rules live in
 
 ### Software badges on the hub
 
-The hub's three software notes now use the same badge template as the mini
-badges: narrower and taller than the nature notes, with a narrow C05 lanyard
-whose clip meets the blue top edge, no punched-hole circle, and a small QR
-mark (`assets/icons/badge-mark.svg`) above the kicker and title. Nature and
-neutral notes keep the landscape note and their robin/perch treatment. The
-other software page titles still use the wide note header for now; extending
-the portrait badge there is the next decision.
+The hub's three software notes use the same portrait container: narrower and
+taller than the nature notes, with a narrow C05 lanyard whose clip meets the
+blue top edge, no punched-hole circle, and a per-page artifact mark above the
+kicker and title. Public GitHub now uses the CMake build mark
+(`assets/icons/build-mark.svg`); C++ & Standards and Talks still use the QR
+mark (`assets/icons/badge-mark.svg`) until their artifact passes. Nature and
+neutral notes keep the landscape note and their robin/perch treatment.
+
+### Software page artifacts
+
+Agreed 2026-11-11. The software pages share one container: the portrait cream
+note, narrow lanyard, software-blue edge, formal serif title and mono kicker
+hanging on the board. The conference badge is not the generic software mark;
+it becomes the **Talks** identity. Each page gets its own artifact at the top:
+
+- **Talks — conference badge.** The speaker badge: lanyard, clip, name-tag or
+  QR. Use it on the page header and the hub card. It is the personal, human
+  object; Ran wears a badge at conferences.
+- **Public GitHub — CMake build log.** A small ink terminal strip with cream
+  mono output (`[ 20%] Building CXX object portfolio`). It fits "Systems", is
+  recognisable to developers and echoes the site's own CMake build. Replace
+  the conference badge in both the page header and the hub card; the
+  repository cards carry the build mark above the GitHub link in their rail.
+- **C++ & Standards — WG21 document stamp.** A small paper sheet or bordered
+  stamp with `WG21`; the full `ISO/IEC JTC1/SC22/WG21` is text, not a logo.
+  Use it on the page header and the hub card, with paper-number cards below.
+  No ISO or C++ logo: WG21 papers are committee proposals, not ISO
+  publications, and the logos are restricted.
+
+Public GitHub is implemented: the page header and hub card use the build-log
+mark, and the repository rail keeps only the GitHub link. The hub cards keep
+the same portrait note and lanyard; only the top mark changes per page, and
+the page headers follow the same artifact. Work order: Public GitHub is done
+and awaiting review; then C++ & Standards; then Talks.
+The C++ kicker becomes `ISO/IEC JTC1/SC22/WG21` while the title stays
+`C++ & Standards`; the string is long for the narrow hub card, so test its
+wrapping and adjust the kicker size/tracking or use a deliberate two-line
+split.
 
 The generic card page remains the fallback for the other cards. Per-page
 stylesheets are auto-discovered from `assets/css/pages/<slug>.css`; a page

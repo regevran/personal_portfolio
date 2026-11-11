@@ -12,10 +12,11 @@
 | `assets/icons/applepodcasts.svg` | podcast episode cards | Apple Podcasts platform logo |
 | `assets/icons/pocketcasts.svg` | podcast episode cards | Pocket Casts platform logo |
 | `assets/icons/lanyard.svg` | hub software badges, Public GitHub page header | narrow C05 lanyard + clip, no string |
-| `assets/icons/conference-badge.svg` | Public GitHub repository cards | small lanyard badge rail motif |
-| `assets/icons/badge-mark.svg` | hub software badges | decorative QR mark above the card text |
-| `assets/icons/github.svg` | Public GitHub repository cards | GitHub mark linking to the repository, under the badge in the right rail |
-| `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; white background, quiet zone added by CSS |
+| `assets/icons/conference-badge.svg` | reserved for the Talks page | small lanyard badge motif; no longer used on Public GitHub |
+| `assets/icons/badge-mark.svg` | hub C++ & Standards and Talks cards | interim QR mark above the card text; the Talks artifact |
+| `assets/icons/build-mark.svg` | hub Public GitHub card, Public GitHub repository rail | small ink terminal with `[ 20%]` and a progress bar |
+| `assets/icons/github.svg` | Public GitHub repository cards | GitHub mark linking to the repository, in the top-right rail |
+| `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the build log, white background and CSS quiet zone |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
 | `assets/rescues/ardea_alba.mp4` | rescues | 576×1024, 24 s |

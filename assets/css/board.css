@@ -207,8 +207,8 @@ body.dir-a {
   border-top-width: 0.6cqh;
 }
 
-/* Software notes are conference badges: narrow, tall, no punched hole,
-   with a QR mark above the text. */
+/* Software notes share a narrow, tall container with no punched hole and a
+   per-page artifact mark above the text. The QR mark is the Talks artifact. */
 .board-item--software .scrap {
   display: flex;
   flex-direction: column;
@@ -227,6 +227,12 @@ body.dir-a {
   height: 3.1cqh;
   margin-bottom: 0.8cqh;
   background: url("../icons/badge-mark.svg") left top / contain no-repeat;
+}
+
+.board-item--software .scrap[data-mark="build-log"]::before {
+  width: 7.4cqh;
+  height: 3.9cqh;
+  background-image: url("../icons/build-mark.svg");
 }
 
 .board-item--software .card-eye {

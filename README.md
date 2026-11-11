@@ -96,7 +96,7 @@ assets/            images, videos, documents, CSS and JS
   css/board.css    the hub board
   css/site.css     shared card pages
   css/pages/       optional per-page styles (podcast.css, engineering.css)
-  icons/           platform logos, GitHub mark, lanyard and conference badge
+  icons/           platform logos, GitHub and build marks, lanyard and badge
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
@@ -114,13 +114,13 @@ dist/              generated output (ignored by git)
 
 - **Card pages:** `content/cards/<slug>/card.json` holds the hub metadata
   (title, kicker, order, status, family, summary, description, audio, board
-  placement, optional `logo`/`logo_alt`) and the ordered `blocks` list. The
-  directory name is the slug.
+  placement, optional `logo`/`logo_alt`, optional `mark`) and the ordered
+  `blocks` list. The directory name is the slug.
 - **Per-page styling:** if `assets/css/pages/<slug>.css` exists, the build
   links it after `site.css` on that page only. Podcast uses
   `assets/css/pages/podcast.css` for its dirty background and floating chapter
   cards; Public GitHub uses `assets/css/pages/engineering.css` for its
-  conference badge and pull-out repository cards.
+  build-log header and pull-out repository cards.
 - **Repository cards:** a full description is clamped to a preview with a
   `More…` toggle at the bottom of the card. Opening one expands it to its full
   height, changes the label to `Less…`, and closes any other open repository
@@ -203,10 +203,11 @@ The site is intentionally a structural skeleton:
   Ringing carries the current ringing photographs.
 - The CV link and the book PDF are placeholders until the real files arrive.
 - Cards are colour-coded by family (`software`, `nature`, `neutral`).
-- Software cards on the hub are portrait conference badges: narrow lanyard,
-  no punched hole, a QR mark and the text grouped at the top, with space below.
-  Nature and neutral cards remain landscape notes with their robin/perch
-  treatment.
+- Software cards on the hub are portrait notes hanging from narrow lanyards,
+  with a per-page artifact mark and the text grouped at the top, with space
+  below. Public GitHub uses the CMake build mark; C++ & Standards and Talks
+  still use the conference-badge QR mark until their artifact passes. Nature
+  and neutral cards remain landscape notes with their robin/perch treatment.
 - The hub and card pages share the board's visual language: sand and cream,
   Patrick Hand titles for nature and neutral, formal serif titles for software,
   mono kickers, family-coloured edges, and a fixed topbar and footer. The

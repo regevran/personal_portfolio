@@ -252,10 +252,10 @@ GITHUB_ICON = "assets/icons/github.svg"
 
 
 def repo_rail(repo: dict, root: str) -> str:
-    badge = '<span class="repo-badge" aria-hidden="true"></span>'
+    mark = '<span class="repo-mark" aria-hidden="true"></span>'
     url = repo.get("url")
     if not url:
-        return f'<span class="repo-rail">{badge}</span>'
+        return f'<span class="repo-rail">{mark}</span>'
     name = repo.get("name", "")
     link = (
         f'<a class="repo-link" href="{esc(url)}" '
@@ -264,7 +264,7 @@ def repo_rail(repo: dict, root: str) -> str:
         f'<img src="{esc(root + GITHUB_ICON)}" alt="" aria-hidden="true">'
         "</a>"
     )
-    return f'<span class="repo-rail">{badge}{link}</span>'
+    return f'<span class="repo-rail">{mark}{link}</span>'
 
 
 def render_repos(records: list[dict], root: str) -> str:
@@ -399,6 +399,21 @@ def render_logo(card: dict, root: str) -> str:
     )
 
 
+def render_card_mark(card: dict) -> str:
+    if card.get("mark") != "build-log":
+        return ""
+    return (
+        '<div class="build-log" aria-hidden="true">'
+        '<p class="build-log-line"><span class="build-log-prompt">$</span>'
+        " cmake --build --preset default</p>"
+        '<p class="build-log-line"><span class="build-log-step">[ 20%]</span>'
+        " Building CXX object portfolio</p>"
+        '<p class="build-log-line"><span class="build-log-step">[ 40%]</span>'
+        " Linking CXX executable portfolio</p>"
+        "</div>"
+    )
+
+
 def page_stylesheet(slug: str, root: str) -> str:
     if not (ASSETS / "css" / "pages" / f"{slug}.css").is_file():
         return ""
@@ -471,6 +486,7 @@ def render_board_card(card: dict, templates: dict[str, str]) -> str:
             "ITEM_STYLE": board_item_style(board),
             "RIG": rig,
             "SCRAP": scrap,
+            "MARK": esc(card.get("mark", "")),
             "SLUG": esc(card["slug"]),
             "KICKER": esc(card["kicker"]),
             "TITLE": esc(card["title"]),
@@ -648,6 +664,7 @@ def build() -> None:
                 "FAMILY": esc(card["family"]),
                 "TITLE": esc(card["title"]),
                 "SUMMARY": esc(card["summary"]),
+                "MARK": render_card_mark(card),
                 "LOGO": render_logo(card, root),
                 "STATUS": status_badge(card["status"]),
                 "BODY": body_html,

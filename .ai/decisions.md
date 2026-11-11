@@ -165,24 +165,26 @@ data-driven, because it will be updated from time to time.
   stylesheets are auto-discovered from `assets/css/pages/<slug>.css`; pages
   without one get only the shared styles. The rest of the card pages keep the
   shared first-pass design for now.
-- The **Public GitHub page** (`engineering`) got its treatment on 2026-11-10:
-  the same dirty ink background and cream notes, with software-blue accents.
-  The header is a portrait conference badge: a narrow C05 lanyard
+- The **Public GitHub page** (`engineering`) got its first treatment on
+  2026-11-10 and its artifact pass on 2026-11-11: the same dirty ink
+  background and cream notes, with software-blue accents. The header is a
+  portrait cream note with a narrow C05 lanyard
   (`assets/icons/lanyard.svg`) whose clip sits on the blue top edge, with no
-  punched hole, and the real GitHub QR
-  (`assets/general/github-qr.svg`, generated for `https://github.com/regevran`)
-  in a white quiet-zone frame. The kicker, formal-serif title and summary sit
-  under the QR, like a real badge. Intro notes are straight with a blue left
-  rule. Repository cards are straight with a blue top edge; the last-push date
-  is centred on the first line and a small conference badge
-  (`assets/icons/conference-badge.svg`) sits in a right-hand rail, like the
-  robin rail on Podcast cards. A GitHub mark
-  (`assets/icons/github.svg`) sits in that same rail directly under the
-  conference badge and links to the repository in a new tab; the repository
-  title keeps its own link. Hovering or focusing pulls the card out and
-  enlarges it (`translateY(-6px) scale(1.02)`) with a blue glow instead of
-  Podcast's rotation. The rules live in
-  `assets/css/pages/engineering.css`.
+  punched hole, and a **build-log artifact**: a dark ink terminal panel with
+  the `cmake --build` command and the `Building CXX object portfolio` /
+  `Linking CXX executable portfolio` lines, beside the real GitHub QR
+  (`assets/general/github-qr.svg`, generated for
+  `https://github.com/regevran`) in a white quiet-zone frame. The kicker,
+  formal-serif title and summary sit under the terminal. Intro notes are
+  straight with a blue left rule. Repository cards are straight with a blue
+  top edge; the last-push date is centred on the first line, and the
+  right-hand rail holds the build mark (`assets/icons/build-mark.svg`) above
+  the GitHub mark (`assets/icons/github.svg`) in a cream circle, linking to
+  the repository in a new tab. The mini conference badge has moved to Talks.
+  The repository title keeps its own link.
+  Hovering or focusing pulls the card out and enlarges it
+  (`translateY(-6px) scale(1.02)`) with a blue glow instead of Podcast's
+  rotation. The rules live in `assets/css/pages/engineering.css`.
 - Markdown links and images use **site-root-relative** paths (`assets/...`).
   `markdown_to_html()` rewrites relative `href`/`src` values with the page
   root (`../` on card pages), so `assets/documents/book.pdf` works both from
@@ -212,13 +214,24 @@ data-driven, because it will be updated from time to time.
   line. `.item-desc` styles this body and caps it at a readable `72ch`.
   Validation now requires every repository to have an inline `description` or
   a `description_src`, and still rejects using both.
-- The hub's software notes became portrait **conference badges** on 2026-11-10:
-  narrower and taller than the nature notes, with the narrow lanyard clip on
-  the top edge, no punched-hole circle, a small QR mark
-  (`assets/icons/badge-mark.svg`) above the kicker and title, and the group
-  aligned to the top of the card. Nature and neutral notes keep the landscape
-  note treatment. The badge template has not yet been extended to the C++ &
-  Standards and Talks page titles.
+- The hub's software notes became portrait notes on 2026-11-10: narrower and
+  taller than the nature notes, with the narrow lanyard clip on the top edge,
+  no punched-hole circle, a per-page artifact mark above the kicker and
+  title, and the group aligned to the top of the card. Public GitHub now uses
+  the CMake build mark (`assets/icons/build-mark.svg`); C++ & Standards and
+  Talks still use the QR mark (`assets/icons/badge-mark.svg`) until their
+  artifact passes. Nature and neutral notes keep the landscape note
+  treatment.
+- The **software page artifact system** was agreed on 2026-11-11. The shared
+  container stays the portrait cream note, lanyard, software-blue edge and
+  formal serif. The conference badge becomes the **Talks** identity (speaker
+  badge). **Public GitHub** gets a CMake build-log motif; **C++ & Standards**
+  gets a WG21 document stamp, with `ISO/IEC JTC1/SC22/WG21` as the hub kicker
+  while the title stays `C++ & Standards`. No ISO or C++ logo: WG21 papers
+  are committee proposals, not ISO publications, and the logos are
+  restricted. The hub cards keep the container and swap only the top mark;
+  page headers follow the same artifact. Public GitHub is implemented and
+  awaiting review; C++ & Standards and Talks follow.
 - The content model was revised on 2026-11-09: `content/data/cards.json` was
   removed; each card is now a directory with `card.json` + prose. Datasets
   gained stable ids and collection tags. The podcast card's promo-video block
