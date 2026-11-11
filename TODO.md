@@ -2,8 +2,8 @@
 
 ## Immediate
 
-1. [ ] Public GitHub — complete the artifact pass — [details](.ai/design-brief.md#software-page-artifacts)
-2. [ ] C++ & Standards — apply the WG21 document motif — [details](.ai/design-brief.md#software-page-artifacts)
+1. [x] Public GitHub — complete the artifact pass — [details](.ai/design-brief.md#software-page-artifacts)
+2. [ ] C++ & Standards — apply the C++ logo motif — [details](.ai/design-brief.md#software-page-artifacts)
 3. [ ] Talks — make the conference badge its identity — [details](.ai/design-brief.md#software-page-artifacts)
 
 ## Site

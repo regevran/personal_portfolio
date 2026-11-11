@@ -1,6 +1,11 @@
 import unittest
 
-from src.build import iso_date, rewrite_markdown_links, sort_latest
+from src.build import (
+    iso_date,
+    open_external_links_in_new_tabs,
+    rewrite_markdown_links,
+    sort_latest,
+)
 from src.site_schema import select_records
 from tests.validate import (
     date_warnings,
@@ -51,6 +56,28 @@ class MarkdownLinkTest(unittest.TestCase):
     def test_no_root_leaves_the_page_unchanged(self):
         page = '<a href="assets/x.pdf">x</a>'
         self.assertEqual(rewrite_markdown_links(page, ""), page)
+
+    def test_external_links_get_a_new_tab(self):
+        page = (
+            '<a href="https://example.com/x">external</a>'
+            '<a href="mailto:ran@example.com">mail</a>'
+            '<a href="../internal">internal</a>'
+        )
+        rewritten = open_external_links_in_new_tabs(page)
+        self.assertIn(
+            '<a href="https://example.com/x" target="_blank" rel="noopener">',
+            rewritten,
+        )
+        self.assertIn('<a href="mailto:ran@example.com">', rewritten)
+        self.assertIn('<a href="../internal">', rewritten)
+
+    def test_external_links_keep_existing_target(self):
+        page = '<a href="https://example.com/x" target="_blank">external</a>'
+        rewritten = open_external_links_in_new_tabs(page)
+        self.assertEqual(
+            rewritten,
+            '<a href="https://example.com/x" target="_blank" rel="noopener">external</a>',
+        )
 
 
 class SortTest(unittest.TestCase):

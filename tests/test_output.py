@@ -56,18 +56,21 @@ class OutputValidationTest(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("icons/lanyard.svg", engineering_css)
-        self.assertIn("icons/build-mark.svg", engineering_css)
-        self.assertIn("build-log", engineering)
-        self.assertIn("Building CXX object portfolio", engineering)
-        self.assertNotIn("build-log-progress", engineering)
-        self.assertNotIn("build-log-cursor", engineering)
+        self.assertIn(".card-page--engineering .github-mark", engineering_css)
+        self.assertIn('class="github-mark"', engineering)
+        self.assertNotIn("build-log", engineering)
+        self.assertIn("Building CXX object", engineering)
         self.assertNotIn("repo-badge", engineering)
+        self.assertNotIn("repo-mark", engineering)
+        self.assertIn('class="repo-tag"', engineering)
+        self.assertIn("[ 20%]", engineering)
+        self.assertIn("[100%]", engineering)
+        self.assertIn("Linking CXX executable", engineering)
         self.assertNotIn("icons/conference-badge.svg", engineering_css)
         self.assertIn("translateY(-6px) scale(1.02)", engineering_css)
         self.assertNotIn("rotate(", engineering_css)
         self.assertNotIn("card-page-header::after", engineering_css)
         self.assertIn("repo-rail", engineering)
-        self.assertIn('class="repo-mark"', engineering)
         self.assertIn("icons/github.svg", engineering)
         self.assertIn('class="repo-link"', engineering)
         self.assertIn(".card-page--engineering .repo-link", engineering_css)
@@ -91,17 +94,48 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn(".scrap--monitor .card-title", board_css)
         self.assertIn(".board-item--software .scrap", board_css)
         self.assertIn("badge-mark.svg", board_css)
-        self.assertIn("build-mark.svg", board_css)
-        self.assertIn('[data-mark="build-log"]', board_css)
+        self.assertNotIn("build-mark.svg", board_css)
+        self.assertIn("github.svg", board_css)
+        self.assertIn('[data-mark="github-logo"]', board_css)
 
         hub = (DIST / "index.html").read_text(encoding="utf-8")
-        self.assertIn('data-mark="build-log"', hub)
+        self.assertIn('data-mark="github-logo"', hub)
 
         qr = (DIST / "assets/general/github-qr.svg").read_text(encoding="utf-8")
         self.assertIn("https://github.com/regevran", qr)
 
         podcast = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("pages/engineering.css", podcast)
+
+    def test_cpp_standards_page_specific_design(self):
+        cpp = (DIST / "cpp-standards" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("assets/css/pages/cpp-standards.css", cpp)
+        self.assertIn("card-page--cpp-standards", cpp)
+        self.assertIn("ISO/IEC JTC1/SC22/WG21", cpp)
+        self.assertIn("cpp-logo.svg", cpp)
+        self.assertIn('class="cpp-logo"', cpp)
+        self.assertIn("paper.svg", cpp)
+        self.assertIn("data-paper=", cpp)
+        self.assertIn('class="paper-rail"', cpp)
+        self.assertIn('class="paper-link"', cpp)
+        self.assertNotIn("pages/engineering.css", cpp)
+
+        cpp_css = (DIST / "assets/css/pages/cpp-standards.css").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("icons/lanyard.svg", cpp_css)
+        self.assertIn("icons/cpp-logo.svg", cpp_css)
+        self.assertIn("translateY(-6px) scale(1.02)", cpp_css)
+
+        hub = (DIST / "index.html").read_text(encoding="utf-8")
+        self.assertIn('data-mark="cpp-logo"', hub)
+        self.assertIn("ISO/IEC JTC1/SC22/WG21", hub)
+
+        board_css = (DIST / "assets/css/board.css").read_text(encoding="utf-8")
+        self.assertIn('[data-mark="cpp-logo"]', board_css)
+        self.assertIn("cpp-logo.svg", board_css)
 
     def test_listings_are_latest_first(self):
         cpp = (DIST / "cpp-standards" / "index.html").read_text(encoding="utf-8")

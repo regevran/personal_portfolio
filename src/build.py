@@ -104,6 +104,35 @@ def rewrite_markdown_links(page: str, root: str) -> str:
     return MARKDOWN_LINK_ATTR.sub(replace, page)
 
 
+ANCHOR_TAG = re.compile(r"<a\b(?P<attrs>[^>]*)>", re.IGNORECASE)
+HREF_VALUE = re.compile(r'href="(?P<url>[^"]*)"', re.IGNORECASE)
+TARGET_ATTR = re.compile(r'\starget="', re.IGNORECASE)
+REL_ATTR = re.compile(r'\srel="', re.IGNORECASE)
+
+
+def open_external_links_in_new_tabs(page: str) -> str:
+    """Open http(s) links in a new tab; leave internal links alone."""
+
+    def replace(match: re.Match) -> str:
+        attrs = match.group("attrs")
+        href = HREF_VALUE.search(attrs)
+        if not href:
+            return match.group(0)
+        url = html.unescape(href.group("url"))
+        if not url.startswith(("http://", "https://")):
+            return match.group(0)
+        extra = ""
+        if not TARGET_ATTR.search(attrs):
+            extra += ' target="_blank"'
+        if not REL_ATTR.search(attrs):
+            extra += ' rel="noopener"'
+        if not extra:
+            return match.group(0)
+        return "<a" + attrs + extra + ">"
+
+    return ANCHOR_TAG.sub(replace, page)
+
+
 def markdown_to_html(path: Path, root: str = "") -> str:
     result = subprocess.run(
         ["pandoc", "-f", "markdown+smart", "-t", "html5", "--wrap=none", str(path)],
@@ -111,7 +140,9 @@ def markdown_to_html(path: Path, root: str = "") -> str:
         capture_output=True,
         text=True,
     )
-    return rewrite_markdown_links(result.stdout, root)
+    return open_external_links_in_new_tabs(
+        rewrite_markdown_links(result.stdout, root)
+    )
 
 
 def iso_date(value):
@@ -161,7 +192,11 @@ def description_html(entry: dict, root: str = "") -> str:
 
 
 def link_item(title: str, url: str | None, meta: str, description: str) -> str:
-    title_html = f'<a href="{esc(url)}">{esc(title)}</a>' if url else esc(title)
+    title_html = (
+        f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(title)}</a>'
+        if url
+        else esc(title)
+    )
     meta_html = f' <span class="item-meta">{esc(meta)}</span>' if meta else ""
     desc_html = f'<div class="item-desc">{description}</div>' if description else ""
     return (
@@ -170,21 +205,54 @@ def link_item(title: str, url: str | None, meta: str, description: str) -> str:
     )
 
 
+CPP_LOGO = "assets/icons/cpp-logo.svg"
+PAPER_ICON = "assets/icons/paper.svg"
+
+
+def paper_rail(paper: dict, root: str) -> str:
+    mark = '<span class="paper-mark" aria-hidden="true"></span>'
+    url = paper.get("link")
+    if not url:
+        return f'<span class="paper-rail">{mark}</span>'
+    title = paper.get("title", "")
+    link = (
+        f'<a class="paper-link" href="{esc(url)}" '
+        f'aria-label="Open {esc(title)} on wg21.link" '
+        f'title="Open {esc(title)} on wg21.link" target="_blank" rel="noopener">'
+        f'<img src="{esc(root + PAPER_ICON)}" alt="" aria-hidden="true">'
+        "</a>"
+    )
+    return f'<span class="paper-rail">{mark}{link}</span>'
+
+
 def render_papers(records: list[dict], root: str) -> str:
     items = []
     for paper in records:
-        meta = " · ".join(
+        title_html = (
+            f'<a href="{esc(paper["link"])}" target="_blank" rel="noopener">'
+            f'{esc(paper["title"])}</a>'
+            if paper.get("link")
+            else esc(paper["title"])
+        )
+        role_year = " · ".join(
             str(part)
-            for part in (paper.get("wg21"), paper.get("role"), paper.get("year"))
+            for part in (paper.get("role"), paper.get("year"))
             if part
         )
+        submeta_html = (
+            f'<span class="item-submeta">{esc(role_year)}</span>'
+            if role_year
+            else ""
+        )
+        description = description_html(paper, root)
+        desc_html = f'<div class="item-desc">{description}</div>' if description else ""
         items.append(
-            link_item(
-                paper["title"],
-                paper.get("link"),
-                meta,
-                description_html(paper, root),
-            )
+            f'<li class="item" data-paper="{esc(paper["id"])}">'
+            '<span class="item-head">'
+            f'<span class="item-title">{title_html}</span>'
+            f'<span class="item-meta">{esc(paper.get("wg21", ""))}</span>'
+            "</span>"
+            f"{submeta_html}{desc_html}{paper_rail(paper, root)}</li>"
         )
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
@@ -252,7 +320,16 @@ GITHUB_ICON = "assets/icons/github.svg"
 
 
 def repo_rail(repo: dict, root: str) -> str:
-    mark = '<span class="repo-mark" aria-hidden="true"></span>'
+    mark = (
+        '<span class="repo-tag" aria-hidden="true">'
+        '<span class="repo-tag-line">'
+        '<span class="repo-tag-step">[ 20%]</span> Building CXX object'
+        "</span>"
+        '<span class="repo-tag-line">'
+        '<span class="repo-tag-step">[100%]</span> Linking CXX executable'
+        "</span>"
+        "</span>"
+    )
     url = repo.get("url")
     if not url:
         return f'<span class="repo-rail">{mark}</span>'
@@ -275,7 +352,8 @@ def render_repos(records: list[dict], root: str) -> str:
         if pushed_at:
             meta = f"Last push: {str(pushed_at)[:10]}"
         name_html = (
-            f'<a href="{esc(repo["url"])}">{esc(repo["name"])}</a>'
+            f'<a href="{esc(repo["url"])}" target="_blank" rel="noopener">'
+            f'{esc(repo["name"])}</a>'
             if repo.get("url")
             else esc(repo["name"])
         )
@@ -399,19 +477,19 @@ def render_logo(card: dict, root: str) -> str:
     )
 
 
-def render_card_mark(card: dict) -> str:
-    if card.get("mark") != "build-log":
-        return ""
-    return (
-        '<div class="build-log" aria-hidden="true">'
-        '<p class="build-log-line"><span class="build-log-prompt">$</span>'
-        " cmake --build --preset default</p>"
-        '<p class="build-log-line"><span class="build-log-step">[ 20%]</span>'
-        " Building CXX object portfolio</p>"
-        '<p class="build-log-line"><span class="build-log-step">[ 40%]</span>'
-        " Linking CXX executable portfolio</p>"
-        "</div>"
-    )
+def render_card_mark(card: dict, root: str) -> str:
+    mark = card.get("mark")
+    if mark == "github-logo":
+        return (
+            f'<img class="github-mark" src="{esc(root + GITHUB_ICON)}" '
+            'alt="" aria-hidden="true">'
+        )
+    if mark == "cpp-logo":
+        return (
+            f'<img class="cpp-logo" src="{esc(root + CPP_LOGO)}" '
+            'alt="" aria-hidden="true">'
+        )
+    return ""
 
 
 def page_stylesheet(slug: str, root: str) -> str:
@@ -664,7 +742,7 @@ def build() -> None:
                 "FAMILY": esc(card["family"]),
                 "TITLE": esc(card["title"]),
                 "SUMMARY": esc(card["summary"]),
-                "MARK": render_card_mark(card),
+                "MARK": render_card_mark(card, root),
                 "LOGO": render_logo(card, root),
                 "STATUS": status_badge(card["status"]),
                 "BODY": body_html,

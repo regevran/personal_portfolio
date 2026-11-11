@@ -170,21 +170,29 @@ data-driven, because it will be updated from time to time.
   background and cream notes, with software-blue accents. The header is a
   portrait cream note with a narrow C05 lanyard
   (`assets/icons/lanyard.svg`) whose clip sits on the blue top edge, with no
-  punched hole, and a **build-log artifact**: a dark ink terminal panel with
-  the `cmake --build` command and the `Building CXX object portfolio` /
-  `Linking CXX executable portfolio` lines, beside the real GitHub QR
-  (`assets/general/github-qr.svg`, generated for
+  punched hole, and the official **GitHub logo** (`assets/icons/github.svg`)
+  beside the real GitHub QR (`assets/general/github-qr.svg`, generated for
   `https://github.com/regevran`) in a white quiet-zone frame. The kicker,
-  formal-serif title and summary sit under the terminal. Intro notes are
+  formal-serif title and summary sit under the logo. Intro notes are
   straight with a blue left rule. Repository cards are straight with a blue
   top edge; the last-push date is centred on the first line, and the
-  right-hand rail holds the build mark (`assets/icons/build-mark.svg`) above
-  the GitHub mark (`assets/icons/github.svg`) in a cream circle, linking to
-  the repository in a new tab. The mini conference badge has moved to Talks.
+  right-hand rail holds a small two-line CMake build tag (`[ 20%] Building CXX
+  object` / `[100%] Linking CXX executable`) above the GitHub mark (`assets/icons/github.svg`) in a cream
+  circle, linking to the repository in a new tab. The mini conference badge has moved to Talks.
   The repository title keeps its own link.
   Hovering or focusing pulls the card out and enlarges it
   (`translateY(-6px) scale(1.02)`) with a blue glow instead of Podcast's
   rotation. The rules live in `assets/css/pages/engineering.css`.
+- The **C++ & Standards page** (`cpp-standards`) got its artifact pass on
+  2026-11-11: the same dirty field, cream notes and straight pull-out cards as
+  Public GitHub, with the official C++ logo. The header carries the unaltered
+  logo (`assets/icons/cpp-logo.svg`) above the full
+  `ISO/IEC JTC1/SC22/WG21` kicker, the formal-serif title `C++ & Standards`
+  and the summary. Paper cards show the title left, the paper number centred,
+  the role/year line under the title and the description below; the
+  right-hand rail holds the C++ logo above a document link
+  (`assets/icons/paper.svg`). The title and document icon link to wg21.link.
+  No ISO logo. The rules live in `assets/css/pages/cpp-standards.css`.
 - Markdown links and images use **site-root-relative** paths (`assets/...`).
   `markdown_to_html()` rewrites relative `href`/`src` values with the page
   root (`../` on card pages), so `assets/documents/book.pdf` works both from
@@ -192,6 +200,12 @@ data-driven, because it will be updated from time to time.
   anchors, query-only links and paths already starting with `/` or `../` are
   left alone. This applies to card prose and to every `description_src`
   dataset (papers, talks, episodes, repos).
+- **External links open in a new tab** (2026-11-11): http(s) links in rendered
+  Markdown, and the paper, repository and talk data links, get
+  `target="_blank" rel="noopener"`. Internal navigation (hub cards, back link,
+  pager) stays in the same tab. This keeps the title and the icon consistent
+  within a card; forcing new tabs for internal pages would break the normal
+  browsing flow.
 - Repository cards became **accordion cards** on 2026-11-11: the description is
   clamped to a preview (`max-height: 7.5rem`) with a soft bottom fade, and a
   `More…` pill expands the card to its full height (`Less…` collapses it).
@@ -217,21 +231,26 @@ data-driven, because it will be updated from time to time.
 - The hub's software notes became portrait notes on 2026-11-10: narrower and
   taller than the nature notes, with the narrow lanyard clip on the top edge,
   no punched-hole circle, a per-page artifact mark above the kicker and
-  title, and the group aligned to the top of the card. Public GitHub now uses
-  the CMake build mark (`assets/icons/build-mark.svg`); C++ & Standards and
-  Talks still use the QR mark (`assets/icons/badge-mark.svg`) until their
-  artifact passes. Nature and neutral notes keep the landscape note
-  treatment.
+  title, and the group aligned to the top of the card. Public GitHub uses the
+  GitHub logo (`assets/icons/github.svg`); C++ & Standards uses the official
+  C++ logo (`assets/icons/cpp-logo.svg`) and the full
+  `ISO/IEC JTC1/SC22/WG21` kicker; Talks still uses the QR mark
+  (`assets/icons/badge-mark.svg`) until its artifact pass. Nature and neutral
+  notes keep the landscape note treatment.
 - The **software page artifact system** was agreed on 2026-11-11. The shared
   container stays the portrait cream note, lanyard, software-blue edge and
   formal serif. The conference badge becomes the **Talks** identity (speaker
-  badge). **Public GitHub** gets a CMake build-log motif; **C++ & Standards**
-  gets a WG21 document stamp, with `ISO/IEC JTC1/SC22/WG21` as the hub kicker
-  while the title stays `C++ & Standards`. No ISO or C++ logo: WG21 papers
-  are committee proposals, not ISO publications, and the logos are
-  restricted. The hub cards keep the container and swap only the top mark;
-  page headers follow the same artifact. Public GitHub is implemented and
-  awaiting review; C++ & Standards and Talks follow.
+  badge). **Public GitHub** gets the official GitHub logo; the CMake reference
+  is only a small build tag in the repository-card rail, not a page or hub
+  artifact. **C++ & Standards** gets the official C++ logo, with
+  `ISO/IEC JTC1/SC22/WG21` as the hub kicker
+  while the title stays `C++ & Standards`. The hexagon C++ logo is a
+  trademark of the Standard C++ Foundation, but the Foundation's terms permit
+  the unaltered logo alongside materials about standardized C++ and working
+  drafts, provided it does not imply endorsement; we use the official SVG
+  unchanged. No ISO logo. The hub cards keep the container and swap only the top mark;
+  page headers follow the same artifact. Public GitHub is committed; C++ &
+  Standards is implemented and awaiting review; Talks follows.
 - The content model was revised on 2026-11-09: `content/data/cards.json` was
   removed; each card is now a directory with `card.json` + prose. Datasets
   gained stable ids and collection tags. The podcast card's promo-video block

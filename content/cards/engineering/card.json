@@ -8,7 +8,7 @@
   "description": "Selected engineering work and contributions.",
   "logo": "assets/general/github-qr.svg",
   "logo_alt": "QR code for github.com/regevran",
-  "mark": "build-log",
+  "mark": "github-logo",
   "audio": null,
   "board": {
     "x": 80,

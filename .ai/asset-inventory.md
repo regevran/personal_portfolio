@@ -11,12 +11,13 @@
 | `assets/icons/spotify.svg` | podcast episode cards | Spotify platform logo |
 | `assets/icons/applepodcasts.svg` | podcast episode cards | Apple Podcasts platform logo |
 | `assets/icons/pocketcasts.svg` | podcast episode cards | Pocket Casts platform logo |
-| `assets/icons/lanyard.svg` | hub software badges, Public GitHub page header | narrow C05 lanyard + clip, no string |
+| `assets/icons/lanyard.svg` | hub software notes, Public GitHub and C++ & Standards headers | narrow C05 lanyard + clip, no string |
 | `assets/icons/conference-badge.svg` | reserved for the Talks page | small lanyard badge motif; no longer used on Public GitHub |
-| `assets/icons/badge-mark.svg` | hub C++ & Standards and Talks cards | interim QR mark above the card text; the Talks artifact |
-| `assets/icons/build-mark.svg` | hub Public GitHub card, Public GitHub repository rail | small ink terminal with `[ 20%]` and a progress bar |
-| `assets/icons/github.svg` | Public GitHub repository cards | GitHub mark linking to the repository, in the top-right rail |
-| `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the build log, white background and CSS quiet zone |
+| `assets/icons/badge-mark.svg` | hub Talks card | interim QR mark above the card text; the Talks artifact |
+| `assets/icons/cpp-logo.svg` | C++ & Standards header and paper rail, hub C++ & Standards card | official C++ hexagon logo, used unaltered; created by Jeremy Kratz, licensed by The Standard C++ Foundation; source `github.com/isocpp/logos` |
+| `assets/icons/paper.svg` | C++ & Standards paper cards | document link icon beside the C++ logo |
+| `assets/icons/github.svg` | Public GitHub header and hub card, repository-card rail | GitHub mark; the page/hub artifact and the repository link |
+| `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the GitHub logo, white background and CSS quiet zone |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
 | `assets/rescues/ardea_alba.mp4` | rescues | 576×1024, 24 s |

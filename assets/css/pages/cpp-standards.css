@@ -1,0 +1,422 @@
+/* C++ & Standards — the standards-paper edition of the field board.
+   Same dirty field and cream notes as Public GitHub, with the official C++
+   logo instead of the GitHub logo. */
+
+body[data-page="cpp-standards"] {
+  background: var(--sand) url("../../general/dirty-background.jpg") center /
+    cover no-repeat;
+}
+
+@media (min-width: 900px) {
+  body[data-page="cpp-standards"] {
+    background-attachment: fixed;
+  }
+}
+
+.card-page--cpp-standards {
+  max-width: 1120px;
+  min-height: 0;
+  padding: clamp(1rem, 3vw, 2rem) clamp(0.6rem, 2vw, 1.2rem)
+    clamp(2rem, 5vw, 4rem);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.card-page--cpp-standards::before {
+  display: none;
+}
+
+.card-page--cpp-standards .back-link {
+  display: inline-block;
+  margin: 0 0 1.2rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--cream);
+  box-shadow: 0 4px 10px rgba(47, 39, 20, 0.12);
+  transition: box-shadow 180ms ease;
+}
+
+.card-page--cpp-standards .back-link:hover,
+.card-page--cpp-standards .back-link:focus-visible {
+  border-color: var(--software);
+  color: var(--software);
+  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.4),
+    0 10px 24px rgba(47, 39, 20, 0.18);
+}
+
+/* WG21 header ------------------------------------------------------------- */
+
+.card-page--cpp-standards .card-page-header {
+  position: relative;
+  max-width: 26rem;
+  margin: 5.5rem auto 2.4rem;
+  padding: 1.4rem 1.8rem 1.9rem;
+  border: 1px solid var(--rule);
+  border-top: 0.55rem solid var(--software);
+  border-radius: 6px 16px 8px 12px;
+  background: var(--cream);
+  box-shadow: 0 20px 44px rgba(47, 39, 20, 0.22);
+  transition: box-shadow 180ms ease;
+}
+
+.card-page--cpp-standards .card-page-header:hover {
+  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.4),
+    0 24px 52px rgba(47, 39, 20, 0.26);
+}
+
+.card-page--cpp-standards .card-page-header::before {
+  content: "";
+  position: absolute;
+  top: -5.1rem;
+  left: 50%;
+  width: 100px;
+  height: 83px;
+  background: url("../../icons/lanyard.svg") center bottom / contain no-repeat;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.card-page--cpp-standards .cpp-logo {
+  display: block;
+  width: 7rem;
+  height: auto;
+  margin: 0 auto 1.1rem;
+}
+
+.card-page--cpp-standards .eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--software);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  line-height: 1.55;
+}
+
+.card-page--cpp-standards .card-page-header h1 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(2rem, 3.4vw, 2.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.card-page--cpp-standards .lede {
+  margin: 0;
+}
+
+/* Intro notes ------------------------------------------------------------- */
+
+.card-page--cpp-standards .prose {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.card-page--cpp-standards .prose > p {
+  width: min(100%, 860px);
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1rem 1.4rem;
+  border: 1px solid var(--rule);
+  border-left: 0.3rem solid var(--software);
+  border-radius: 4px 10px 5px 8px;
+  background: var(--cream);
+  box-shadow: 0 10px 24px rgba(47, 39, 20, 0.16);
+  transition: box-shadow 180ms ease;
+}
+
+.card-page--cpp-standards .prose > p:hover {
+  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.35),
+    0 16px 32px rgba(47, 39, 20, 0.2);
+}
+
+.card-page--cpp-standards .prose a {
+  color: var(--software);
+}
+
+.card-page--cpp-standards .prose a:hover,
+.card-page--cpp-standards .prose a:focus-visible {
+  color: var(--ink);
+}
+
+/* Paper cards ------------------------------------------------------------- */
+
+.card-page--cpp-standards .item-list {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 980px);
+  margin: 2rem auto 0;
+  padding: 0;
+  border: none;
+  list-style: none;
+  gap: 1.1rem;
+}
+
+.card-page--cpp-standards .item-list .item {
+  position: relative;
+  display: grid;
+  grid-template-areas: none;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0.25rem;
+  min-height: 7rem;
+  padding: 0.9rem 6.4rem 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  border-top: 0.35rem solid var(--software);
+  border-radius: 4px 10px 6px 8px;
+  background: var(--cream);
+  box-shadow: 0 12px 26px rgba(47, 39, 20, 0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card-page--cpp-standards .item-list .item:hover,
+.card-page--cpp-standards .item-list .item:focus-within {
+  z-index: 1;
+  box-shadow: 0 22px 40px rgba(47, 39, 20, 0.24),
+    0 0 0 0.22rem rgba(62, 107, 137, 0.35);
+  transform: translateY(-6px) scale(1.02);
+}
+
+.card-page--cpp-standards .item-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 1rem;
+}
+
+.card-page--cpp-standards .item-title {
+  grid-area: auto;
+  grid-column: 1;
+  font-family: var(--serif);
+  font-size: 1.06rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.card-page--cpp-standards .item-title a {
+  border-bottom: 1px solid transparent;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.card-page--cpp-standards .item-title a:hover,
+.card-page--cpp-standards .item-title a:focus-visible {
+  border-bottom-color: var(--software);
+  color: var(--software);
+}
+
+.card-page--cpp-standards .item-meta {
+  grid-area: auto;
+  grid-column: 2;
+  margin: 0;
+  color: var(--software);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.card-page--cpp-standards .item-submeta {
+  grid-area: auto;
+  grid-column: 1;
+  margin-top: -0.1rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.card-page--cpp-standards .item-desc {
+  grid-area: auto;
+  grid-column: 1;
+  max-width: 72ch;
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card-page--cpp-standards .item-desc p {
+  margin: 0.25rem 0 0;
+}
+
+.card-page--cpp-standards .item-desc a {
+  color: var(--software);
+  text-decoration: underline;
+  text-decoration-color: rgba(62, 107, 137, 0.35);
+  text-underline-offset: 0.14em;
+}
+
+.card-page--cpp-standards .item-desc a:hover,
+.card-page--cpp-standards .item-desc a:focus-visible {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.card-page--cpp-standards .item-desc strong {
+  color: var(--ink);
+}
+
+.card-page--cpp-standards .item-desc code {
+  padding: 0.06em 0.28em;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: rgba(239, 223, 192, 0.55);
+  font-size: 0.86em;
+}
+
+.card-page--cpp-standards .paper-rail {
+  position: absolute;
+  top: 0.6rem;
+  right: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  width: 5rem;
+}
+
+.card-page--cpp-standards .paper-mark {
+  display: block;
+  width: 2.4rem;
+  height: 2.7rem;
+  background: url("../../icons/cpp-logo.svg") center / contain no-repeat;
+}
+
+.card-page--cpp-standards .paper-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--cream);
+  transition: transform 160ms ease, box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.card-page--cpp-standards .paper-link img {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.card-page--cpp-standards .paper-link:hover,
+.card-page--cpp-standards .paper-link:focus-visible {
+  border-color: var(--software);
+  box-shadow: 0 4px 10px rgba(47, 39, 20, 0.18),
+    0 0 0 0.18rem rgba(62, 107, 137, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Pager ------------------------------------------------------------------- */
+
+.card-page--cpp-standards .pager {
+  width: min(100%, 980px);
+  margin: 3rem auto 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px 10px 5px 8px;
+  background: var(--cream);
+  box-shadow: 0 10px 24px rgba(47, 39, 20, 0.16);
+  transition: box-shadow 180ms ease;
+}
+
+.card-page--cpp-standards .pager:hover {
+  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.35),
+    0 16px 32px rgba(47, 39, 20, 0.2);
+}
+
+.card-page--cpp-standards .pager a:hover,
+.card-page--cpp-standards .pager a:focus-visible {
+  border-bottom-color: var(--software);
+  color: var(--software);
+}
+
+/* Small screens ----------------------------------------------------------- */
+
+@media (max-width: 700px) {
+  .card-page--cpp-standards .card-page-header {
+    margin-top: 4.2rem;
+    padding: 1.2rem 1.4rem 1.7rem;
+  }
+
+  .card-page--cpp-standards .card-page-header::before {
+    top: -4.3rem;
+    width: 84px;
+    height: 70px;
+  }
+
+  .card-page--cpp-standards .cpp-logo {
+    width: 5.6rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .card-page--cpp-standards .eyebrow {
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
+  }
+
+  .card-page--cpp-standards .item-list .item {
+    min-height: 6.4rem;
+    padding: 0.85rem 5.2rem 0.95rem 1rem;
+  }
+
+  .card-page--cpp-standards .item-head {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.15rem;
+  }
+
+  .card-page--cpp-standards .item-title,
+  .card-page--cpp-standards .item-meta,
+  .card-page--cpp-standards .item-submeta,
+  .card-page--cpp-standards .item-desc {
+    grid-column: 1;
+  }
+
+  .card-page--cpp-standards .item-meta {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .card-page--cpp-standards .paper-rail {
+    top: 0.5rem;
+    right: 0.8rem;
+    width: 4rem;
+  }
+
+  .card-page--cpp-standards .paper-mark {
+    width: 2rem;
+    height: 2.25rem;
+  }
+
+  .card-page--cpp-standards .paper-link {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .card-page--cpp-standards .paper-link img {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-page--cpp-standards .item-list .item,
+  .card-page--cpp-standards .prose > p,
+  .card-page--cpp-standards .pager,
+  .card-page--cpp-standards .paper-link {
+    transition: none;
+  }
+
+  .card-page--cpp-standards .item-list .item:hover,
+  .card-page--cpp-standards .item-list .item:focus-within,
+  .card-page--cpp-standards .paper-link:hover,
+  .card-page--cpp-standards .paper-link:focus-visible {
+    transform: none;
+  }
+}

@@ -1,6 +1,6 @@
 /* Public GitHub — the software edition of the field board.
-   Same dirty field and cream notes as Podcast, but straight cards and a
-   conference badge instead of tilted chapter cards. */
+   Same dirty field and cream notes as Podcast, but with the GitHub logo and
+   straight, pull-out repository cards. */
 
 body[data-page="engineering"] {
   background: var(--sand) url("../../general/dirty-background.jpg") center /
@@ -46,13 +46,13 @@ body[data-page="engineering"] {
     0 10px 24px rgba(47, 39, 20, 0.18);
 }
 
-/* Build-log header -------------------------------------------------------- */
+/* GitHub-logo header ------------------------------------------------------ */
 
 .card-page--engineering .card-page-header {
   position: relative;
   display: grid;
   grid-template-areas:
-    "log qr"
+    "mark qr"
     "eyebrow eyebrow"
     "title title"
     "lede lede"
@@ -126,37 +126,10 @@ body[data-page="engineering"] {
   background: #fff;
 }
 
-/* Build log panel --------------------------------------------------------- */
-
-.card-page--engineering .build-log {
-  grid-area: log;
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  justify-content: center;
-  min-width: 0;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid rgba(47, 39, 20, 0.35);
-  border-radius: 5px;
-  background: var(--ink);
-  color: var(--sand);
-  font-family: var(--mono);
-  font-size: 0.55rem;
-  line-height: 1.6;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 8px 18px rgba(47, 39, 20, 0.2);
-}
-
-.card-page--engineering .build-log-line {
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.card-page--engineering .build-log-prompt,
-.card-page--engineering .build-log-step {
-  color: var(--gold);
+.card-page--engineering .github-mark {
+  grid-area: mark;
+  width: 5.8rem;
+  height: auto;
 }
 
 /* Intro notes ------------------------------------------------------------- */
@@ -216,7 +189,7 @@ body[data-page="engineering"] {
   align-items: baseline;
   row-gap: 0.3rem;
   min-height: 6.6rem;
-  padding: 0.9rem 6.4rem 1rem 1.2rem;
+  padding: 0.9rem 12.2rem 1rem 1.2rem;
   border: 1px solid var(--rule);
   border-top: 0.35rem solid var(--software);
   border-radius: 4px 10px 6px 8px;
@@ -445,14 +418,29 @@ body[data-page="engineering"] {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  width: 5rem;
+  width: max-content;
 }
 
-.card-page--engineering .repo-mark {
+.card-page--engineering .repo-tag {
   display: block;
-  width: 4.8rem;
-  height: 2.4rem;
-  background: url("../../icons/build-mark.svg") center / contain no-repeat;
+  padding: 0.28rem 0.8rem;
+  border: 1px solid rgba(47, 39, 20, 0.45);
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--sand);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  line-height: 1.35;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.card-page--engineering .repo-tag-line {
+  display: block;
+}
+
+.card-page--engineering .repo-tag-step {
+  color: var(--gold);
 }
 
 .card-page--engineering .repo-link {
@@ -510,7 +498,7 @@ body[data-page="engineering"] {
 @media (max-width: 700px) {
   .card-page--engineering .card-page-header {
     grid-template-areas:
-      "log"
+      "mark"
       "qr"
       "eyebrow"
       "title"
@@ -532,14 +520,14 @@ body[data-page="engineering"] {
     margin: 0;
   }
 
-  .card-page--engineering .build-log {
-    font-size: 0.52rem;
+  .card-page--engineering .github-mark {
+    width: 5.2rem;
   }
 
   .card-page--engineering .item-list .item {
     grid-template-columns: minmax(0, 1fr);
     min-height: 5.8rem;
-    padding: 0.85rem 5.2rem 0.95rem 1rem;
+    padding: 0.85rem 6.9rem 0.95rem 1rem;
   }
 
   .card-page--engineering .item-head {
@@ -562,12 +550,15 @@ body[data-page="engineering"] {
   .card-page--engineering .repo-rail {
     top: 0.5rem;
     right: 0.8rem;
-    width: 4rem;
+    width: 5.5rem;
   }
 
-  .card-page--engineering .repo-mark {
-    width: 3.8rem;
-    height: 1.9rem;
+  .card-page--engineering .repo-tag {
+    width: 100%;
+    padding: 0.28rem 0.35rem;
+    font-size: 0.44rem;
+    line-height: 1.3;
+    white-space: normal;
   }
 
   .card-page--engineering .repo-link {

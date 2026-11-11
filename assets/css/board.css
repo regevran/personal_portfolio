@@ -229,10 +229,22 @@ body.dir-a {
   background: url("../icons/badge-mark.svg") left top / contain no-repeat;
 }
 
-.board-item--software .scrap[data-mark="build-log"]::before {
-  width: 7.4cqh;
-  height: 3.9cqh;
-  background-image: url("../icons/build-mark.svg");
+.board-item--software .scrap[data-mark="github-logo"]::before {
+  width: 4.8cqh;
+  height: 4.8cqh;
+  background-image: url("../icons/github.svg");
+}
+
+.board-item--software .scrap[data-mark="cpp-logo"]::before {
+  width: 4.4cqh;
+  height: 5cqh;
+  background-image: url("../icons/cpp-logo.svg");
+}
+
+.board-item--software .scrap[data-mark="cpp-logo"] .card-kicker {
+  font-size: 1.05cqh;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
 }
 
 .board-item--software .card-eye {

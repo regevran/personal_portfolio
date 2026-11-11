@@ -533,7 +533,8 @@ def validate_assets() -> list[str]:
         "assets/icons/lanyard.svg",
         "assets/icons/conference-badge.svg",
         "assets/icons/badge-mark.svg",
-        "assets/icons/build-mark.svg",
+        "assets/icons/cpp-logo.svg",
+        "assets/icons/paper.svg",
         "assets/icons/github.svg",
         "assets/documents/README.md",
     ):

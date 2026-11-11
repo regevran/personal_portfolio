@@ -241,19 +241,18 @@ Podcast but reads as software. Its rules live in
 - The background is the same dirty ink texture, fixed on desktop; there is no
   full-page sheet. The title uses the formal serif, not Patrick Hand.
 - The header is a portrait cream note with the software-blue top edge and the
-  narrow lanyard, now carrying the **build-log artifact**: a dark ink terminal
-  panel with the `cmake --build` command and the `Building CXX object
-  portfolio` / `Linking CXX executable portfolio` lines, beside the real
-  GitHub QR code in a white quiet-zone frame. The kicker, formal-serif title
-  and summary sit under the terminal. The QR
-  (`assets/general/github-qr.svg`) was generated for
+  narrow lanyard, carrying the official **GitHub logo**
+  (`assets/icons/github.svg`) beside the real GitHub QR code in a white
+  quiet-zone frame. The kicker, formal-serif title and summary sit under the
+  logo. The QR (`assets/general/github-qr.svg`) was generated for
   `https://github.com/regevran` and still scans to the profile.
 - Intro paragraphs are straight cream notes with a software-blue left rule.
 - Repositories are straight cream cards with a software-blue top edge. The
   repository name sits left and the last-push date is centred on the first
   line; the description follows. An absolutely positioned right-hand rail
-  mirrors the robin rail on Podcast cards: the CMake build mark
-  (`assets/icons/build-mark.svg`) sits above the GitHub mark
+  mirrors the robin rail on Podcast cards: a small two-line CMake build tag
+  (`[ 20%] Building CXX object` / `[100%] Linking CXX executable`) sits above
+  the GitHub mark
   (`assets/icons/github.svg`) in a cream circle, which links to the
   repository in a new tab; the conference badge has moved to Talks. The
   repository name keeps its own link. The body comes from
@@ -273,15 +272,45 @@ Podcast but reads as software. Its rules live in
 - Static text notes (header, intro notes, back link, pager) get a soft blue
   glow. `prefers-reduced-motion` removes the pull-out transform.
 
+### C++ & Standards page
+
+C++ & Standards (`cpp-standards`) shares the dirty field, cream notes and
+straight pull-out cards with Public GitHub, with the official **C++ logo**
+instead of the GitHub logo. Its rules live in
+`assets/css/pages/cpp-standards.css`.
+
+- The header is a portrait cream note with the software-blue top edge and the
+  narrow lanyard, carrying the unaltered official C++ logo
+  (`assets/icons/cpp-logo.svg`) at the top. Below it are the full designation
+  `ISO/IEC JTC1/SC22/WG21`, the formal-serif title `C++ & Standards`, and the
+  summary. The logo is the artifact; the full designation supplies the
+  standards context. There is no ISO logo.
+- Intro paragraphs are straight cream notes with a software-blue left rule,
+  like Public GitHub.
+- Papers are straight cream cards with a software-blue top edge. The title
+  sits left, the paper number (`P3817R0-R1`, etc.) is centred on the first
+  line, and the role/year line sits under the title. The description follows.
+  A right-hand rail holds the C++ logo above a document link
+  (`assets/icons/paper.svg`), both in the same rhythm as the GitHub page's
+  rail. The title and the document icon both link to `wg21.link` in a new
+  tab.
+- Hovering or focusing a card pulls it out and enlarges it
+  (`translateY(-6px) scale(1.02)`) with a blue glow. There is no rotation.
+  Mobile stacks the paper number and role/year under the title.
+- Paper descriptions can use `description_src` Markdown. The current cards use
+  the inline one-liners.
+
 ### Software badges on the hub
 
 The hub's three software notes use the same portrait container: narrower and
 taller than the nature notes, with a narrow C05 lanyard whose clip meets the
 blue top edge, no punched-hole circle, and a per-page artifact mark above the
-kicker and title. Public GitHub now uses the CMake build mark
-(`assets/icons/build-mark.svg`); C++ & Standards and Talks still use the QR
-mark (`assets/icons/badge-mark.svg`) until their artifact passes. Nature and
-neutral notes keep the landscape note and their robin/perch treatment.
+kicker and title. Public GitHub now uses the GitHub logo
+(`assets/icons/github.svg`); C++ & Standards uses the official C++ logo
+(`assets/icons/cpp-logo.svg`) and the full `ISO/IEC JTC1/SC22/WG21` kicker;
+Talks still uses the QR mark (`assets/icons/badge-mark.svg`) until its
+artifact pass. Nature and neutral notes keep the landscape note and their
+robin/perch treatment.
 
 ### Software page artifacts
 
@@ -293,22 +322,27 @@ it becomes the **Talks** identity. Each page gets its own artifact at the top:
 - **Talks — conference badge.** The speaker badge: lanyard, clip, name-tag or
   QR. Use it on the page header and the hub card. It is the personal, human
   object; Ran wears a badge at conferences.
-- **Public GitHub — CMake build log.** A small ink terminal strip with cream
-  mono output (`[ 20%] Building CXX object portfolio`). It fits "Systems", is
-  recognisable to developers and echoes the site's own CMake build. Replace
-  the conference badge in both the page header and the hub card; the
-  repository cards carry the build mark above the GitHub link in their rail.
-- **C++ & Standards — WG21 document stamp.** A small paper sheet or bordered
-  stamp with `WG21`; the full `ISO/IEC JTC1/SC22/WG21` is text, not a logo.
-  Use it on the page header and the hub card, with paper-number cards below.
-  No ISO or C++ logo: WG21 papers are committee proposals, not ISO
-  publications, and the logos are restricted.
+- **Public GitHub — official GitHub logo.** The GitHub mark on the page header
+  and the hub card, beside the QR in the header. The CMake reference is
+  reduced to a small two-line text tag in each repository card's rail
+  (`[ 20%] Building CXX object` / `[100%] Linking CXX executable`), above the
+  GitHub link; it is not the page or hub artifact.
+- **C++ & Standards — official C++ logo.** The unaltered hexagon logo from
+  `github.com/isocpp/logos` (created by Jeremy Kratz, licensed by The
+  Standard C++ Foundation), with the full `ISO/IEC JTC1/SC22/WG21` as text.
+  The Foundation's terms permit the unaltered logo alongside materials about
+  standardized C++ and working drafts, provided it does not imply endorsement
+  (it is a trademark, not public domain). Use it on the page header, the
+  paper-card rail and the hub card, with paper-number cards below. No ISO
+  logo.
 
-Public GitHub is implemented: the page header and hub card use the build-log
-mark, and the repository rail keeps only the GitHub link. The hub cards keep
-the same portrait note and lanyard; only the top mark changes per page, and
-the page headers follow the same artifact. Work order: Public GitHub is done
-and awaiting review; then C++ & Standards; then Talks.
+Public GitHub is implemented and committed: the page header and hub card use
+the GitHub logo, and the repository rail carries the CMake build tag above the
+GitHub link. C++ & Standards is implemented and awaiting review: the header
+and hub card use the official C++ logo and the full designation kicker. The hub cards
+keep the same portrait note and lanyard; only the top mark changes per page,
+and the page headers follow the same artifact. Talks remains the last artifact
+pass.
 The C++ kicker becomes `ISO/IEC JTC1/SC22/WG21` while the title stays
 `C++ & Standards`; the string is long for the narrow hub card, so test its
 wrapping and adjust the kicker size/tracking or use a deliberate two-line
