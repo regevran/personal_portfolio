@@ -4,10 +4,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "alcedo-atthis",
     "src": "assets/ringing/alcedo_atthis_1.jpeg",
     "title": "Common Kingfisher",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -15,10 +15,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "alcedo-atthis",
     "src": "assets/ringing/alcedo_atthis_2.jpeg",
     "title": "Common Kingfisher",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -26,10 +26,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "alcedo-atthis",
     "src": "assets/ringing/alcedo_atthis_3.jpeg",
     "title": "Common Kingfisher",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -37,10 +37,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "otus-scops",
     "src": "assets/ringing/otus_scops_1.jpeg",
     "title": "Eurasian Scops Owl",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -48,10 +48,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "otus-scops",
     "src": "assets/ringing/otus_scops_2.jpeg",
     "title": "Eurasian Scops Owl",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -59,10 +59,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "otus-scops",
     "src": "assets/ringing/otus_scops_3.jpeg",
     "title": "Eurasian Scops Owl",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -70,10 +70,10 @@
     "collections": [
       "ringing"
     ],
+    "species": "otus-scops",
     "src": "assets/ringing/otus_scops_4.jpeg",
     "title": "Eurasian Scops Owl",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "date": "2027-10-30",
+    "date": "2026-10-30",
     "audio": null
   },
   {
@@ -81,9 +81,9 @@
     "collections": [
       "ringing"
     ],
+    "species": "saxicola-maurus",
     "src": "assets/ringing/saxicola_maurus.jpeg",
     "title": "Siberian Stonechat",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "2026-11-03",
     "audio": null
   },
@@ -92,9 +92,9 @@
     "collections": [
       "ringing"
     ],
+    "species": "upupa-epops",
     "src": "assets/ringing/upupa_epops_1.jpeg",
     "title": "Eurasian Hoopoe",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "2026-11-18",
     "audio": null
   },
@@ -103,10 +103,76 @@
     "collections": [
       "ringing"
     ],
+    "species": "upupa-epops",
     "src": "assets/ringing/upupa_epops_2.jpeg",
     "title": "Eurasian Hoopoe",
-    "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "date": "2026-11-18",
+    "audio": null
+  },
+  {
+    "id": "photo-phyloscopus-collybita-2",
+    "collections": [
+      "ringing"
+    ],
+    "species": "phyloscopus-collybita",
+    "src": "assets/ringing/phyloscopus_collybita_2.jpeg",
+    "title": "Common Chiffchaff",
+    "date": "2026-11-09",
+    "audio": null
+  },
+  {
+    "id": "photo-phyloscopus-collybita-3",
+    "collections": [
+      "ringing"
+    ],
+    "species": "phyloscopus-collybita",
+    "src": "assets/ringing/phyloscopus_collybita_3.jpeg",
+    "title": "Common Chiffchaff",
+    "date": "2026-11-09",
+    "audio": null
+  },
+  {
+    "id": "photo-phyloscopus-collybita-4",
+    "collections": [
+      "ringing"
+    ],
+    "species": "phyloscopus-collybita",
+    "src": "assets/ringing/phyloscopus_collybita_4.jpeg",
+    "title": "Common Chiffchaff",
+    "date": "2026-11-09",
+    "audio": null
+  },
+  {
+    "id": "photo-sylvia-atricapilla-1",
+    "collections": [
+      "ringing"
+    ],
+    "species": "sylvia-atricapilla",
+    "src": "assets/ringing/sylvia_atricapilla_1.jpeg",
+    "title": "Eurasian Blackcap",
+    "date": "2026-11-09",
+    "audio": null
+  },
+  {
+    "id": "photo-sylvia-atricapilla-2",
+    "collections": [
+      "ringing"
+    ],
+    "species": "sylvia-atricapilla",
+    "src": "assets/ringing/sylvia_atricapilla_2.jpeg",
+    "title": "Eurasian Blackcap",
+    "date": "2026-11-09",
+    "audio": null
+  },
+  {
+    "id": "photo-sylvia-atricapilla-3",
+    "collections": [
+      "ringing"
+    ],
+    "species": "sylvia-atricapilla",
+    "src": "assets/ringing/sylvia_atricapilla_3.jpeg",
+    "title": "Eurasian Blackcap",
+    "date": "2026-11-09",
     "audio": null
   }
 ]

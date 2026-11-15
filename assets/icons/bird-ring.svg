@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="ring-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FCFDFE"/>
+      <stop offset="0.28" stop-color="#D9DDE1"/>
+      <stop offset="0.55" stop-color="#8A9299"/>
+      <stop offset="0.78" stop-color="#E9EDF0"/>
+      <stop offset="1" stop-color="#AEB6BD"/>
+    </linearGradient>
+  </defs>
+  <g transform="rotate(-14 32 32)">
+    <path d="M11 22v20a21 8 0 0 0 42 0V22z" fill="url(#ring-metal)" stroke="#4A5258" stroke-width="2"/>
+    <path d="M32 14a21 8 0 1 0 0.01 0zm0 5a14 4.6 0 1 1 -0.01 0z" fill="url(#ring-metal)" fill-rule="evenodd" stroke="#4A5258" stroke-width="1.6"/>
+    <path d="M11.5 26v16" stroke="#4A5258" stroke-width="2"/>
+    <path d="M23 33h4M31 33h3M38 33h3M22 38h5M31 38h4M38 38h3" stroke="#4A5258" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
+    <path d="M17 26v13" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>

@@ -173,6 +173,130 @@
     });
   });
 
+  // Species decks: hovering or keyboard focus fans the deck open. Pressing a
+  // fanned card presents it; pressing the presented card returns it to the
+  // fan. Leaving hover closes the deck with the selected card on top.
+  var deckEntries = [];
+  var decks = Array.prototype.slice.call(
+    document.querySelectorAll("[data-deck]")
+  );
+
+  decks.forEach(function (deck) {
+    var cards = Array.prototype.slice.call(
+      deck.querySelectorAll("[data-card]")
+    );
+    if (!cards.length) {
+      return;
+    }
+
+    var selected = cards[0];
+    var presented = cards[0];
+
+    function updateStack() {
+      var index = presented ? cards.indexOf(presented) : -1;
+      var open = deck.classList.contains("is-open");
+      var rank = 0;
+
+      cards.forEach(function (card, position) {
+        if (card === presented) {
+          card.style.setProperty("--stack-rank", "0");
+          card.style.zIndex = "60";
+          return;
+        }
+        rank += 1;
+        card.style.setProperty("--stack-rank", String(rank));
+        card.style.zIndex = String(
+          open
+            ? index < 0
+              ? position + 10
+              : 50 - Math.abs(position - index)
+            : 55 - rank
+        );
+      });
+    }
+
+    function applyPresentation(card) {
+      presented = card;
+      cards.forEach(function (other) {
+        var active = other === card;
+        other.classList.toggle("is-presented", active);
+        other.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      updateStack();
+    }
+
+    function open() {
+      deck.classList.add("is-open");
+      if (!presented) {
+        applyPresentation(selected);
+      } else {
+        updateStack();
+      }
+    }
+
+    function close() {
+      deck.classList.remove("is-open");
+      if (selected) {
+        applyPresentation(selected);
+      } else {
+        updateStack();
+      }
+    }
+
+    deck.addEventListener("mouseenter", open);
+    deck.addEventListener("mouseleave", close);
+
+    deck.addEventListener("focusin", function (event) {
+      var target = event.target;
+      if (target.matches && target.matches(":focus-visible")) {
+        open();
+      }
+    });
+
+    deck.addEventListener("focusout", function (event) {
+      if (!deck.contains(event.relatedTarget)) {
+        close();
+      }
+    });
+
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        if (!deck.classList.contains("is-open")) {
+          open();
+          selected = card;
+          applyPresentation(card);
+          return;
+        }
+        if (card === presented) {
+          if (cards.length > 1) {
+            presented = null;
+            cards.forEach(function (other) {
+              other.classList.remove("is-presented");
+              other.setAttribute("aria-pressed", "false");
+            });
+            updateStack();
+          }
+          return;
+        }
+        selected = card;
+        applyPresentation(card);
+      });
+    });
+
+    applyPresentation(presented);
+    deckEntries.push({ deck: deck, close: close });
+  });
+
+  if (deckEntries.length) {
+    document.addEventListener("pointerdown", function (event) {
+      deckEntries.forEach(function (entry) {
+        if (!entry.deck.contains(event.target)) {
+          entry.close();
+        }
+      });
+    });
+  }
+
   // YouTube refuses to configure a player without an HTTP referrer, so file://
   // previews keep the link behaviour and open the watch page instead. Over
   // HTTP(S) the click swaps the thumbnail for an inline player.

@@ -18,8 +18,10 @@ personal_portfolio/
 │       ├── repos.json        selected GitHub repositories
 │       ├── videos.json       rescue clips and podcast promos
 │       ├── photos.json       ringing photographs
+│       ├── species.json      species names and note pointers
 │       ├── episodes/         per-episode description Markdown
-│       └── repos/            per-repository description Markdown
+│       ├── repos/            per-repository description Markdown
+│       └── species/          per-species note Markdown
 ├── templates/
 │   ├── base.html             card page shell
 │   ├── base-board.html       hub shell
@@ -30,9 +32,9 @@ personal_portfolio/
 │   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
 │   ├── css/site.css          shared card pages
-│   ├── css/pages/            optional per-page styles (podcast.css, engineering.css)
+│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing)
 │   ├── js/board.js           horizontal pan and nav shortcuts
-│   ├── js/site.js            contact form
+│   ├── js/site.js            contact form, repo accordions, talk videos, species decks
 │   ├── fonts/                Patrick Hand (OFL)
 │   ├── general/              board background, robin PNG, reference assets
 │   ├── documents/            CV and book PDF placeholders
@@ -110,8 +112,12 @@ automatically. No renderer change is needed for a new card.
   description}`. `youtube` takes precedence when set; `date` is ISO
   `YYYY-MM-DD` or null. Video files are not committed: a missing local `src`
   (with no `youtube`) is a hard validation error.
-- `photos.json`: `{id, collections, src, title, caption, date, audio}`. `date`
-  is ISO `YYYY-MM-DD` or null.
+- `photos.json`: `{id, collections, species, src, title, date, audio}`.
+  `species` is the id of a `species.json` record; `date` is ISO `YYYY-MM-DD`
+  or null. There is no per-photo caption.
+- `species.json`: `{id, collections, name, note_src}`. `note_src` points into
+  `content/data/species/`; the rendered Markdown is the shared note on the
+  species deck. Photos grouped by `"species"` join through this id.
 
 ## Board layout
 

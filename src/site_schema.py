@@ -25,6 +25,10 @@ DATASETS = {
 DATASET_TYPES = frozenset(DATASETS)
 BLOCK_TYPES = frozenset({"prose", "contact"}) | DATASET_TYPES
 
+# Species notes are page text, not a block dataset. Photos reference a species
+# id, and the photo renderer joins the note for the group label.
+SPECIES_FILE = "species.json"
+
 # Reserved collection: a record carrying it is excluded from collection
 # selection, but remains on disk and can be restored by removing the name.
 HIDDEN_COLLECTION = "hidden"
@@ -32,6 +36,11 @@ HIDDEN_COLLECTION = "hidden"
 
 def load_dataset(name: str) -> list[dict]:
     with (DATA_DIR / DATASETS[name]).open(encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def load_species() -> list[dict]:
+    with (DATA_DIR / SPECIES_FILE).open(encoding="utf-8") as handle:
         return json.load(handle)
 
 

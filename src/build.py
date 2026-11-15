@@ -20,6 +20,7 @@ from src.site_schema import (
     load_cards,
     load_dataset,
     load_site,
+    load_species,
     select_records,
 )
 
@@ -153,6 +154,30 @@ def iso_date(value):
         return date.fromisoformat(str(value))
     except ValueError:
         return None
+
+
+MONTHS = (
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+)
+
+
+def display_date(value):
+    """Human date for card metadata, or an empty string."""
+    parsed = iso_date(value)
+    if not parsed:
+        return ""
+    return f"{parsed.day} {MONTHS[parsed.month - 1]} {parsed.year}"
 
 
 def iso_moment(value):
@@ -478,27 +503,111 @@ def render_videos(records: list[dict], root: str) -> str:
     return '<div class="media-grid media-grid--videos">' + "".join(cards) + "</div>"
 
 
-def render_photos(records: list[dict], root: str) -> str:
-    cards = []
+BIRD_RING = "assets/icons/bird-ring.svg"
+
+
+def photo_card(photo: dict, root: str) -> str:
+    media = (
+        f'<img src="{esc(root + photo["src"])}" '
+        f'alt="{esc(photo["title"])}" loading="lazy">'
+    )
+    audio = ""
+    if photo.get("audio"):
+        audio = (
+            f'<audio controls preload="none" '
+            f'src="{esc(root + photo["audio"])}"></audio>'
+        )
+    caption = photo.get("caption", "")
+    parts = [f'<span class="media-title">{esc(photo["title"])}</span>']
+    if caption:
+        parts.append(f'<span class="media-meta">{esc(caption)}</span>')
+    return (
+        f'<figure class="media-card">{media}<figcaption>'
+        + "".join(parts)
+        + audio
+        + "</figcaption></figure>"
+    )
+
+
+def species_group(
+    species: dict[str, dict] | None, key: str, root: str
+) -> tuple[str, str]:
+    """Return the display name and rendered note for a grouping key."""
+    record = species.get(key) if species else None
+    if not record:
+        return key, ""
+    label = record.get("name") or key
+    source = record.get("note_src")
+    note = markdown_to_html(DATA_DIR / source, root) if source else ""
+    return label, note
+
+
+def render_photos(
+    records: list[dict],
+    root: str,
+    group_by: str | None = None,
+    species: dict[str, dict] | None = None,
+) -> str:
+    if not group_by:
+        cards = [photo_card(photo, root) for photo in records]
+        return (
+            '<div class="media-grid media-grid--photos">'
+            + "".join(cards)
+            + "</div>"
+        )
+
+    groups: dict[str, list[dict]] = {}
+    order: list[str] = []
     for photo in records:
-        media = (
-            f'<img src="{esc(root + photo["src"])}" '
-            f'alt="{esc(photo["title"])}" loading="lazy">'
-        )
-        audio = ""
-        if photo.get("audio"):
-            audio = (
-                f'<audio controls preload="none" '
-                f'src="{esc(root + photo["audio"])}"></audio>'
+        key = str(photo.get(group_by) or "Other")
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(photo)
+
+    sections = []
+    for key in order:
+        photos = groups[key]
+        total = len(photos)
+        count = "1 photo" if total == 1 else f"{total} photos"
+        dates: list[str] = []
+        for photo in photos:
+            stamp = display_date(photo.get("date"))
+            if stamp and stamp not in dates:
+                dates.append(stamp)
+        meta = " · ".join([count] + dates)
+        label, note = species_group(species, key, root)
+        cards = []
+        for index in range(total):
+            active = " is-presented" if index == 0 else ""
+            pressed = "true" if index == 0 else "false"
+            cards.append(
+                f'<button class="deck-card{active}" type="button" data-card '
+                f'style="--i: {index}" aria-pressed="{pressed}" '
+                f'aria-label="Show photo {index + 1} of {total}: '
+                f'{esc(photos[index]["title"])}">'
+                f'<img src="{esc(root + photos[index]["src"])}" alt="" '
+                'loading="lazy">'
+                "</button>"
             )
-        caption = photo.get("caption", "")
-        cards.append(
-            f'<figure class="media-card">{media}<figcaption>'
-            f'<span class="media-title">{esc(photo["title"])}</span>'
-            f'<span class="media-meta">{esc(caption)}</span>{audio}'
-            "</figcaption></figure>"
+        note_html = f'<div class="deck-note">{note}</div>' if note else ""
+        sections.append(
+            f'<section class="species-deck" data-deck '
+            f'data-species="{esc(key)}" data-count="{total}">'
+            '<div class="deck-cards">'
+            + "".join(cards)
+            + "</div>"
+            '<div class="deck-base">'
+            '<header class="deck-head">'
+            f'<img class="ring-mark" src="{esc(root + BIRD_RING)}" '
+            'alt="" aria-hidden="true">'
+            f'<h2 class="deck-species">{esc(label)}</h2>'
+            f'<span class="deck-meta">{esc(meta)}</span>'
+            "</header>"
+            f"{note_html}"
+            "</div></section>"
         )
-    return '<div class="media-grid media-grid--photos">' + "".join(cards) + "</div>"
+    return '<div class="species-decks">' + "".join(sections) + "</div>"
 
 
 def phone_tel(phone: object) -> str:
@@ -563,6 +672,16 @@ def render_card_mark(card: dict, root: str) -> str:
             f'<img class="conference-mark" src="{esc(root + TALK_BADGE)}" '
             'alt="" aria-hidden="true">'
         )
+    if mark == "ringing-station":
+        perch = read_template("partials/perch.html")
+        return (
+            render_template(
+                perch,
+                {"ROBIN_STYLE": "--robin-tilt: 9deg", "ROOT": root},
+            )
+            + f'<img class="ring-band" src="{esc(root + BIRD_RING)}" '
+            'alt="" aria-hidden="true">'
+        )
     return ""
 
 
@@ -624,7 +743,9 @@ def render_board_card(card: dict, templates: dict[str, str]) -> str:
         robin_style = f"--robin-tilt: {fmt_num(robin['tilt'])}deg"
         if robin["flip"]:
             robin_style += "; --robin-flip: -1"
-        rig = render_template(templates["perch"], {"ROBIN_STYLE": robin_style})
+        rig = render_template(
+            templates["perch"], {"ROBIN_STYLE": robin_style, "ROOT": ""}
+        )
     elif anchor == "lanyard":
         rig = templates["lanyard"]
     else:
@@ -665,10 +786,19 @@ RENDERERS = {
 }
 
 
-def render_dataset(name: str, select: dict, root: str) -> str:
+def render_dataset(
+    name: str, select: dict, root: str, group_by: str | None = None
+) -> str:
     records = select_records(load_dataset(name), select)
     if "ids" not in select:
         records = sort_latest(records, SORT_KEYS[name])
+    if name == "photos" and group_by:
+        species = (
+            {record["id"]: record for record in load_species()}
+            if group_by == "species"
+            else None
+        )
+        return render_photos(records, root, group_by, species)
     return RENDERERS[name](records, root)
 
 
@@ -679,7 +809,9 @@ def render_block(block: dict, card_dir: Path, site: dict, root: str) -> str:
     if block_type == "contact":
         return render_contact(site)
     if block_type in RENDERERS:
-        return render_dataset(block_type, block["select"], root)
+        return render_dataset(
+            block_type, block["select"], root, block.get("group_by")
+        )
     raise SystemExit(f"build.py: unknown block type {block_type!r}")
 
 

@@ -4,9 +4,9 @@ Date: 2026-11-08
 Status: 16:9 poster layout with title-only cards; anchors chosen (C05 lanyard +
 N03 robin perch); robin transparent PNG integrated; the board is now the site
 hub, with each card linking to its page. Podcast has floating chapter cards;
-Public GitHub has a conference badge and straight, pull-out repository cards,
-both on the dirty ink background. The other card pages keep the shared
-first-pass styling; contact interaction remains.
+Public GitHub, C++ & Standards and Talks have artifact-led software treatments;
+Ringing has the ringer's field sheet with fanned species decks. The other
+card pages keep the shared first-pass styling; contact interaction remains.
 
 ## Goal
 
@@ -332,6 +332,49 @@ C++ & Standards; its rules live in `assets/css/pages/talks.css`.
   then the icon row.
 - Static text notes (header, intro notes, back link, pager) get a soft blue
   glow; `prefers-reduced-motion` removes the pull-out transform.
+
+### Ringing page
+
+Ringing (`ringing`) is the first nature page with its own treatment. It shares
+Podcast's dirty field and cream notes and stays in the board's nature half.
+
+- The background is the dirty ink texture, fixed on desktop; there is no
+  full-page sheet.
+- The header is a landscape cream note with the nature-green top edge and the
+  board's robin perch at its top left: the same branch and twine, with the
+  bird above the note. A silver leg ring (`assets/icons/bird-ring.svg`) sits
+  at the top right as the page artifact, mimicking a real ringing band. The
+  `Field work` kicker, the Patrick Hand title `Ringing` and the summary sit
+  under the perch.
+- Intro paragraphs are straight cream notes with a nature-green left rule,
+  matching the software pages' intro notes.
+- Each species is a **deck** one photograph wide. The static cream base sits
+  directly under the closed photo at the same width and carries the species
+  name, photo count, visit date and one shared note — there is no per-photo
+  caption. The photograph is the dominant element; the note is a narrow
+  column beneath it.
+- Above the base the photos sit as a closed hand of cards: the selected photo
+  is moved to the front of the deck and faces the viewer perfectly upright,
+  with the other photos stacked behind it in a clean single-sided stack.
+  Selecting another card moves it to the front. The cards tuck behind the
+  base's top edge, so the base reads as the lip of a card holder without
+  drawing any mechanism.
+- Hovering or keyboard focus fans the deck open to one side, like a bird's
+  wing opened to one side rather than symmetrically. The cards share a bottom
+  pivot and swing right from the upright selected card; the fan may extend
+  past the base. Losing hover closes it again, with the selected card on top.
+  Pressing a fanned card presents it (replacing the previous facing card);
+  pressing the presented card returns it to the fan while leaving the deck
+  open. A one-photo deck is a one-card deck, and a two-photo deck opens into a
+  shallow one-way fan. Touch opens on tap and closes on a tap outside.
+- Static notes (header, back link, intro notes, pager) get a soft olive glow;
+  the pager and back link are cream tags on the dirty field.
+  `prefers-reduced-motion` keeps the deck states but removes the transitions.
+- The photos block groups by `"species"`. Each photo carries a species id;
+  `content/data/species.json` holds the name and `note_src`, and the note
+  itself lives in `content/data/species/<id>.md`. This is the first page to
+  follow the rule that all prose, including group notes, lives in Markdown
+  from the start rather than inline JSON.
 
 ### Software badges on the hub
 

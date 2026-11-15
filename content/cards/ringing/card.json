@@ -4,7 +4,8 @@
   "family": "nature",
   "order": 5,
   "status": "ready",
-  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.",
+  "mark": "ringing-station",
+  "summary": "The morning's catch at the ringing station — birds in the hand, measured and released.",
   "description": "Bird ringing and field observations.",
   "audio": null,
   "board": {
@@ -26,7 +27,8 @@
       "type": "photos",
       "select": {
         "collection": "ringing"
-      }
+      },
+      "group_by": "species"
     }
   ]
 }

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "alcedo-atthis",
+    "collections": [
+      "ringing"
+    ],
+    "name": "Common Kingfisher",
+    "note_src": "species/alcedo-atthis.md"
+  },
+  {
+    "id": "otus-scops",
+    "collections": [
+      "ringing"
+    ],
+    "name": "Eurasian Scops Owl",
+    "note_src": "species/otus-scops.md"
+  },
+  {
+    "id": "upupa-epops",
+    "collections": [
+      "ringing"
+    ],
+    "name": "Eurasian Hoopoe",
+    "note_src": "species/upupa-epops.md"
+  },
+  {
+    "id": "saxicola-maurus",
+    "collections": [
+      "ringing"
+    ],
+    "name": "Siberian Stonechat",
+    "note_src": "species/saxicola-maurus.md"
+  },
+  {
+    "id": "phyloscopus-collybita",
+    "collections": [
+      "ringing"
+    ],
+    "name": "Common Chiffchaff",
+    "note_src": "species/phyloscopus_collybita.md"
+  },
+  {
+    "id": "sylvia-atricapilla",
+    "collections": [
+      "ringing"
+    ],
+    "name": "Eurasian Blackcap",
+    "note_src": "species/sylvia-atricapilla.md"
+  }
+]

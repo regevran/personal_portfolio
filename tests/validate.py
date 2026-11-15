@@ -96,7 +96,6 @@ DATASET_FIELDS = {
         "collections",
         "src",
         "title",
-        "caption",
         "date",
         "audio",
     ),
@@ -296,9 +295,17 @@ def _validate_block(
             errors.append(f"{label}: unknown fields {sorted(extra)}")
         return
 
-    extra = set(block) - {"type", "select"}
+    allowed = {"type", "select"}
+    if block_type == "photos":
+        allowed.add("group_by")
+    extra = set(block) - allowed
     if extra:
         errors.append(f"{label}: unknown fields {sorted(extra)}")
+
+    if "group_by" in block:
+        group_by = block["group_by"]
+        if not isinstance(group_by, str) or not group_by:
+            errors.append(f"{label}: 'group_by' must be a non-empty string")
 
     try:
         records = load_dataset(block_type)
@@ -307,9 +314,18 @@ def _validate_block(
         return
 
     try:
-        select_records(records, block.get("select"))
+        selected = select_records(records, block.get("select"))
     except ValueError as exc:
         errors.append(f"{label}: {exc}")
+        return
+
+    if block_type == "photos" and block.get("group_by") == "species":
+        for record in selected:
+            if not isinstance(record.get("species"), str) or not record["species"]:
+                errors.append(
+                    f"{label}: photo {record.get('id', '?')!r} "
+                    "needs a 'species' id"
+                )
 
 
 def validate_cards() -> list[str]:
@@ -518,6 +534,66 @@ def validate_datasets() -> list[str]:
     return errors
 
 
+SPECIES_FIELDS = ("id", "collections", "name", "note_src")
+
+
+def validate_species() -> list[str]:
+    errors: list[str] = []
+    path = DATA_DIR / "species.json"
+    if not path.is_file():
+        errors.append(f"{path.relative_to(ROOT)}: missing")
+        return errors
+    try:
+        records = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        errors.append(f"{path.relative_to(ROOT)}: invalid JSON ({exc})")
+        return errors
+    if not isinstance(records, list) or not records:
+        errors.append(f"{path.relative_to(ROOT)}: expected a non-empty list")
+        return errors
+
+    seen: set[str] = set()
+    for index, entry in enumerate(records):
+        label = f"content/data/species.json[{index}]"
+        if not _require(errors, entry, SPECIES_FIELDS, label):
+            continue
+        _validate_record_id(errors, entry, label, seen)
+        _validate_collections(errors, entry, label)
+
+        name = entry.get("name")
+        if not isinstance(name, str) or not name:
+            errors.append(f"{label}: 'name' must be a non-empty string")
+
+        source = entry.get("note_src")
+        if not isinstance(source, str) or not source:
+            errors.append(f"{label}: 'note_src' must be a non-empty string")
+            continue
+        target = (DATA_DIR / source).resolve()
+        try:
+            target.relative_to(DATA_DIR.resolve())
+        except ValueError:
+            errors.append(f"{label}: 'note_src' escapes content/data")
+            continue
+        if not target.is_file():
+            errors.append(f"{label}: missing {target.relative_to(ROOT)}")
+
+    ids = {entry.get("id") for entry in records if isinstance(entry, dict)}
+    try:
+        photos = load_dataset("photos")
+    except (OSError, json.JSONDecodeError):
+        photos = []
+    for index, photo in enumerate(photos):
+        if not isinstance(photo, dict) or "species" not in photo:
+            continue
+        species_id = photo.get("species")
+        label = f"content/data/photos.json[{index}]"
+        if not isinstance(species_id, str) or not species_id:
+            errors.append(f"{label}: 'species' must be a non-empty string")
+        elif species_id not in ids:
+            errors.append(f"{label}: unknown species {species_id!r}")
+    return errors
+
+
 def validate_assets() -> list[str]:
     errors: list[str] = []
     for relative in (
@@ -528,6 +604,7 @@ def validate_assets() -> list[str]:
         "assets/css/pages/engineering.css",
         "assets/css/pages/cpp-standards.css",
         "assets/css/pages/talks.css",
+        "assets/css/pages/ringing.css",
         "assets/js/site.js",
         "assets/js/board.js",
         "assets/fonts/PatrickHand-Regular.ttf",
@@ -548,6 +625,7 @@ def validate_assets() -> list[str]:
         "assets/icons/external.svg",
         "assets/icons/youtube.svg",
         "assets/icons/github.svg",
+        "assets/icons/bird-ring.svg",
     ):
         _file_exists(errors, relative, "assets")
     return errors
@@ -558,6 +636,7 @@ def validate_content() -> list[str]:
         validate_site()
         + validate_cards()
         + validate_datasets()
+        + validate_species()
         + validate_assets()
     )
 

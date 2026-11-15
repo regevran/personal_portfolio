@@ -263,6 +263,36 @@ data-driven, because it will be updated from time to time.
   rejects a player without an HTTP referrer. The icon row uses the YouTube
   mark and a document mark, not the `Open origin` text; `url` is the fallback
   origin icon when a talk has neither.
+- The **Ringing page** (`ringing`) got its field-sheet treatment on
+  2026-11-15. It keeps Podcast's dirty ink field and cream notes but uses the
+  nature-green accent and the board's robin perch: the bird sits on the branch
+  above the header note, whose top-left carries the perch. A **silver** leg
+  ring (`assets/icons/bird-ring.svg`) is the page artifact at the top right,
+  mimicking a real ringing band. Intro notes are straight with a green left
+  rule.
+- **Ringing photos became species decks** on 2026-11-15. Each deck is one
+  photograph wide: a static cream base sits directly under the closed photo at
+  the same width and carries its name, photo count, visit date and one shared
+  note. The photograph is much larger than the note column; there are no
+  per-photo captions. The photos are a closed hand of cards above the base:
+  the selected card is moved to the front of the deck and held upright, with
+  the rest stacked behind it in one clean direction (not peeking out on both
+  sides), their bottoms tucked behind the base. Selecting another card moves
+  it to the front. Hover or keyboard focus fans the deck open **to one
+  side** — right, like a bird's wing — from a common bottom pivot; it is not a
+  symmetric fan. Losing hover closes it. Pressing a fanned card presents it,
+  and pressing the presented card returns it to the fan while the deck stays
+  open. One-photo decks are a single card and two-photo decks a shallow
+  one-way fan. The rules live in `assets/css/pages/ringing.css`, the state and
+  interaction in `assets/js/site.js`, and the fan step is responsive
+  (`--fan-step` with `--i` per card) so the one-way fan still fits a phone.
+  The shared perch partial now takes a `{{ROOT}}` so it works on card pages as
+  well as the hub.
+- **Species notes are Markdown from the start.** `content/data/species.json`
+  holds `id`, `collections`, `name` and `note_src`; the note text lives in
+  `content/data/species/<id>.md`. Photos carry a `species` id and the photos
+  block groups by `"species"`. This follows the new working rule that all
+  prose lives in Markdown files, not inline JSON, even before it grows.
 - The content model was revised on 2026-11-09: `content/data/cards.json` was
   removed; each card is now a directory with `card.json` + prose. Datasets
   gained stable ids and collection tags. The podcast card's promo-video block

@@ -94,12 +94,14 @@ content/
     *.json         canonical records (papers, talks, episodes, repos, videos, photos)
     episodes/      per-episode description Markdown
     repos/         per-repository description Markdown
+    species.json   species names and note pointers for grouped photos
+    species/       per-species note Markdown
 templates/         base shells, the hub board, card pages and partials
 assets/            images, videos, documents, CSS and JS
   css/theme.css    palette, type, topbar and footer
   css/board.css    the hub board
   css/site.css     shared card pages
-  css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css, talks.css)
+  css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css, talks.css, ringing.css)
   icons/           platform, GitHub, C++ logo, conference-badge, document and video marks; lanyard
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
@@ -127,7 +129,9 @@ dist/              generated output (ignored by git)
   GitHub-logo header and pull-out repository cards; C++ & Standards uses
   `assets/css/pages/cpp-standards.css` for its C++ logo header and paper
   cards; Talks uses `assets/css/pages/talks.css` for its conference-badge
-  header, embedded-video talk boxes and click-to-play thumbnails.
+  header, embedded-video talk boxes and click-to-play thumbnails; Ringing uses
+  `assets/css/pages/ringing.css` for its robin-perch header, silver ring mark
+  and fanned species decks.
 - **Repository cards:** a full description is clamped to a preview with a
   `More…` toggle at the bottom of the card. Opening one expands it to its full
   height, changes the label to `Less…`, and closes any other open repository
@@ -135,6 +139,16 @@ dist/              generated output (ignored by git)
   the animation off. The toggle is only shown when the description actually
   overflows; with JavaScript disabled the full text stays visible. The
   behaviour lives in `assets/js/site.js`.
+- **Species decks:** a grouped photo block renders each species as a deck one
+  photograph wide. The static base sits directly under the photo at the same
+  width and carries the shared species note. Hover or keyboard focus fans the
+  cards open to one side, like a wing; pressing a fanned card presents it, and
+  pressing the presented card returns it to the fan while the deck stays open.
+  Leaving hover closes the deck with the selected card moved to the front of
+  the stack and the rest behind it in one clean stack. Fan angles come from a
+  responsive `--fan-step` and the card index, so the closed and fanned states
+  work before JavaScript runs; `site.js` owns the selected/presented state and
+  the closed stack order.
 - **Links:** internal navigation (hub cards, back link, pager) stays in the
   same tab. External links in card data and Markdown open in a new tab with
   `rel="noopener"`; the renderer adds this to http(s) links in Markdown and to
@@ -157,6 +171,16 @@ dist/              generated output (ignored by git)
   `"description_src"` in `repos.json`. Each file holds the full Markdown body
   for the repository card; the first paragraph doubles as its one-line
   summary. Use `##` and below for subheadings, not `#`.
+- **Species notes:** `content/data/species.json` records an `id`,
+  `collections`, display `name` and `note_src`; the note itself lives in
+  `content/data/species/<id>.md`. Photos reference the species id in a
+  `species` field. The note is shared by every photo in the deck.
+- **All prose lives in Markdown.** Any text a visitor reads belongs in a
+  `.md` file from the start — page prose, episode and repository descriptions,
+  species notes and future datasets — with JSON carrying only ids, routing
+  fields and structured metadata. Do not put prose inline in JSON even when it
+  is short; it makes the text easy to find and lets markup grow without a data
+  migration.
 - **Episode links:** `episodes.json` records carry `links` with `spotify`,
   `apple`, and `pocketcasts` URLs. Episode titles are not links; each card
   renders the three platform logos. A missing direct link falls back to the
@@ -180,20 +204,25 @@ in `card.json`; no code changes are needed. A block selects records with
 | `{"type": "episodes", "select": {"collection": "podcast"}}` | podcast episodes |
 | `{"type": "repos", "select": {"collection": "engineering"}}` | repositories |
 | `{"type": "videos", "select": {"collection": "rescues"}}` | video grid |
-| `{"type": "photos", "select": {"collection": "ringing"}}` | photo gallery |
+| `{"type": "photos", "select": {"collection": "ringing"}, "group_by": "species"}` | species decks |
 | `{"type": "contact"}` | contact panel and form |
 
 Collection selection ignores records whose `collections` contains `hidden`, so
 soft-removing a record means adding `"hidden"`; remove it again to restore the
 record. Explicit `ids` selection is not affected by `hidden`.
 
+Photo blocks may add `"group_by": "<field>"` (used with `species` on Ringing)
+to render one deck per value. The deck's static base carries the group name,
+the photo count, the visit date(s) and the shared note; the photos themselves
+have no per-frame caption.
+
 All listings render **latest first**: papers by `year`, talks and episodes by
 `sort_date`, videos and photos by `date`, repositories by `pushed_at`. A `null`
 date sorts to the end and keeps the source order. Explicit `ids` keep the order
 given. Use `cmake --build --preset refresh-repos` (or the `refresh` workflow) to
-refresh `pushed_at` from GitHub; the default build is offline. Photos and rescue
-videos currently have no embedded capture dates; fill their `date` fields when
-known and the warnings will stop.
+refresh `pushed_at` from GitHub; the default build is offline. The build warns
+for any visible entry without a sortable date; fill the `date` field when known
+and the warning stops.
 
 ### Videos
 

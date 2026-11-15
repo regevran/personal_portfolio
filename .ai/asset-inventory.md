@@ -15,6 +15,7 @@
 | `assets/icons/external.svg` | Talks fallback cards | external-link icon for a talk with no video or slides |
 | `assets/icons/youtube.svg` | Talks video cards | YouTube play mark for the watch link |
 | `assets/icons/github.svg` | Public GitHub header and hub card, repository-card rail | GitHub mark; the page/hub artifact and the repository link |
+| `assets/icons/bird-ring.svg` | Ringing header and species deck bases | silver leg-ring mark; the Ringing page artifact |
 | `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the GitHub logo, white background and CSS quiet zone |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
@@ -25,6 +26,8 @@
 | `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_{1,2,3,4}.jpeg` | rescues (later) | not yet wired into a gallery |
 | `assets/ringing/alcedo_atthis_{1,2,3}.jpeg` | ringing, photos.json | Common Kingfisher |
 | `assets/ringing/otus_scops_{1,2,3,4}.jpeg` | ringing, photos.json | Eurasian Scops Owl |
+| `assets/ringing/phyloscopus_collybita_{2,3,4}.jpeg` | ringing, photos.json | Common Chiffchaff; note `content/data/species/phyloscopus_collybita.md` |
+| `assets/ringing/sylvia_atricapilla_{1,2,3}.jpeg` | ringing, photos.json | Eurasian Blackcap; note `content/data/species/sylvia-atricapilla.md` |
 | `assets/ringing/saxicola_maurus.jpeg` | ringing, photos.json | Siberian Stonechat |
 | `assets/ringing/upupa_epops_{1,2}.jpeg` | ringing, photos.json | Eurasian Hoopoe |
 | `design/assets/img/main_page_concept.{jpeg,svg}` | design session only | mood reference, moved out of `assets/` so it is not published. The SVG is a flattened Canva export: 3.1 MB, 16,844 elements, 15 embedded rasters, no semantic labels, text outlined. |
@@ -38,7 +41,7 @@
 | CV PDF | pending; card shows a placeholder |
 | Bird book PDF | exists in `~/dev/ran/birds/book/out/` (2.3 MB) but not shareable yet |
 | Learning-aid build | design phase only in `~/dev/ran/birds/learn` |
-| Photo/video capture dates | not present in EXIF or QuickTime metadata; `date` fields are null until supplied |
+| Photo/video capture dates | not present in EXIF or QuickTime metadata; `date` fields are null until supplied. The three Eurasian Blackcap photos are null for now and trigger the date warning. |
 | YouTube URLs | local files for now |
 
 ## Design assets

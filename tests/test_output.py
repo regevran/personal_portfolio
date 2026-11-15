@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from src.build import iso_date, sort_latest
+from src.build import display_date, iso_date, sort_latest
 from tests.validate import DATA_DIR, DIST, validate_output
 
 
@@ -184,6 +184,116 @@ class OutputValidationTest(unittest.TestCase):
 
         board_css = (DIST / "assets" / "css" / "board.css").read_text(encoding="utf-8")
         self.assertIn('[data-mark="conference-badge"]', board_css)
+
+    def test_ringing_page_specific_design(self):
+        ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("assets/css/pages/ringing.css", ringing)
+        self.assertIn("card-page--ringing", ringing)
+        self.assertIn("hang-rig--perch", ringing)
+        self.assertIn("robin-img", ringing)
+        self.assertIn("closing_on_birds_robin.png", ringing)
+        self.assertIn('class="ring-band"', ringing)
+        self.assertIn("bird-ring.svg", ringing)
+        self.assertEqual(ringing.count('class="species-deck"'), 6)
+        self.assertIn('data-deck', ringing)
+        self.assertIn('data-count="4"', ringing)
+        self.assertIn('data-count="2"', ringing)
+        self.assertIn('class="deck-cards"', ringing)
+        self.assertEqual(ringing.count('<button class="deck-card'), 16)
+        self.assertIn('class="deck-base"', ringing)
+        self.assertIn('class="deck-note"', ringing)
+        self.assertIn('class="deck-species"', ringing)
+        self.assertIn('aria-pressed="true"', ringing)
+        self.assertIn('style="--i: 0"', ringing)
+        self.assertIn("2 photos", ringing)
+        self.assertIn("3 photos", ringing)
+        self.assertIn('data-count="3"', ringing)
+        self.assertIn("4 photos", ringing)
+        self.assertNotIn('class="media-title"', ringing)
+        self.assertNotIn("pages/podcast.css", ringing)
+
+        for phrase in (
+            "flying into the net",
+            "caught early in the morning before sunrise",
+            "Just a lovely Hoopoe.",
+            "rarer than European stonechats",
+            "normally fast to fly once done",
+            "mixed colors on its cap",
+        ):
+            self.assertIn(phrase, ringing)
+
+        ringing_css = (
+            DIST / "assets" / "css" / "pages" / "ringing.css"
+        ).read_text(encoding="utf-8")
+        self.assertIn("dirty-background.jpg", ringing_css)
+        self.assertIn(".card-page--ringing", ringing_css)
+        self.assertIn(".species-deck", ringing_css)
+        self.assertIn(".deck-card", ringing_css)
+        self.assertIn(".deck-base", ringing_css)
+        self.assertIn(".deck-note", ringing_css)
+        self.assertIn(".ring-mark", ringing_css)
+        self.assertIn(".ring-band", ringing_css)
+        self.assertIn("--fan-step: 10deg", ringing_css)
+        self.assertIn("calc(var(--i) * var(--fan-step))", ringing_css)
+        self.assertIn("transform-origin: 50% 100%", ringing_css)
+        self.assertIn("rotate(var(--angle))", ringing_css)
+        self.assertIn("var(--stack-rank", ringing_css)
+        self.assertIn("width: var(--card-w)", ringing_css)
+        self.assertIn("prefers-reduced-motion: reduce", ringing_css)
+
+        site_js = (DIST / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+        self.assertIn("[data-deck]", site_js)
+        self.assertIn("[data-card]", site_js)
+        self.assertIn("is-presented", site_js)
+        self.assertIn("is-open", site_js)
+        self.assertIn("aria-pressed", site_js)
+        self.assertIn("pointerdown", site_js)
+        self.assertIn("--stack-rank", site_js)
+        self.assertIn("updateStack", site_js)
+
+        ring = (DIST / "assets" / "icons" / "bird-ring.svg").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("#D9DDE1", ring)
+        self.assertNotIn("#C6A465", ring)
+
+        photos = json.loads(
+            (DATA_DIR / "photos.json").read_text(encoding="utf-8")
+        )
+        species = json.loads(
+            (DATA_DIR / "species.json").read_text(encoding="utf-8")
+        )
+        labels = {record["id"]: record["name"] for record in species}
+        ringing_photos = [
+            photo
+            for photo in photos
+            if "ringing" in photo.get("collections", [])
+        ]
+        ordered = sort_latest(
+            ringing_photos, lambda photo: iso_date(photo.get("date"))
+        )
+        group_order = []
+        for photo in ordered:
+            if photo["species"] not in group_order:
+                group_order.append(photo["species"])
+        positions = [
+            ringing.index(f'class="deck-species">{labels[species_id]}<')
+            for species_id in group_order
+        ]
+        self.assertEqual(positions, sorted(positions))
+
+        for species_id in group_order:
+            group = [
+                photo for photo in ordered if photo["species"] == species_id
+            ]
+            count = "1 photo" if len(group) == 1 else f"{len(group)} photos"
+            dates = []
+            for photo in group:
+                stamp = display_date(photo.get("date"))
+                if stamp and stamp not in dates:
+                    dates.append(stamp)
+            meta = " · ".join([count] + dates)
+            self.assertIn(meta, ringing)
 
     def test_listings_are_latest_first(self):
         cpp = (DIST / "cpp-standards" / "index.html").read_text(encoding="utf-8")

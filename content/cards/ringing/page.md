@@ -1,3 +1,3 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ringing is the quiet craft underneath a lot of bird knowledge. A mist net is checked at first light; each bird is lifted out, measured, aged, and fitted with a numbered metal ring before it goes back to the scrub. The ring is small, but it turns a single sighting into a data point that can be read years later, somewhere else.
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+These are the birds that came through the station — held briefly, photographed, and released. The species are grouped below, with the date of each visit.

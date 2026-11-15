@@ -1,0 +1,406 @@
+/* Ringing — the ringer's field sheet on the dirty board. */
+
+body[data-page="ringing"] {
+  background: var(--sand) url("../../general/dirty-background.jpg") center /
+    cover no-repeat;
+}
+
+@media (min-width: 900px) {
+  body[data-page="ringing"] {
+    background-attachment: fixed;
+  }
+}
+
+.card-page--ringing {
+  max-width: 1120px;
+  min-height: 0;
+  padding: clamp(1rem, 3vw, 2rem) clamp(0.6rem, 2vw, 1.2rem)
+    clamp(2rem, 5vw, 4rem);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.card-page--ringing::before {
+  display: none;
+}
+
+.card-page--ringing .back-link {
+  display: inline-block;
+  margin: 0 0 1.2rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--cream);
+  box-shadow: 0 4px 10px rgba(47, 39, 20, 0.12);
+  transform: rotate(-1deg);
+}
+
+.card-page--ringing .back-link:hover,
+.card-page--ringing .back-link:focus-visible {
+  color: var(--nature-dark);
+  border-bottom-color: transparent;
+}
+
+/* Header note ------------------------------------------------------------- */
+
+.card-page--ringing .card-page-header {
+  position: relative;
+  max-width: 980px;
+  margin: 5.8rem auto clamp(2rem, 4vw, 2.8rem);
+  padding: clamp(1.7rem, 4vw, 2.7rem) clamp(1.4rem, 4vw, 2.8rem)
+    clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--rule);
+  border-top: 0.55rem solid var(--nature-dark);
+  border-radius: 4px 16px 6px 12px;
+  background: var(--cream);
+  box-shadow: 0 22px 48px rgba(47, 39, 20, 0.24);
+}
+
+.card-page--ringing .card-page-header h1 {
+  font-size: clamp(3rem, 6.5vw, 5rem);
+}
+
+.card-page--ringing .eyebrow {
+  color: var(--nature-dark);
+}
+
+.card-page--ringing .lede {
+  max-width: 58ch;
+}
+
+/* The robin perch sits on the note's top edge. */
+.card-page--ringing .hang-rig--perch {
+  position: absolute;
+  top: -6rem;
+  left: clamp(1.4rem, 4vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  height: auto;
+  pointer-events: none;
+}
+
+.card-page--ringing .hang-rig--perch svg {
+  display: block;
+  width: 120px;
+  height: 36px;
+  margin-top: -4px;
+  overflow: visible;
+}
+
+.card-page--ringing .robin-img {
+  display: block;
+  width: 56px;
+  height: 72px;
+  object-fit: contain;
+  object-position: bottom center;
+  transform: translateY(2px) rotate(var(--robin-tilt, 0deg))
+    scaleX(var(--robin-flip, 1));
+  transform-origin: bottom center;
+  filter: drop-shadow(0 6px 10px rgba(47, 39, 20, 0.16));
+}
+
+.card-page--ringing .ring-band {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 1.6rem);
+  right: clamp(1rem, 3vw, 1.8rem);
+  width: clamp(3rem, 5vw, 4.4rem);
+  height: auto;
+  transform: rotate(7deg);
+  filter: drop-shadow(0 6px 10px rgba(47, 39, 20, 0.18));
+}
+
+/* Intro notes ------------------------------------------------------------- */
+
+.card-page--ringing .prose {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.4rem, 2.8vw, 2.2rem);
+}
+
+.card-page--ringing .prose > p {
+  width: min(100%, 980px);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.15rem 1.6rem;
+  border: 1px solid var(--rule);
+  border-left: 0.3rem solid var(--nature-dark);
+  border-radius: 3px 9px 4px 7px;
+  background: var(--cream);
+  box-shadow: 0 12px 26px rgba(47, 39, 20, 0.16);
+}
+
+/* Species decks ----------------------------------------------------------- */
+
+.species-decks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.4rem, 4.5vw, 3.8rem);
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
+
+.species-deck {
+  --card-w: clamp(300px, 34vw, 420px);
+  --fan-step: 10deg;
+  width: var(--card-w);
+  margin: 0 auto;
+}
+
+/* A bird's wing opens to one side, so every card swings the same way. */
+.species-deck[data-count="2"] {
+  --fan-step: 14deg;
+}
+
+.species-deck[data-count="3"] {
+  --fan-step: 12deg;
+}
+
+.deck-cards {
+  position: relative;
+  height: calc(var(--card-w) * 1.25 + 1.6rem);
+}
+
+.deck-card {
+  --angle: calc(var(--i) * var(--fan-step));
+  position: absolute;
+  left: 50%;
+  bottom: -0.5rem;
+  display: block;
+  width: var(--card-w);
+  height: calc(var(--card-w) * 1.25);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  border: 1px solid var(--rule);
+  border-radius: 3px 5px 4px 7px;
+  background: var(--cream);
+  box-shadow: 0 9px 20px rgba(47, 39, 20, 0.16);
+  transform: translateX(-50%)
+    translate(
+      calc(var(--stack-rank, var(--i)) * 5px),
+      calc(var(--stack-rank, var(--i)) * -4px)
+    )
+    rotate(calc(var(--stack-rank, var(--i)) * 0.8deg));
+  transform-origin: 50% 100%;
+  z-index: var(--i);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 200ms ease;
+}
+
+.deck-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px 4px 3px 6px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Closed: the selected photo faces the viewer; the rest peek out behind. */
+.deck-card.is-presented {
+  z-index: 60;
+  transform: translateX(-50%) rotate(0);
+}
+
+/* Hover and the JS .is-open state fan the cards from a common bottom pivot. */
+.species-deck.is-open .deck-card,
+.species-deck:hover .deck-card {
+  transform: translateX(-50%) rotate(var(--angle));
+  z-index: calc(var(--i) + 10);
+}
+
+.species-deck.is-open .deck-card.is-presented,
+.species-deck:hover .deck-card.is-presented {
+  z-index: 70;
+  box-shadow: 0 20px 38px rgba(47, 39, 20, 0.26);
+  transform: translateX(-50%) rotate(var(--angle)) translateY(-14px)
+    scale(1.04);
+}
+
+/* The static tray the deck sits in. It covers the card bottoms, like a lip. */
+.deck-base {
+  position: relative;
+  z-index: 80;
+  padding: 0.95rem 1.1rem 1.15rem;
+  border: 1px solid var(--rule);
+  border-top: 0.5rem solid var(--nature-dark);
+  border-radius: 3px 12px 5px 9px;
+  background: var(--cream);
+  box-shadow: 0 16px 34px rgba(47, 39, 20, 0.2);
+}
+
+.deck-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "mark name"
+    "mark meta";
+  align-items: center;
+  gap: 0.15rem 0.55rem;
+  margin-bottom: 0.65rem;
+}
+
+.ring-mark {
+  grid-area: mark;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.deck-species {
+  grid-area: name;
+  margin: 0;
+  font-family: var(--hand);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.deck-meta {
+  grid-area: meta;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.deck-note {
+  max-width: none;
+}
+
+.deck-note p {
+  margin: 0 0 0.7rem;
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.deck-note p:last-child {
+  margin-bottom: 0;
+}
+
+/* Static notes glow; the cards carry their own lift. */
+.card-page--ringing .card-page-header,
+.card-page--ringing .back-link,
+.card-page--ringing .prose > p,
+.card-page--ringing .pager {
+  transition: box-shadow 180ms ease;
+}
+
+.card-page--ringing .card-page-header:hover,
+.card-page--ringing .back-link:hover,
+.card-page--ringing .back-link:focus-visible,
+.card-page--ringing .prose > p:hover,
+.card-page--ringing .pager:hover {
+  box-shadow: 0 0 0 0.22rem rgba(154, 154, 91, 0.5),
+    0 18px 38px rgba(47, 39, 20, 0.22);
+}
+
+/* Pager ------------------------------------------------------------------- */
+
+.card-page--ringing .pager {
+  width: min(100%, 980px);
+  margin: 3rem auto 0;
+  padding: 1rem 1.4rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px 9px 4px 7px;
+  background: var(--cream);
+  box-shadow: 0 12px 26px rgba(47, 39, 20, 0.16);
+}
+
+/* Small screens ----------------------------------------------------------- */
+
+@media (max-width: 820px) {
+  .card-page--ringing .card-page-header {
+    margin-top: 4.6rem;
+  }
+
+  .card-page--ringing .hang-rig--perch {
+    top: -4.9rem;
+    left: 1.1rem;
+    width: 92px;
+  }
+
+  .card-page--ringing .hang-rig--perch svg {
+    width: 92px;
+    height: 28px;
+  }
+
+  .card-page--ringing .robin-img {
+    width: 44px;
+    height: 56px;
+  }
+
+  .card-page--ringing .ring-band {
+    width: 2.7rem;
+  }
+
+  .species-deck {
+    --card-w: clamp(230px, 48vw, 300px);
+  }
+
+  .deck-cards {
+    height: calc(var(--card-w) * 1.25 + 1.4rem);
+  }
+
+  .deck-base {
+    padding: 0.85rem 1rem 1rem;
+  }
+
+  .deck-head {
+    gap: 0.1rem 0.45rem;
+  }
+
+  .ring-mark {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .deck-species {
+    font-size: 1.38rem;
+  }
+
+  .deck-meta {
+    font-size: 0.52rem;
+  }
+
+  .deck-note p {
+    font-size: 0.9rem;
+  }
+
+  .card-page--ringing .prose > p {
+    padding: 0.95rem 1.1rem;
+  }
+}
+
+/* Keep the one-way fan inside a narrow phone screen. */
+@media (max-width: 650px) {
+  .species-deck[data-count="2"] {
+    --fan-step: 8deg;
+  }
+
+  .species-deck[data-count="3"] {
+    --fan-step: 5deg;
+  }
+
+  .species-deck[data-count="4"] {
+    --fan-step: 4deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-page--ringing .card-page-header,
+  .card-page--ringing .back-link,
+  .card-page--ringing .prose > p,
+  .card-page--ringing .pager,
+  .deck-card {
+    transition: none;
+  }
+}
