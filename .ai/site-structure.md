@@ -8,8 +8,10 @@ personal_portfolio/
 ├── content/
 │   ├── cards/
 │   │   └── <slug>/
-│   │       ├── card.json     page metadata and ordered blocks
-│   │       └── page.md       page prose (any number of prose files)
+│   │       ├── card.json       page metadata and ordered blocks
+│   │       ├── summary.md      visible page lede
+│   │       ├── description.md  meta description
+│   │       └── page.md         page prose (any number of prose files)
 │   └── data/
 │       ├── site.json         identity, tagline, contact details
 │       ├── papers.json       WG21 papers
@@ -21,6 +23,7 @@ personal_portfolio/
 │       ├── species.json      species names and note pointers
 │       ├── episodes/         per-episode description Markdown
 │       ├── repos/            per-repository description Markdown
+│       ├── rescues/          per-rescue story Markdown
 │       └── species/          per-species note Markdown
 ├── templates/
 │   ├── base.html             card page shell
@@ -32,9 +35,9 @@ personal_portfolio/
 │   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
 │   ├── css/site.css          shared card pages
-│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing)
+│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues)
 │   ├── js/board.js           horizontal pan and nav shortcuts
-│   ├── js/site.js            contact form, repo accordions, talk videos, species decks
+│   ├── js/site.js            contact form, repo accordions, talk videos, species decks, rescue stacks
 │   ├── fonts/                Patrick Hand (OFL)
 │   ├── general/              board background, robin PNG, reference assets
 │   ├── documents/            CV and book PDF placeholders
@@ -81,13 +84,14 @@ automatically. No renderer change is needed for a new card.
 
 - `site.json`: `name`, `tagline`, `intro`, `email`, `phone`, `github`, `footer`.
   `footer` is the sentence rendered after the copyright line on every page.
-- `cards/<slug>/card.json`: `{title, kicker, family, summary, order, status,
-  audio, description, board, blocks}`. `status` is one of `ready`,
-  `under-construction`, `coming-soon`, `placeholder`; `family` is one of
-  `software`, `nature`, `neutral` and drives the card colours and anchors.
-  `audio` is `null` or a path under `assets/`; optional `logo` and `logo_alt`
-  add a page logo. The slug is the directory name. `board` holds the hub
-  placement (see below).
+- `cards/<slug>/card.json`: `{title, kicker, family, order, status, audio,
+  board, blocks}`. `status` is one of `ready`, `under-construction`,
+  `coming-soon`, `placeholder`; `family` is one of `software`, `nature`,
+  `neutral` and drives the card colours and anchors. `audio` is `null` or a
+  path under `assets/`; optional `logo` and `logo_alt` add a page logo. The
+  slug is the directory name. `board` holds the hub placement (see below).
+  `summary.md` supplies the visible lede; `description.md` supplies the meta
+  description. Both are required and non-empty, with no JSON fallback.
 - Every dataset record has a stable `id` and a `collections` list. A collection
   is a selection tag, not an index: several records share one; a record can be
   in several. `hidden` is reserved — a record carrying it is excluded from
@@ -108,9 +112,15 @@ automatically. No renderer change is needed for a new card.
   lists, links and inline code. `pushed_at` is refreshed from the GitHub API by
   `fetch_repos.py` and is an ISO timestamp or null.
 - `videos.json`: `{id, collections, title, species, src, youtube, date,
-  description}`. `youtube` takes precedence when set; `date` is ISO
-  `YYYY-MM-DD` or null. Video files are not committed: a missing local `src`
-  (with no `youtube`) is a hard validation error.
+  poster, description, description_src, photos}`. `youtube` takes precedence
+  when set; `date` is ISO `YYYY-MM-DD` or null. `description_src` points into
+  `content/data/rescues/` for rescue stories (an inline `description` remains
+  the fallback for other videos). `poster` is the selected video poster;
+  `photos` is an optional list of still-image paths. The first still is the
+  fallback poster, and the photos render as the rescue stills stack. Video
+  files are not committed: a missing local `src` (with no `youtube`) is a hard
+  validation error. A video block may add `"layout": "rescue-rows"` for the
+  full-width stills | text | video rows.
 - `photos.json`: `{id, collections, species, src, title, date, audio}`.
   `species` is the id of a `species.json` record; `date` is ISO `YYYY-MM-DD`
   or null. There is no per-photo caption.

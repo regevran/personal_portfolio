@@ -6,10 +6,19 @@
     ],
     "title": "Great Egret",
     "species": "Ardea alba",
-    "src": "assets/rescues/ardea_alba.mp4",
+    "src": "assets/rescues/ardea_alba/ardea_alba.mp4",
     "youtube": null,
     "date": "2026-03-20",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    "poster": "assets/rescues/ardea_alba/ardea_alba_frame_6.jpeg",
+    "description": null,
+    "description_src": "rescues/ardea-alba.md",
+    "photos": [
+      "assets/rescues/ardea_alba/ardea_alba_frame_1.jpeg",
+      "assets/rescues/ardea_alba/ardea_alba_frame_2.jpeg",
+      "assets/rescues/ardea_alba/ardea_alba_frame_3.jpeg",
+      "assets/rescues/ardea_alba/ardea_alba_frame_4.jpeg",
+      "assets/rescues/ardea_alba/ardea_alba_frame_5.jpeg"
+    ]
   },
   {
     "id": "video-ciconia-ciconia",
@@ -18,10 +27,19 @@
     ],
     "title": "White Stork",
     "species": "Ciconia ciconia",
-    "src": "assets/rescues/ciconia_ciconia.mp4",
+    "src": "assets/rescues/ciconia_ciconia/ciconia_ciconia.mp4",
     "youtube": null,
     "date": "2026-08-21",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    "poster": "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_6.jpeg",
+    "description": null,
+    "description_src": "rescues/ciconia-ciconia.md",
+    "photos": [
+      "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_1.jpeg",
+      "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_2.jpeg",
+      "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_3.jpeg",
+      "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_4.jpeg",
+      "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_5.jpeg"
+    ]
   },
   {
     "id": "video-microcarbo-pygmaeus",
@@ -30,10 +48,19 @@
     ],
     "title": "Pygmy Cormorant",
     "species": "Microcarbo pygmaeus",
-    "src": "assets/rescues/microcarbo_pygmeus.mp4",
+    "src": "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus.mp4",
     "youtube": null,
     "date": "2026-03-20",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    "poster": "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_6.jpeg",
+    "description": null,
+    "description_src": "rescues/microcarbo-pygmaeus.md",
+    "photos": [
+      "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_1.jpeg",
+      "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_2.jpeg",
+      "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_3.jpeg",
+      "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_4.jpeg",
+      "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_5.jpeg"
+    ]
   },
   {
     "id": "video-pelecanus-onocrotalus",
@@ -45,7 +72,58 @@
     "src": "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_video.mp4",
     "youtube": null,
     "date": "2026-10-07",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    "poster": "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_1.jpeg",
+    "description": null,
+    "description_src": "rescues/pelecanus-onocrotalus.md",
+    "photos": [
+      "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_2.jpeg",
+      "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_3.jpeg",
+      "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_4.jpeg",
+      "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_frame_1.jpeg",
+      "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_frame_2.jpeg"
+    ]
+  },
+  {
+    "id": "video-falco-tinnunculus",
+    "collections": [
+      "rescues"
+    ],
+    "title": "Common Kestrel",
+    "species": "Falco tinnunculus",
+    "src": "assets/rescues/falco_tinnunculus/falco_tinnunculus.mp4",
+    "youtube": null,
+    "date": "2026-11-12",
+    "poster": "assets/rescues/falco_tinnunculus/falco_tinnunculus_frame_1.jpeg",
+    "description": null,
+    "description_src": "rescues/falco-tinnunculus.md",
+    "photos": [
+      "assets/rescues/falco_tinnunculus/falco_tinnunculus_1.jpeg",
+      "assets/rescues/falco_tinnunculus/falco_tinnunculus_2.jpeg",
+      "assets/rescues/falco_tinnunculus/falco_tinnunculus_3.jpeg",
+      "assets/rescues/falco_tinnunculus/falco_tinnunculus_4.jpeg",
+      "assets/rescues/falco_tinnunculus/falco_tinnunculus_5.jpeg"
+    ]
+  },
+  {
+    "id": "video-milvus-migrans",
+    "collections": [
+      "rescues"
+    ],
+    "title": "Black Kite",
+    "species": "Milvus migrans",
+    "src": "assets/rescues/milvus_migrans/milvus_migrans.mp4",
+    "youtube": null,
+    "date": "2026-10-25",
+    "poster": "assets/rescues/milvus_migrans/milvus_migrans_frame_6.jpeg",
+    "description": null,
+    "description_src": "rescues/milvus-migrans.md",
+    "photos": [
+      "assets/rescues/milvus_migrans/milvus_migrans_frame_1.jpeg",
+      "assets/rescues/milvus_migrans/milvus_migrans_frame_2.jpeg",
+      "assets/rescues/milvus_migrans/milvus_migrans_frame_3.jpeg",
+      "assets/rescues/milvus_migrans/milvus_migrans_frame_4.jpeg",
+      "assets/rescues/milvus_migrans/milvus_migrans_frame_5.jpeg"
+    ]
   },
   {
     "id": "video-promo-anat-gal",

@@ -61,6 +61,14 @@ class OutputValidationTest(unittest.TestCase):
 
         self.assertIn('href="../index.html#nature"', card)
 
+    def test_card_summary_and_description_markdown(self):
+        ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")
+        self.assertIn(
+            '<meta name="description" content="Bird ringing and field observations.">',
+            ringing,
+        )
+        self.assertIn('<div class="lede"><p>The morning', ringing)
+
     def test_podcast_page_specific_design(self):
         podcast = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
         self.assertIn("assets/css/pages/podcast.css", podcast)
@@ -329,6 +337,67 @@ class OutputValidationTest(unittest.TestCase):
             meta = " · ".join([count] + dates)
             self.assertIn(meta, ringing)
 
+    def test_rescues_page_specific_design(self):
+        rescues = (DIST / "rescues" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("assets/css/pages/rescues.css", rescues)
+        self.assertIn("card-page--rescues", rescues)
+        self.assertIn('data-video="video-falco-tinnunculus"', rescues)
+        self.assertIn('data-video="video-milvus-migrans"', rescues)
+        self.assertEqual(rescues.count('class="rescue-row"'), 6)
+        self.assertEqual(rescues.count('class="rescue-row-mark"'), 6)
+        self.assertEqual(rescues.count('class="rescue-mark"'), 1)
+        self.assertEqual(rescues.count('class="rescue-stack"'), 6)
+        self.assertEqual(rescues.count('<button class="stack-card'), 30)
+        self.assertIn("data-reel-card", rescues)
+        self.assertIn('aria-pressed="true"', rescues)
+        self.assertIn('style="--depth: 0; z-index: 5"', rescues)
+        self.assertNotIn("media-card--with-reel", rescues)
+        for poster in (
+            "../assets/rescues/ardea_alba/ardea_alba_frame_6.jpeg",
+            "../assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_6.jpeg",
+            "../assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_6.jpeg",
+            "../assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_1.jpeg",
+            "../assets/rescues/falco_tinnunculus/falco_tinnunculus_frame_1.jpeg",
+            "../assets/rescues/milvus_migrans/milvus_migrans_frame_6.jpeg",
+        ):
+            self.assertIn(f'poster="{poster}"', rescues)
+        self.assertIn('class="media-title">Common Kestrel', rescues)
+        self.assertIn('class="media-title">Black Kite', rescues)
+
+        videos = json.loads(
+            (DATA_DIR / "videos.json").read_text(encoding="utf-8")
+        )
+        for video in videos:
+            if "rescues" not in video.get("collections", []):
+                continue
+            self.assertEqual(len(video.get("photos", [])), 5)
+            self.assertNotIn(video["poster"], video["photos"])
+
+        rescues_css = (
+            DIST / "assets" / "css" / "pages" / "rescues.css"
+        ).read_text(encoding="utf-8")
+        for needle in (
+            ".rescue-row",
+            ".rescue-stack",
+            ".stack-card.is-presented",
+            'grid-template-areas: "photos copy media"',
+            "repeat(3, minmax(0, 1fr))",
+            "--stack-x: 6px",
+            "var(--depth",
+            "position: absolute",
+            "prefers-reduced-motion",
+        ):
+            self.assertIn(needle, rescues_css)
+
+        site_js = (DIST / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+        for needle in (
+            "[data-reel]",
+            "data-reel-card",
+            "is-presented",
+            "% cards.length",
+        ):
+            self.assertIn(needle, site_js)
+
     def test_listings_are_latest_first(self):
         cpp = (DIST / "cpp-standards" / "index.html").read_text(encoding="utf-8")
         self.assertLess(
@@ -358,6 +427,24 @@ class OutputValidationTest(unittest.TestCase):
             podcast.index("Swifts - with"),
             podcast.index("The Birdwatcher"),
         )
+
+        rescues = (DIST / "rescues" / "index.html").read_text(encoding="utf-8")
+        video_records = json.loads(
+            (DATA_DIR / "videos.json").read_text(encoding="utf-8")
+        )
+        rescue_videos = [
+            video
+            for video in video_records
+            if "rescues" in video.get("collections", [])
+        ]
+        ordered_videos = sort_latest(
+            rescue_videos, lambda video: iso_date(video.get("date"))
+        )
+        positions = [
+            rescues.index(f'data-video="{video["id"]}"')
+            for video in ordered_videos
+        ]
+        self.assertEqual(positions, sorted(positions))
 
     def test_repos_are_latest_push_first(self):
         repos = json.loads((DATA_DIR / "repos.json").read_text(encoding="utf-8"))

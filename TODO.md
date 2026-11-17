@@ -35,6 +35,7 @@
 25. [ ] Decide the learning-aid hosting strategy — [details](.ai/asset-inventory.md#missing-or-pending)
 26. [ ] Replace all Lorem Ipsum with real content
 27. [ ] Add more content to each GitHub repository
+28. [ ] Add more data Rescues cards
 
 ## Bugs
 
@@ -42,4 +43,4 @@
 
 ## Follow-up
 
-29. [ ] Move the remaining inline prose (card summaries, paper and talk descriptions) into Markdown files
+29. [ ] Move the remaining inline prose (paper and talk descriptions) into Markdown files

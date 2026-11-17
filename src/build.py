@@ -146,6 +146,25 @@ def markdown_to_html(path: Path, root: str = "") -> str:
     )
 
 
+def markdown_to_text(path: Path) -> str:
+    result = subprocess.run(
+        ["pandoc", "-f", "markdown+smart", "-t", "plain", "--wrap=none", str(path)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return re.sub(r"\s+", " ", result.stdout).strip()
+
+
+def card_markdown(card: dict, filename: str) -> Path:
+    path = card["dir"] / filename
+    if not path.is_file():
+        raise SystemExit(f"build.py: missing {path.relative_to(ROOT)}")
+    if not path.read_text(encoding="utf-8").strip():
+        raise SystemExit(f"build.py: empty {path.relative_to(ROOT)}")
+    return path
+
+
 def iso_date(value):
     """Return a date for sorting, or None when the value is absent/invalid."""
     if not value:
@@ -211,7 +230,7 @@ def description_html(entry: dict, root: str = "") -> str:
     """Render an inline description or a per-record Markdown description."""
     source = entry.get("description_src")
     if source:
-        return markdown_to_html(DATA_DIR / source, root)
+        return markdown_to_html(DATA_DIR / source, root).strip()
     description = entry.get("description")
     return esc(description) if description else ""
 
@@ -468,42 +487,105 @@ def render_repos(records: list[dict], root: str) -> str:
     return '<ul class="item-list">' + "".join(items) + "</ul>"
 
 
+def video_poster(video: dict, root: str) -> str:
+    source = video.get("poster")
+    if not source:
+        photos = video.get("photos") or []
+        source = photos[0] if photos else ""
+    return f' poster="{esc(root + source)}"' if source else ""
+
+
+def video_media(video: dict, root: str) -> str:
+    youtube = video.get("youtube")
+    if youtube:
+        source = (
+            youtube
+            if str(youtube).startswith("http")
+            else f"https://www.youtube.com/embed/{youtube}"
+        )
+        return (
+            f'<iframe src="{esc(source)}" title="{esc(video["title"])}" '
+            'loading="lazy" allowfullscreen></iframe>'
+        )
+    return (
+        f'<video controls preload="metadata"{video_poster(video, root)} '
+        f'src="{esc(root + video["src"])}"></video>'
+    )
+
+
+def rescue_reel(video: dict, root: str) -> str:
+    photos = video.get("photos") or []
+    if not photos:
+        return ""
+    total = len(photos)
+    cards = []
+    for index, source in enumerate(photos):
+        active = " is-presented" if index == 0 else ""
+        pressed = "true" if index == 0 else "false"
+        tabindex = "0" if index == 0 else "-1"
+        cards.append(
+            f'<button class="stack-card{active}" type="button" data-reel-card '
+            f'style="--depth: {index}; z-index: {total - index}" '
+            f'tabindex="{tabindex}" aria-pressed="{pressed}" '
+            f'aria-label="Photo {index + 1} of {total}: '
+            f'{esc(video["title"])}">'
+            f'<img src="{esc(root + source)}" alt="" loading="lazy">'
+            "</button>"
+        )
+    return f'<div class="rescue-stack" data-reel>{"".join(cards)}</div>'
+
+
 def render_videos(records: list[dict], root: str) -> str:
     cards = []
     for video in records:
-        youtube = video.get("youtube")
-        if youtube:
-            source = (
-                youtube
-                if str(youtube).startswith("http")
-                else f"https://www.youtube.com/embed/{youtube}"
-            )
-            media = (
-                f'<iframe src="{esc(source)}" title="{esc(video["title"])}" '
-                'loading="lazy" allowfullscreen></iframe>'
-            )
-        else:
-            media = (
-                f'<video controls preload="metadata" '
-                f'src="{esc(root + video["src"])}"></video>'
-            )
-
         species = ""
         if video.get("species"):
             species = f'<span class="media-meta">{esc(video["species"])}</span>'
-        description = ""
-        if video.get("description"):
-            description = f'<p class="item-desc">{esc(video["description"])}</p>'
-
+        description = description_html(video, root)
+        desc_html = (
+            f'<div class="item-desc">{description}</div>' if description else ""
+        )
         cards.append(
-            f'<figure class="media-card">{media}<figcaption>'
+            f'<figure class="media-card" data-video="{esc(video["id"])}">'
+            f'{video_media(video, root)}<figcaption>'
             f'<span class="media-title">{esc(video["title"])}</span>'
-            f"{species}{description}</figcaption></figure>"
+            f"{species}{desc_html}</figcaption></figure>"
         )
     return '<div class="media-grid media-grid--videos">' + "".join(cards) + "</div>"
 
 
+def render_rescue_rows(records: list[dict], root: str) -> str:
+    rows = []
+    for video in records:
+        species = ""
+        if video.get("species"):
+            species = f'<span class="media-meta">{esc(video["species"])}</span>'
+        description = description_html(video, root)
+        desc_html = (
+            f'<div class="item-desc">{description}</div>' if description else ""
+        )
+        reel = rescue_reel(video, root)
+        extra = "" if reel else " rescue-row--no-photos"
+        rows.append(
+            f'<article class="rescue-row{extra}" '
+            f'data-video="{esc(video["id"])}">'
+            '<div class="rescue-copy">'
+            '<div class="rescue-head">'
+            f'<img class="rescue-row-mark" src="{esc(root + RESCUE_ICON)}" '
+            'alt="" aria-hidden="true">'
+            f'<h2 class="media-title">{esc(video["title"])}</h2>'
+            "</div>"
+            f"{species}{desc_html}"
+            "</div>"
+            f'<div class="rescue-photos">{reel}</div>'
+            f'<div class="rescue-media">{video_media(video, root)}</div>'
+            "</article>"
+        )
+    return '<div class="rescue-list">' + "".join(rows) + "</div>"
+
+
 BIRD_RING = "assets/icons/bird-ring.svg"
+RESCUE_ICON = "assets/icons/rescue.svg"
 
 
 def photo_card(photo: dict, root: str) -> str:
@@ -682,6 +764,11 @@ def render_card_mark(card: dict, root: str) -> str:
             + f'<img class="ring-band" src="{esc(root + BIRD_RING)}" '
             'alt="" aria-hidden="true">'
         )
+    if mark == "rescue":
+        return (
+            f'<img class="rescue-mark" src="{esc(root + RESCUE_ICON)}" '
+            'alt="" aria-hidden="true">'
+        )
     return ""
 
 
@@ -787,11 +874,17 @@ RENDERERS = {
 
 
 def render_dataset(
-    name: str, select: dict, root: str, group_by: str | None = None
+    name: str,
+    select: dict,
+    root: str,
+    group_by: str | None = None,
+    layout: str | None = None,
 ) -> str:
     records = select_records(load_dataset(name), select)
     if "ids" not in select:
         records = sort_latest(records, SORT_KEYS[name])
+    if name == "videos" and layout == "rescue-rows":
+        return render_rescue_rows(records, root)
     if name == "photos" and group_by:
         species = (
             {record["id"]: record for record in load_species()}
@@ -810,7 +903,11 @@ def render_block(block: dict, card_dir: Path, site: dict, root: str) -> str:
         return render_contact(site)
     if block_type in RENDERERS:
         return render_dataset(
-            block_type, block["select"], root, block.get("group_by")
+            block_type,
+            block["select"],
+            root,
+            block.get("group_by"),
+            block.get("layout"),
         )
     raise SystemExit(f"build.py: unknown block type {block_type!r}")
 
@@ -939,6 +1036,13 @@ def build() -> None:
                 f'{esc(following["title"])} &rarr;</a>'
             )
 
+        summary_html = markdown_to_html(
+            card_markdown(card, "summary.md"), root
+        )
+        description_text = markdown_to_text(
+            card_markdown(card, "description.md")
+        )
+
         card_body = render_template(
             card_template,
             {
@@ -947,7 +1051,7 @@ def build() -> None:
                 "KICKER": esc(card["kicker"]),
                 "FAMILY": esc(card["family"]),
                 "TITLE": esc(card["title"]),
-                "SUMMARY": esc(card["summary"]),
+                "SUMMARY": summary_html,
                 "MARK": render_card_mark(card, root),
                 "LOGO": render_logo(card, root),
                 "STATUS": status_badge(card["status"]),
@@ -960,7 +1064,7 @@ def build() -> None:
         write_page(
             DIST / card["slug"] / "index.html",
             f'{card["title"]} — {site["name"]}',
-            card.get("description", card["summary"]),
+            description_text,
             card_body,
             root,
             card_topbar,

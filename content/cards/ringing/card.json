@@ -5,8 +5,6 @@
   "order": 4,
   "status": "ready",
   "mark": "ringing-station",
-  "summary": "The morning's catch at the ringing station — birds in the hand, measured and released.",
-  "description": "Bird ringing and field observations.",
   "audio": null,
   "board": {
     "x": 16,

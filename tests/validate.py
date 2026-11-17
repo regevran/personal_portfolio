@@ -38,14 +38,13 @@ REQUIRED_CARD = (
     "title",
     "kicker",
     "family",
-    "summary",
     "order",
     "status",
     "audio",
-    "description",
     "board",
     "blocks",
 )
+CARD_TEXT_FILES = ("summary.md", "description.md")
 ALLOWED_STATUS = {"ready", "under-construction", "coming-soon", "placeholder"}
 ALLOWED_FAMILIES = {"software", "nature", "neutral"}
 BOARD_ANCHORS = {"perch", "lanyard", "none"}
@@ -102,7 +101,7 @@ DATASET_FIELDS = {
 }
 
 # Datasets whose renderer understands a per-record Markdown description.
-DESCRIPTION_SRC_TYPES = {"papers", "talks", "episodes", "repos"}
+DESCRIPTION_SRC_TYPES = {"papers", "talks", "episodes", "repos", "videos"}
 
 
 def _load(errors: list[str], name: str):
@@ -298,6 +297,8 @@ def _validate_block(
     allowed = {"type", "select"}
     if block_type == "photos":
         allowed.add("group_by")
+    if block_type == "videos":
+        allowed.add("layout")
     extra = set(block) - allowed
     if extra:
         errors.append(f"{label}: unknown fields {sorted(extra)}")
@@ -306,6 +307,11 @@ def _validate_block(
         group_by = block["group_by"]
         if not isinstance(group_by, str) or not group_by:
             errors.append(f"{label}: 'group_by' must be a non-empty string")
+
+    if "layout" in block:
+        layout = block["layout"]
+        if layout != "rescue-rows":
+            errors.append(f"{label}: unknown layout {layout!r}")
 
     try:
         records = load_dataset(block_type)
@@ -341,6 +347,13 @@ def validate_cards() -> list[str]:
             continue
         if not _require(errors, card, REQUIRED_CARD, label):
             continue
+
+        for filename in CARD_TEXT_FILES:
+            path = card_dir / filename
+            if not path.is_file():
+                errors.append(f"{label}: missing {filename}")
+            elif not path.read_text(encoding="utf-8").strip():
+                errors.append(f"{label}: {filename} must not be empty")
 
         if not isinstance(card.get("order"), int) or isinstance(card.get("order"), bool):
             errors.append(f"{label}: 'order' must be an integer")
@@ -497,6 +510,22 @@ def _validate_dataset_entry(
                 errors.append(f"{label}: needs either 'youtube' or 'src'")
             else:
                 _file_exists(errors, source, label)
+        poster = entry.get("poster")
+        if poster is not None:
+            if not isinstance(poster, str) or not poster:
+                errors.append(f"{label}: 'poster' must be a non-empty string")
+            else:
+                _file_exists(errors, poster, label)
+        photos = entry.get("photos")
+        if photos is not None:
+            if not isinstance(photos, list) or not photos:
+                errors.append(f"{label}: 'photos' must be a non-empty list")
+            else:
+                for photo in photos:
+                    if not isinstance(photo, str) or not photo:
+                        errors.append(f"{label}: every photo must be a path")
+                    else:
+                        _file_exists(errors, photo, label)
 
     elif dataset == "photos":
         source = entry.get("src")
@@ -605,6 +634,7 @@ def validate_assets() -> list[str]:
         "assets/css/pages/cpp-standards.css",
         "assets/css/pages/talks.css",
         "assets/css/pages/ringing.css",
+        "assets/css/pages/rescues.css",
         "assets/js/site.js",
         "assets/js/board.js",
         "assets/fonts/PatrickHand-Regular.ttf",

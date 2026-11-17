@@ -201,6 +201,13 @@ data-driven, because it will be updated from time to time.
   anchors, query-only links and paths already starting with `/` or `../` are
   left alone. This applies to card prose and to every `description_src`
   dataset (papers, talks, episodes, repos).
+- **Card summary and meta description moved to Markdown on 2026-11-17.**
+  Every card directory now requires `summary.md` and `description.md`.
+  `summary.md` is rendered as Markdown for the visible lede;
+  `description.md` is flattened to plain text for `<meta name="description">`.
+  There are no JSON fallbacks: a missing or empty file is a validation and
+  build error. This removes the duplicated `summary`/`description` fields
+  from `card.json` and makes the card text discoverable alongside `page.md`.
 - **External links open in a new tab** (2026-11-11): http(s) links in rendered
   Markdown, and the paper, repository and talk data links, get
   `target="_blank" rel="noopener"`. Internal navigation (hub cards, back link,
@@ -311,3 +318,16 @@ data-driven, because it will be updated from time to time.
   the mark sits beside the kicker and title: bird ring (Ringing), podcast logo
   (Podcast), released bird (Rescues), open book (The Book), and bird-name
   cards (Learning Aid).
+- **Rescues got per-rescue Markdown stories, selected posters and stills on
+  2026-11-17.** `videos.json` accepts `description_src` (stories in
+  `content/data/rescues/`), `poster`, and optional `photos`. Each rescue now
+  has six images: five in the stills stack and one separate poster. The
+  pelican and kestrel use supplied photographs plus extracted frames; the
+  other four clips contribute six extracted frames each. The page moved from a
+  video grid to one full-width row per rescue, split evenly into stills | text
+  | video. The
+  stills are a pile of cream-bordered prints: the presented one is full size,
+  the others peek out behind it as edges. Pressing the presented print
+  advances to the next with a wrap; pressing a peeking print presents it.
+  There is no ringing fan or hover opening. The per-row rescue icon and the
+  page-header artifact make every row identifiable.

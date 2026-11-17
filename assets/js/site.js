@@ -297,6 +297,48 @@
     });
   }
 
+  // Rescue stills: the photos are a pile. Pressing the presented photo moves
+  // to the next one, wrapping at the end; pressing a peeking card presents it.
+  var reels = Array.prototype.slice.call(
+    document.querySelectorAll("[data-reel]")
+  );
+
+  reels.forEach(function (reel) {
+    var cards = Array.prototype.slice.call(
+      reel.querySelectorAll("[data-reel-card]")
+    );
+    if (!cards.length) {
+      return;
+    }
+
+    var presented = cards[0];
+
+    function updateStack() {
+      var index = cards.indexOf(presented);
+      cards.forEach(function (card, position) {
+        var depth = (position - index + cards.length) % cards.length;
+        card.style.setProperty("--depth", String(depth));
+        card.style.zIndex = String(cards.length - depth);
+        card.classList.toggle("is-presented", depth === 0);
+        card.setAttribute("aria-pressed", depth === 0 ? "true" : "false");
+        card.tabIndex = depth === 0 ? 0 : -1;
+      });
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        if (card === presented) {
+          presented = cards[(cards.indexOf(card) + 1) % cards.length];
+        } else {
+          presented = card;
+        }
+        updateStack();
+      });
+    });
+
+    updateStack();
+  });
+
   // YouTube refuses to configure a player without an HTTP referrer, so file://
   // previews keep the link behaviour and open the watch page instead. Over
   // HTTP(S) the click swaps the thumbnail for an inline player.

@@ -377,6 +377,37 @@ Podcast's dirty field and cream notes and stays in the board's nature half.
   follow the rule that all prose, including group notes, lives in Markdown
   from the start rather than inline JSON.
 
+### Rescues page
+
+Rescues keeps the standard card page and the nature palette; its additions
+live in `assets/css/pages/rescues.css`.
+
+- Each rescue is one full-width row, a cream note divided into three equal
+  columns: **stills | text | video**, left to right. The text column carries the rescue
+  icon, title, species and story; the middle column is a vertical stills
+  stack; the video fills the right column.
+- The rescue icon (`assets/icons/rescue.svg`) is used in the page header as the
+  page artifact and beside every row's title.
+- Each rescue story is Markdown in `content/data/rescues/<id>.md`, referenced
+  by `"description_src"` in `videos.json`. The files start empty until Ran
+  writes the field story; an empty file renders nothing.
+- Videos carry a `poster` path in `videos.json`; it is deliberately a sixth
+  image, not one of the five presented stills. If `poster` is absent the first
+  still is used as a fallback.
+- Every rescue has six images: five in the stills stack and one poster. The
+  pelican and kestrel use their supplied photographs plus extracted frames;
+  the Great Egret, White Stork, Pygmy Cormorant and Black Kite use six frames
+  extracted from their clips.
+- The stills are a pile of cream-bordered photo prints, not a strip of slices.
+  The presented print is full size; the others sit behind it, offset down and
+  right so only their cream edges show. There is no hover opening and no
+  rotation. Pressing the presented print advances to the next, wrapping at the
+  end; pressing a peeking print presents that one. Keys work because the
+  prints are real buttons, and `prefers-reduced-motion` removes the transform
+  transition.
+- On mobile the three columns stack as stills, text, video; the video keeps its
+  aspect and the stills stack keeps a fixed height.
+
 ### Software badges on the hub
 
 The hub's three software notes use the same portrait container: narrower and

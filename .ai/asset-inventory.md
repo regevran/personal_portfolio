@@ -22,11 +22,21 @@
 | `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the GitHub logo, white background and CSS quiet zone |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
-| `assets/rescues/ardea_alba.mp4` | rescues | 576×1024, 24 s |
-| `assets/rescues/ciconia_ciconia.mp4` | rescues | 478×850, 27 s |
-| `assets/rescues/microcarbo_pygmeus.mp4` | rescues | 576×1024, 28 s |
+| `assets/rescues/ardea_alba/ardea_alba.mp4` | rescues | 576×1024, 24 s |
+| `assets/rescues/ardea_alba/ardea_alba_frame_{1..6}.jpeg` | rescues, videos.json | extracted frames; 1–5 in the stack, 6 the poster |
+| `assets/rescues/ciconia_ciconia/ciconia_ciconia.mp4` | rescues | 478×850, 27 s |
+| `assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_{1..6}.jpeg` | rescues, videos.json | extracted frames; 1–5 in the stack, 6 the poster |
+| `assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus.mp4` | rescues | 576×1024, 28 s |
+| `assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_{1..6}.jpeg` | rescues, videos.json | extracted frames; 1–5 in the stack, 6 the poster |
+| `assets/rescues/falco_tinnunculus/falco_tinnunculus.mp4` | rescues | 480×860, 13 s |
+| `assets/rescues/falco_tinnunculus/falco_tinnunculus_{1..5}.jpeg` | rescues, videos.json | Common Kestrel stills stack |
+| `assets/rescues/falco_tinnunculus/falco_tinnunculus_frame_1.jpeg` | rescues, videos.json | Common Kestrel video poster |
+| `assets/rescues/milvus_migrans/milvus_migrans.mp4` | rescues | 480×854, 20 s |
+| `assets/rescues/milvus_migrans/milvus_migrans_frame_{1..6}.jpeg` | rescues, videos.json | extracted frames; 1–5 in the stack, 6 the poster |
 | `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_video.mp4` | rescues | 848×478, 34 s |
-| `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_{1,2,3,4}.jpeg` | rescues (later) | not yet wired into a gallery |
+| `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_{1,2,3,4}.jpeg` | rescues, videos.json | Great White Pelican stills; 1 is the poster, 2–4 are in the stack |
+| `assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_frame_{1,2}.jpeg` | rescues, videos.json | extracted frames in the pelican stills stack |
+| `content/data/rescues/*.md` | videos.json | per-rescue stories; empty until Ran writes them |
 | `assets/ringing/alcedo_atthis_{1,2,3}.jpeg` | ringing, photos.json | Common Kingfisher |
 | `assets/ringing/otus_scops_{1,2,3,4}.jpeg` | ringing, photos.json | Eurasian Scops Owl |
 | `assets/ringing/phyloscopus_collybita_{2,3,4}.jpeg` | ringing, photos.json | Common Chiffchaff; note `content/data/species/phyloscopus_collybita.md` |
@@ -44,7 +54,7 @@
 | CV PDF | pending; card shows a placeholder |
 | Bird book PDF | exists in `~/dev/ran/birds/book/out/` (2.3 MB) but not shareable yet |
 | Learning-aid build | design phase only in `~/dev/ran/birds/learn` |
-| Photo/video capture dates | not present in EXIF or QuickTime metadata; the `date` fields are supplied in the data files. |
+| Photo/video capture dates | not present in EXIF or QuickTime metadata; the `date` fields are supplied in the data files. The Common Kestrel and Black Kite videos are still null and warn. |
 | YouTube URLs | local files for now |
 
 ## Design assets

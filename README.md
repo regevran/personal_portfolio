@@ -88,12 +88,15 @@ ctest --preset default
 content/
   cards/
     <slug>/
-      card.json    page metadata and ordered blocks
-      page.md      page prose (any number of prose files)
+      card.json       page metadata and ordered blocks
+      summary.md      visible page lede
+      description.md  meta description
+      page.md         page prose (any number of prose files)
   data/
     *.json         canonical records (papers, talks, episodes, repos, videos, photos)
     episodes/      per-episode description Markdown
     repos/         per-repository description Markdown
+    rescues/       per-rescue story Markdown
     species.json   species names and note pointers for grouped photos
     species/       per-species note Markdown
 templates/         base shells, the hub board, card pages and partials
@@ -101,8 +104,8 @@ assets/            images, videos, documents, CSS and JS
   css/theme.css    palette, type, topbar and footer
   css/board.css    the hub board
   css/site.css     shared card pages
-  css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css, talks.css, ringing.css)
-  icons/           platform, GitHub, C++ logo, conference-badge, document and video marks; lanyard
+  css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css, talks.css, ringing.css, rescues.css)
+  icons/           platform, GitHub, C++, badge, nature, document and video marks; lanyard
   fonts/           Patrick Hand (OFL)
 tests/             all content and output validation
 src/               Python build package
@@ -119,9 +122,11 @@ dist/              generated output (ignored by git)
 ### Editing content
 
 - **Card pages:** `content/cards/<slug>/card.json` holds the hub metadata
-  (title, kicker, order, status, family, summary, description, audio, board
-  placement, optional `logo`/`logo_alt`, optional `mark`) and the ordered
-  `blocks` list. The directory name is the slug.
+  (title, kicker, order, status, family, audio, board placement, optional
+  `logo`/`logo_alt`, optional `mark`) and the ordered `blocks` list. The
+  directory name is the slug. `summary.md` supplies the visible lede;
+  `description.md` supplies the `<meta name="description">`. Both files are
+  required and must not be empty — there is no JSON fallback.
 - **Per-page styling:** if `assets/css/pages/<slug>.css` exists, the build
   links it after `site.css` on that page only. Podcast uses
   `assets/css/pages/podcast.css` for its dirty background and floating chapter
@@ -131,7 +136,8 @@ dist/              generated output (ignored by git)
   cards; Talks uses `assets/css/pages/talks.css` for its conference-badge
   header, embedded-video talk boxes and click-to-play thumbnails; Ringing uses
   `assets/css/pages/ringing.css` for its robin-perch header, silver ring mark
-  and fanned species decks.
+  and fanned species decks; Rescues uses `assets/css/pages/rescues.css` for
+  the full-width stills | text | video rescue rows and vertical stills stack.
 - **Repository cards:** a full description is clamped to a preview with a
   `More…` toggle at the bottom of the card. Opening one expands it to its full
   height, changes the label to `Less…`, and closes any other open repository
@@ -162,6 +168,10 @@ dist/              generated output (ignored by git)
   adds the page prefix (`../` on card pages) so the same path works from
   source and from `dist/`. Leave absolute URLs, anchors and `../` paths as
   they are.
+- **Card summary and description:** `content/cards/<slug>/summary.md` is the
+  visible lede under the page title, rendered as Markdown;
+  `content/cards/<slug>/description.md` is flattened to plain text for the
+  meta description. Both are required.
 - **Structured data:** `content/data/*.json` — `papers`, `talks`, `episodes`,
   `repos`, `videos`, `photos`. Every record has a stable `id` and a
   `collections` list.
@@ -175,10 +185,15 @@ dist/              generated output (ignored by git)
   `collections`, display `name` and `note_src`; the note itself lives in
   `content/data/species/<id>.md`. Photos reference the species id in a
   `species` field. The note is shared by every photo in the deck.
+- **Rescue stories:** `content/data/rescues/<id>.md`, referenced by
+  `"description_src"` in `videos.json`. Each rescue video has its own file for
+  Ran's field story; a record can also carry `poster` and `photos`, which
+  render as the vertical stills stack beside the video.
 - **All prose lives in Markdown.** Any text a visitor reads belongs in a
-  `.md` file from the start — page prose, episode and repository descriptions,
-  species notes and future datasets — with JSON carrying only ids, routing
-  fields and structured metadata. Do not put prose inline in JSON even when it
+  `.md` file from the start — page prose, card summaries and meta
+  descriptions, episode and repository descriptions, species notes and future
+  datasets — with JSON carrying only ids, routing fields and structured
+  metadata. Do not put prose inline in JSON even when it
   is short; it makes the text easy to find and lets markup grow without a data
   migration.
 - **Episode links:** `episodes.json` records carry `links` with `spotify`,
@@ -203,7 +218,8 @@ in `card.json`; no code changes are needed. A block selects records with
 | `{"type": "talks", "select": {"collection": "talks"}}` | talks |
 | `{"type": "episodes", "select": {"collection": "podcast"}}` | podcast episodes |
 | `{"type": "repos", "select": {"collection": "engineering"}}` | repositories |
-| `{"type": "videos", "select": {"collection": "rescues"}}` | video grid |
+| `{"type": "videos", "select": {"collection": "rescues"}, "layout": "rescue-rows"}` | full-width rescue rows |
+| `{"type": "videos", "select": {"collection": "podcast-promos"}}` | video grid |
 | `{"type": "photos", "select": {"collection": "ringing"}, "group_by": "species"}` | species decks |
 | `{"type": "contact"}` | contact panel and form |
 
@@ -214,7 +230,8 @@ record. Explicit `ids` selection is not affected by `hidden`.
 Photo blocks may add `"group_by": "<field>"` (used with `species` on Ringing)
 to render one deck per value. The deck's static base carries the group name,
 the photo count, the visit date(s) and the shared note; the photos themselves
-have no per-frame caption.
+have no per-frame caption. Video blocks may add `"layout": "rescue-rows"` to
+render each rescue as a full-width stills | text | video row.
 
 All listings render **latest first**: papers by `year`, talks and episodes by
 `sort_date`, videos and photos by `date`, repositories by `pushed_at`. A `null`
@@ -237,6 +254,15 @@ Video files are not committed (`*.mp4` is ignored). A missing local video is a
 the files until each entry has a `youtube` value. Once `youtube` is set, the
 local-file check is skipped and the iframe is used, so a clean checkout builds
 again.
+
+Rescue videos take their story from `description_src` (Markdown), select their
+video frame with `poster`, and list five `photos` for the stills stack. The
+poster is a sixth image, not one of those five; if it is absent the first
+still is used. The stills render as a pile of cream-bordered prints: the
+presented print is full size, the others peek out behind it. Pressing the
+presented print advances to the next and wraps; pressing a peeking print
+presents it. Every rescue currently has supplied photographs or frames
+extracted from its clip.
 
 ### Placeholders
 
