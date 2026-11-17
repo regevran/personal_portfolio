@@ -46,5 +46,13 @@
     ],
     "name": "Eurasian Blackcap",
     "note_src": "species/sylvia-atricapilla.md"
+  },
+  {
+    "id": "pycnonotus-xanthopygos",
+    "collections": [
+      "ringing"
+    ],
+    "name": "White-spectacled Bulbul",
+    "note_src": "species/pycnonotus-xanthopygos.md"
   }
 ]

@@ -243,7 +243,7 @@ again.
 The site is intentionally a structural skeleton:
 
 - All prose that is not yet written is lorem ipsum.
-- The Birding card is a placeholder for future photographs and field stories;
+- Birding was removed from the hub and deferred to phase 2, if it happens;
   Ringing carries the current ringing photographs.
 - The CV link and the book PDF are placeholders until the real files arrive.
 - Cards are colour-coded by family (`software`, `nature`, `neutral`).
@@ -251,8 +251,11 @@ The site is intentionally a structural skeleton:
   with a per-page artifact mark and the text grouped at the top, with space
   below. Public GitHub uses the GitHub logo; C++ & Standards uses the official
   C++ logo; Talks uses the conference badge. The repository rail keeps the
-  small CMake build tag above the GitHub link. Nature and neutral cards remain
-  landscape notes with their robin/perch treatment.
+  small CMake build tag above the GitHub link. Nature cards remain landscape
+  notes with their robin/perch treatment and carry a mark beside the text:
+  bird ring (Ringing), podcast logo (Podcast), released bird (Rescues), open
+  book (The Book), and bird-name cards (Learning Aid). Neutral cards keep the
+  plain grommet.
 - The hub and card pages share the board's visual language: sand and cream,
   Patrick Hand titles for nature and neutral, formal serif titles for software,
   mono kickers, family-coloured edges, and a fixed topbar and footer. The

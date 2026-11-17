@@ -2,7 +2,7 @@
   "title": "Ringing",
   "kicker": "Field work",
   "family": "nature",
-  "order": 5,
+  "order": 4,
   "status": "ready",
   "mark": "ringing-station",
   "summary": "The morning's catch at the ringing station — birds in the hand, measured and released.",
@@ -16,7 +16,8 @@
     "robin": {
       "tilt": 18,
       "flip": false
-    }
+    },
+    "id": "nature"
   },
   "blocks": [
     {

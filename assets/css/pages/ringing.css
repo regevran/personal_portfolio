@@ -106,8 +106,8 @@ body[data-page="ringing"] {
   position: absolute;
   top: clamp(1rem, 2.5vw, 1.6rem);
   right: clamp(1rem, 3vw, 1.8rem);
-  width: clamp(3rem, 5vw, 4.4rem);
-  height: auto;
+  height: clamp(3.6rem, 6vw, 5rem);
+  width: auto;
   transform: rotate(7deg);
   filter: drop-shadow(0 6px 10px rgba(47, 39, 20, 0.18));
 }
@@ -250,8 +250,8 @@ body[data-page="ringing"] {
 
 .ring-mark {
   grid-area: mark;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.05rem;
+  height: auto;
 }
 
 .deck-species {
@@ -339,7 +339,8 @@ body[data-page="ringing"] {
   }
 
   .card-page--ringing .ring-band {
-    width: 2.7rem;
+    height: 3rem;
+    width: auto;
   }
 
   .species-deck {
@@ -359,8 +360,8 @@ body[data-page="ringing"] {
   }
 
   .ring-mark {
-    width: 1.35rem;
-    height: 1.35rem;
+    width: 0.95rem;
+    height: auto;
   }
 
   .deck-species {

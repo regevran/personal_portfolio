@@ -95,7 +95,7 @@
     "species": "upupa-epops",
     "src": "assets/ringing/upupa_epops_1.jpeg",
     "title": "Eurasian Hoopoe",
-    "date": "2026-11-18",
+    "date": "2026-11-04",
     "audio": null
   },
   {
@@ -106,7 +106,7 @@
     "species": "upupa-epops",
     "src": "assets/ringing/upupa_epops_2.jpeg",
     "title": "Eurasian Hoopoe",
-    "date": "2026-11-18",
+    "date": "2026-11-04",
     "audio": null
   },
   {
@@ -173,6 +173,28 @@
     "src": "assets/ringing/sylvia_atricapilla_3.jpeg",
     "title": "Eurasian Blackcap",
     "date": "2026-11-09",
+    "audio": null
+  },
+  {
+    "id": "photo-pycnonotus-xanthopygos-1",
+    "collections": [
+      "ringing"
+    ],
+    "species": "pycnonotus-xanthopygos",
+    "src": "assets/ringing/pycnonotus_xanthopygos_1.jpeg",
+    "title": "White-spectacled Bulbul",
+    "date": "2026-11-17",
+    "audio": null
+  },
+  {
+    "id": "photo-pycnonotus-xanthopygos-2",
+    "collections": [
+      "ringing"
+    ],
+    "species": "pycnonotus-xanthopygos",
+    "src": "assets/ringing/pycnonotus_xanthopygos_2.jpeg",
+    "title": "White-spectacled Bulbul",
+    "date": "2026-11-17",
     "audio": null
   }
 ]

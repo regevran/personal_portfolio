@@ -730,7 +730,7 @@ def render_board_card(card: dict, templates: dict[str, str]) -> str:
     board = card["board"]
     family = card["family"]
     item_class = {
-        "nature": "",
+        "nature": " board-item--nature",
         "software": " board-item--software",
         "neutral": " board-item--neutral board-item--bottom",
     }[family]

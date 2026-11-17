@@ -18,7 +18,7 @@ data-driven, because it will be updated from time to time.
 | Content model | `content/data/` holds canonical records, each with a stable `id` and a `collections` list. `content/cards/<slug>/card.json` holds page metadata and ordered `blocks`; page prose is sibling Markdown. Cards select data by collection or explicit ids — no duplicate membership index. `hidden` is a reserved collection for soft removal. |
 | Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and repository descriptions in `content/data/repos/<name>.md`, both referenced by `description_src`; the inline `description` remains the fallback for other datasets. An episode or repository needs one of the two. |
 | Toolchain | `cmake` 3.25+ + Ninja + `python3` standard library + `pandoc` (3.9.0.2). No Node/npm, no third-party Python packages. |
-| Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; eleven title-only cards around it — nature scattered on the left, software on the right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Every card links to its page. |
+| Visual design | Chosen: a 16:9 yin-yang poster. One dirty composite background with the sharp cutout; ten title-only cards around it — nature scattered on the left, software on the right, About/Contact bottom. No separate page texture and no tape. Compact C05 lanyards sit above the software cards; compact N03 robin perches above the nature cards. The poster fits the viewport when it can and pans horizontally when it cannot; there is no vertical page scroll. Every card links to its page. |
 | Tone | Playful / illustrated, not childish. Employer-facing. |
 | Interaction | Cards lift on hover and focus; clicking opens a separate page per card. Keyboard and touch must work; honor `prefers-reduced-motion`. |
 | Voice-over | English, added at the very end. Every card reserves an `audio` field and a transcript slot in the template from the start. |
@@ -59,7 +59,7 @@ data-driven, because it will be updated from time to time.
   yin-yang group is shifted 120 px right, so the owl's eye stays on the
   yin-yang's light eye at (927.5, 285); the extra left wall gives nature more
   room.
-- The eleven cards are title-only (kicker + title); descriptions, statuses and
+- The ten cards are title-only (kicker + title); descriptions, statuses and
   content live in the card pages. The poster is not a grid: nature cards are
   scattered on the left in a zigzag, software cards vary their x position on the
   right, and About and Contact stay flat and bottom-aligned. Card rotations run
@@ -266,10 +266,10 @@ data-driven, because it will be updated from time to time.
 - The **Ringing page** (`ringing`) got its field-sheet treatment on
   2026-11-15. It keeps Podcast's dirty ink field and cream notes but uses the
   nature-green accent and the board's robin perch: the bird sits on the branch
-  above the header note, whose top-left carries the perch. A **silver** leg
-  ring (`assets/icons/bird-ring.svg`) is the page artifact at the top right,
-  mimicking a real ringing band. Intro notes are straight with a green left
-  rule.
+  above the header note, whose top-left carries the perch. A **narrow, tall,
+  open silver** leg ring (`assets/icons/bird-ring.svg`) is the page artifact
+  at the top right, mimicking a real ringing band with its seam open. Intro
+  notes are straight with a green left rule.
 - **Ringing photos became species decks** on 2026-11-15. Each deck is one
   photograph wide: a static cream base sits directly under the closed photo at
   the same width and carries its name, photo count, visit date and one shared
@@ -302,3 +302,12 @@ data-driven, because it will be updated from time to time.
   `placeholder`, prose only); `ringing` owns the existing ringing photographs
   (order 5, `"collections": ["ringing"]`). The board shows both with the robin
   perch.
+- **Birding was removed from the hub on 2026-11-17.** The card and its
+  placeholder page were deleted; photographs and field stories are deferred to
+  phase 2, if they happen. The other nature cards were renumbered to close the
+  gap.
+- **Nature cards gained their own marks on 2026-11-17**, mirroring the
+  software notes' per-card artifacts. The robin/perch stays above the card;
+  the mark sits beside the kicker and title: bird ring (Ringing), podcast logo
+  (Podcast), released bird (Rescues), open book (The Book), and bird-name
+  cards (Learning Aid).

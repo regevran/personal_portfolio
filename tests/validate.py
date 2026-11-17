@@ -626,6 +626,9 @@ def validate_assets() -> list[str]:
         "assets/icons/youtube.svg",
         "assets/icons/github.svg",
         "assets/icons/bird-ring.svg",
+        "assets/icons/rescue.svg",
+        "assets/icons/book.svg",
+        "assets/icons/learning-aid.svg",
     ):
         _file_exists(errors, relative, "assets")
     return errors

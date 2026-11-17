@@ -257,6 +257,66 @@ body.dir-a {
   display: none;
 }
 
+/* Nature notes keep the robin perch above the card, and each one carries its
+   own mark beside the text, the way the software notes carry theirs. */
+.board-item--nature .scrap {
+  display: grid;
+  grid-template-columns: 5.2cqh minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 1.2cqh;
+  align-items: center;
+}
+
+.board-item--nature .scrap::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  justify-self: center;
+  align-self: center;
+  width: 5cqh;
+  height: 5cqh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.95;
+}
+
+.board-item--nature .scrap .card-kicker {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+}
+
+.board-item--nature .scrap .card-title {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+}
+
+.board-item--nature .scrap[data-mark="ringing-station"]::before {
+  width: 2.8cqh;
+  height: 5.2cqh;
+  background-image: url("../icons/bird-ring.svg");
+}
+
+.board-item--nature .scrap[data-mark="podcast-logo"]::before {
+  width: 4cqh;
+  height: 5.2cqh;
+  background-image: url("../general/closing_on_birds_logo.png");
+}
+
+.board-item--nature .scrap[data-mark="rescue"]::before {
+  background-image: url("../icons/rescue.svg");
+}
+
+.board-item--nature .scrap[data-mark="book"]::before {
+  background-image: url("../icons/book.svg");
+}
+
+.board-item--nature .scrap[data-mark="learning-aid"]::before {
+  background-image: url("../icons/learning-aid.svg");
+}
+
 .board .scrap .card-kicker {
   margin: 0 0 0.5cqh;
   font-size: 1.35cqh;

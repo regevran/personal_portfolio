@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+     stroke="#5f6232" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-hidden="true">
+  <!-- bird-name cards with a check mark -->
+  <rect x="7" y="13" width="35" height="28" rx="3"/>
+  <rect x="17" y="21" width="38" height="28" rx="3" fill="#fff9ec"/>
+  <path d="M25 36 C27 30 33 28 38 31 C35 35 32 37 28 37 C28 40 25 42 22 42 C22 39 23 37 25 36 Z"
+        fill="#5f6232" stroke="none"/>
+  <circle cx="36" cy="31.5" r="1" fill="#fff9ec" stroke="none"/>
+  <circle cx="49" cy="47" r="9" fill="#fff9ec"/>
+  <path d="M45 47 L48 50 L54 43" stroke="#7a4e12"/>
+</svg>

@@ -60,18 +60,17 @@ personal_portfolio/
 | 1 | engineering | Public GitHub | software | ready |
 | 2 | cpp-standards | C++ & Standards | software | ready |
 | 3 | talks | Talks | software | ready |
-| 4 | birding | Birding | nature | placeholder |
-| 5 | ringing | Ringing | nature | ready |
-| 6 | rescues | Rescues | nature | ready |
-| 7 | podcast | Podcast | nature | ready |
-| 8 | book | The Book | nature | coming-soon |
-| 9 | learn | Learning Aid | nature | under-construction |
-| 10 | about | About | neutral | placeholder |
-| 11 | contact | Contact | neutral | ready |
+| 4 | ringing | Ringing | nature | ready |
+| 5 | rescues | Rescues | nature | ready |
+| 6 | podcast | Podcast | nature | ready |
+| 7 | book | The Book | nature | coming-soon |
+| 8 | learn | Learning Aid | nature | under-construction |
+| 9 | about | About | neutral | placeholder |
+| 10 | contact | Contact | neutral | ready |
 
-Birding and Ringing were one card. Birding is now a placeholder for birding
-photographs and field stories; Ringing owns the existing ringing photographs
-(`"collections": ["ringing"]`).
+Ringing and Birding were one card. Ringing owns the existing ringing
+photographs (`"collections": ["ringing"]`). Birding was removed from the hub on
+2026-11-17 and is deferred to phase 2, if it returns at all.
 
 Adding a card: create `content/cards/<slug>/card.json` with the metadata,
 `board` placement and `blocks`, plus the prose files the prose blocks
@@ -123,8 +122,8 @@ automatically. No renderer change is needed for a new card.
 
 Every card carries its hub placement in `board`:
 
-- `x` — horizontal position in percent of board width; may be negative
-  (Birding deliberately drifts off the left edge).
+- `x` — horizontal position in percent of board width; may be negative to let
+  a card drift off the left edge.
 - `y` — top position in percent of board height for hanging cards.
 - `bottom` — distance from the bottom for the flat neutral cards; exactly one
   of `y` or `bottom` is present.

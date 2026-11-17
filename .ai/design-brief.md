@@ -19,7 +19,7 @@ lives.
 The first pass was too clean and grid-like. The language is now a **dirty field
 notebook collage**: one dirty ink image as the whole page, with the data placed
 on top of it. Nothing else: no separate page texture, no taped photo frame, no
-strips of tape. The eleven sections are notes on the board, not a grid.
+strips of tape. The ten sections are notes on the board, not a grid.
 
 Direction A (the field board) is the only direction. Directions B and C were
 dropped and their files deleted.
@@ -98,12 +98,12 @@ The main page is a **16:9 poster**, not a scrolling document:
 
 1. `board-background.jpg` — the dirty ink yin-yang with the sharp Ran + owl
    cutout baked in at 380 px wide.
-2. The data on top — a tagline note and eleven title-only cards placed around
+2. The data on top — a tagline note and ten title-only cards placed around
    the portrait.
 
 The spatial grammar follows the original jpeg but is deliberately **not a
-grid**: **nature is scattered on the left** (Birding, Ringing, Rescues,
-Podcast, The Book, Learning Aid) in a zigzag, **software is on the right**
+grid**: **nature is scattered on the left** (Ringing, Rescues, Podcast,
+The Book, Learning Aid) in a zigzag, **software is on the right**
 (Public GitHub, C++ & Standards, Talks) with varied x positions rather
 than one column, and the two neutral cards (About, Contact) stay flat and
 bottom-aligned under the portrait. Hanging cards rotate up to roughly ±6° and
@@ -160,7 +160,7 @@ On the board, the C05 V is compact and points down (apex at the badge clip),
 with the straps running up as if from the neck; there is no nail. A small
 version sits above every software card. Each nature card carries a compact
 robin perch: a branch, twine, and a robin above the card. The perch is repeated
-above Birding, Ringing, Rescues, Podcast, The Book, and Learning Aid.
+above Ringing, Rescues, Podcast, The Book, and Learning Aid.
 
 The robin uses the book's transparent PNG
 (`assets/general/closing_on_birds_robin.png`, 359 × 356 RGBA). It is rendered
@@ -342,8 +342,9 @@ Podcast's dirty field and cream notes and stays in the board's nature half.
   full-page sheet.
 - The header is a landscape cream note with the nature-green top edge and the
   board's robin perch at its top left: the same branch and twine, with the
-  bird above the note. A silver leg ring (`assets/icons/bird-ring.svg`) sits
-  at the top right as the page artifact, mimicking a real ringing band. The
+  bird above the note. A narrow, tall silver leg ring (`assets/icons/bird-ring.svg`),
+  open at its seam like a real ringing band, sits at the top right as the page
+  artifact. The
   `Field work` kicker, the Patrick Hand title `Ringing` and the summary sit
   under the perch.
 - Intro paragraphs are straight cream notes with a nature-green left rule,
@@ -385,8 +386,11 @@ kicker and title. Public GitHub uses the GitHub logo
 (`assets/icons/github.svg`); C++ & Standards uses the official C++ logo
 (`assets/icons/cpp-logo.svg`) and the full `ISO/IEC JTC1/SC22/WG21` kicker;
 Talks uses the conference-badge name tag
-(`assets/icons/conference-badge-mark.svg`). Nature and neutral notes keep the
-landscape note and their robin/perch treatment.
+(`assets/icons/conference-badge-mark.svg`). Nature notes keep the landscape
+note and their robin/perch treatment, and each one now carries its own mark
+beside the kicker and title: the bird ring for Ringing, the podcast logo for
+Podcast, a released bird for Rescues, an open book for The Book, and bird-name
+cards for Learning Aid. Neutral notes stay marked only by the grommet.
 
 ### Software page artifacts
 

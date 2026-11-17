@@ -17,10 +17,42 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn("board-background", (DIST / "assets" / "css" / "board.css").read_text())
         self.assertNotIn('class="card-grid"', hub)
 
+    def test_hub_nature_cards_have_their_own_marks(self):
+        hub = (DIST / "index.html").read_text(encoding="utf-8")
+        for mark in (
+            "ringing-station",
+            "podcast-logo",
+            "rescue",
+            "book",
+            "learning-aid",
+        ):
+            self.assertIn(f'data-mark="{mark}"', hub)
+        self.assertIn("board-item--nature", hub)
+        self.assertIn('id="nature"', hub)
+        self.assertNotIn("birding/index.html", hub)
+        self.assertNotIn("Birding", hub)
+        self.assertFalse((DIST / "birding").exists())
+
+        board_css = (DIST / "assets" / "css" / "board.css").read_text(
+            encoding="utf-8"
+        )
+        for icon in (
+            "bird-ring.svg",
+            "closing_on_birds_logo.png",
+            "rescue.svg",
+            "book.svg",
+            "learning-aid.svg",
+        ):
+            self.assertIn(icon, board_css)
+
+        for icon in ("rescue.svg", "book.svg", "learning-aid.svg"):
+            self.assertTrue((DIST / "assets" / "icons" / icon).is_file())
+
     def test_shared_chrome_and_footer_data(self):
         hub = (DIST / "index.html").read_text(encoding="utf-8")
         card = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
-        expected = "Static, data-driven, rebuilt with cmake."
+        site = json.loads((DATA_DIR / "site.json").read_text(encoding="utf-8"))
+        expected = site["footer"]
 
         for page in (hub, card):
             self.assertIn('class="topbar', page)
@@ -194,12 +226,12 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn("closing_on_birds_robin.png", ringing)
         self.assertIn('class="ring-band"', ringing)
         self.assertIn("bird-ring.svg", ringing)
-        self.assertEqual(ringing.count('class="species-deck"'), 6)
+        self.assertEqual(ringing.count('class="species-deck"'), 7)
         self.assertIn('data-deck', ringing)
         self.assertIn('data-count="4"', ringing)
         self.assertIn('data-count="2"', ringing)
         self.assertIn('class="deck-cards"', ringing)
-        self.assertEqual(ringing.count('<button class="deck-card'), 16)
+        self.assertEqual(ringing.count('<button class="deck-card'), 18)
         self.assertIn('class="deck-base"', ringing)
         self.assertIn('class="deck-note"', ringing)
         self.assertIn('class="deck-species"', ringing)
@@ -209,6 +241,7 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn("3 photos", ringing)
         self.assertIn('data-count="3"', ringing)
         self.assertIn("4 photos", ringing)
+        self.assertIn("White-spectacled Bulbul", ringing)
         self.assertNotIn('class="media-title"', ringing)
         self.assertNotIn("pages/podcast.css", ringing)
 
@@ -256,6 +289,7 @@ class OutputValidationTest(unittest.TestCase):
         )
         self.assertIn("#D9DDE1", ring)
         self.assertNotIn("#C6A465", ring)
+        self.assertIn("ring-opening", ring)
 
         photos = json.loads(
             (DATA_DIR / "photos.json").read_text(encoding="utf-8")

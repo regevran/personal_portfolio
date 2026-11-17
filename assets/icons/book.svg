@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+     stroke="#5f6232" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-hidden="true">
+  <!-- open book with a bird perched on the page -->
+  <path d="M7 18 C15 14 25 14 32 18 L32 50 C25 46 15 46 7 50 Z"/>
+  <path d="M57 18 C49 14 39 14 32 18 L32 50 C39 46 49 46 57 50 Z"/>
+  <path d="M13 24 C19 22 25 22 29 24 M13 31 C19 29 25 29 29 31" opacity="0.45"/>
+  <path d="M39 18 C41 12 49 12 52 18 C48 19 44 21 41 24 Z"
+        fill="#5f6232" stroke="none"/>
+  <circle cx="49" cy="15" r="1.1" fill="#fff9ec" stroke="none"/>
+  <path d="M52 16 L57 17 L53 19"/>
+  <path d="M44 18 L44 21" opacity="0.55"/>
+</svg>
