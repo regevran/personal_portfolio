@@ -13,7 +13,7 @@ data-driven, because it will be updated from time to time.
 | Area | Decision |
 |---|---|
 | Language | English only. Hebrew is deferred; the cost of retrofitting is accepted. |
-| Hosting | **GitHub Pages** project site at <https://regevran.github.io/personal_portfolio/>; phase 2 publishes `dist/` through a GitHub Actions Pages artifact. **Cloudflare R2 is the source of truth for content media**: every `.jpeg`, `.mp4` and `.pdf` under `ringing/`, `rescues/`, `podcast/` and `documents/`, using the free public `r2.dev` base in `deploy.json`. Theme assets stay on Pages. No paid domain: `r2.dev` rate limits are accepted for low traffic, and `github.io` cannot be attached to R2 as a custom domain. |
+| Hosting | **GitHub Pages** project site at <https://regevran.github.io/personal_portfolio/>; pushes to `main` build and test in GitHub Actions and publish `dist/` through the Pages artifact. **Cloudflare R2 is the source of truth for content media**: every `.jpeg`, `.mp4` and `.pdf` under `ringing/`, `rescues/`, `podcast/` and `documents/`, using the free public `r2.dev` base in `deploy.json`. Theme assets stay on Pages. No paid domain: `r2.dev` rate limits are accepted for low traffic, and `github.io` cannot be attached to R2 as a custom domain. |
 | Build | **CMake** (same single build system as `../birds`) → `dist/`. `CMakeLists.txt` + `CMakePresets.json`; targets, tests and workflow presets. The default build is offline; repo-date refresh is an explicit target/workflow. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
 | Content model | `content/data/` holds canonical records, each with a stable `id` and a `collections` list. `content/cards/<slug>/card.json` holds page metadata and ordered `blocks`; page prose is sibling Markdown. Cards select data by collection or explicit ids — no duplicate membership index. `hidden` is a reserved collection for soft removal. |
 | Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and repository descriptions in `content/data/repos/<name>.md`, both referenced by `description_src`; the inline `description` remains the fallback for other datasets. An episode or repository needs one of the two. |
@@ -139,7 +139,13 @@ data-driven, because it will be updated from time to time.
   local untracked copies are the backup. R2 bucket `personal-portfolio`;
   uploads use the account S3 endpoint, never the public `r2.dev` URL. Objects
   carry the correct content type and `Cache-Control: public, max-age=604800`.
-  GitHub Pages publishing is phase 2.
+- GitHub Pages deployment (2026-11-18): `.github/workflows/pages.yml` runs on
+  pushes to `main` and `workflow_dispatch`. It builds/tests with CMake, runs
+  `check_media check`, uploads `dist/` as the Pages artifact and deploys it
+  with `actions/deploy-pages`. Pages' source is GitHub Actions, not a
+  `gh-pages` branch; `configure-pages` enables it on the first run. No R2
+  credentials are stored in GitHub: media is already uploaded, and the check
+  uses public URLs. The bucket inventory audit remains local.
 - Cards carry a `family` (`software`, `nature`, `neutral`) that drives the
   board's top rule and colour, the anchor (`lanyard`, `perch`, `none`), and the
   card page's top edge.

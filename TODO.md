@@ -45,5 +45,5 @@
 ## Follow-up
 
 29. [ ] Move the remaining inline prose (paper and talk descriptions) into Markdown files
-30. [ ] Add the GitHub Actions Pages workflow, publish `dist/`, and verify <https://regevran.github.io/personal_portfolio/>
+30. [ ] Verify the live Pages site after the first workflow run — workflow added in `.github/workflows/pages.yml`, URL <https://regevran.github.io/personal_portfolio/>
 31. [ ] Add a "keep/hidden" marker for media intentionally stored in R2 but not referenced by the site, so the audit can distinguish it from stale objects

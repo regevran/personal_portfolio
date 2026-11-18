@@ -26,7 +26,7 @@ cmake --workflow --preset site    # configure, build, validate in one command
 cmake --workflow --preset refresh # refresh repo dates, build, validate
 cmake --build --preset serve      # build, then serve dist/ on :8000
 cmake --build --preset test      # build, then run ctest
-cmake --build --preset upload    # upload dist/ media to Cloudflare R2
+cmake --build --preset upload       # upload dist/ media to Cloudflare R2
 cmake --build --preset check-media  # HEAD every R2 URL used by dist/
 cmake --build --preset audit-media  # compare the bucket with dist/
 cmake --build --preset help      # print the available commands
@@ -99,12 +99,22 @@ untracked media files are the backup, not R2 versions.
 
 ### GitHub Pages
 
-The intended host is **GitHub Pages** at
-<https://regevran.github.io/personal_portfolio/>. Phase 2 adds a GitHub Actions
-workflow on pushes to `main` that builds and tests, runs `check-media`, and
-publishes `dist/` through the Pages artifact. Pages’ source will be
-**GitHub Actions**, not a `gh-pages` branch. The build writes `.nojekyll`, so
-GitHub serves the files verbatim.
+**GitHub Pages** serves the site at
+<https://regevran.github.io/personal_portfolio/>. The workflow in
+`.github/workflows/pages.yml` runs on every push to `main` (and manually through
+`workflow_dispatch`):
+
+1. install Python, CMake, Ninja and Pandoc;
+2. `cmake --workflow --preset site` — build and all CTest checks;
+3. `python3 -m src.check_media check` — every R2 URL must be reachable;
+4. upload `dist/` as the Pages artifact and deploy it.
+
+Pages’ source must be **GitHub Actions**, not a `gh-pages` branch;
+`actions/configure-pages` requests enablement on the first run. The workflow
+needs no R2 credentials: media is already in the bucket, and the media check
+uses the public URLs. The local `audit-media` inventory check stays local
+because it needs the R2 API token. The build writes `.nojekyll`, so GitHub
+serves the files verbatim.
 
 ## Design preview
 
@@ -145,6 +155,7 @@ ctest --preset default
 ## Layout
 
 ```text
+.github/workflows/pages.yml  build, test, media check and Pages deploy
 content/
   cards/
     <slug>/

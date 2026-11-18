@@ -5,6 +5,7 @@
 ```text
 personal_portfolio/
 ├── .ai/                      context and decisions for AI sessions
+├── .github/workflows/pages.yml  build, test, media check, Pages deploy
 ├── content/
 │   ├── cards/
 │   │   └── <slug>/
@@ -271,9 +272,13 @@ Objects carry `Content-Type: image/jpeg|video/mp4|application/pdf` and
 `Cache-Control: public, max-age=604800`. Versioning is off: uploading the same
 key replaces the object. Local untracked media files are the backup.
 
-GitHub Pages (`https://regevran.github.io/personal_portfolio/`) is the intended
-host; phase 2 adds a push workflow that builds, tests, runs `check-media`, and
-publishes `dist/` through the Pages artifact.
+GitHub Pages (`https://regevran.github.io/personal_portfolio/`) is deployed by
+`.github/workflows/pages.yml` on pushes to `main` and `workflow_dispatch`. It
+installs Python/CMake/Ninja/Pandoc, runs `cmake --workflow --preset site`, runs
+`check_media check`, uploads `dist/` as the Pages artifact, and deploys it.
+Pages' source is **GitHub Actions**; `configure-pages` enables it on the first
+run. The workflow needs no R2 credentials; `audit-media` remains a local
+inventory command because it uses the S3 API token.
 
 ## Conventions
 
