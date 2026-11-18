@@ -105,6 +105,9 @@ class OutputValidationTest(unittest.TestCase):
         self.assertNotIn("background: transparent", engineering_css)
         self.assertNotIn(".card-page--engineering .prose > p", engineering_css)
         self.assertIn(".card-page--engineering .github-mark", engineering_css)
+        self.assertIn("padding-right: calc(var(--artifact)", engineering_css)
+        self.assertIn("position: absolute", engineering_css)
+        self.assertIn("right: 0", engineering_css)
         self.assertIn('class="github-mark"', engineering)
         self.assertNotIn("build-log", engineering)
         self.assertIn("Building CXX object", engineering)
@@ -177,6 +180,9 @@ class OutputValidationTest(unittest.TestCase):
         self.assertNotIn("background: transparent", cpp_css)
         self.assertNotIn(".card-page--cpp-standards .prose > p", cpp_css)
         self.assertIn("icons/cpp-logo.svg", cpp_css)
+        self.assertIn("padding-right: calc(var(--artifact)", cpp_css)
+        self.assertIn("position: absolute", cpp_css)
+        self.assertIn("right: 0", cpp_css)
         self.assertIn("translateY(-6px) scale(1.02)", cpp_css)
 
         hub = (DIST / "index.html").read_text(encoding="utf-8")
@@ -221,6 +227,9 @@ class OutputValidationTest(unittest.TestCase):
         self.assertNotIn("background: transparent", talks_css)
         self.assertNotIn(".card-page--talks .prose > p", talks_css)
         self.assertIn("icons/conference-badge-mark.svg", talks_css)
+        self.assertIn("padding-right: calc(var(--artifact)", talks_css)
+        self.assertIn("position: absolute", talks_css)
+        self.assertIn("right: 0", talks_css)
         self.assertIn(".talk-video", talks_css)
         self.assertIn(".talk-media iframe", talks_css)
         self.assertIn("aspect-ratio: 16 / 9", talks_css)
@@ -294,6 +303,9 @@ class OutputValidationTest(unittest.TestCase):
         )
         self.assertIn(".book-pdf", book_css)
         self.assertIn(".book-goto", book_css)
+        self.assertIn("padding-right: calc(var(--artifact)", book_css)
+        self.assertIn("position: absolute", book_css)
+        self.assertIn("right: 0", book_css)
         self.assertIn(".pdflip-toolbar", book_css)
         self.assertIn("justify-content: flex-start", book_css)
         self.assertIn("prefers-reduced-motion: reduce", book_css)
@@ -427,6 +439,21 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn(".card-page .back-link", holding_css)
         self.assertIn(".learn-plate", holding_css)
         self.assertIn(".construction-stamp", holding_css)
+
+    def test_page_css_links_are_content_versioned(self):
+        for slug in (
+            "engineering",
+            "cpp-standards",
+            "talks",
+            "ringing",
+            "rescues",
+            "book",
+            "learn",
+            "about",
+            "contact",
+        ):
+            page = (DIST / slug / "index.html").read_text(encoding="utf-8")
+            self.assertIn(".css?v=", page, slug)
 
     def test_ringing_page_specific_design(self):
         ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")

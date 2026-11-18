@@ -261,7 +261,8 @@ of CTest.
    the shared topbar and footer. A card with `holding: true` links
    `assets/css/pages/holding.css`; otherwise, if
    `assets/css/pages/<slug>.css` exists, link it after `site.css`; only that
-   page loads it.
+   page loads it. Page stylesheet links carry a content-hash query
+   (`...css?v=<sha1>`) so CSS changes bypass browser caches.
 7. Compose `dist/index.html` from `index.html` + `base-board.html`, including
    the same topbar and footer.
 8. Write `.nojekyll` (GitHub Pages serves the files verbatim).

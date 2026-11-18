@@ -17,11 +17,20 @@ body[data-page="book"] {
 
 /* Header ----------------------------------------------------------------- */
 
+.card-page--book .card-page-header {
+  --artifact: clamp(3.6rem, 4.6vw, 4.4rem);
+  position: relative;
+  padding-right: calc(var(--artifact) + 1.4rem);
+}
+
 .card-page--book .book-mark {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: block;
-  width: 4.4rem;
+  width: var(--artifact);
   height: auto;
-  margin: 0 0 1.1rem;
+  margin: 0;
   filter: drop-shadow(0 3px 4px rgba(47, 39, 20, 0.18));
 }
 
@@ -276,11 +285,6 @@ body[data-page="book"] {
 /* Small screens ---------------------------------------------------------- */
 
 @media (max-width: 700px) {
-  .card-page--book .book-mark {
-    width: 4rem;
-    margin-bottom: 0.9rem;
-  }
-
   .book-actions {
     margin-top: 1.5rem;
   }

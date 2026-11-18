@@ -17,40 +17,21 @@ body[data-page="engineering"] {
    artifacts; the old portrait note and lanyard are gone. */
 
 .card-page--engineering .card-page-header {
-  display: grid;
-  grid-template-areas:
-    "mark qr"
-    "eyebrow eyebrow"
-    "title title"
-    "lede lede"
-    "status status";
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
-  column-gap: 0.9rem;
-  row-gap: 0.45rem;
+  --artifact: clamp(4.2rem, 6vw, 5.8rem);
+  position: relative;
+  min-height: calc(var(--artifact) * 2 + 0.8rem);
+  padding-right: calc(var(--artifact) + 1.2rem);
 }
 
 .card-page--engineering .eyebrow {
-  grid-area: eyebrow;
   color: var(--software);
 }
 
-.card-page--engineering .card-page-header h1 {
-  grid-area: title;
-}
-
-.card-page--engineering .card-page-header .lede {
-  grid-area: lede;
-}
-
-.card-page--engineering .card-page-header .badge {
-  grid-area: status;
-  justify-self: start;
-}
-
 .card-page--engineering .card-page-logo {
-  grid-area: qr;
-  width: 5.8rem;
+  position: absolute;
+  top: calc(var(--artifact) + 0.55rem);
+  right: 0;
+  width: var(--artifact);
   height: auto;
   margin: 0;
   padding: 0.55rem;
@@ -60,8 +41,10 @@ body[data-page="engineering"] {
 }
 
 .card-page--engineering .github-mark {
-  grid-area: mark;
-  width: 5.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--artifact);
   height: auto;
 }
 
@@ -388,15 +371,6 @@ body[data-page="engineering"] {
 /* Small screens ----------------------------------------------------------- */
 
 @media (max-width: 700px) {
-  .card-page--engineering .card-page-logo {
-    width: 5.2rem;
-    margin: 0;
-  }
-
-  .card-page--engineering .github-mark {
-    width: 5.2rem;
-  }
-
   .card-page--engineering .item-list .item {
     grid-template-columns: minmax(0, 1fr);
     min-height: 5.8rem;

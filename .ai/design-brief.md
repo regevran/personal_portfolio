@@ -444,7 +444,9 @@ and bird-name cards for Learning Aid. Neutral notes stay marked only by the grom
 Agreed 2026-11-11. The software pages share one container: the portrait cream
 note, narrow lanyard, software-blue edge, formal serif title and mono kicker
 hanging on the board. The conference badge is not the generic software mark;
-it becomes the **Talks** identity. Each page gets its own artifact at the top:
+it becomes the **Talks** identity. Each page gets its own artifact at the
+header's top right, beside the title, matching the nature and neutral pages.
+Public GitHub stacks its GitHub logo above the QR in that right rail.
 
 - **Talks — conference badge.** The speaker badge: lanyard, clip, name-tag or
   QR. Use it on the page header and the hub card. It is the personal, human

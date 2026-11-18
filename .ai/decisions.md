@@ -316,9 +316,16 @@ data-driven, because it will be updated from time to time.
   2026-11-18. Public GitHub, C++ & Standards and Talks now use the same cream
   sheet, title, summary and `page.md` flow as the other pages; their page
   artifacts (GitHub logo with QR, C++ logo, conference badge) sit at the
-  header's top left. The old portrait header notes, note lanyards and separate
-  intro notes are gone. The **hub** software notes remain portrait with their
-  lanyards; only the card pages changed.
+  header's top right, beside the title. On Public GitHub the GitHub logo sits
+  above the QR in the right rail. The old portrait header notes, note lanyards
+  and separate intro notes are gone. The **hub** software notes remain
+  portrait with their lanyards; only the card pages changed.
+- **All card-page artifacts now sit at the header's top right** (2026-11-18).
+  The four outliers were fixed: Public GitHub, C++ & Standards, Talks and
+  Birds of Israel Index. The mark is absolutely positioned at `top: 0;
+  right: 0`, and the header reserves space with `padding-right` so the title
+  and lede never run beneath it. The nature and neutral pages already used
+  this alignment.
 - The **Ringing page** (`ringing`) got its field-sheet treatment on
   2026-11-15 and was folded back into the standard card sheet on 2026-11-18.
   It keeps the dirty ink field and nature-green accent. A **narrow, tall,

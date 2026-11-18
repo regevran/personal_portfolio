@@ -16,11 +16,20 @@ body[data-page="talks"] {
 /* Header inside the standard sheet. The conference badge remains the page
    artifact; the old portrait note and lanyard are gone. */
 
+.card-page--talks .card-page-header {
+  --artifact: clamp(3.8rem, 4.8vw, 4.6rem);
+  position: relative;
+  padding-right: calc(var(--artifact) + 1.4rem);
+}
+
 .card-page--talks .conference-mark {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: block;
-  width: 4.6rem;
+  width: var(--artifact);
   height: auto;
-  margin: 0 0 1.1rem;
+  margin: 0;
   filter: drop-shadow(0 3px 4px rgba(47, 39, 20, 0.18));
 }
 
@@ -284,11 +293,6 @@ body[data-page="talks"] {
 /* Small screens ----------------------------------------------------------- */
 
 @media (max-width: 700px) {
-  .card-page--talks .conference-mark {
-    width: 4rem;
-    margin-bottom: 0.9rem;
-  }
-
   .card-page--talks .talk-card,
   .card-page--talks .talk-card--text {
     grid-template-columns: minmax(0, 1fr);

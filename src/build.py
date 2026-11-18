@@ -8,6 +8,7 @@ script only composes them; validation lives in tests/.
 
 from __future__ import annotations
 
+import hashlib
 import html
 import re
 import shutil
@@ -788,9 +789,11 @@ def render_card_mark(card: dict, root: str) -> str:
 
 
 def page_stylesheet(slug: str, root: str) -> str:
-    if not (ASSETS / "css" / "pages" / f"{slug}.css").is_file():
+    path = ASSETS / "css" / "pages" / f"{slug}.css"
+    if not path.is_file():
         return ""
-    relative = f"assets/css/pages/{slug}.css"
+    digest = hashlib.sha1(path.read_bytes()).hexdigest()[:10]
+    relative = f"assets/css/pages/{slug}.css?v={digest}"
     return f'<link rel="stylesheet" href="{esc(asset_url(relative, root))}">'
 
 
