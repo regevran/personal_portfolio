@@ -101,7 +101,9 @@ class OutputValidationTest(unittest.TestCase):
         engineering_css = (DIST / "assets/css/pages/engineering.css").read_text(
             encoding="utf-8"
         )
-        self.assertIn("icons/lanyard.svg", engineering_css)
+        self.assertNotIn("icons/lanyard.svg", engineering_css)
+        self.assertNotIn("background: transparent", engineering_css)
+        self.assertNotIn(".card-page--engineering .prose > p", engineering_css)
         self.assertIn(".card-page--engineering .github-mark", engineering_css)
         self.assertIn('class="github-mark"', engineering)
         self.assertNotIn("build-log", engineering)

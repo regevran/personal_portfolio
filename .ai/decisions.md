@@ -188,15 +188,16 @@ data-driven, because it will be updated from time to time.
   without one get only the shared styles. The rest of the card pages keep the
   shared first-pass design for now.
 - The **Public GitHub page** (`engineering`) got its first treatment on
-  2026-11-10 and its artifact pass on 2026-11-11: the same dirty ink
-  background and cream notes, with software-blue accents. The header is a
-  portrait cream note with a narrow C05 lanyard
-  (`assets/icons/lanyard.svg`) whose clip sits on the blue top edge, with no
-  punched hole, and the official **GitHub logo** (`assets/icons/github.svg`)
-  beside the real GitHub QR (`assets/general/github-qr.svg`, generated for
-  `https://github.com/regevran`) in a white quiet-zone frame. The kicker,
-  formal-serif title and summary sit under the logo. Intro notes are
-  straight with a blue left rule. Repository cards are straight with a blue
+  2026-11-10, its artifact pass on 2026-11-11, and was unified with the
+  standard card sheet on 2026-11-18: the same dirty ink background and
+  software-blue accents, but now a normal cream sheet. The header lives
+  inside the sheet: the official **GitHub logo**
+  (`assets/icons/github.svg`) at the top left and the real GitHub QR
+  (`assets/general/github-qr.svg`, generated for
+  `https://github.com/regevran`) in a white quiet-zone frame at the top right.
+  The kicker, formal-serif title and summary sit under them. The old portrait
+  note and lanyard are gone. `page.md` is ordinary prose in the sheet; there
+  are no separate intro notes. Repository cards are straight with a blue
   top edge; the last-push date is centred on the first line, and the
   right-hand rail holds a small two-line CMake build tag (`[ 20%] Building CXX
   object` / `[100%] Linking CXX executable`) above the GitHub mark (`assets/icons/github.svg`) in a cream

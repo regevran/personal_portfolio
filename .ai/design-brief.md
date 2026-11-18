@@ -240,15 +240,17 @@ Public GitHub (`engineering`) shares the dirty field and cream notes with
 Podcast but reads as software. Its rules live in
 `assets/css/pages/engineering.css`.
 
-- The background is the same dirty ink texture, fixed on desktop; there is no
-  full-page sheet. The title uses the formal serif, not Patrick Hand.
-- The header is a portrait cream note with the software-blue top edge and the
-  narrow lanyard, carrying the official **GitHub logo**
-  (`assets/icons/github.svg`) beside the real GitHub QR code in a white
-  quiet-zone frame. The kicker, formal-serif title and summary sit under the
-  logo. The QR (`assets/general/github-qr.svg`) was generated for
+- The background is the same dirty ink texture, fixed on desktop. The page is
+  the standard cream card sheet with the software-blue top edge. The title
+  uses the formal serif, not Patrick Hand.
+- The header lives inside that sheet. The official **GitHub logo**
+  (`assets/icons/github.svg`) sits at its top left and the real GitHub QR code
+  in a white quiet-zone frame at its top right. The kicker, formal-serif title
+  and summary sit under them. The old portrait note and lanyard are gone.
+  The QR (`assets/general/github-qr.svg`) was generated for
   `https://github.com/regevran` and still scans to the profile.
-- Intro paragraphs are straight cream notes with a software-blue left rule.
+- `page.md` is ordinary prose inside the sheet; there are no separate intro
+  notes.
 - Repositories are straight cream cards with a software-blue top edge. The
   repository name sits left and the last-push date is centred on the first
   line; the description follows. An absolutely positioned right-hand rail
@@ -271,8 +273,8 @@ Podcast but reads as software. Its rules live in
   Podcast's tilt-and-straighten, hovering or focusing a card pulls it out and
   enlarges it slightly (`translateY(-6px) scale(1.02)`) with a blue glow.
   There is no rotation. Mobile stacks the date under the name.
-- Static text notes (header, intro notes, back link, pager) get a soft blue
-  glow. `prefers-reduced-motion` removes the pull-out transform.
+- `prefers-reduced-motion` removes the pull-out transform; static text uses
+  the standard card styling.
 
 ### C++ & Standards page
 

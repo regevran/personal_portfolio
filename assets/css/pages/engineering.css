@@ -13,43 +13,10 @@ body[data-page="engineering"] {
   }
 }
 
-.card-page--engineering {
-  max-width: 1120px;
-  min-height: 0;
-  padding: clamp(1rem, 3vw, 2rem) clamp(0.6rem, 2vw, 1.2rem)
-    clamp(2rem, 5vw, 4rem);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.card-page--engineering::before {
-  display: none;
-}
-
-.card-page--engineering .back-link {
-  display: inline-block;
-  margin: 0 0 1.2rem;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  background: var(--cream);
-  box-shadow: 0 4px 10px rgba(47, 39, 20, 0.12);
-  transition: box-shadow 180ms ease;
-}
-
-.card-page--engineering .back-link:hover,
-.card-page--engineering .back-link:focus-visible {
-  border-color: var(--software);
-  color: var(--software);
-  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.4),
-    0 10px 24px rgba(47, 39, 20, 0.18);
-}
-
-/* GitHub-logo header ------------------------------------------------------ */
+/* Header inside the standard sheet. The GitHub mark and QR remain the page
+   artifacts; the old portrait note and lanyard are gone. */
 
 .card-page--engineering .card-page-header {
-  position: relative;
   display: grid;
   grid-template-areas:
     "mark qr"
@@ -61,62 +28,28 @@ body[data-page="engineering"] {
   align-items: start;
   column-gap: 0.9rem;
   row-gap: 0.45rem;
-  max-width: 26rem;
-  margin: 5.5rem auto 2.4rem;
-  padding: 1.3rem 1.5rem 1.8rem;
-  border: 1px solid var(--rule);
-  border-top: 0.55rem solid var(--software);
-  border-radius: 6px 16px 8px 12px;
-  background: var(--cream);
-  box-shadow: 0 20px 44px rgba(47, 39, 20, 0.22);
-  transition: box-shadow 180ms ease;
-}
-
-.card-page--engineering .card-page-header:hover {
-  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.4),
-    0 24px 52px rgba(47, 39, 20, 0.26);
-}
-
-.card-page--engineering .card-page-header::before {
-  content: "";
-  position: absolute;
-  top: -5.1rem;
-  left: 50%;
-  width: 100px;
-  height: 83px;
-  background: url("../../icons/lanyard.svg") center bottom / contain no-repeat;
-  transform: translateX(-50%);
-  pointer-events: none;
 }
 
 .card-page--engineering .eyebrow {
   grid-area: eyebrow;
-  margin: 0.75rem 0 0;
   color: var(--software);
 }
 
 .card-page--engineering .card-page-header h1 {
   grid-area: title;
-  margin: 0;
-  font-size: clamp(2.1rem, 3.6vw, 2.8rem);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
 }
 
 .card-page--engineering .card-page-header .lede {
   grid-area: lede;
-  margin: 0.15rem 0 0;
 }
 
 .card-page--engineering .card-page-header .badge {
   grid-area: status;
   justify-self: start;
-  margin-top: 0.2rem;
 }
 
 .card-page--engineering .card-page-logo {
   grid-area: qr;
-  float: none;
   width: 5.8rem;
   height: auto;
   margin: 0;
@@ -132,32 +65,7 @@ body[data-page="engineering"] {
   height: auto;
 }
 
-/* Intro notes ------------------------------------------------------------- */
-
-.card-page--engineering .prose {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.4rem;
-}
-
-.card-page--engineering .prose > p {
-  width: min(100%, 860px);
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 1rem 1.4rem;
-  border: 1px solid var(--rule);
-  border-left: 0.3rem solid var(--software);
-  border-radius: 4px 10px 5px 8px;
-  background: var(--cream);
-  box-shadow: 0 10px 24px rgba(47, 39, 20, 0.16);
-  transition: box-shadow 180ms ease;
-}
-
-.card-page--engineering .prose > p:hover {
-  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.35),
-    0 16px 32px rgba(47, 39, 20, 0.2);
-}
+/* Intro prose ------------------------------------------------------------- */
 
 .card-page--engineering .prose a {
   color: var(--software);
@@ -173,8 +81,8 @@ body[data-page="engineering"] {
 .card-page--engineering .item-list {
   display: flex;
   flex-direction: column;
-  width: min(100%, 980px);
-  margin: 2rem auto 0;
+  width: 100%;
+  margin: clamp(2.2rem, 4vw, 3rem) auto 0;
   padding: 0;
   border: none;
   list-style: none;
@@ -471,22 +379,6 @@ body[data-page="engineering"] {
 
 /* Pager ------------------------------------------------------------------- */
 
-.card-page--engineering .pager {
-  width: min(100%, 980px);
-  margin: 3rem auto 0;
-  padding: 1rem 1.2rem;
-  border: 1px solid var(--rule);
-  border-radius: 4px 10px 5px 8px;
-  background: var(--cream);
-  box-shadow: 0 10px 24px rgba(47, 39, 20, 0.16);
-  transition: box-shadow 180ms ease;
-}
-
-.card-page--engineering .pager:hover {
-  box-shadow: 0 0 0 0.22rem rgba(62, 107, 137, 0.35),
-    0 16px 32px rgba(47, 39, 20, 0.2);
-}
-
 .card-page--engineering .pager a:hover,
 .card-page--engineering .pager a:focus-visible {
   border-bottom-color: var(--software);
@@ -496,25 +388,6 @@ body[data-page="engineering"] {
 /* Small screens ----------------------------------------------------------- */
 
 @media (max-width: 700px) {
-  .card-page--engineering .card-page-header {
-    grid-template-areas:
-      "mark"
-      "qr"
-      "eyebrow"
-      "title"
-      "lede"
-      "status";
-    grid-template-columns: minmax(0, 1fr);
-    margin-top: 4.2rem;
-    padding: 1.3rem 1.4rem 1.8rem;
-  }
-
-  .card-page--engineering .card-page-header::before {
-    top: -4.3rem;
-    width: 84px;
-    height: 70px;
-  }
-
   .card-page--engineering .card-page-logo {
     width: 5.2rem;
     margin: 0;
@@ -587,8 +460,6 @@ body[data-page="engineering"] {
 
 @media (prefers-reduced-motion: reduce) {
   .card-page--engineering .item-list .item,
-  .card-page--engineering .prose > p,
-  .card-page--engineering .pager,
   .card-page--engineering .repo-link,
   .card-page--engineering .item-desc {
     transform: none;
