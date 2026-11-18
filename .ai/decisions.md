@@ -207,11 +207,13 @@ data-driven, because it will be updated from time to time.
   (`translateY(-6px) scale(1.02)`) with a blue glow instead of Podcast's
   rotation. The rules live in `assets/css/pages/engineering.css`.
 - The **C++ & Standards page** (`cpp-standards`) got its artifact pass on
-  2026-11-11: the same dirty field, cream notes and straight pull-out cards as
-  Public GitHub, with the official C++ logo. The header carries the unaltered
-  logo (`assets/icons/cpp-logo.svg`) above the full
+  2026-11-11 and was unified with the standard card sheet on 2026-11-18: the
+  same dirty field, cream sheet and straight pull-out cards as Public GitHub,
+  with the official C++ logo. The header lives inside the sheet, with the
+  unaltered logo (`assets/icons/cpp-logo.svg`) at the top left, then the full
   `ISO/IEC JTC1/SC22/WG21` kicker, the formal-serif title `C++ & Standards`
-  and the summary. Paper cards show the title left, the paper number centred,
+  and the summary. The old portrait note and lanyard are gone. `page.md` is
+  ordinary prose in the sheet. Paper cards show the title left, the paper number centred,
   the role/year line under the title and the description below; the
   right-hand rail holds the C++ logo above a document link
   (`assets/icons/paper.svg`). The title and document icon link to wg21.link.
@@ -267,9 +269,10 @@ data-driven, because it will be updated from time to time.
   `ISO/IEC JTC1/SC22/WG21` kicker; Talks uses the conference-badge name tag
   (`assets/icons/conference-badge-mark.svg`). Nature and neutral
   notes keep the landscape note treatment.
-- The **software page artifact system** was agreed on 2026-11-11. The shared
-  container stays the portrait cream note, lanyard, software-blue edge and
-  formal serif. The conference badge becomes the **Talks** identity (speaker
+- The **software page artifact system** was agreed on 2026-11-11. On the hub,
+  the shared container stays the portrait cream note, lanyard, software-blue
+  edge and formal serif; the card-page headers were later unified with the
+  standard sheet. The conference badge becomes the **Talks** identity (speaker
   badge). **Public GitHub** gets the official GitHub logo; the CMake reference
   is only a small build tag in the repository-card rail, not a page or hub
   artifact. **C++ & Standards** gets the official C++ logo, with
@@ -292,6 +295,13 @@ data-driven, because it will be updated from time to time.
   rejects a player without an HTTP referrer. The icon row uses the YouTube
   mark and a document mark, not the `Open origin` text; `url` is the fallback
   origin icon when a talk has neither.
+- **Software page headers were unified with the standard card sheet** on
+  2026-11-18. Public GitHub, C++ & Standards and Talks now use the same cream
+  sheet, title, summary and `page.md` flow as the other pages; their page
+  artifacts (GitHub logo with QR, C++ logo, conference badge) sit at the
+  header's top left. The old portrait header notes, note lanyards and separate
+  intro notes are gone. The **hub** software notes remain portrait with their
+  lanyards; only the card pages changed.
 - The **Ringing page** (`ringing`) got its field-sheet treatment on
   2026-11-15 and was folded back into the standard card sheet on 2026-11-18.
   It keeps the dirty ink field and nature-green accent. A **narrow, tall,

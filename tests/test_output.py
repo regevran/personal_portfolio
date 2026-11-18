@@ -173,7 +173,9 @@ class OutputValidationTest(unittest.TestCase):
         cpp_css = (DIST / "assets/css/pages/cpp-standards.css").read_text(
             encoding="utf-8"
         )
-        self.assertIn("icons/lanyard.svg", cpp_css)
+        self.assertNotIn("icons/lanyard.svg", cpp_css)
+        self.assertNotIn("background: transparent", cpp_css)
+        self.assertNotIn(".card-page--cpp-standards .prose > p", cpp_css)
         self.assertIn("icons/cpp-logo.svg", cpp_css)
         self.assertIn("translateY(-6px) scale(1.02)", cpp_css)
 
@@ -215,7 +217,9 @@ class OutputValidationTest(unittest.TestCase):
         talks_css = (DIST / "assets" / "css" / "pages" / "talks.css").read_text(
             encoding="utf-8"
         )
-        self.assertIn("icons/lanyard.svg", talks_css)
+        self.assertNotIn("icons/lanyard.svg", talks_css)
+        self.assertNotIn("background: transparent", talks_css)
+        self.assertNotIn(".card-page--talks .prose > p", talks_css)
         self.assertIn("icons/conference-badge-mark.svg", talks_css)
         self.assertIn(".talk-video", talks_css)
         self.assertIn(".talk-media iframe", talks_css)

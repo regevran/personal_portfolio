@@ -283,14 +283,15 @@ straight pull-out cards with Public GitHub, with the official **C++ logo**
 instead of the GitHub logo. Its rules live in
 `assets/css/pages/cpp-standards.css`.
 
-- The header is a portrait cream note with the software-blue top edge and the
-  narrow lanyard, carrying the unaltered official C++ logo
-  (`assets/icons/cpp-logo.svg`) at the top. Below it are the full designation
+- The page is the standard cream sheet with the software-blue top edge. The
+  header lives inside it: the unaltered official C++ logo
+  (`assets/icons/cpp-logo.svg`) at the top left, then the full designation
   `ISO/IEC JTC1/SC22/WG21`, the formal-serif title `C++ & Standards`, and the
   summary. The logo is the artifact; the full designation supplies the
-  standards context. There is no ISO logo.
-- Intro paragraphs are straight cream notes with a software-blue left rule,
-  like Public GitHub.
+  standards context. There is no ISO logo. The old portrait note and lanyard
+  are gone.
+- `page.md` is ordinary prose inside the sheet; there are no separate intro
+  notes.
 - Papers are straight cream cards with a software-blue top edge. The title
   sits left, the paper number (`P3817R0-R1`, etc.) is centred on the first
   line, and the role/year line sits under the title. The description follows.
@@ -309,14 +310,14 @@ instead of the GitHub logo. Its rules live in
 Talks (`talks`) shares the dirty field and cream notes with Public GitHub and
 C++ & Standards; its rules live in `assets/css/pages/talks.css`.
 
-- The header is a portrait cream note with the software-blue top edge and the
-  narrow lanyard, carrying the full conference badge
-  (`assets/icons/conference-badge.svg`) at the top: badge card, QR, name lines
-  and its own lanyard. Below it are the `Stage` kicker, the formal-serif title
-  `Talks` and the summary. The note lanyard and the badge lanyard read as one
-  hanging object.
-- Intro paragraphs are straight cream notes with a software-blue left rule,
-  like the other software pages.
+- The page is the standard cream sheet with the software-blue top edge. The
+  header lives inside it: the full conference badge
+  (`assets/icons/conference-badge.svg`) at the top left — badge card, QR, name
+  lines and its own lanyard — then the `Stage` kicker, the formal-serif title
+  `Talks` and the summary. The old portrait note and note lanyard are gone;
+  the badge keeps its own lanyard.
+- `page.md` is ordinary prose inside the sheet; there are no separate intro
+  notes.
 - Talks are straight cream video boxes with a software-blue top edge. Each
   box carries the badge name-tag stamp at the top left, then the uppercase
   date, formal-serif title and description in the copy column, with a 16:9
@@ -334,8 +335,8 @@ C++ & Standards; its rules live in `assets/css/pages/talks.css`.
   icon sits under it. Hovering or focusing a card lifts it
   (`translateY(-4px)`) with a blue glow. Mobile stacks the copy, the video and
   then the icon row.
-- Static text notes (header, intro notes, back link, pager) get a soft blue
-  glow; `prefers-reduced-motion` removes the pull-out transform.
+- `prefers-reduced-motion` removes the pull-out transform; static text uses
+  the standard card styling.
 
 ### Ringing page
 
