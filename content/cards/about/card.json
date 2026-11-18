@@ -4,6 +4,7 @@
   "family": "neutral",
   "order": 9,
   "status": "placeholder",
+  "holding": true,
   "audio": null,
   "board": {
     "x": 36.5,

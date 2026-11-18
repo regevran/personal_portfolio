@@ -1,5 +1,1 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nibh sit amet arcu faucibus tincidunt. Curabitur sodales, augue non volutpat luctus, ipsum arcu consequat erat, at luctus velit massa vitae dui.
-
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-<p class="placeholder-note">CV: <span class="disabled-link">placeholder - file pending</span></p>
+<figure class="learn-plate"><img src="assets/general/learning-aid-weaver.jpg" width="1920" height="1280" alt="A male black-headed weaver hangs upside down beneath a half-built grass nest."><span class="construction-stamp">Under Construction</span><figcaption class="visually-hidden">Photo: Charles J. Sharp, CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/, via Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Black-headed_weaver_(Ploceus_cucullatus_bohndorffi)_male_nest_building.jpg. Resized.</figcaption></figure>

@@ -1,1 +1,1 @@
-Biography and curriculum vitae.
+About Ran Regev.

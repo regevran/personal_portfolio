@@ -23,7 +23,7 @@
 | `assets/icons/download.svg` | Birds of Israel Index download button | down arrow onto a base line |
 | `assets/icons/learning-aid.svg` | hub Learning Aid card | bird-name cards with a check mark |
 | `assets/general/github-qr.svg` | Public GitHub page header | real QR code for `https://github.com/regevran`; beside the GitHub logo, white background and CSS quiet zone |
-| `assets/general/learning-aid-weaver.jpg` | Learning Aid holding page | Black-headed Weaver building its nest, 1920 × 1280; photo Charles J. Sharp, CC BY-SA 4.0, via Wikimedia Commons, resized; attribution kept in a visually hidden figcaption |
+| `assets/general/learning-aid-weaver.jpg` | Learning Aid, About and Contact holding pages | Black-headed Weaver building its nest, 1920 × 1280; photo Charles J. Sharp, CC BY-SA 4.0, via Wikimedia Commons, resized; attribution kept in a visually hidden figcaption |
 | `assets/podcast/promo_anat_gal_birds_in_the_city.mp4` | podcast | 1080×1920, 27 s |
 | `assets/podcast/promo_shay_agmon_ringing.mp4` | podcast | 1080×1920, 65 s |
 | `assets/rescues/ardea_alba/ardea_alba.mp4` | rescues | 576×1024, 24 s |

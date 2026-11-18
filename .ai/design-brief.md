@@ -505,22 +505,27 @@ untracked. The bucket CORS policy allows the site origin and the local preview
 with `GET`/`HEAD`; the viewer disables range loading, so that is enough. If
 JavaScript is unavailable, the PDF download remains.
 
-### Learning Aid — title and photograph
+### Holding pages — Learning Aid, About, Contact
 
-The Learning Aid card is still in development, so its page is a deliberately
-minimal holding page: the title **Learning Aid**, one large photograph of a
-male Black-headed Weaver hanging beneath a half-built grass nest, a tilted
-**Under Construction** stamp in the sky, and the Previous/Next pager. There is
-no prose, status badge, construction strip or visible caption. The layout fills
-the viewport with the photo and does not scroll at normal desktop and mobile
-sizes. The CC BY-SA 4.0 attribution remains in a visually hidden figcaption,
-because the image requires it.
+These three cards are still in development, so their pages share a deliberately
+minimal holding layout: the card title, one large photograph of a male
+Black-headed Weaver hanging beneath a half-built grass nest, a tilted **Under
+Construction** stamp in the sky, and the Previous/Next pager. There is no prose,
+status badge, construction strip or visible caption. The layout fills the
+viewport with the photo and does not scroll at normal desktop and mobile sizes.
+The CC BY-SA 4.0 attribution remains in a visually hidden figcaption, because
+the image requires it.
+
+The cards set `holding: true`, which links the shared
+`assets/css/pages/holding.css` instead of a per-slug stylesheet. The real
+Learning Aid, About and Contact pages will replace the shared treatment when
+their content is ready.
 
 The alternative **Coming Soon** treatment was not used because the
 nest-building photograph is clearer and shows the work in progress.
 
 ## Next step
 
-The Learning Aid holding page is in place. Design the remaining card pages
-individually, starting with the neutral pages. Then build the contact
-power-line/notebook interaction. Voice-over comes last.
+The Learning Aid, About and Contact holding pages are in place. Build the
+contact power-line/notebook interaction when the real contact content is ready.
+Voice-over comes last.

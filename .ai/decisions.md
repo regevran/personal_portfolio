@@ -23,10 +23,10 @@ data-driven, because it will be updated from time to time.
 | Interaction | Cards lift on hover and focus; clicking opens a separate page per card. Keyboard and touch must work; honor `prefers-reduced-motion`. |
 | Voice-over | English, added at the very end. Every card reserves an `audio` field and a transcript slot in the template from the start. |
 | Videos | Local files embedded during development. Data model supports switching each entry to a YouTube embed later. |
-| Contact | Animated notebook/power-line panel planned for the design phase. Direct email (public), public phone, and a form that composes a `mailto:` with the typed message. A true one-click send would require a third-party endpoint or a backend; deferred. |
+| Contact | Currently a holding page using the same title-and-photo treatment as Learning Aid. The animated notebook/power-line panel is still planned: public email and phone, plus a form that composes a `mailto:` with the typed message. A true one-click send would require a third-party endpoint or a backend; deferred. |
 | Gallery | Deferred. The data model can accept it later, with per-photo text/audio. |
 | Book | Implemented as **Birds of Israel Index**: a PDF download and a right-to-left page-turn viewer built on the ready-made pdflip engine, flipping the PDF itself from R2. |
-| Learning aid | Card exists as a minimal holding page: **Learning Aid**, one large Black-headed Weaver building its nest (Charles J. Sharp, CC BY-SA 4.0, resized; attribution kept visually hidden), a tilted **Under Construction** stamp, and Previous/Next. No prose or visible status badge; fitted to the viewport without scrolling. GitHub Pages cannot run the Python trainer; hosting/ports deferred. |
+| Holding pages | Learning Aid, About and Contact share the minimal title-and-photo layout: title, one large Black-headed Weaver building its nest (Charles J. Sharp, CC BY-SA 4.0, resized; attribution kept visually hidden), a tilted **Under Construction** stamp, and Previous/Next. No prose or visible status badge; fitted to the viewport without scrolling. `holding: true` links the shared `assets/css/pages/holding.css`. GitHub Pages cannot run the Python trainer; hosting/ports deferred. |
 | CV | Placeholder until the real CV is ready. |
 | Git | No LFS. Ignore `tags`, `*.swp`, `dist/`, Python caches. |
 

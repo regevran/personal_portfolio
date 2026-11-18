@@ -1,33 +1,37 @@
-/* Learning Aid — a title and one photograph, fitted to the screen. */
+/* Holding pages — a title and one photograph, fitted to the screen. */
 
-body[data-page="learn"] {
+body[data-page="learn"],
+body[data-page="about"],
+body[data-page="contact"] {
   background: var(--sand) url("../../general/dirty-background.jpg") center /
     cover no-repeat;
 }
 
 @media (min-width: 900px) {
-  body[data-page="learn"] {
+  body[data-page="learn"],
+  body[data-page="about"],
+  body[data-page="contact"] {
     background-attachment: fixed;
   }
 }
 
-/* The holding page carries no visible prose, status or ornament: the title
+/* A holding page carries no visible prose, status or ornament: the title
    and the photograph are the whole page. The photo credit stays in the
    markup, visually hidden, because the image is CC BY-SA. */
-.card-page--learn .back-link,
-.card-page--learn .eyebrow,
-.card-page--learn .lede,
-.card-page--learn .badge,
-.card-page--learn .learn-mark {
+.card-page .back-link,
+.card-page .eyebrow,
+.card-page .lede,
+.card-page .badge,
+.card-page .learn-mark {
   display: none;
 }
 
-body[data-page="learn"] .site-main > .wrap {
+.site-main > .wrap {
   height: 100%;
   padding: clamp(0.9rem, 2.5vh, 1.8rem) 0;
 }
 
-.card-page--learn {
+.card-page {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -36,7 +40,7 @@ body[data-page="learn"] .site-main > .wrap {
     clamp(0.8rem, 2.4vw, 1.5rem);
 }
 
-.card-page--learn .card-page-header {
+.card-page .card-page-header {
   flex: 0 0 auto;
   margin: 0 0 clamp(0.8rem, 2vh, 1.2rem);
   padding: 0;
@@ -44,13 +48,13 @@ body[data-page="learn"] .site-main > .wrap {
   text-align: center;
 }
 
-.card-page--learn .card-page-header h1 {
+.card-page .card-page-header h1 {
   margin: 0;
   font-size: clamp(2.5rem, 6vw, 4.8rem);
   line-height: 1;
 }
 
-.card-page--learn .prose {
+.card-page .prose {
   display: flex;
   flex: 1 1 auto;
   min-height: 0;
@@ -105,7 +109,7 @@ body[data-page="learn"] .site-main > .wrap {
   pointer-events: none;
 }
 
-.card-page--learn .pager {
+.card-page .pager {
   flex: 0 0 auto;
   margin-top: clamp(0.8rem, 2vh, 1.2rem);
   padding-top: 0;
@@ -113,12 +117,12 @@ body[data-page="learn"] .site-main > .wrap {
 }
 
 @media (max-width: 620px) {
-  .card-page--learn {
+  .card-page {
     padding-right: 1.1rem;
     padding-left: 1.1rem;
   }
 
-  .card-page--learn .card-page-header h1 {
+  .card-page .card-page-header h1 {
     font-size: 2.6rem;
   }
 }

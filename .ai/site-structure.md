@@ -36,13 +36,13 @@ personal_portfolio/
 │   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
 │   ├── css/site.css          shared card pages
-│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues, book, learn)
+│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues, book)
 │   ├── js/board.js           horizontal pan and nav shortcuts
 │   ├── js/site.js            contact form, repo accordions, talk videos, species decks, rescue stacks
 │   ├── js/pages/book.js      pdflip controls, Go to page, and counter
 │   ├── vendor/pdflip/        BSD page-turn engine and pdf.js (pruned)
 │   ├── fonts/                Patrick Hand (OFL)
-│   ├── general/              board background, robin PNG, Learning Aid weaver photo, reference assets
+│   ├── general/              board background, robin PNG, holding-page weaver photo, reference assets
 │   ├── documents/            CV and book PDF (R2-hosted; local backup)
 │   └── ringing/ rescues/ podcast/ documents/ ...
 ├── tests/                    all validation and date warnings
@@ -82,6 +82,10 @@ Ringing and Birding were one card. Ringing owns the existing ringing
 photographs (`"collections": ["ringing"]`). Birding was removed from the hub on
 2026-11-17 and is deferred to phase 2, if it returns at all.
 
+Learning Aid, About and Contact currently use the shared title-and-photo
+holding layout (`"holding": true`). Their real pages will replace it when the
+content is ready.
+
 Adding a card: create `content/cards/<slug>/card.json` with the metadata,
 `board` placement and `blocks`, plus the prose files the prose blocks
 reference. The directory name is the slug; the tests and hub pick it up
@@ -95,8 +99,10 @@ automatically. No renderer change is needed for a new card.
   board, blocks}`. `status` is one of `ready`, `under-construction`,
   `coming-soon`, `placeholder`; `family` is one of `software`, `nature`,
   `neutral` and drives the card colours and anchors. `audio` is `null` or a
-  path under `assets/`; optional `logo` and `logo_alt` add a page logo. The
-  slug is the directory name. `board` holds the hub placement (see below).
+  path under `assets/`; optional `logo` and `logo_alt` add a page logo. Optional
+  `holding: true` links the shared `assets/css/pages/holding.css` instead of a
+  per-slug stylesheet; Learning Aid, About and Contact use it. The slug is the
+  directory name. `board` holds the hub placement (see below).
   `summary.md` supplies the visible lede; `description.md` supplies the meta
   description. Both are required and non-empty, with no JSON fallback.
 - Every dataset record has a stable `id` and a `collections` list. A collection
@@ -250,8 +256,10 @@ of CTest.
 5. Render each card's blocks in order: prose via pandoc, contact from site
    data, datasets selected by collection or id and sorted latest-first.
 6. Compose `dist/<slug>/index.html` from `card.html` + `base.html`, including
-   the shared topbar and footer. If `assets/css/pages/<slug>.css` exists, link
-   it after `site.css`; only that page loads it.
+   the shared topbar and footer. A card with `holding: true` links
+   `assets/css/pages/holding.css`; otherwise, if
+   `assets/css/pages/<slug>.css` exists, link it after `site.css`; only that
+   page loads it.
 7. Compose `dist/index.html` from `index.html` + `base-board.html`, including
    the same topbar and footer.
 8. Write `.nojekyll` (GitHub Pages serves the files verbatim).

@@ -1,1 +1,1 @@
-Email, phone and a short message form.
+Contact Ran Regev.

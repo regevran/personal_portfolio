@@ -4,6 +4,7 @@
   "family": "neutral",
   "order": 10,
   "status": "ready",
+  "holding": true,
   "audio": null,
   "board": {
     "x": 53.5,
@@ -16,9 +17,6 @@
     {
       "type": "prose",
       "src": "page.md"
-    },
-    {
-      "type": "contact"
     }
   ]
 }

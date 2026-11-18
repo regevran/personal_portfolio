@@ -220,10 +220,10 @@ dist/              generated output (ignored by git)
 
 - **Card pages:** `content/cards/<slug>/card.json` holds the hub metadata
   (title, kicker, order, status, family, audio, board placement, optional
-  `logo`/`logo_alt`, optional `mark`) and the ordered `blocks` list. The
-  directory name is the slug. `summary.md` supplies the visible lede;
-  `description.md` supplies the `<meta name="description">`. Both files are
-  required and must not be empty — there is no JSON fallback.
+  `logo`/`logo_alt`, optional `mark`, optional `holding`) and the ordered
+  `blocks` list. The directory name is the slug. `summary.md` supplies the
+  visible lede; `description.md` supplies the `<meta name="description">`.
+  Both files are required and must not be empty — there is no JSON fallback.
 - **Per-page styling:** if `assets/css/pages/<slug>.css` exists, the build
   links it after `site.css` on that page only. Podcast uses
   `assets/css/pages/podcast.css` for its dirty background and floating chapter
@@ -235,6 +235,9 @@ dist/              generated output (ignored by git)
   `assets/css/pages/ringing.css` for its robin-perch header, silver ring mark
   and fanned species decks; Rescues uses `assets/css/pages/rescues.css` for
   the full-width stills | text | video rescue rows and vertical stills stack.
+  Cards with `holding: true` link the shared
+  `assets/css/pages/holding.css` instead; Learning Aid, About and Contact use
+  it for their title-and-photo holding pages.
 - **Repository cards:** a full description is clamped to a preview with a
   `More…` toggle at the bottom of the card. Opening one expands it to its full
   height, changes the label to `Less…`, and closes any other open repository

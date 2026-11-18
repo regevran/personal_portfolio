@@ -4,6 +4,7 @@
   "family": "nature",
   "order": 8,
   "status": "under-construction",
+  "holding": true,
   "mark": "learning-aid",
   "audio": null,
   "board": {

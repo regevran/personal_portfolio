@@ -1148,7 +1148,9 @@ def build() -> None:
             card_topbar,
             card_footer,
             card["slug"],
-            page_stylesheet(card["slug"], root),
+            page_stylesheet(
+                "holding" if card.get("holding") else card["slug"], root
+            ),
         )
 
     (DIST / ".nojekyll").write_text("", encoding="utf-8")

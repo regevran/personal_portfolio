@@ -420,6 +420,9 @@ def validate_cards() -> list[str]:
         if card.get("family") not in ALLOWED_FAMILIES:
             errors.append(f"{label}: unknown family {card.get('family')!r}")
 
+        if "holding" in card and not isinstance(card["holding"], bool):
+            errors.append(f"{label}: 'holding' must be a boolean")
+
         if card.get("audio"):
             _file_exists(errors, card["audio"], label)
 

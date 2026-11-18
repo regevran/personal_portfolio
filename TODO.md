@@ -14,8 +14,8 @@
 [x] Style the Rescues page in the board's visual language
 [x] Style the Birds of Israel Index page in the board's visual language — PDF download, RTL pdflip viewer, Go to page — [details](.ai/design-brief.md#book-page--birds-of-israel-index)
 [x] Style the Learning Aid page in the board's visual language — title, licensed weaver photo with tilted Under Construction stamp, Previous/Next, no scrolling
-[ ] Style the About page in the board's visual language
-[ ] Style the Contact page in the board's visual language
+[x] Style the About page in the board's visual language — same title-and-photo holding page as Learning Aid
+[x] Style the Contact page in the board's visual language — same title-and-photo holding page as Learning Aid
 [ ] Build the contact notebook / power-line interaction — [details](.ai/design-brief.md#next-step)
 [x] Choose host and domain, then add a deploy step around `cmake --install` — GitHub Pages + R2 content media, [details](.ai/decisions.md)
 [ ] Move "Learning Aid" to software - after all, this is a software development effort more than birding

@@ -339,7 +339,7 @@ class OutputValidationTest(unittest.TestCase):
             'the birds of Israel, in development.">',
             learn,
         )
-        self.assertIn("assets/css/pages/learn.css", learn)
+        self.assertIn("assets/css/pages/holding.css", learn)
         self.assertIn("card-page--learn", learn)
         self.assertIn('class="learn-plate"', learn)
         self.assertIn('class="construction-stamp"', learn)
@@ -364,15 +364,15 @@ class OutputValidationTest(unittest.TestCase):
         self.assertNotIn("placeholder", learn.lower())
 
         learn_css = (
-            DIST / "assets" / "css" / "pages" / "learn.css"
+            DIST / "assets" / "css" / "pages" / "holding.css"
         ).read_text(encoding="utf-8")
         self.assertIn("dirty-background.jpg", learn_css)
         for hidden in (
-            ".card-page--learn .back-link",
-            ".card-page--learn .eyebrow",
-            ".card-page--learn .lede",
-            ".card-page--learn .badge",
-            ".card-page--learn .learn-mark",
+            ".card-page .back-link",
+            ".card-page .eyebrow",
+            ".card-page .lede",
+            ".card-page .badge",
+            ".card-page .learn-mark",
         ):
             self.assertIn(hidden, learn_css)
         self.assertIn("display: none", learn_css)
@@ -385,6 +385,48 @@ class OutputValidationTest(unittest.TestCase):
         self.assertTrue(
             (DIST / "assets" / "general" / "learning-aid-weaver.jpg").is_file()
         )
+
+    def test_about_and_contact_are_holding_pages(self):
+        pages = {}
+        for slug, title, description in (
+            ("about", "About", "About Ran Regev."),
+            ("contact", "Contact", "Contact Ran Regev."),
+        ):
+            page = (DIST / slug / "index.html").read_text(encoding="utf-8")
+            pages[slug] = page
+            self.assertIn(f"<title>{title} — Ran Regev</title>", page)
+            self.assertIn(
+                f'<meta name="description" content="{description}">', page
+            )
+            self.assertIn("assets/css/pages/holding.css", page)
+            self.assertIn(f"card-page--{slug}", page)
+            self.assertIn('class="learn-plate"', page)
+            self.assertIn('class="construction-stamp"', page)
+            self.assertIn("Under Construction", page)
+            self.assertIn(
+                "assets/general/learning-aid-weaver.jpg", page
+            )
+            self.assertIn('class="visually-hidden"', page)
+            self.assertIn("CC BY-SA 4.0", page)
+            self.assertNotIn("Lorem ipsum", page)
+            self.assertNotIn("placeholder-note", page)
+            self.assertNotIn("construction-strip", page)
+
+        self.assertNotIn("contact-panel", pages["about"])
+        self.assertNotIn("contact-panel", pages["contact"])
+        self.assertNotIn("<form", pages["contact"])
+        self.assertIn('href="../learn/index.html"', pages["about"])
+        self.assertIn('href="../contact/index.html"', pages["about"])
+        self.assertIn('href="../about/index.html"', pages["contact"])
+
+        holding_css = (
+            DIST / "assets" / "css" / "pages" / "holding.css"
+        ).read_text(encoding="utf-8")
+        for slug in ("learn", "about", "contact"):
+            self.assertIn(f'body[data-page="{slug}"]', holding_css)
+        self.assertIn(".card-page .back-link", holding_css)
+        self.assertIn(".learn-plate", holding_css)
+        self.assertIn(".construction-stamp", holding_css)
 
     def test_ringing_page_specific_design(self):
         ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")
