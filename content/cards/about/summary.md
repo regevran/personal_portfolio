@@ -1,1 +1,1 @@
-A profile of Ran Regev.
+A profile of Ran Regev

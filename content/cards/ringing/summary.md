@@ -1,1 +1,1 @@
-A few catches from the ringing station.
+A few catches from the ringing station

@@ -520,15 +520,15 @@ JavaScript is unavailable, the PDF download remains.
 
 The six prose cards — Public GitHub, C++ & Standards, Talks, Ringing, Rescues
 and Podcast — now use the same generic `.note-intro` composition as the book:
-a large hand-lettered line on the left, a mono kicker and two or three short
+a large hand-lettered line on the left, a mono kicker and one to three short
 paragraphs on the right. The left line is a pull quote from the page, not a
-label: "A few things of my own.", "A room full of experts.", "Not a conference
-person.", "A few of the catches.", "No footage, no rescue. :-)", and "About 20
-episodes. Then we'll see." The copy keeps Ran's voice while fixing spelling
+label: "A few things of my own", "A room full of experts", "Not a conference
+person", "At the ringing station", "No footage / No rescue / 🙂", and
+"Everything about birds". The copy keeps Ran's voice while fixing spelling
 and grammar; bold carries facts and contrasts, italics carry names such as
-*C++* and *WhatsApp*, and at most one ochre `<mark>` per page carries the
-phrase to remember. The classes live in `site.css`; no new block type, card
-metadata or per-page intro CSS was needed.
+*WhatsApp* and the occasional aside, and at most one ochre `<mark>` per page
+carries the phrase to remember. The classes live in `site.css`; no new block
+type, card metadata or per-page intro CSS was needed.
 
 ### Holding pages — Learning Aid, About, Contact
 
