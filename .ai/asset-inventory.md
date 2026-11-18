@@ -83,4 +83,5 @@
 - The pelican filename typo was fixed by the user.
 - The imported `pyconotus_xanthopygos_2.jpeg` typo was normalized to
   `pycnonotus_xanthopygos_2.jpeg` so both bulbul assets match the genus name.
-- No LFS: all binaries are small enough; GitHub Pages does not serve LFS anyway.
+- No LFS. Content JPEG/MP4/PDF media is hosted in Cloudflare R2 (JPEG/MP4
+  untracked in git); theme assets and the PDF are small enough for git.

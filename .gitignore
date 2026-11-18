@@ -20,6 +20,11 @@ __pycache__/
 # OS noise
 .DS_Store
 
+# Content media is hosted on Cloudflare R2; see deploy.json.
+assets/ringing/*.jpeg
+assets/rescues/**/*.jpeg
+assets/podcast/*.jpeg
+
 # videos
 *.mp4
 

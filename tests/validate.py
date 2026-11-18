@@ -12,6 +12,7 @@ from datetime import date, datetime
 from html.parser import HTMLParser
 from pathlib import Path
 
+from src.media import MEDIA
 from src.site_schema import (
     BLOCK_TYPES,
     CARDS_DIR,
@@ -139,6 +140,9 @@ def _load_card(errors: list[str], path: Path):
 
 
 def _file_exists(errors: list[str], relative: str, label: str) -> None:
+    # Hosted media lives in R2; `site-check-media` verifies those objects.
+    if MEDIA.is_remote(relative):
+        return
     if not (ROOT / relative).is_file():
         errors.append(f"{label}: missing file {relative}")
 

@@ -29,8 +29,10 @@ file(GLOB_RECURSE PORTFOLIO_INPUTS CONFIGURE_DEPENDS
     "${PORTFOLIO_ROOT}/templates/*"
     "${PORTFOLIO_ROOT}/assets/*")
 list(APPEND PORTFOLIO_INPUTS
+    "${PORTFOLIO_ROOT}/deploy.json"
     "${PORTFOLIO_ROOT}/src/__init__.py"
     "${PORTFOLIO_ROOT}/src/build.py"
+    "${PORTFOLIO_ROOT}/src/media.py"
     "${PORTFOLIO_ROOT}/src/site_schema.py"
     "${PORTFOLIO_ROOT}/tests/test_content.py"
     "${PORTFOLIO_ROOT}/tests/warnings.py"
@@ -71,6 +73,33 @@ add_custom_target(site-serve
     USES_TERMINAL
     VERBATIM)
 
+# Media lives in R2 and dist/ already references it by absolute URL. The
+# upload target pushes only referenced files; the check/audit targets are
+# explicit because they need the network.
+add_custom_target(site-upload
+    COMMAND "${Python3_EXECUTABLE}" -m src.upload_media
+    DEPENDS site-build
+    WORKING_DIRECTORY "${PORTFOLIO_ROOT}"
+    COMMENT "Uploading dist/ media to Cloudflare R2"
+    USES_TERMINAL
+    VERBATIM)
+
+add_custom_target(site-check-media
+    COMMAND "${Python3_EXECUTABLE}" -m src.check_media check
+    DEPENDS site-build
+    WORKING_DIRECTORY "${PORTFOLIO_ROOT}"
+    COMMENT "Checking R2 media referenced by dist/"
+    USES_TERMINAL
+    VERBATIM)
+
+add_custom_target(site-audit-media
+    COMMAND "${Python3_EXECUTABLE}" -m src.check_media audit
+    DEPENDS site-build
+    WORKING_DIRECTORY "${PORTFOLIO_ROOT}"
+    COMMENT "Comparing the R2 bucket with dist/ references"
+    USES_TERMINAL
+    VERBATIM)
+
 # Two validation passes bracket the build: content before, output after. The
 # workflow presets build first, so ctest always sees a fresh dist/. The
 # non-fatal date warnings print during the render.
@@ -78,11 +107,15 @@ add_test(NAME content-validation
     COMMAND "${Python3_EXECUTABLE}" -m unittest -q tests.test_content)
 add_test(NAME output-validation
     COMMAND "${Python3_EXECUTABLE}" -m unittest -q tests.test_output)
+add_test(NAME media-config
+    COMMAND "${Python3_EXECUTABLE}" -m unittest -q tests.test_media)
 
-set_tests_properties(content-validation output-validation
+set_tests_properties(content-validation output-validation media-config
     PROPERTIES WORKING_DIRECTORY "${PORTFOLIO_ROOT}")
 set_tests_properties(output-validation
     PROPERTIES DEPENDS "content-validation")
+set_tests_properties(media-config
+    PROPERTIES DEPENDS "output-validation")
 
 add_custom_target(site-test
     COMMAND "${CMAKE_CTEST_COMMAND}" --output-on-failure
@@ -95,9 +128,8 @@ add_custom_target(site-test
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_CLEAN_FILES
     "${PORTFOLIO_DIST}")
 
-# Deploy foundation: stage the generated site with
+# Deploy: dist/ is the publishable tree; media URLs already point at R2.
 #   cmake --install build --prefix <destination>
-# The actual host and upload step are still deferred.
 install(DIRECTORY "${PORTFOLIO_DIST}/" DESTINATION "."
         COMPONENT site)
 
@@ -108,6 +140,9 @@ add_custom_target(usage
     COMMAND ${CMAKE_COMMAND} -E echo "Refresh dates: cmake --workflow --preset refresh"
     COMMAND ${CMAKE_COMMAND} -E echo "Test:          ctest --preset default"
     COMMAND ${CMAKE_COMMAND} -E echo "Serve:         cmake --build --preset serve"
-    COMMAND ${CMAKE_COMMAND} -E echo "Stage deploy:  cmake --install build --prefix <dir>"
+    COMMAND ${CMAKE_COMMAND} -E echo "Upload media:  cmake --build --preset upload"
+    COMMAND ${CMAKE_COMMAND} -E echo "Check media:   cmake --build --preset check-media"
+    COMMAND ${CMAKE_COMMAND} -E echo "Audit bucket:  cmake --build --preset audit-media"
+    COMMAND ${CMAKE_COMMAND} -E echo "Install copy:  cmake --install build --prefix <dir>"
     COMMAND ${CMAKE_COMMAND} -E echo "Clean:         cmake --build build --target clean"
     VERBATIM)

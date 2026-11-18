@@ -1,9 +1,9 @@
 # Ran Regev — personal portfolio
 
 A static, data-driven portfolio. Content lives in `content/` and `assets/`;
-CMake builds the site into `dist/`. The generated output is plain static HTML
-with relative URLs, so it can be inspected locally or moved to any static host
-later. Open work is tracked in [`TODO.md`](TODO.md).
+CMake builds the site into `dist/`. The generated output is plain static HTML;
+content media (JPEG, MP4, PDF) is referenced from Cloudflare R2, and the rest is
+published to GitHub Pages. Open work is tracked in [`TODO.md`](TODO.md).
 
 ## Requirements
 
@@ -26,9 +26,12 @@ cmake --workflow --preset site    # configure, build, validate in one command
 cmake --workflow --preset refresh # refresh repo dates, build, validate
 cmake --build --preset serve      # build, then serve dist/ on :8000
 cmake --build --preset test      # build, then run ctest
+cmake --build --preset upload    # upload dist/ media to Cloudflare R2
+cmake --build --preset check-media  # HEAD every R2 URL used by dist/
+cmake --build --preset audit-media  # compare the bucket with dist/
 cmake --build --preset help      # print the available commands
 
-cmake --install build            # stage a deploy copy under build/install/
+cmake --install build            # copy dist/ under build/install/
 ```
 
 Then open `dist/index.html` in a browser. The build prints the absolute path of
@@ -40,11 +43,68 @@ The pages work from `file://`. YouTube playback does not: YouTube refuses its
 player without an HTTP referrer. Use `cmake --build --preset serve` when
 reviewing the Talks videos; the deployed site plays them inline.
 
-`cmake --install build --prefix <directory>` stages the generated site for a
-future deploy. The host and upload step are still deferred.
+Content media is not copied into `dist/`: the build emits absolute URLs from
+`deploy.json` for files under `ringing/`, `rescues/`, `podcast/` and
+`documents/`. So `dist/` is both the local preview and the deployable tree;
+`cmake --install build --prefix <directory>` copies it. The default tests stay
+offline; the media checks are explicit targets because they use the network.
 
 Missing listing dates are reported as warnings before the build; they never
 fail it. The affected entries sort last.
+
+## Deployment
+
+**Cloudflare R2 is the source of truth for content media.** Every `.jpeg`,
+`.mp4` and `.pdf` under these directories lives in the bucket
+`personal-portfolio`:
+
+```text
+assets/ringing/     assets/rescues/
+assets/podcast/     assets/documents/
+```
+
+The public base is configured in `deploy.json`:
+
+```text
+https://pub-2c1165061319472a94d3c24d6ccfc009.r2.dev
+```
+
+`deploy.json` also holds the bucket name and the S3 endpoint used for uploads.
+The build emits absolute R2 URLs for those files and does **not** copy them into
+`dist/`. Theme assets — CSS, JS, fonts, icons and `general/` `.jpg`/`.png` — stay
+with the HTML. The PDF download link is rewritten like any other hosted asset.
+
+### Media workflow
+
+When a photo, video or PDF is added or replaced:
+
+1. Build and test: `cmake --workflow --preset site`.
+2. Upload the referenced media: `cmake --build --preset upload`. It uploads only
+   files referenced by `dist/`, skips objects whose size already matches, sets
+   `Content-Type` and `Cache-Control: public, max-age=604800`, and never deletes.
+3. Verify: `cmake --build --preset check-media` HEADs every media URL used by
+   the site. Failures are missing objects, wrong content types, or rate limiting.
+4. Inventory: `cmake --build --preset audit-media` compares the bucket with
+   `dist/` and warns about objects that no page references. Use
+   `python3 -m src.check_media audit --strict` to make unused objects fatal.
+
+The `r2.dev` host is rate limited: the checker is deliberately sequential and
+retries bursts. For a one-person portfolio this is sufficient; the upload uses
+the S3 endpoint, never the public URL.
+
+Because the filenames are stable and versioning is off, uploading the same key
+replaces the object. Replacing a file may serve the old copy for up to the cache
+lifetime; purge that object in Cloudflare when replacing one. The local
+untracked media files are the backup, not R2 versions.
+
+### GitHub Pages
+
+The intended host is **GitHub Pages** at
+<https://regevran.github.io/personal_portfolio/>. Phase 2 adds a GitHub Actions
+workflow on pushes to `main` that builds and tests, runs `check-media`, and
+publishes `dist/` through the Pages artifact. Pages’ source will be
+**GitHub Actions**, not a `gh-pages` branch. The build writes `.nojekyll`, so
+GitHub serves the files verbatim.
 
 ## Design preview
 
@@ -107,12 +167,16 @@ assets/            images, videos, documents, CSS and JS
   css/pages/       optional per-page styles (podcast.css, engineering.css, cpp-standards.css, talks.css, ringing.css, rescues.css)
   icons/           platform, GitHub, C++, badge, nature, document and video marks; lanyard
   fonts/           Patrick Hand (OFL)
-tests/             all content and output validation
+tests/             all content, output and media-policy validation
 src/               Python build package
   __init__.py
   build.py         the renderer (Python standard library)
   site_schema.py   dataset registry and block-selection semantics
+  media.py         R2 policy, URL rewriting and media inventory helpers
   fetch_repos.py   refreshes repo last-push dates from GitHub
+  upload_media.py  uploads referenced media to R2
+  check_media.py   HEAD check and bucket audit against dist/
+deploy.json        public R2 base, hosted paths, bucket and endpoint
 CMakeLists.txt     build entry point and validation targets
 CMakePresets.json  configure/build/test/workflow presets
 build/             CMake build tree (ignored by git)

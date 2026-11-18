@@ -1,0 +1,11 @@
+{
+  "media_base": "https://pub-2c1165061319472a94d3c24d6ccfc009.r2.dev",
+  "remote_paths": [
+    "assets/ringing/",
+    "assets/rescues/",
+    "assets/podcast/",
+    "assets/documents/"
+  ],
+  "bucket": "personal-portfolio",
+  "endpoint": "https://9384b269bd9951fc39f3ae87502fa847.r2.cloudflarestorage.com"
+}

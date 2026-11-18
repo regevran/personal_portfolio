@@ -15,6 +15,7 @@ import subprocess
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+from src.media import MEDIA
 from src.site_schema import (
     DATA_DIR,
     load_cards,
@@ -85,19 +86,24 @@ def root_relative_url(url: str, root: str) -> str:
     return root + url
 
 
+def asset_url(relative: str, root: str) -> str:
+    """Return an R2 URL for hosted media, otherwise a page-relative URL."""
+    if MEDIA.is_remote(relative):
+        return MEDIA.remote_url(relative)
+    return root_relative_url(relative, root)
+
+
 def rewrite_markdown_links(page: str, root: str) -> str:
-    """Prefix relative links in rendered Markdown with the page root.
+    """Point relative links at their page root, or at R2 for hosted media.
 
     Content paths are written relative to the site root (`assets/foo.pdf`),
-    while card pages live one directory down (`engineering/`), so the render
-    has to add `../` to keep downloads and cross-links working.
+    while card pages live one directory down (`engineering/`), so local links
+    add `../` and hosted media becomes an absolute R2 URL.
     """
-    if not root:
-        return page
 
     def replace(match: re.Match) -> str:
         url = html.unescape(match.group("url"))
-        rewritten = root_relative_url(url, root)
+        rewritten = asset_url(url, root)
         if rewritten == url:
             return match.group(0)
         return match.group("attr") + esc(rewritten) + match.group("quote")
@@ -252,7 +258,7 @@ def paper_rail(paper: dict, root: str) -> str:
         f'<a class="paper-link" href="{esc(url)}" '
         f'aria-label="Open {esc(title)} on wg21.link" '
         f'title="Open {esc(title)} on wg21.link" target="_blank" rel="noopener">'
-        f'<img src="{esc(root + PAPER_ICON)}" alt="" aria-hidden="true">'
+        f'<img src="{esc(asset_url(PAPER_ICON, root))}" alt="" aria-hidden="true">'
         "</a>"
     )
     return f'<span class="paper-rail">{mark}{link}</span>'
@@ -332,7 +338,7 @@ def talk_links(talk: dict, root: str) -> str:
             f'href="https://www.youtube.com/watch?v={esc(video_id)}" '
             f'aria-label="Watch {esc(title)} on YouTube" '
             f'title="Watch on YouTube" target="_blank" rel="noopener">'
-            f'<img src="{esc(root + YOUTUBE_ICON)}" alt="" aria-hidden="true">'
+            f'<img src="{esc(asset_url(YOUTUBE_ICON, root))}" alt="" aria-hidden="true">'
             "</a>"
         )
 
@@ -342,7 +348,7 @@ def talk_links(talk: dict, root: str) -> str:
             f'<a class="talk-link talk-link--slides" href="{esc(slides)}" '
             f'aria-label="Open {esc(title)} slides" title="Slides" '
             'target="_blank" rel="noopener">'
-            f'<img src="{esc(root + PAPER_ICON)}" alt="" aria-hidden="true">'
+            f'<img src="{esc(asset_url(PAPER_ICON, root))}" alt="" aria-hidden="true">'
             "<span>Slides</span></a>"
         )
 
@@ -352,7 +358,7 @@ def talk_links(talk: dict, root: str) -> str:
             f'href="{esc(talk["url"])}" '
             f'aria-label="Open {esc(title)} at its origin" '
             f'title="Open origin" target="_blank" rel="noopener">'
-            f'<img src="{esc(root + EXTERNAL_ICON)}" alt="" aria-hidden="true">'
+            f'<img src="{esc(asset_url(EXTERNAL_ICON, root))}" alt="" aria-hidden="true">'
             "</a>"
         )
 
@@ -398,7 +404,7 @@ def episode_links(episode: dict, root: str) -> str:
             f'<a class="episode-link episode-link--{platform}" '
             f'href="{esc(url)}" aria-label="{esc(label)}" '
             f'title="{esc(label)}" target="_blank" rel="noopener">'
-            f'<img src="{esc(root + icon)}" alt="" aria-hidden="true">'
+            f'<img src="{esc(asset_url(icon, root))}" alt="" aria-hidden="true">'
             "</a>"
         )
     return '<span class="episode-links">' + "".join(anchors) + "</span>"
@@ -451,7 +457,7 @@ def repo_rail(repo: dict, root: str) -> str:
         f'<a class="repo-link" href="{esc(url)}" '
         f'aria-label="{esc(name)} on GitHub" '
         f'title="{esc(name)} on GitHub" target="_blank" rel="noopener">'
-        f'<img src="{esc(root + GITHUB_ICON)}" alt="" aria-hidden="true">'
+        f'<img src="{esc(asset_url(GITHUB_ICON, root))}" alt="" aria-hidden="true">'
         "</a>"
     )
     return f'<span class="repo-rail">{mark}{link}</span>'
@@ -492,7 +498,7 @@ def video_poster(video: dict, root: str) -> str:
     if not source:
         photos = video.get("photos") or []
         source = photos[0] if photos else ""
-    return f' poster="{esc(root + source)}"' if source else ""
+    return f' poster="{esc(asset_url(source, root))}"' if source else ""
 
 
 def video_media(video: dict, root: str) -> str:
@@ -509,7 +515,7 @@ def video_media(video: dict, root: str) -> str:
         )
     return (
         f'<video controls preload="metadata"{video_poster(video, root)} '
-        f'src="{esc(root + video["src"])}"></video>'
+        f'src="{esc(asset_url(video["src"], root))}"></video>'
     )
 
 
@@ -529,7 +535,7 @@ def rescue_reel(video: dict, root: str) -> str:
             f'tabindex="{tabindex}" aria-pressed="{pressed}" '
             f'aria-label="Photo {index + 1} of {total}: '
             f'{esc(video["title"])}">'
-            f'<img src="{esc(root + source)}" alt="" loading="lazy">'
+            f'<img src="{esc(asset_url(source, root))}" alt="" loading="lazy">'
             "</button>"
         )
     return f'<div class="rescue-stack" data-reel>{"".join(cards)}</div>'
@@ -571,7 +577,7 @@ def render_rescue_rows(records: list[dict], root: str) -> str:
             f'data-video="{esc(video["id"])}">'
             '<div class="rescue-copy">'
             '<div class="rescue-head">'
-            f'<img class="rescue-row-mark" src="{esc(root + RESCUE_ICON)}" '
+            f'<img class="rescue-row-mark" src="{esc(asset_url(RESCUE_ICON, root))}" '
             'alt="" aria-hidden="true">'
             f'<h2 class="media-title">{esc(video["title"])}</h2>'
             "</div>"
@@ -590,14 +596,14 @@ RESCUE_ICON = "assets/icons/rescue.svg"
 
 def photo_card(photo: dict, root: str) -> str:
     media = (
-        f'<img src="{esc(root + photo["src"])}" '
+        f'<img src="{esc(asset_url(photo["src"], root))}" '
         f'alt="{esc(photo["title"])}" loading="lazy">'
     )
     audio = ""
     if photo.get("audio"):
         audio = (
             f'<audio controls preload="none" '
-            f'src="{esc(root + photo["audio"])}"></audio>'
+            f'src="{esc(asset_url(photo["audio"], root))}"></audio>'
         )
     caption = photo.get("caption", "")
     parts = [f'<span class="media-title">{esc(photo["title"])}</span>']
@@ -668,7 +674,7 @@ def render_photos(
                 f'style="--i: {index}" aria-pressed="{pressed}" '
                 f'aria-label="Show photo {index + 1} of {total}: '
                 f'{esc(photos[index]["title"])}">'
-                f'<img src="{esc(root + photos[index]["src"])}" alt="" '
+                f'<img src="{esc(asset_url(photos[index]["src"], root))}" alt="" '
                 'loading="lazy">'
                 "</button>"
             )
@@ -681,7 +687,7 @@ def render_photos(
             + "</div>"
             '<div class="deck-base">'
             '<header class="deck-head">'
-            f'<img class="ring-mark" src="{esc(root + BIRD_RING)}" '
+            f'<img class="ring-mark" src="{esc(asset_url(BIRD_RING, root))}" '
             'alt="" aria-hidden="true">'
             f'<h2 class="deck-species">{esc(label)}</h2>'
             f'<span class="deck-meta">{esc(meta)}</span>'
@@ -732,7 +738,7 @@ def render_logo(card: dict, root: str) -> str:
         return ""
     alt = card.get("logo_alt") or f'{card["title"]} logo'
     return (
-        f'<img class="card-page-logo" src="{esc(root + source)}" '
+        f'<img class="card-page-logo" src="{esc(asset_url(source, root))}" '
         f'alt="{esc(alt)}">'
     )
 
@@ -741,17 +747,17 @@ def render_card_mark(card: dict, root: str) -> str:
     mark = card.get("mark")
     if mark == "github-logo":
         return (
-            f'<img class="github-mark" src="{esc(root + GITHUB_ICON)}" '
+            f'<img class="github-mark" src="{esc(asset_url(GITHUB_ICON, root))}" '
             'alt="" aria-hidden="true">'
         )
     if mark == "cpp-logo":
         return (
-            f'<img class="cpp-logo" src="{esc(root + CPP_LOGO)}" '
+            f'<img class="cpp-logo" src="{esc(asset_url(CPP_LOGO, root))}" '
             'alt="" aria-hidden="true">'
         )
     if mark == "conference-badge":
         return (
-            f'<img class="conference-mark" src="{esc(root + TALK_BADGE)}" '
+            f'<img class="conference-mark" src="{esc(asset_url(TALK_BADGE, root))}" '
             'alt="" aria-hidden="true">'
         )
     if mark == "ringing-station":
@@ -761,12 +767,12 @@ def render_card_mark(card: dict, root: str) -> str:
                 perch,
                 {"ROBIN_STYLE": "--robin-tilt: 9deg", "ROOT": root},
             )
-            + f'<img class="ring-band" src="{esc(root + BIRD_RING)}" '
+            + f'<img class="ring-band" src="{esc(asset_url(BIRD_RING, root))}" '
             'alt="" aria-hidden="true">'
         )
     if mark == "rescue":
         return (
-            f'<img class="rescue-mark" src="{esc(root + RESCUE_ICON)}" '
+            f'<img class="rescue-mark" src="{esc(asset_url(RESCUE_ICON, root))}" '
             'alt="" aria-hidden="true">'
         )
     return ""
@@ -776,7 +782,7 @@ def page_stylesheet(slug: str, root: str) -> str:
     if not (ASSETS / "css" / "pages" / f"{slug}.css").is_file():
         return ""
     relative = f"assets/css/pages/{slug}.css"
-    return f'<link rel="stylesheet" href="{esc(root + relative)}">'
+    return f'<link rel="stylesheet" href="{esc(asset_url(relative, root))}">'
 
 
 def render_contact(site: dict) -> str:
@@ -923,7 +929,8 @@ def build() -> None:
     shutil.copytree(
         ASSETS,
         DIST / "assets",
-        ignore=shutil.ignore_patterns("*.swp", "*.swo"),
+        ignore=lambda directory, names: MEDIA.ignore(directory, names)
+        | {name for name in names if name.endswith((".swp", ".swo"))},
     )
 
     year = str(date.today().year)
@@ -1011,7 +1018,7 @@ def build() -> None:
         if card.get("audio"):
             audio_html = (
                 '<section class="voice"><h2>Listen</h2>'
-                f'<audio controls preload="none" src="{esc(root + card["audio"])}"></audio>'
+                f'<audio controls preload="none" src="{esc(asset_url(card["audio"], root))}"></audio>'
                 "</section>"
             )
 

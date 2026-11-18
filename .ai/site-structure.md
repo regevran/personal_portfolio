@@ -47,7 +47,11 @@ personal_portfolio/
 │   ├── __init__.py
 │   ├── build.py              renderer
 │   ├── site_schema.py        dataset registry and block selection
-│   └── fetch_repos.py        refreshes repo last-push dates from GitHub
+│   ├── media.py              R2 policy, URL rewriting and media inventory
+│   ├── fetch_repos.py        refreshes repo last-push dates from GitHub
+│   ├── upload_media.py       uploads referenced media to R2
+│   └── check_media.py        HEAD check and bucket audit against dist/
+├── deploy.json               R2 base, hosted paths, bucket and endpoint
 ├── CMakeLists.txt            build entry point and validation targets
 ├── CMakePresets.json         configure/build/test/workflow presets
 ├── build/                    CMake build tree (ignored)
@@ -189,6 +193,10 @@ Targets:
 - `site-refresh-repos`: fetch repository `pushed_at` from GitHub. Explicit and
   offline-by-default; failures warn and keep the cached values.
 - `site-serve`: build, then serve `dist/` on port 8000.
+- `site-upload`: build, then upload the media referenced by `dist/` to R2.
+- `site-check-media`: HEAD every R2 URL used by `dist/`.
+- `site-audit-media`: list the bucket and compare it with `dist/`; unused
+  objects are warnings.
 - `site-test`: build, then `ctest`.
 - `usage`: print the command list.
 
@@ -205,19 +213,25 @@ cmake --workflow --preset refresh
 The `site` workflow configures, builds and tests. The `refresh` workflow adds
 `site-refresh-repos` before the build so the updated dates are rendered in the
 same run. The non-fatal date warnings print during the render. CTest defines
-two tests:
+three tests:
 
 1. `content-validation` — `python3 -m unittest -q tests.test_content`.
 2. `output-validation` — `python3 -m unittest -q tests.test_output`, ordered
    after the content check; the workflow builds first so `dist/` is fresh.
+3. `media-config` — `python3 -m unittest -q tests.test_media`, ordered after
+   the output check. It verifies the R2 path policy, the copied tree, and the
+   absolute URLs the build emits.
 
-`cmake --install build` stages `dist/` under the install prefix (the preset
-uses `build/install`); the host and upload step for deployment are deferred.
+`dist/` is the publishable tree: content media is already absolute and not
+copied. `cmake --install build` copies it under the install prefix (the preset
+uses `build/install`). The network media checks are explicit targets, not part
+of CTest.
 
 `src/build.py`:
 
 1. Clear and recreate `dist/`.
-2. Copy `assets/` (skipping swap files).
+2. Copy `assets/` while skipping swap files and the R2-hosted directories
+   (`ringing/`, `rescues/`, `podcast/`, `documents/`).
 3. Read `site.json` and every `content/cards/*/card.json`, sorted by `order`.
 4. Build the hub board: each card's `board` metadata produces its position,
    tilt, perch/lanyard rig and robin transform via the `board-card`, `perch`
@@ -230,12 +244,42 @@ uses `build/install`); the host and upload step for deployment are deferred.
    it after `site.css`; only that page loads it.
 7. Compose `dist/index.html` from `index.html` + `base-board.html`, including
    the same topbar and footer.
-8. Write `.nojekyll` (harmless now, useful for GitHub Pages later).
+8. Write `.nojekyll` (GitHub Pages serves the files verbatim).
+
+## Deployment
+
+Cloudflare R2 is the source of truth for content media. Every `.jpeg`, `.mp4`
+and `.pdf` under `assets/ringing/`, `assets/rescues/`, `assets/podcast/` and
+`assets/documents/` lives in the bucket `personal-portfolio` and is referenced
+through the public base in `deploy.json`
+(`https://pub-2c1165061319472a94d3c24d6ccfc009.r2.dev`). The build emits those
+URLs directly and leaves those directories out of `dist/`.
+
+Theme assets stay on GitHub Pages: HTML, CSS, JS, fonts, icons and the `.jpg` /
+`.png` images in `assets/general/`. Fonts must stay local because `r2.dev`
+sends no CORS headers, and the CSS references `general/` and `icons/`
+relatively.
+
+`src/upload_media.py` uploads only files referenced by `dist/`, skips objects
+whose size already matches, and never deletes. `src/check_media.py check`
+HEADs every referenced URL; `audit` lists the bucket and reports objects no
+page uses. Both use the S3 endpoint for listing with the `r2` profile; HEAD
+requests use the public URL. `r2.dev` is rate limited, so the HEAD check is
+sequential and retries 403/429.
+
+Objects carry `Content-Type: image/jpeg|video/mp4|application/pdf` and
+`Cache-Control: public, max-age=604800`. Versioning is off: uploading the same
+key replaces the object. Local untracked media files are the backup.
+
+GitHub Pages (`https://regevran.github.io/personal_portfolio/`) is the intended
+host; phase 2 adds a push workflow that builds, tests, runs `check-media`, and
+publishes `dist/` through the Pages artifact.
 
 ## Conventions
 
-- **Relative URLs only.** No leading `/`. Card pages use `../` as their root
-  prefix; the hub uses `""`.
+- **Relative URLs for site assets; absolute URLs for R2 media.** No leading
+  `/`. Card pages use `../` as their root prefix; the hub uses `""`. Hosted
+  media under the four R2 directories is always an absolute `deploy.json` URL.
 - **Fixed chrome.** The topbar and footer are shared partials and stay fixed;
   the main column scrolls between them. The footer sentence comes from
   `site.json`, not from a template.

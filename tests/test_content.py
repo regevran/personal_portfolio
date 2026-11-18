@@ -6,6 +6,7 @@ from src.build import (
     rewrite_markdown_links,
     sort_latest,
 )
+from src.media import MEDIA
 from src.site_schema import select_records
 from tests.validate import (
     date_warnings,
@@ -40,7 +41,9 @@ class MarkdownLinkTest(unittest.TestCase):
             '<img src="./assets/icons/github.svg" alt=""></p>'
         )
         rewritten = rewrite_markdown_links(page, "../")
-        self.assertIn('href="../assets/documents/book.pdf"', rewritten)
+        self.assertIn(
+            f'href="{MEDIA.base}/assets/documents/book.pdf"', rewritten
+        )
         self.assertIn('src="../assets/icons/github.svg"', rewritten)
 
     def test_non_relative_links_are_untouched(self):

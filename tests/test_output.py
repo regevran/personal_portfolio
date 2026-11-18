@@ -2,6 +2,7 @@ import json
 import unittest
 
 from src.build import display_date, iso_date, sort_latest
+from src.media import MEDIA
 from tests.validate import DATA_DIR, DIST, validate_output
 
 
@@ -353,14 +354,14 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn('style="--depth: 0; z-index: 5"', rescues)
         self.assertNotIn("media-card--with-reel", rescues)
         for poster in (
-            "../assets/rescues/ardea_alba/ardea_alba_frame_6.jpeg",
-            "../assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_6.jpeg",
-            "../assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_6.jpeg",
-            "../assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_1.jpeg",
-            "../assets/rescues/falco_tinnunculus/falco_tinnunculus_frame_1.jpeg",
-            "../assets/rescues/milvus_migrans/milvus_migrans_frame_6.jpeg",
+            "assets/rescues/ardea_alba/ardea_alba_frame_6.jpeg",
+            "assets/rescues/ciconia_ciconia/ciconia_ciconia_frame_6.jpeg",
+            "assets/rescues/microcarbo_pygmeus/microcarbo_pygmeus_frame_6.jpeg",
+            "assets/rescues/pelecanus_onocrotalus/pelecanus_onocrotalus_1.jpeg",
+            "assets/rescues/falco_tinnunculus/falco_tinnunculus_frame_1.jpeg",
+            "assets/rescues/milvus_migrans/milvus_migrans_frame_6.jpeg",
         ):
-            self.assertIn(f'poster="{poster}"', rescues)
+            self.assertIn(f'poster="{MEDIA.base}/{poster}"', rescues)
         self.assertIn('class="media-title">Common Kestrel', rescues)
         self.assertIn('class="media-title">Black Kite', rescues)
 

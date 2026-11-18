@@ -52,6 +52,21 @@
       "targets": ["site-serve"]
     },
     {
+      "name": "upload",
+      "configurePreset": "default",
+      "targets": ["site-upload"]
+    },
+    {
+      "name": "check-media",
+      "configurePreset": "default",
+      "targets": ["site-check-media"]
+    },
+    {
+      "name": "audit-media",
+      "configurePreset": "default",
+      "targets": ["site-audit-media"]
+    },
+    {
       "name": "help",
       "configurePreset": "default",
       "targets": ["usage"]

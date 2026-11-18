@@ -13,7 +13,7 @@ data-driven, because it will be updated from time to time.
 | Area | Decision |
 |---|---|
 | Language | English only. Hebrew is deferred; the cost of retrofitting is accepted. |
-| Hosting | **Deferred.** No hosting assumption yet. `dist/` is plain static with relative URLs so it can move to GitHub Pages, a custom domain, or elsewhere later. |
+| Hosting | **GitHub Pages** project site at <https://regevran.github.io/personal_portfolio/>; phase 2 publishes `dist/` through a GitHub Actions Pages artifact. **Cloudflare R2 is the source of truth for content media**: every `.jpeg`, `.mp4` and `.pdf` under `ringing/`, `rescues/`, `podcast/` and `documents/`, using the free public `r2.dev` base in `deploy.json`. Theme assets stay on Pages. No paid domain: `r2.dev` rate limits are accepted for low traffic, and `github.io` cannot be attached to R2 as a custom domain. |
 | Build | **CMake** (same single build system as `../birds`) → `dist/`. `CMakeLists.txt` + `CMakePresets.json`; targets, tests and workflow presets. The default build is offline; repo-date refresh is an explicit target/workflow. Data/view split: prose in Markdown, structured content in JSON, view in templates. |
 | Content model | `content/data/` holds canonical records, each with a stable `id` and a `collections` list. `content/cards/<slug>/card.json` holds page metadata and ordered `blocks`; page prose is sibling Markdown. Cards select data by collection or explicit ids — no duplicate membership index. `hidden` is a reserved collection for soft removal. |
 | Record prose | Episode descriptions live in `content/data/episodes/<slug>.md` and repository descriptions in `content/data/repos/<name>.md`, both referenced by `description_src`; the inline `description` remains the fallback for other datasets. An episode or repository needs one of the two. |
@@ -32,7 +32,8 @@ data-driven, because it will be updated from time to time.
 
 ## Deferred items
 
-1. Hosting and domain (and whether the repo becomes `regevran.github.io`).
+1. A custom domain or a Cloudflare Worker hostname, if `r2.dev` rate limits ever
+   become a problem. `github.io` cannot serve as an R2 custom domain.
 2. YouTube channel and upload of the six video clips.
 3. Book PDF readiness; where the PDF lives.
 4. Learning-aid hosting strategy.
@@ -126,8 +127,19 @@ data-driven, because it will be updated from time to time.
 - The build is CMake-only. `cmake --workflow --preset site` configures, builds
   and tests; `cmake --workflow --preset refresh` refreshes GitHub dates first.
   The default build is offline, like the birds data pipeline. `render.sh` was
-  removed. `cmake --install build` stages a deploy copy; the host/upload step
-  remains deferred.
+  removed.
+- Deployment (2026-11-18): **R2 canonical.** Cloudflare R2 is the source of
+  truth for content media: all `.jpeg`, `.mp4` and `.pdf` under `ringing/`,
+  `rescues/`, `podcast/` and `documents/`. The build emits absolute `deploy.json`
+  URLs and does not copy those directories into `dist/`; `dist/` is already the
+  publishable tree. Content media is untracked in git; theme `.jpg`/`.png` and
+  the PDF remain tracked. `src/upload_media.py` uploads only referenced files,
+  `src/check_media.py check` HEADs them, and `audit` compares the bucket with
+  `dist/` (unused objects warn). Versioning is off; same key overwrites, and
+  local untracked copies are the backup. R2 bucket `personal-portfolio`;
+  uploads use the account S3 endpoint, never the public `r2.dev` URL. Objects
+  carry the correct content type and `Cache-Control: public, max-age=604800`.
+  GitHub Pages publishing is phase 2.
 - Cards carry a `family` (`software`, `nature`, `neutral`) that drives the
   board's top rule and colour, the anchor (`lanyard`, `perch`, `none`), and the
   card page's top edge.
