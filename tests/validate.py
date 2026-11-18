@@ -298,6 +298,56 @@ def _validate_block(
             errors.append(f"{label}: unknown fields {sorted(extra)}")
         return
 
+    if block_type == "book":
+        allowed = {
+            "type",
+            "pdf",
+            "note",
+            "download_name",
+            "page_offset",
+            "numbered_pages",
+        }
+        extra = set(block) - allowed
+        if extra:
+            errors.append(f"{label}: unknown fields {sorted(extra)}")
+
+        pdf = block.get("pdf")
+        if not isinstance(pdf, str) or not pdf:
+            errors.append(f"{label}: 'pdf' must be a non-empty string")
+
+        if "note" in block:
+            note = block["note"]
+            if not isinstance(note, str):
+                errors.append(f"{label}: 'note' must be a string")
+
+        if "download_name" in block:
+            name = block["download_name"]
+            if not isinstance(name, str) or not name.endswith(".pdf"):
+                errors.append(f"{label}: 'download_name' must end in .pdf")
+
+        if ("page_offset" in block) != ("numbered_pages" in block):
+            errors.append(
+                f"{label}: 'page_offset' and 'numbered_pages' must be set "
+                "together"
+            )
+        if "page_offset" in block:
+            offset = block["page_offset"]
+            if not isinstance(offset, int) or isinstance(offset, bool) or offset < 0:
+                errors.append(
+                    f"{label}: 'page_offset' must be a non-negative integer"
+                )
+        if "numbered_pages" in block:
+            numbered = block["numbered_pages"]
+            if (
+                not isinstance(numbered, int)
+                or isinstance(numbered, bool)
+                or numbered < 1
+            ):
+                errors.append(
+                    f"{label}: 'numbered_pages' must be a positive integer"
+                )
+        return
+
     allowed = {"type", "select"}
     if block_type == "photos":
         allowed.add("group_by")
@@ -639,8 +689,17 @@ def validate_assets() -> list[str]:
         "assets/css/pages/talks.css",
         "assets/css/pages/ringing.css",
         "assets/css/pages/rescues.css",
+        "assets/css/pages/book.css",
         "assets/js/site.js",
         "assets/js/board.js",
+        "assets/js/pages/book.js",
+        "assets/vendor/pdflip/pdflip.global.js",
+        "assets/vendor/pdflip/pdflip.global.js.map",
+        "assets/vendor/pdflip/pdflip.css",
+        "assets/vendor/pdflip/LICENSE",
+        "assets/vendor/pdflip/pdfjs/pdf.min.mjs",
+        "assets/vendor/pdflip/pdfjs/pdf.worker.min.mjs",
+        "assets/vendor/pdflip/pdfjs/LICENSE",
         "assets/fonts/PatrickHand-Regular.ttf",
         "assets/general/board-background.jpg",
         "assets/general/dirty-background.jpg",
@@ -662,6 +721,7 @@ def validate_assets() -> list[str]:
         "assets/icons/bird-ring.svg",
         "assets/icons/rescue.svg",
         "assets/icons/book.svg",
+        "assets/icons/download.svg",
         "assets/icons/learning-aid.svg",
     ):
         _file_exists(errors, relative, "assets")

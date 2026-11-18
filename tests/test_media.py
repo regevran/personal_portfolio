@@ -15,7 +15,7 @@ class MediaConfigTest(unittest.TestCase):
             "assets/rescues/ardea_alba/ardea_alba.mp4",
             "assets/rescues/ardea_alba/ardea_alba_frame_1.jpeg",
             "assets/podcast/promo_shay_agmon_ringing.mp4",
-            "assets/documents/israel_birds_one_file.pdf",
+            "assets/documents/birds-of-israel-index.pdf",
         ):
             self.assertTrue(MEDIA.is_remote(path), path)
             self.assertEqual(MEDIA.remote_url(path), f"{MEDIA.base}/{path}")
@@ -53,7 +53,7 @@ class MediaConfigTest(unittest.TestCase):
         self.assertTrue(urls)
         self.assertTrue(all(url.startswith(MEDIA.base + "/") for url in urls))
         self.assertTrue(
-            any(url.endswith("/israel_birds_one_file.pdf") for url in urls)
+            any(url.endswith("/birds-of-israel-index.pdf") for url in urls)
         )
         self.assertTrue(any(url.endswith(".mp4") for url in urls))
         self.assertTrue(any(url.endswith(".jpeg") for url in urls))

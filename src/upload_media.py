@@ -44,6 +44,13 @@ def upload(key: str, path: Path, profile: str, region: str) -> None:
         "--cache-control",
         CACHE_CONTROL,
     ]
+    if content_type == "application/pdf":
+        # PDFs are downloads, not inline viewers; the header also names the file
+        # when the link is cross-origin and the HTML download attribute is ignored.
+        command += [
+            "--content-disposition",
+            f'attachment; filename="{path.name}"',
+        ]
     if profile:
         command += ["--profile", profile]
     result = subprocess.run(command, capture_output=True, text=True)

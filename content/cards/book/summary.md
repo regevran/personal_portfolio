@@ -1,1 +1,1 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim.
+A pocket index of the birds of Israel, pairing each Hebrew name with its Latin name and the meaning behind it.

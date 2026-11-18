@@ -103,7 +103,7 @@ The main page is a **16:9 poster**, not a scrolling document:
 
 The spatial grammar follows the original jpeg but is deliberately **not a
 grid**: **nature is scattered on the left** (Ringing, Rescues, Podcast,
-The Book, Learning Aid) in a zigzag, **software is on the right**
+Birds of Israel Index, Learning Aid) in a zigzag, **software is on the right**
 (Public GitHub, C++ & Standards, Talks) with varied x positions rather
 than one column, and the two neutral cards (About, Contact) stay flat and
 bottom-aligned under the portrait. Hanging cards rotate up to roughly ±6° and
@@ -160,7 +160,7 @@ On the board, the C05 V is compact and points down (apex at the badge clip),
 with the straps running up as if from the neck; there is no nail. A small
 version sits above every software card. Each nature card carries a compact
 robin perch: a branch, twine, and a robin above the card. The perch is repeated
-above Ringing, Rescues, Podcast, The Book, and Learning Aid.
+above Ringing, Rescues, Podcast, Birds of Israel Index, and Learning Aid.
 
 The robin uses the book's transparent PNG
 (`assets/general/closing_on_birds_robin.png`, 359 × 356 RGBA). It is rendered
@@ -436,8 +436,8 @@ Talks uses the conference-badge name tag
 (`assets/icons/conference-badge-mark.svg`). Nature notes keep the landscape
 note and their robin/perch treatment, and each one now carries its own mark
 beside the kicker and title: the bird ring for Ringing, the podcast logo for
-Podcast, a released bird for Rescues, an open book for The Book, and bird-name
-cards for Learning Aid. Neutral notes stay marked only by the grommet.
+Podcast, a released bird for Rescues, an open book for Birds of Israel Index,
+and bird-name cards for Learning Aid. Neutral notes stay marked only by the grommet.
 
 ### Software page artifacts
 
@@ -479,8 +479,34 @@ The generic card page remains the fallback for the other cards. Per-page
 stylesheets are auto-discovered from `assets/css/pages/<slug>.css`; a page
 without one gets only `theme.css` + `site.css`.
 
+### Book page — Birds of Israel Index
+
+The Book card is now **Birds of Israel Index**. It keeps the standard cream
+sheet, dirty field and open-book page mark. The page has three parts: the
+intro prose, a left-aligned download button with a standard download icon, and
+a right-to-left page-turn preview. The preview uses the ready-made **pdflip
+0.1.0** engine (BSD-3, pdf.js, vendored) rather than custom page-turn
+mechanics, with `direction: "rtl"`, `flipStyle: "cover"`, and
+`pageMode: "auto"`. It flips the actual PDF from R2, so there are no page
+images and no render step. The book is centred; on narrow screens the spread
+becomes one page at a time.
+
+The controls sit under the book: **Next** on the left with a left arrow,
+**Previous** on the right with a right arrow, and a **Go to** number input
+between them. The `Pages 72–73 of 87` counter is a separate centred line under
+the controls; both the counter and the Go input use the book's printed page
+numbers (PDF page = printed page + 6). The old instructions ("Swipe, drag a
+page edge…") and the "third edition…" sentence were removed. The download
+button is aligned left and uses `assets/icons/download.svg`.
+
+The PDF is a real download (`Content-Disposition: attachment`) rather than a
+new-tab viewer. The name is `birds-of-israel-index.pdf`; it is R2-only and
+untracked. The bucket CORS policy allows the site origin and the local preview
+with `GET`/`HEAD`; the viewer disables range loading, so that is enough. If
+JavaScript is unavailable, the PDF download remains.
+
 ## Next step
 
-Design the remaining card pages individually, starting with whichever card
-matters next. Then build the contact power-line/notebook interaction.
+Design the remaining card pages individually, starting with the Learning Aid
+and the neutral pages. Then build the contact power-line/notebook interaction.
 Voice-over comes last.

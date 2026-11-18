@@ -236,6 +236,100 @@ class OutputValidationTest(unittest.TestCase):
         board_css = (DIST / "assets" / "css" / "board.css").read_text(encoding="utf-8")
         self.assertIn('[data-mark="conference-badge"]', board_css)
 
+    def test_book_page_is_a_right_to_left_pdf_flipbook(self):
+        book = (DIST / "book" / "index.html").read_text(encoding="utf-8")
+        hub = (DIST / "index.html").read_text(encoding="utf-8")
+        pdf_url = f"{MEDIA.base}/assets/documents/birds-of-israel-index.pdf"
+
+        self.assertIn("<title>Birds of Israel Index — Ran Regev</title>", book)
+        self.assertIn("Birds of Israel Index", hub)
+        self.assertNotIn("The Book", hub)
+        self.assertIn("assets/css/pages/book.css", book)
+        self.assertIn("card-page--book", book)
+        self.assertIn('class="book-mark"', book)
+        self.assertIn('class="book-download"', book)
+        self.assertIn(f'href="{pdf_url}"', book)
+        self.assertIn(f'data-book-source="{pdf_url}"', book)
+        self.assertIn('data-book-page-offset="6"', book)
+        self.assertIn('data-book-numbered-pages="87"', book)
+        self.assertIn('max="87"', book)
+        self.assertIn('download="birds-of-israel-index.pdf"', book)
+        self.assertIn("5.0 MB · 98 pages", book)
+        self.assertIn("download.svg", book)
+
+        self.assertNotIn("data-book-pages", book)
+        self.assertNotIn("page-001.jpeg", book)
+        self.assertNotIn('class="book-page"', book)
+        self.assertIn('class="book-pdf" data-book-pdf', book)
+        self.assertIn("data-book-counter", book)
+        self.assertIn("data-book-prev", book)
+        self.assertIn("data-book-next", book)
+        self.assertIn("data-book-goto", book)
+        self.assertIn('data-book-goto novalidate', book)
+        self.assertIn("data-book-goto-input", book)
+        self.assertIn("assets/vendor/pdflip/pdflip.global.js", book)
+        self.assertIn("assets/js/pages/book.js", book)
+        self.assertIn("The page-turn preview needs JavaScript", book)
+        self.assertIn("It is a learning aid rather than a field guide.", book)
+        self.assertNotIn("The third edition", book)
+        self.assertNotIn("Swipe, drag a page edge", book)
+        self.assertNotIn("placeholder", book.lower())
+
+        controls = book[
+            book.index('class="book-controls"') : book.index(
+                'class="book-counter"'
+            )
+        ]
+        self.assertLess(controls.index("data-book-next"), controls.index("data-book-goto"))
+        self.assertLess(controls.index("data-book-goto"), controls.index("data-book-prev"))
+        self.assertIn('<span aria-hidden="true">&larr;</span> Next', controls)
+        self.assertIn('Previous <span aria-hidden="true">&rarr;</span>', controls)
+
+        book_css = (
+            DIST / "assets" / "css" / "pages" / "book.css"
+        ).read_text(encoding="utf-8")
+        self.assertIn("dirty-background.jpg", book_css)
+        self.assertIn(
+            '@import url("../../vendor/pdflip/pdflip.css")', book_css
+        )
+        self.assertIn(".book-pdf", book_css)
+        self.assertIn(".book-goto", book_css)
+        self.assertIn(".pdflip-toolbar", book_css)
+        self.assertIn("justify-content: flex-start", book_css)
+        self.assertIn("prefers-reduced-motion: reduce", book_css)
+        self.assertNotIn("openpageflip", book_css)
+
+        book_js = (
+            DIST / "assets" / "js" / "pages" / "book.js"
+        ).read_text(encoding="utf-8")
+        self.assertIn("new window.Pdflip.Flipbook", book_js)
+        self.assertIn('direction: "rtl"', book_js)
+        self.assertIn('flipStyle: "cover"', book_js)
+        self.assertIn("pageMode: \"auto\"", book_js)
+        self.assertIn("disableRange: true", book_js)
+        self.assertIn("data-book-page-offset", book_js)
+        self.assertIn("data-book-numbered-pages", book_js)
+        self.assertIn("target + offset", book_js)
+        self.assertIn("book.goTo(physical)", book_js)
+        self.assertIn('" of " + numberedPages', book_js)
+        self.assertIn("data-book-goto-input", book_js)
+        self.assertIn("data-book-prev", book_js)
+        self.assertNotIn("OpenPageFlip", book_js)
+
+        for asset in (
+            "pdflip.global.js",
+            "pdflip.css",
+            "LICENSE",
+            "pdfjs/pdf.min.mjs",
+            "pdfjs/pdf.worker.min.mjs",
+            "pdfjs/LICENSE",
+        ):
+            self.assertTrue(
+                (DIST / "assets" / "vendor" / "pdflip" / asset).is_file(),
+                asset,
+            )
+        self.assertTrue((DIST / "assets" / "icons" / "download.svg").is_file())
+
     def test_ringing_page_specific_design(self):
         ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")
         self.assertIn("assets/css/pages/ringing.css", ringing)

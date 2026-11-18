@@ -25,7 +25,7 @@ data-driven, because it will be updated from time to time.
 | Videos | Local files embedded during development. Data model supports switching each entry to a YouTube embed later. |
 | Contact | Animated notebook/power-line panel planned for the design phase. Direct email (public), public phone, and a form that composes a `mailto:` with the typed message. A true one-click send would require a third-party endpoint or a backend; deferred. |
 | Gallery | Deferred. The data model can accept it later, with per-photo text/audio. |
-| Book | Card exists as “Coming soon” until the PDF is shareable. |
+| Book | Implemented as **Birds of Israel Index**: a PDF download and a right-to-left page-turn viewer built on the ready-made pdflip engine, flipping the PDF itself from R2. |
 | Learning aid | Card exists as “Under construction.” GitHub Pages cannot run the Python trainer; hosting/ports deferred. |
 | CV | Placeholder until the real CV is ready. |
 | Git | No LFS. Ignore `tags`, `*.swp`, `dist/`, Python caches. |
@@ -132,8 +132,8 @@ data-driven, because it will be updated from time to time.
   truth for content media: all `.jpeg`, `.mp4` and `.pdf` under `ringing/`,
   `rescues/`, `podcast/` and `documents/`. The build emits absolute `deploy.json`
   URLs and does not copy those directories into `dist/`; `dist/` is already the
-  publishable tree. Content media is untracked in git; theme `.jpg`/`.png` and
-  the PDF remain tracked. `src/upload_media.py` uploads only referenced files,
+  publishable tree. Content media is untracked in git, including the book PDF
+  (`assets/documents/*.pdf` is ignored); the local file is the backup. `src/upload_media.py` uploads only referenced files,
   `src/check_media.py check` HEADs them, and `audit` compares the bucket with
   `dist/` (unused objects warn). Versioning is off; same key overwrites, and
   local untracked copies are the backup. R2 bucket `personal-portfolio`;
@@ -218,10 +218,27 @@ data-driven, because it will be updated from time to time.
   right-hand rail holds the C++ logo above a document link
   (`assets/icons/paper.svg`). The title and document icon link to wg21.link.
   No ISO logo. The rules live in `assets/css/pages/cpp-standards.css`.
+- **Book page (2026-11-18).** The card is **Birds of Israel Index**. It uses the
+  standard cream sheet and dirty field, with the open-book icon as the page
+  artifact. The PDF (`assets/documents/birds-of-israel-index.pdf`) is R2-only and
+  untracked; the local copy is a backup. The page-turn preview flips the actual
+  PDF with the ready-made **pdflip 0.1.0** (BSD-3, pdf.js, vendored under
+  `assets/vendor/pdflip/`), not custom mechanics: `direction: "rtl"`,
+  `flipStyle: "cover"`, `pageMode: "auto"`, and `pdfjs.disableRange: true`. No
+  page images and no render step. The controls are Next on the left with a left
+  arrow, Previous on the right with a right arrow, a **Go to** number input
+  between them, and the page counter below. The counter and the Go input use
+  the book's printed page numbers, 1–87: printed page N is PDF page N+6, so Go
+  to 72 opens PDF pages 78–79. The cover, front matter, blank leaves and back
+  cover are labelled rather than numbered. The PDF is uploaded with
+  `Content-Disposition: attachment` so the cross-origin download button
+  downloads rather than opening the browser's PDF viewer. The R2 bucket CORS
+  policy allows `https://regevran.github.io` and `http://localhost:8000` with
+  `GET`/`HEAD`; with range loading disabled that simple policy is enough.
 - Markdown links and images use **site-root-relative** paths (`assets/...`).
   `markdown_to_html()` rewrites relative `href`/`src` values with the page
-  root (`../` on card pages), so `assets/documents/book.pdf` works both from
-  the source file and from `dist/engineering/index.html`. Absolute URLs,
+  root (`../` on card pages), so `assets/documents/birds-of-israel-index.pdf`
+  works both from the source file and from a card page. Absolute URLs,
   anchors, query-only links and paths already starting with `/` or `../` are
   left alone. This applies to card prose and to every `description_src`
   dataset (papers, talks, episodes, repos).
@@ -359,7 +376,7 @@ data-driven, because it will be updated from time to time.
 - **Nature cards gained their own marks on 2026-11-17**, mirroring the
   software notes' per-card artifacts. The robin/perch stays above the card;
   the mark sits beside the kicker and title: bird ring (Ringing), podcast logo
-  (Podcast), released bird (Rescues), open book (The Book), and bird-name
+  (Podcast), released bird (Rescues), open book (Birds of Israel Index), and bird-name
   cards (Learning Aid).
 - **Rescues got per-rescue Markdown stories, selected posters and stills on
   2026-11-17.** `videos.json` accepts `description_src` (stories in

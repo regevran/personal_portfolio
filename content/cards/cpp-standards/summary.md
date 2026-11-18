@@ -1,1 +1,1 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales augue non volutpat luctus.
+A list of papers I was involed with from WG21, the C++ standartization working group within ISO/ETC JTC1/SC22

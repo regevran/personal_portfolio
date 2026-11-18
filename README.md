@@ -10,7 +10,8 @@ published to GitHub Pages. Open work is tracked in [`TODO.md`](TODO.md).
 - `cmake` 3.25+ and `ninja`
 - `python3` (3.11+; standard library only)
 - `pandoc` (tested with 3.9.0.2)
-- Network access only for the explicit GitHub last-push refresh
+- Network access only for the explicit GitHub last-push refresh and the R2
+  upload/check targets
 
 No Node, npm, or Python packages are required. Set `GITHUB_TOKEN` to raise the
 GitHub API rate limit when refreshing repo dates.
@@ -39,9 +40,11 @@ the generated index. The default build is **offline** and uses the cached dates
 in `content/data/repos.json`; the `refresh` workflow or the `site-refresh-repos`
 target updates them from GitHub.
 
-The pages work from `file://`. YouTube playback does not: YouTube refuses its
-player without an HTTP referrer. Use `cmake --build --preset serve` when
-reviewing the Talks videos; the deployed site plays them inline.
+Most pages work from `file://`. YouTube playback does not: YouTube refuses its
+player without an HTTP referrer. The book PDF viewer also needs HTTP, because
+the PDF is cross-origin from R2 and a `file://` page has no allowed origin. Use
+`cmake --build --preset serve` for both; the deployed site plays and turns the
+pages inline.
 
 Content media is not copied into `dist/`: the build emits absolute URLs from
 `deploy.json` for files under `ringing/`, `rescues/`, `podcast/` and
@@ -71,20 +74,39 @@ https://pub-2c1165061319472a94d3c24d6ccfc009.r2.dev
 
 `deploy.json` also holds the bucket name and the S3 endpoint used for uploads.
 The build emits absolute R2 URLs for those files and does **not** copy them into
-`dist/`. Theme assets — CSS, JS, fonts, icons and `general/` `.jpg`/`.png` — stay
-with the HTML. The PDF download link is rewritten like any other hosted asset.
+`dist/`. Theme assets — CSS, JS, fonts, icons, `vendor/` and `general/`
+`.jpg`/`.png` — stay with the HTML. The PDF download link is rewritten like any
+other hosted asset; PDFs are uploaded with
+`Content-Disposition: attachment` so a cross-origin link still downloads.
+
+### Book PDF and CORS
+
+The book PDF is R2-only and untracked; `assets/documents/*.pdf` is ignored and
+the local file is only a backup. The page's viewer is **pdflip** (BSD,
+pdf.js), vendored under `assets/vendor/pdflip/`. It fetches the PDF from R2, so
+the bucket needs a CORS policy allowing the site origin
+(`https://regevran.github.io`) and the local preview
+(`http://localhost:8000`), with `GET` and `HEAD`. The viewer sets
+`pdfjs.disableRange = true`, so that simple policy is enough; no `Range` or
+`Content-Range` headers are needed. No page images or render step exist. The
+counter and Go input use the book's printed numbers (1–87), mapped from the
+PDF by `page_offset` and `numbered_pages` in `content/cards/book/card.json`:
+printed page 1 is PDF page 7.
 
 ### Media workflow
 
 When a photo, video or PDF is added or replaced:
 
-1. Build and test: `cmake --workflow --preset site`.
-2. Upload the referenced media: `cmake --build --preset upload`. It uploads only
+1. Put the file under its hosted directory. The book PDF is untracked; copy it
+   to `assets/documents/`, which is ignored by git.
+2. Build and test: `cmake --workflow --preset site`.
+3. Upload the referenced media: `cmake --build --preset upload`. It uploads only
    files referenced by `dist/`, skips objects whose size already matches, sets
-   `Content-Type` and `Cache-Control: public, max-age=604800`, and never deletes.
-3. Verify: `cmake --build --preset check-media` HEADs every media URL used by
+   `Content-Type`, `Cache-Control: public, max-age=604800` and the PDF download
+   header, and never deletes.
+4. Verify: `cmake --build --preset check-media` HEADs every media URL used by
    the site. Failures are missing objects, wrong content types, or rate limiting.
-4. Inventory: `cmake --build --preset audit-media` compares the bucket with
+5. Inventory: `cmake --build --preset audit-media` compares the bucket with
    `dist/` and warns about objects that no page references. Use
    `python3 -m src.check_media audit --strict` to make unused objects fatal.
 
@@ -346,7 +368,7 @@ The site is intentionally a structural skeleton:
 - All prose that is not yet written is lorem ipsum.
 - Birding was removed from the hub and deferred to phase 2, if it happens;
   Ringing carries the current ringing photographs.
-- The CV link and the book PDF are placeholders until the real files arrive.
+- The CV link is a placeholder until the real file arrives.
 - Cards are colour-coded by family (`software`, `nature`, `neutral`).
 - Software cards on the hub are portrait notes hanging from narrow lanyards,
   with a per-page artifact mark and the text grouped at the top, with space
@@ -355,8 +377,8 @@ The site is intentionally a structural skeleton:
   small CMake build tag above the GitHub link. Nature cards remain landscape
   notes with their robin/perch treatment and carry a mark beside the text:
   bird ring (Ringing), podcast logo (Podcast), released bird (Rescues), open
-  book (The Book), and bird-name cards (Learning Aid). Neutral cards keep the
-  plain grommet.
+  book (Birds of Israel Index), and bird-name cards (Learning Aid). Neutral
+  cards keep the plain grommet.
 - The hub and card pages share the board's visual language: sand and cream,
   Patrick Hand titles for nature and neutral, formal serif titles for software,
   mono kickers, family-coloured edges, and a fixed topbar and footer. The

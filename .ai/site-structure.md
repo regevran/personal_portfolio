@@ -36,13 +36,15 @@ personal_portfolio/
 │   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
 │   ├── css/site.css          shared card pages
-│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues)
+│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues, book)
 │   ├── js/board.js           horizontal pan and nav shortcuts
 │   ├── js/site.js            contact form, repo accordions, talk videos, species decks, rescue stacks
+│   ├── js/pages/book.js      pdflip controls, Go to page, and counter
+│   ├── vendor/pdflip/        BSD page-turn engine and pdf.js (pruned)
 │   ├── fonts/                Patrick Hand (OFL)
 │   ├── general/              board background, robin PNG, reference assets
-│   ├── documents/            CV and book PDF placeholders
-│   └── ringing/ rescues/ podcast/ ...
+│   ├── documents/            CV and book PDF (R2-hosted; local backup)
+│   └── ringing/ rescues/ podcast/ documents/ ...
 ├── tests/                    all validation and date warnings
 ├── src/
 │   ├── __init__.py
@@ -71,7 +73,7 @@ personal_portfolio/
 | 4 | ringing | Ringing | nature | ready |
 | 5 | rescues | Rescues | nature | ready |
 | 6 | podcast | Podcast | nature | ready |
-| 7 | book | The Book | nature | coming-soon |
+| 7 | book | Birds of Israel Index | nature | ready |
 | 8 | learn | Learning Aid | nature | under-construction |
 | 9 | about | About | neutral | placeholder |
 | 10 | contact | Contact | neutral | ready |
@@ -157,6 +159,13 @@ Blocks are `{type, ...}` objects rendered in order:
 
 - `{"type": "prose", "src": "page.md"}` — Markdown fragment in the card
   directory.
+- `{"type": "book", "pdf": ..., "note": ...}` — PDF download button and a
+  right-to-left pdflip viewer that reads the PDF from R2. `note` is the optional
+  file-size/page-count line under the download label. `page_offset` is the
+  number of PDF pages before printed page 1 and `numbered_pages` is the highest
+  printed number; together they map the printed pages used by the counter and
+  the Go input (book: offset 6, pages 1–87). Front matter, blank leaves and the
+  covers get text labels instead of page numbers.
 - `{"type": "contact"}` — contact panel from `site.json`.
 - `{"type": <dataset>, "select": {"collection": "name"}}` — collection
   selection, excluding hidden records.
@@ -256,10 +265,12 @@ through the public base in `deploy.json`
 (`https://pub-2c1165061319472a94d3c24d6ccfc009.r2.dev`). The build emits those
 URLs directly and leaves those directories out of `dist/`.
 
-Theme assets stay on GitHub Pages: HTML, CSS, JS, fonts, icons and the `.jpg` /
-`.png` images in `assets/general/`. Fonts must stay local because `r2.dev`
-sends no CORS headers, and the CSS references `general/` and `icons/`
-relatively.
+Theme assets stay on GitHub Pages: HTML, CSS, JS, fonts, icons, the vendored
+pdflip bundle and the `.jpg` / `.png` images in `assets/general/`. Fonts stay
+local because that needs no CORS, and the CSS references `general/` and
+`icons/` relatively. The book PDF is fetched by pdflip from R2, so the bucket
+CORS policy allows `https://regevran.github.io` and `http://localhost:8000`
+with `GET`/`HEAD`; range loading is disabled, so no `Range` headers are needed.
 
 `src/upload_media.py` uploads only files referenced by `dist/`, skips objects
 whose size already matches, and never deletes. `src/check_media.py check`

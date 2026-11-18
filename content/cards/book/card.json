@@ -1,9 +1,9 @@
 {
-  "title": "The Book",
+  "title": "Birds of Israel Index",
   "kicker": "Print",
   "family": "nature",
   "order": 7,
-  "status": "coming-soon",
+  "status": "ready",
   "mark": "book",
   "audio": null,
   "board": {
@@ -20,6 +20,13 @@
     {
       "type": "prose",
       "src": "page.md"
+    },
+    {
+      "type": "book",
+      "pdf": "assets/documents/birds-of-israel-index.pdf",
+      "note": "5.0 MB · 98 pages",
+      "page_offset": 6,
+      "numbered_pages": 87
     }
   ]
 }

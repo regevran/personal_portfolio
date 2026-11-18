@@ -23,7 +23,7 @@ DATASETS = {
     "photos": "photos.json",
 }
 DATASET_TYPES = frozenset(DATASETS)
-BLOCK_TYPES = frozenset({"prose", "contact"}) | DATASET_TYPES
+BLOCK_TYPES = frozenset({"prose", "contact", "book"}) | DATASET_TYPES
 
 # Species notes are page text, not a block dataset. Photos reference a species
 # id, and the photo renderer joins the note for the group label.

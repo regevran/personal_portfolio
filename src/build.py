@@ -246,6 +246,8 @@ PAPER_ICON = "assets/icons/paper.svg"
 TALK_BADGE = "assets/icons/conference-badge.svg"
 EXTERNAL_ICON = "assets/icons/external.svg"
 YOUTUBE_ICON = "assets/icons/youtube.svg"
+BOOK_ICON = "assets/icons/book.svg"
+DOWNLOAD_ICON = "assets/icons/download.svg"
 
 
 def paper_rail(paper: dict, root: str) -> str:
@@ -770,6 +772,11 @@ def render_card_mark(card: dict, root: str) -> str:
             f'<img class="rescue-mark" src="{esc(asset_url(RESCUE_ICON, root))}" '
             'alt="" aria-hidden="true">'
         )
+    if mark == "book":
+        return (
+            f'<img class="book-mark" src="{esc(asset_url(BOOK_ICON, root))}" '
+            'alt="" aria-hidden="true">'
+        )
     return ""
 
 
@@ -896,12 +903,74 @@ def render_dataset(
     return RENDERERS[name](records, root)
 
 
+def render_book(block: dict, root: str) -> str:
+    """Render the PDF download and the right-to-left pdflip viewer."""
+    pdf = block["pdf"]
+    note = block.get("note", "")
+    page_offset = block.get("page_offset", 0)
+    numbered_pages = block.get("numbered_pages")
+    download_name = block.get("download_name") or Path(pdf).name
+    pdf_url = asset_url(pdf, root)
+    icon = asset_url(DOWNLOAD_ICON, root)
+    vendor_js = asset_url("assets/vendor/pdflip/pdflip.global.js", root)
+    book_js = asset_url("assets/js/pages/book.js", root)
+    meta = (
+        f'<span class="book-download-meta">{esc(note)}</span>' if note else ""
+    )
+    numbering = ""
+    max_attr = ""
+    if numbered_pages:
+        numbering = (
+            f' data-book-page-offset="{page_offset}"'
+            f' data-book-numbered-pages="{numbered_pages}"'
+        )
+        max_attr = f' max="{numbered_pages}"'
+
+    return (
+        '<div class="book-actions">'
+        f'<a class="book-download" href="{esc(pdf_url)}" '
+        f'download="{esc(download_name)}" target="_blank" rel="noopener">'
+        f'<img src="{esc(icon)}" alt="" aria-hidden="true">'
+        '<span class="book-download-copy">'
+        "<strong>Download the PDF</strong>"
+        f"{meta}"
+        "</span></a></div>"
+        '<section class="book-viewer" data-book '
+        f'data-book-source="{esc(pdf_url)}"{numbering} aria-label="Book preview">'
+        '<div class="book-pdf" data-book-pdf></div>'
+        '<div class="book-controls">'
+        '<button class="book-nav book-nav--next" type="button" data-book-next>'
+        '<span aria-hidden="true">&larr;</span> Next</button>'
+        '<form class="book-goto" data-book-goto novalidate>'
+        '<label class="book-goto-label" for="book-goto">Go to</label>'
+        '<input class="book-goto-input" id="book-goto" type="number" '
+        f'min="1"{max_attr} step="1" inputmode="numeric" enterkeyhint="go" '
+        "data-book-goto-input>"
+        '<button class="book-goto-go" type="submit">Go</button>'
+        "</form>"
+        '<button class="book-nav book-nav--prev" type="button" data-book-prev>'
+        'Previous <span aria-hidden="true">&rarr;</span></button>'
+        "</div>"
+        '<p class="book-counter" data-book-counter aria-live="polite">Cover</p>'
+        "<noscript>"
+        "<style>.book-controls, .book-counter { display: none; }</style>"
+        '<p class="book-fallback">The page-turn preview needs JavaScript. '
+        "Use the download button above to read the full book.</p>"
+        "</noscript>"
+        f'<script src="{esc(vendor_js)}" defer></script>'
+        f'<script src="{esc(book_js)}" defer></script>'
+        "</section>"
+    )
+
+
 def render_block(block: dict, card_dir: Path, site: dict, root: str) -> str:
     block_type = block.get("type")
     if block_type == "prose":
         return markdown_to_html(card_dir / block["src"], root)
     if block_type == "contact":
         return render_contact(site)
+    if block_type == "book":
+        return render_book(block, root)
     if block_type in RENDERERS:
         return render_dataset(
             block_type,
