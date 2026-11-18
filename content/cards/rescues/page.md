@@ -1,5 +1,15 @@
-Rescues are normally callouts that I get from a local collegue or from a dedicated whatapp group in my area.
-When there is an animal, normally a bird, which is ingured or stacked or tired or whatnot, if I am available at the moment I go out to rescue.
-Sometimes the bird is not found either because the report was vague, or the animal was hunted or something else.
-Sometimes it is too late and the bird is already dead, but many times with a bit of work it can be saved.
-Oh, and the most important part - no futage no rescue! :-) 
+::: {.note-intro}
+::: {.note-intro-figure}
+No footage<br>No rescue<br><br>🙂
+:::
+
+::: {.note-intro-copy}
+::: {.note-intro-kicker}
+On call
+:::
+
+Rescues are usually callouts from a local colleague or from a dedicated *WhatsApp* group in my area. If there is an animal — usually a bird — that is **injured, stranded or exhausted**, and I am free at that moment, I go out.
+
+Sometimes the bird is not found because the report was vague, or the bird was hunted or taken. Sometimes it is too late, and the bird is already dead. But many times, <mark>with a bit of effort it can be saved</mark>.
+:::
+:::

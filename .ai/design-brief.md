@@ -486,12 +486,21 @@ without one gets only `theme.css` + `site.css`.
 The Book card is now **Birds of Israel Index**. It keeps the standard cream
 sheet, dirty field and open-book page mark. The page has three parts: the
 intro prose, a left-aligned download button with a standard download icon, and
-a right-to-left page-turn preview. The preview uses the ready-made **pdflip
-0.1.0** engine (BSD-3, pdf.js, vendored) rather than custom page-turn
-mechanics, with `direction: "rtl"`, `flipStyle: "cover"`, and
-`pageMode: "auto"`. It flips the actual PDF from R2, so there are no page
-images and no render step. The book is centred; on narrow screens the spread
-becomes one page at a time.
+a right-to-left page-turn preview. The intro is a two-column note: a large
+hand-lettered **565 species in 84 families** on the left, the download button
+aligned with the bottom of that column, and three short paragraphs under a mono
+`Third edition · 2026` kicker on the right. Facts and the content/structure
+contrast are bold, language names are italic, and one phrase (`unpacks the
+Latin`) gets a full-line-height ochre highlighter. The old "A learning aid,
+not a field guide" line was removed. The intro is generic and reusable:
+`.note-intro`, `.note-intro-figure`, `.note-intro-copy`, and
+`.note-intro-kicker` live in `site.css`; `book.css` only places the download
+under the figure and the viewer below. It needs no extra block type or card
+metadata. The preview uses the ready-made **pdflip 0.1.0** engine (BSD-3,
+pdf.js, vendored) rather than custom page-turn mechanics, with
+`direction: "rtl"`, `flipStyle: "cover"`, and `pageMode: "auto"`. It flips the
+actual PDF from R2, so there are no page images and no render step. The book is
+centred; on narrow screens the spread becomes one page at a time.
 
 The controls sit under the book: **Next** on the left with a left arrow,
 **Previous** on the right with a right arrow, and a **Go to** number input
@@ -506,6 +515,20 @@ new-tab viewer. The name is `birds-of-israel-index.pdf`; it is R2-only and
 untracked. The bucket CORS policy allows the site origin and the local preview
 with `GET`/`HEAD`; the viewer disables range loading, so that is enough. If
 JavaScript is unavailable, the PDF download remains.
+
+### Prose pages — split note intro
+
+The six prose cards — Public GitHub, C++ & Standards, Talks, Ringing, Rescues
+and Podcast — now use the same generic `.note-intro` composition as the book:
+a large hand-lettered line on the left, a mono kicker and two or three short
+paragraphs on the right. The left line is a pull quote from the page, not a
+label: "A few things of my own.", "A room full of experts.", "Not a conference
+person.", "A few of the catches.", "No footage, no rescue. :-)", and "About 20
+episodes. Then we'll see." The copy keeps Ran's voice while fixing spelling
+and grammar; bold carries facts and contrasts, italics carry names such as
+*C++* and *WhatsApp*, and at most one ochre `<mark>` per page carries the
+phrase to remember. The classes live in `site.css`; no new block type, card
+metadata or per-page intro CSS was needed.
 
 ### Holding pages — Learning Aid, About, Contact
 

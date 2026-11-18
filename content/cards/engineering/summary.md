@@ -1,1 +1,1 @@
-A collection of public work of mine
+A collection of my public work.

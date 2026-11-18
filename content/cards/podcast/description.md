@@ -1,1 +1,1 @@
-podcast With conversations about birds with researchers, birders and conservationists.
+Conversations about birds with researchers, birders and conservationists.

@@ -230,11 +230,26 @@ data-driven, because it will be updated from time to time.
   between them, and the page counter below. The counter and the Go input use
   the book's printed page numbers, 1–87: printed page N is PDF page N+6, so Go
   to 72 opens PDF pages 78–79. The cover, front matter, blank leaves and back
-  cover are labelled rather than numbered. The PDF is uploaded with
+  cover are labelled rather than numbered. The intro is a two-column note:
+  **565 species in 84 families** on the left with the download button aligned
+  to the bottom of the column, three short paragraphs on the right, with bold
+  facts, italic language names, and one full-line ochre highlighter on “unpacks
+  the Latin.” The classes are generic (`note-intro`, `note-intro-figure`,
+  `note-intro-copy`, `note-intro-kicker`) and live in `site.css`; `book.css`
+  only places the download and the viewer. The old “A learning aid, not a
+  field guide” sentence was removed. The PDF is uploaded with
   `Content-Disposition: attachment` so the cross-origin download button
   downloads rather than opening the browser's PDF viewer. The R2 bucket CORS
   policy allows `https://regevran.github.io` and `http://localhost:8000` with
   `GET`/`HEAD`; with range loading disabled that simple policy is enough.
+- **Prose pages use the split note intro (2026-11-18).** Public GitHub,
+  C++ & Standards, Talks, Ringing, Rescues and Podcast now share the book's
+  generic `.note-intro` composition and received a voice-preserving language
+  and emphasis pass. The left column carries a line from the page; the copy
+  uses restrained bold, italic names and at most one ochre highlight. Shared
+  `theme.css`, `site.css` and `board.css` links now carry content hashes too,
+  so the new shared styles cannot be served stale. No new block type or
+  per-page intro CSS was needed.
 - Markdown links and images use **site-root-relative** paths (`assets/...`).
   `markdown_to_html()` rewrites relative `href`/`src` values with the page
   root (`../` on card pages), so `assets/documents/birds-of-israel-index.pdf`

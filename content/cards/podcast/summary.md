@@ -1,1 +1,1 @@
-The only Hebrew podcast about everything related to birds
+The one and only Hebrew podcast about birds

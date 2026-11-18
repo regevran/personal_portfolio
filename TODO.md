@@ -24,6 +24,7 @@
 
 ## Content
 
+[x] Apply the split note intro and a language/emphasis pass to the six prose pages — [details](.ai/design-brief.md#prose-pages--split-note-intro)
 [x] Add the Common Chiffchaff photos to `content/data/photos.json`
 [x] Decide the podcast promo-video block position (first or after episodes)
 [x] Fill missing dates (2 talks, 4 rescue videos, 10 photos) — full list in the build warnings, [notes](.ai/asset-inventory.md#missing-or-pending)

@@ -245,6 +245,22 @@ class OutputValidationTest(unittest.TestCase):
         board_css = (DIST / "assets" / "css" / "board.css").read_text(encoding="utf-8")
         self.assertIn('[data-mark="conference-badge"]', board_css)
 
+    def test_prose_pages_share_the_split_note_intro(self):
+        for slug in (
+            "engineering",
+            "cpp-standards",
+            "talks",
+            "ringing",
+            "rescues",
+            "podcast",
+        ):
+            page = (DIST / slug / "index.html").read_text(encoding="utf-8")
+            self.assertIn('class="note-intro"', page)
+            self.assertIn('class="note-intro-figure"', page)
+            self.assertIn('class="note-intro-copy"', page)
+            self.assertIn('class="note-intro-kicker"', page)
+            self.assertIn("<mark>", page)
+
     def test_book_page_is_a_right_to_left_pdf_flipbook(self):
         book = (DIST / "book" / "index.html").read_text(encoding="utf-8")
         hub = (DIST / "index.html").read_text(encoding="utf-8")
@@ -279,7 +295,21 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn("assets/vendor/pdflip/pdflip.global.js", book)
         self.assertIn("assets/js/pages/book.js", book)
         self.assertIn("The page-turn preview needs JavaScript", book)
-        self.assertIn("It is a learning aid rather than a field guide.", book)
+        self.assertIn('class="note-intro"', book)
+        self.assertIn('class="note-intro-figure"', book)
+        self.assertIn('class="note-intro-copy"', book)
+        self.assertIn("565 species<br>in 84 families.", book)
+        self.assertIn(
+            "I designed and edited this book to be carried into the field.",
+            book,
+        )
+        self.assertIn("<strong>third edition</strong>", book)
+        self.assertIn("<em>Hebrew</em>", book)
+        self.assertIn("<mark>unpacks the Latin</mark>", book)
+        self.assertNotIn("A learning aid, not a field guide.", book)
+        self.assertNotIn(
+            "It is a learning aid rather than a field guide.", book
+        )
         self.assertNotIn("The third edition", book)
         self.assertNotIn("Swipe, drag a page edge", book)
         self.assertNotIn("placeholder", book.lower())
@@ -303,11 +333,22 @@ class OutputValidationTest(unittest.TestCase):
         )
         self.assertIn(".book-pdf", book_css)
         self.assertIn(".book-goto", book_css)
+        self.assertIn(".card-page--book .note-intro", book_css)
+        self.assertIn(".card-page--book .book-actions", book_css)
+        self.assertIn("align-self: end", book_css)
+        self.assertIn("display: contents", book_css)
         self.assertIn("padding-right: calc(var(--artifact)", book_css)
         self.assertIn("position: absolute", book_css)
         self.assertIn("right: 0", book_css)
         self.assertIn(".pdflip-toolbar", book_css)
         self.assertIn("justify-content: flex-start", book_css)
+
+        site_css = (DIST / "assets" / "css" / "site.css").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(".note-intro", site_css)
+        self.assertIn(".note-intro mark", site_css)
+        self.assertIn("box-decoration-break: clone", site_css)
         self.assertIn("prefers-reduced-motion: reduce", book_css)
         self.assertNotIn("openpageflip", book_css)
 
@@ -454,6 +495,27 @@ class OutputValidationTest(unittest.TestCase):
         ):
             page = (DIST / slug / "index.html").read_text(encoding="utf-8")
             self.assertIn(".css?v=", page, slug)
+
+    def test_shared_css_links_are_content_versioned(self):
+        hub = (DIST / "index.html").read_text(encoding="utf-8")
+        self.assertIn("assets/css/theme.css?v=", hub)
+        self.assertIn("assets/css/board.css?v=", hub)
+
+        for slug in (
+            "engineering",
+            "cpp-standards",
+            "talks",
+            "ringing",
+            "rescues",
+            "podcast",
+            "book",
+            "learn",
+            "about",
+            "contact",
+        ):
+            page = (DIST / slug / "index.html").read_text(encoding="utf-8")
+            self.assertIn("assets/css/theme.css?v=", page, slug)
+            self.assertIn("assets/css/site.css?v=", page, slug)
 
     def test_ringing_page_specific_design(self):
         ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")

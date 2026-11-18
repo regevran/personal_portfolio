@@ -1,1 +1,1 @@
-Joining ringing sites to help 
+A few catches from the ringing station.

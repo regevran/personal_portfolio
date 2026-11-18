@@ -1,1 +1,1 @@
-A list of papers I was involed with from WG21, the C++ standartization working group within ISO/ETC JTC1/SC22
+A list of papers I worked on in WG21, the C++ standardization working group within ISO/IEC JTC1/SC22.

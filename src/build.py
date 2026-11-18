@@ -788,13 +788,16 @@ def render_card_mark(card: dict, root: str) -> str:
     return ""
 
 
-def page_stylesheet(slug: str, root: str) -> str:
-    path = ASSETS / "css" / "pages" / f"{slug}.css"
+def stylesheet_link(relative: str, root: str) -> str:
+    path = ROOT / relative
     if not path.is_file():
         return ""
     digest = hashlib.sha1(path.read_bytes()).hexdigest()[:10]
-    relative = f"assets/css/pages/{slug}.css?v={digest}"
-    return f'<link rel="stylesheet" href="{esc(asset_url(relative, root))}">'
+    return f'<link rel="stylesheet" href="{esc(asset_url(f"{relative}?v={digest}", root))}">'
+
+
+def page_stylesheet(slug: str, root: str) -> str:
+    return stylesheet_link(f"assets/css/pages/{slug}.css", root)
 
 
 def render_contact(site: dict) -> str:
@@ -1039,6 +1042,8 @@ def build() -> None:
                 "BODY": body,
                 "FOOTER": footer,
                 "PAGE": esc(page_slug),
+                "THEME_CSS": stylesheet_link("assets/css/theme.css", root),
+                "SITE_CSS": stylesheet_link("assets/css/site.css", root),
                 "PAGE_CSS": page_css,
             },
         )
@@ -1074,6 +1079,8 @@ def build() -> None:
             "TOPBAR": render_topbar(site, "index.html", ""),
             "BODY": index_body,
             "FOOTER": render_footer(site, year),
+            "THEME_CSS": stylesheet_link("assets/css/theme.css", ""),
+            "BOARD_CSS": stylesheet_link("assets/css/board.css", ""),
         },
     )
     (DIST / "index.html").write_text(hub_page, encoding="utf-8")

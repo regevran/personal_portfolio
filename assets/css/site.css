@@ -251,6 +251,78 @@ body.card-shell {
   box-shadow: 0 8px 20px rgba(47, 39, 20, 0.12);
 }
 
+/* Split intro: a large fact or quote beside short prose. */
+
+.note-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  align-items: start;
+  gap: clamp(1.4rem, 4vw, 3.4rem);
+  margin: 1.6rem 0 2.3rem;
+}
+
+.note-intro-figure {
+  margin: 0;
+  color: var(--family-color, var(--nature-dark));
+  font-family: var(--hand);
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.note-intro-figure p {
+  margin: 0;
+}
+
+.note-intro-copy p {
+  max-width: 60ch;
+  margin: 0 0 0.7rem;
+}
+
+.note-intro-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.note-intro-kicker {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.note-intro-kicker p {
+  margin: 0;
+}
+
+.note-intro-copy strong {
+  font-weight: 700;
+}
+
+.note-intro-copy em {
+  font-style: italic;
+}
+
+.note-intro mark {
+  padding: 0.2em 0.08em;
+  background: rgba(236, 182, 82, 0.42);
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@media (max-width: 700px) {
+  .note-intro {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .note-intro-figure {
+    font-size: 2.2rem;
+  }
+}
+
 .prose table {
   width: 100%;
   margin: 1.5rem 0;

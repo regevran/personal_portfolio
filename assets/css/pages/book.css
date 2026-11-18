@@ -47,6 +47,68 @@ body[data-page="book"] {
   color: var(--ink);
 }
 
+/* Intro: the count at the top left, the download at the bottom left. */
+
+.card-page--book .prose {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  align-items: start;
+  column-gap: clamp(1.4rem, 4vw, 3.4rem);
+  row-gap: 1.2rem;
+}
+
+.card-page--book .note-intro {
+  display: contents;
+}
+
+.card-page--book .note-intro-figure {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.card-page--book .note-intro-copy {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.card-page--book .book-actions {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+  margin: 0;
+}
+
+.card-page--book .book-viewer {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: clamp(1.4rem, 3vw, 2rem);
+}
+
+@media (max-width: 700px) {
+  .card-page--book .prose {
+    grid-template-columns: 1fr;
+  }
+
+  .card-page--book .note-intro-figure {
+    grid-row: 1;
+  }
+
+  .card-page--book .book-actions {
+    grid-row: 2;
+    align-self: start;
+  }
+
+  .card-page--book .note-intro-copy {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .card-page--book .book-viewer {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
+
 /* Download --------------------------------------------------------------- */
 
 .book-actions {
