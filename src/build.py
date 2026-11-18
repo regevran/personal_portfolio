@@ -248,6 +248,7 @@ EXTERNAL_ICON = "assets/icons/external.svg"
 YOUTUBE_ICON = "assets/icons/youtube.svg"
 BOOK_ICON = "assets/icons/book.svg"
 DOWNLOAD_ICON = "assets/icons/download.svg"
+LEARNING_AID_ICON = "assets/icons/learning-aid.svg"
 
 
 def paper_rail(paper: dict, root: str) -> str:
@@ -775,6 +776,12 @@ def render_card_mark(card: dict, root: str) -> str:
     if mark == "book":
         return (
             f'<img class="book-mark" src="{esc(asset_url(BOOK_ICON, root))}" '
+            'alt="" aria-hidden="true">'
+        )
+    if mark == "learning-aid":
+        return (
+            f'<img class="learn-mark" '
+            f'src="{esc(asset_url(LEARNING_AID_ICON, root))}" '
             'alt="" aria-hidden="true">'
         )
     return ""

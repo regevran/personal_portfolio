@@ -13,7 +13,7 @@
 [x] Style the Ringing page in the board's visual language — [details](.ai/design-brief.md#ringing-page)
 [x] Style the Rescues page in the board's visual language
 [x] Style the Birds of Israel Index page in the board's visual language — PDF download, RTL pdflip viewer, Go to page — [details](.ai/design-brief.md#book-page--birds-of-israel-index)
-[ ] Style the Learning Aid page in the board's visual language
+[x] Style the Learning Aid page in the board's visual language — title, licensed weaver photo with tilted Under Construction stamp, Previous/Next, no scrolling
 [ ] Style the About page in the board's visual language
 [ ] Style the Contact page in the board's visual language
 [ ] Build the contact notebook / power-line interaction — [details](.ai/design-brief.md#next-step)

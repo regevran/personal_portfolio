@@ -505,8 +505,22 @@ untracked. The bucket CORS policy allows the site origin and the local preview
 with `GET`/`HEAD`; the viewer disables range loading, so that is enough. If
 JavaScript is unavailable, the PDF download remains.
 
+### Learning Aid — title and photograph
+
+The Learning Aid card is still in development, so its page is a deliberately
+minimal holding page: the title **Learning Aid**, one large photograph of a
+male Black-headed Weaver hanging beneath a half-built grass nest, a tilted
+**Under Construction** stamp in the sky, and the Previous/Next pager. There is
+no prose, status badge, construction strip or visible caption. The layout fills
+the viewport with the photo and does not scroll at normal desktop and mobile
+sizes. The CC BY-SA 4.0 attribution remains in a visually hidden figcaption,
+because the image requires it.
+
+The alternative **Coming Soon** treatment was not used because the
+nest-building photograph is clearer and shows the work in progress.
+
 ## Next step
 
-Design the remaining card pages individually, starting with the Learning Aid
-and the neutral pages. Then build the contact power-line/notebook interaction.
-Voice-over comes last.
+The Learning Aid holding page is in place. Design the remaining card pages
+individually, starting with the neutral pages. Then build the contact
+power-line/notebook interaction. Voice-over comes last.

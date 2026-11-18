@@ -36,13 +36,13 @@ personal_portfolio/
 │   ├── css/theme.css         palette, type, topbar and footer
 │   ├── css/board.css         hub board
 │   ├── css/site.css          shared card pages
-│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues, book)
+│   ├── css/pages/            optional per-page styles (podcast, engineering, cpp-standards, talks, ringing, rescues, book, learn)
 │   ├── js/board.js           horizontal pan and nav shortcuts
 │   ├── js/site.js            contact form, repo accordions, talk videos, species decks, rescue stacks
 │   ├── js/pages/book.js      pdflip controls, Go to page, and counter
 │   ├── vendor/pdflip/        BSD page-turn engine and pdf.js (pruned)
 │   ├── fonts/                Patrick Hand (OFL)
-│   ├── general/              board background, robin PNG, reference assets
+│   ├── general/              board background, robin PNG, Learning Aid weaver photo, reference assets
 │   ├── documents/            CV and book PDF (R2-hosted; local backup)
 │   └── ringing/ rescues/ podcast/ documents/ ...
 ├── tests/                    all validation and date warnings

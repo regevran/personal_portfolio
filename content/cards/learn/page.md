@@ -1,8 +1,1 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales, augue non volutpat luctus, ipsum arcu consequat erat, at luctus velit massa vitae dui.
-
-Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
-<pre class="construction-log">[ 95%] Building learning-aid
-[ 95%] Lorem ipsum dolor sit amet, consectetur adipiscing elit</pre>
-
-<p class="placeholder-note">This card is a placeholder for the companion trainer.</p>
+<figure class="learn-plate"><img src="assets/general/learning-aid-weaver.jpg" width="1920" height="1280" alt="A male black-headed weaver hangs upside down beneath a half-built grass nest."><span class="construction-stamp">Under Construction</span><figcaption class="visually-hidden">Photo: Charles J. Sharp, CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/, via Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Black-headed_weaver_(Ploceus_cucullatus_bohndorffi)_male_nest_building.jpg. Resized.</figcaption></figure>

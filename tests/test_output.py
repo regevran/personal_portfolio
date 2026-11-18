@@ -330,6 +330,62 @@ class OutputValidationTest(unittest.TestCase):
             )
         self.assertTrue((DIST / "assets" / "icons" / "download.svg").is_file())
 
+    def test_learning_aid_is_a_title_and_a_photo(self):
+        learn = (DIST / "learn" / "index.html").read_text(encoding="utf-8")
+
+        self.assertIn("<title>Learning Aid — Ran Regev</title>", learn)
+        self.assertIn(
+            '<meta name="description" content="A companion trainer for learning '
+            'the birds of Israel, in development.">',
+            learn,
+        )
+        self.assertIn("assets/css/pages/learn.css", learn)
+        self.assertIn("card-page--learn", learn)
+        self.assertIn('class="learn-plate"', learn)
+        self.assertIn('class="construction-stamp"', learn)
+        self.assertIn("Under Construction", learn)
+        self.assertIn("assets/general/learning-aid-weaver.jpg", learn)
+        self.assertIn('width="1920" height="1280"', learn)
+        self.assertIn(
+            "A male black-headed weaver hangs upside down beneath a half-built "
+            "grass nest.",
+            learn,
+        )
+        self.assertIn('class="visually-hidden"', learn)
+        self.assertIn("CC BY-SA 4.0", learn)
+        self.assertIn("creativecommons.org/licenses/by-sa/4.0", learn)
+        self.assertIn('href="../book/index.html"', learn)
+        self.assertNotIn("construction-plate", learn)
+        self.assertNotIn("construction-strip", learn)
+        self.assertNotIn("One strand at a time", learn)
+        self.assertNotIn("The trainer is still being built", learn)
+        self.assertNotIn("The book is the list", learn)
+        self.assertNotIn("Lorem ipsum", learn)
+        self.assertNotIn("placeholder", learn.lower())
+
+        learn_css = (
+            DIST / "assets" / "css" / "pages" / "learn.css"
+        ).read_text(encoding="utf-8")
+        self.assertIn("dirty-background.jpg", learn_css)
+        for hidden in (
+            ".card-page--learn .back-link",
+            ".card-page--learn .eyebrow",
+            ".card-page--learn .lede",
+            ".card-page--learn .badge",
+            ".card-page--learn .learn-mark",
+        ):
+            self.assertIn(hidden, learn_css)
+        self.assertIn("display: none", learn_css)
+        self.assertIn(".learn-plate", learn_css)
+        self.assertIn(".construction-stamp", learn_css)
+        self.assertIn("transform: rotate(-7deg)", learn_css)
+        self.assertIn("object-fit: cover", learn_css)
+        self.assertIn("height: 100%", learn_css)
+        self.assertIn("min-height: 0", learn_css)
+        self.assertTrue(
+            (DIST / "assets" / "general" / "learning-aid-weaver.jpg").is_file()
+        )
+
     def test_ringing_page_specific_design(self):
         ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")
         self.assertIn("assets/css/pages/ringing.css", ringing)

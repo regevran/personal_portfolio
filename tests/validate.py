@@ -707,6 +707,7 @@ def validate_assets() -> list[str]:
         "assets/general/closing_on_birds_logo.png",
         "assets/general/closing_on_birds_robin.png",
         "assets/general/github-qr.svg",
+        "assets/general/learning-aid-weaver.jpg",
         "assets/icons/spotify.svg",
         "assets/icons/applepodcasts.svg",
         "assets/icons/pocketcasts.svg",

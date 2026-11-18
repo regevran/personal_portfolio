@@ -1,0 +1,124 @@
+/* Learning Aid — a title and one photograph, fitted to the screen. */
+
+body[data-page="learn"] {
+  background: var(--sand) url("../../general/dirty-background.jpg") center /
+    cover no-repeat;
+}
+
+@media (min-width: 900px) {
+  body[data-page="learn"] {
+    background-attachment: fixed;
+  }
+}
+
+/* The holding page carries no visible prose, status or ornament: the title
+   and the photograph are the whole page. The photo credit stays in the
+   markup, visually hidden, because the image is CC BY-SA. */
+.card-page--learn .back-link,
+.card-page--learn .eyebrow,
+.card-page--learn .lede,
+.card-page--learn .badge,
+.card-page--learn .learn-mark {
+  display: none;
+}
+
+body[data-page="learn"] .site-main > .wrap {
+  height: 100%;
+  padding: clamp(0.9rem, 2.5vh, 1.8rem) 0;
+}
+
+.card-page--learn {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(0.9rem, 2.4vw, 1.8rem) clamp(1rem, 4vw, 3rem)
+    clamp(0.8rem, 2.4vw, 1.5rem);
+}
+
+.card-page--learn .card-page-header {
+  flex: 0 0 auto;
+  margin: 0 0 clamp(0.8rem, 2vh, 1.2rem);
+  padding: 0;
+  border: 0;
+  text-align: center;
+}
+
+.card-page--learn .card-page-header h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  line-height: 1;
+}
+
+.card-page--learn .prose {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.learn-plate {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 4px 12px 6px 10px;
+  background: var(--ink);
+  box-shadow: 0 20px 44px rgba(47, 39, 20, 0.2);
+}
+
+.learn-plate img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: cover;
+  object-position: center;
+}
+
+.construction-stamp {
+  position: absolute;
+  top: clamp(0.9rem, 4%, 1.8rem);
+  left: clamp(0.9rem, 4%, 1.8rem);
+  z-index: 1;
+  padding: 0.55rem 0.8rem 0.5rem;
+  border: 2px solid rgba(47, 39, 20, 0.84);
+  border-radius: 3px;
+  background: rgba(255, 249, 236, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(255, 249, 236, 0.55),
+    0 3px 10px rgba(47, 39, 20, 0.14);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(0.62rem, 1.1vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: rotate(-7deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.card-page--learn .pager {
+  flex: 0 0 auto;
+  margin-top: clamp(0.8rem, 2vh, 1.2rem);
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media (max-width: 620px) {
+  .card-page--learn {
+    padding-right: 1.1rem;
+    padding-left: 1.1rem;
+  }
+
+  .card-page--learn .card-page-header h1 {
+    font-size: 2.6rem;
+  }
+}

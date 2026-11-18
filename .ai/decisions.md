@@ -26,7 +26,7 @@ data-driven, because it will be updated from time to time.
 | Contact | Animated notebook/power-line panel planned for the design phase. Direct email (public), public phone, and a form that composes a `mailto:` with the typed message. A true one-click send would require a third-party endpoint or a backend; deferred. |
 | Gallery | Deferred. The data model can accept it later, with per-photo text/audio. |
 | Book | Implemented as **Birds of Israel Index**: a PDF download and a right-to-left page-turn viewer built on the ready-made pdflip engine, flipping the PDF itself from R2. |
-| Learning aid | Card exists as “Under construction.” GitHub Pages cannot run the Python trainer; hosting/ports deferred. |
+| Learning aid | Card exists as a minimal holding page: **Learning Aid**, one large Black-headed Weaver building its nest (Charles J. Sharp, CC BY-SA 4.0, resized; attribution kept visually hidden), a tilted **Under Construction** stamp, and Previous/Next. No prose or visible status badge; fitted to the viewport without scrolling. GitHub Pages cannot run the Python trainer; hosting/ports deferred. |
 | CV | Placeholder until the real CV is ready. |
 | Git | No LFS. Ignore `tags`, `*.swp`, `dist/`, Python caches. |
 

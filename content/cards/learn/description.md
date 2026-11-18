@@ -1,1 +1,1 @@
-A companion trainer for bird names, in development.
+A companion trainer for learning the birds of Israel, in development.
