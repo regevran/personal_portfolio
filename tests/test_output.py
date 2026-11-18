@@ -684,5 +684,33 @@ class OutputValidationTest(unittest.TestCase):
         self.assertEqual(positions, sorted(positions))
 
 
+    def test_card_pagers_wrap_around(self):
+        first = (DIST / "engineering" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(
+            'class="pager-prev" href="../contact/index.html"', first
+        )
+        self.assertIn(
+            'class="pager-next" href="../cpp-standards/index.html"', first
+        )
+
+        last = (DIST / "contact" / "index.html").read_text(encoding="utf-8")
+        self.assertIn(
+            'class="pager-prev" href="../about/index.html"', last
+        )
+        self.assertIn(
+            'class="pager-next" href="../engineering/index.html"', last
+        )
+
+        home = (DIST / "learn" / "index.html").read_text(encoding="utf-8")
+        self.assertIn(
+            'class="pager-prev" href="../book/index.html"', home
+        )
+        self.assertIn(
+            'class="pager-next" href="../about/index.html"', home
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

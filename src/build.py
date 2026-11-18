@@ -1101,14 +1101,13 @@ def build() -> None:
             )
 
         pager = []
-        if position > 0:
-            previous = cards[position - 1]
+        if len(cards) > 1:
+            previous = cards[(position - 1) % len(cards)]
+            following = cards[(position + 1) % len(cards)]
             pager.append(
                 f'<a class="pager-prev" href="../{esc(previous["slug"])}/index.html">'
                 f'&larr; {esc(previous["title"])}</a>'
             )
-        if position + 1 < len(cards):
-            following = cards[position + 1]
             pager.append(
                 f'<a class="pager-next" href="../{esc(following["slug"])}/index.html">'
                 f'{esc(following["title"])} &rarr;</a>'

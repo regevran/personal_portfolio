@@ -89,7 +89,9 @@ content is ready.
 Adding a card: create `content/cards/<slug>/card.json` with the metadata,
 `board` placement and `blocks`, plus the prose files the prose blocks
 reference. The directory name is the slug; the tests and hub pick it up
-automatically. No renderer change is needed for a new card.
+automatically. No renderer change is needed for a new card. The Previous/Next
+pager is circular: each card links to the adjacent cards in `order`, and the
+first and last wrap around.
 
 ## Data model
 

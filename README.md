@@ -238,6 +238,9 @@ dist/              generated output (ignored by git)
   Cards with `holding: true` link the shared
   `assets/css/pages/holding.css` instead; Learning Aid, About and Contact use
   it for their title-and-photo holding pages.
+- **Pager:** card pages link to the adjacent cards in `order`. The sequence is
+  circular: the first card's Previous points to the last card, and the last
+  card's Next points back to the first.
 - **Repository cards:** a full description is clamped to a preview with a
   `More…` toggle at the bottom of the card. Opening one expands it to its full
   height, changes the label to `Less…`, and closes any other open repository
