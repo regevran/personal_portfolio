@@ -1,6 +1,24 @@
 (function () {
   "use strict";
 
+  // Keep keyboard focus rings for keyboard users, but do not let a pointer
+  // click leave a focus ring on a photo button.
+  var root = document.documentElement;
+  document.addEventListener(
+    "pointerdown",
+    function () {
+      root.classList.add("using-pointer");
+    },
+    true
+  );
+  document.addEventListener(
+    "keydown",
+    function () {
+      root.classList.remove("using-pointer");
+    },
+    true
+  );
+
   var form = document.querySelector(".contact-form");
   if (form) {
     form.addEventListener("submit", function (event) {
@@ -174,8 +192,9 @@
   });
 
   // Species decks: hovering or keyboard focus fans the deck open. Pressing a
-  // fanned card presents it; pressing the presented card returns it to the
-  // fan. Leaving hover closes the deck with the selected card on top.
+  // fanned card presents it; pressing the presented card advances to the next
+  // photo and wraps. Leaving hover closes the deck with the selected card on
+  // top.
   var deckEntries = [];
   var decks = Array.prototype.slice.call(
     document.querySelectorAll("[data-deck]")
@@ -260,7 +279,7 @@
     });
 
     cards.forEach(function (card) {
-      card.addEventListener("click", function () {
+      card.addEventListener("click", function (event) {
         if (!deck.classList.contains("is-open")) {
           open();
           selected = card;
@@ -268,13 +287,11 @@
           return;
         }
         if (card === presented) {
-          if (cards.length > 1) {
-            presented = null;
-            cards.forEach(function (other) {
-              other.classList.remove("is-presented");
-              other.setAttribute("aria-pressed", "false");
-            });
-            updateStack();
+          var next = cards[(cards.indexOf(card) + 1) % cards.length];
+          selected = next;
+          applyPresentation(next);
+          if (event.detail === 0) {
+            next.focus({ preventScroll: true });
           }
           return;
         }

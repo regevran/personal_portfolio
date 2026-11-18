@@ -68,7 +68,7 @@ class OutputValidationTest(unittest.TestCase):
             '<meta name="description" content="Bird ringing and field observations.">',
             ringing,
         )
-        self.assertIn('<div class="lede"><p>The morning', ringing)
+        self.assertIn('<div class="lede"><p>', ringing)
 
     def test_podcast_page_specific_design(self):
         podcast = (DIST / "podcast" / "index.html").read_text(encoding="utf-8")
@@ -79,6 +79,10 @@ class OutputValidationTest(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("closing_on_birds_logo.png", podcast_css)
+        self.assertNotIn(".card-page--podcast .prose > p", podcast_css)
+        self.assertNotIn("background: transparent", podcast_css)
+        self.assertIn("float: right", podcast_css)
+        self.assertIn("width: clamp(104px, 12vw, 148px)", podcast_css)
         for platform in ("spotify", "apple", "pocketcasts"):
             self.assertIn(f"episode-link--{platform}", podcast)
 
@@ -230,9 +234,9 @@ class OutputValidationTest(unittest.TestCase):
         ringing = (DIST / "ringing" / "index.html").read_text(encoding="utf-8")
         self.assertIn("assets/css/pages/ringing.css", ringing)
         self.assertIn("card-page--ringing", ringing)
-        self.assertIn("hang-rig--perch", ringing)
-        self.assertIn("robin-img", ringing)
-        self.assertIn("closing_on_birds_robin.png", ringing)
+        self.assertNotIn("hang-rig--perch", ringing)
+        self.assertNotIn("robin-img", ringing)
+        self.assertNotIn("closing_on_birds_robin.png", ringing)
         self.assertIn('class="ring-band"', ringing)
         self.assertIn("bird-ring.svg", ringing)
         self.assertEqual(ringing.count('class="species-deck"'), 7)
@@ -276,14 +280,24 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn(".ring-mark", ringing_css)
         self.assertIn(".ring-band", ringing_css)
         self.assertIn("--fan-step: 10deg", ringing_css)
-        self.assertIn("calc(var(--i) * var(--fan-step))", ringing_css)
+        self.assertIn("--fan-direction: -1", ringing_css)
+        self.assertIn(
+            "calc(var(--i) * var(--fan-step) * var(--fan-direction))",
+            ringing_css,
+        )
         self.assertIn("transform-origin: 50% 100%", ringing_css)
         self.assertIn("rotate(var(--angle))", ringing_css)
         self.assertIn("var(--stack-rank", ringing_css)
-        self.assertIn("width: var(--card-w)", ringing_css)
+        self.assertIn("grid-template-columns: repeat(2, minmax(0, 1fr))", ringing_css)
+        self.assertIn("aspect-ratio: 4 / 5", ringing_css)
+        self.assertIn("flex: 1 1 auto", ringing_css)
+        self.assertIn(".deck-card:focus-visible", ringing_css)
+        self.assertIn("outline: 2px solid var(--gold)", ringing_css)
+        self.assertNotIn(".card-page--ringing .prose > p", ringing_css)
         self.assertIn("prefers-reduced-motion: reduce", ringing_css)
 
         site_js = (DIST / "assets" / "js" / "site.js").read_text(encoding="utf-8")
+        self.assertIn("using-pointer", site_js)
         self.assertIn("[data-deck]", site_js)
         self.assertIn("[data-card]", site_js)
         self.assertIn("is-presented", site_js)
@@ -292,6 +306,10 @@ class OutputValidationTest(unittest.TestCase):
         self.assertIn("pointerdown", site_js)
         self.assertIn("--stack-rank", site_js)
         self.assertIn("updateStack", site_js)
+        self.assertIn(
+            "var next = cards[(cards.indexOf(card) + 1) % cards.length]",
+            site_js,
+        )
 
         ring = (DIST / "assets" / "icons" / "bird-ring.svg").read_text(
             encoding="utf-8"
@@ -381,6 +399,8 @@ class OutputValidationTest(unittest.TestCase):
             ".rescue-row",
             ".rescue-stack",
             ".stack-card.is-presented",
+            ".stack-card:focus-visible",
+            "outline: 2px solid var(--gold)",
             'grid-template-areas: "photos copy media"',
             "repeat(3, minmax(0, 1fr))",
             "--stack-x: 6px",

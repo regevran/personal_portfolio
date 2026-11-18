@@ -1,4 +1,20 @@
 (function () {
+  var root = document.documentElement;
+  document.addEventListener(
+    'pointerdown',
+    function () {
+      root.classList.add('using-pointer');
+    },
+    true
+  );
+  document.addEventListener(
+    'keydown',
+    function () {
+      root.classList.remove('using-pointer');
+    },
+    true
+  );
+
   var viewport = document.querySelector('.board-viewport');
   if (!viewport) return;
 

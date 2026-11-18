@@ -96,7 +96,7 @@ body.card-shell {
 }
 
 .card-page-header h1 {
-  margin: 0 0 0.8rem;
+  margin: 0 0 clamp(1.1rem, 1.6vw, 1.4rem);
   color: var(--ink);
   font-family: var(--hand);
   font-size: clamp(3rem, 7vw, 5.4rem);
@@ -643,6 +643,12 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px dashed var(--ochre);
   outline-offset: 3px;
+}
+
+/* A pointer click should not leave a keyboard-style ring on the photo. */
+html.using-pointer a:focus-visible,
+html.using-pointer button:focus-visible {
+  outline: none;
 }
 
 /* Responsive ------------------------------------------------------------- */

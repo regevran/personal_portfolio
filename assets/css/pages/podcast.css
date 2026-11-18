@@ -11,70 +11,27 @@ body[data-page="podcast"] {
   }
 }
 
-.card-page--podcast {
-  max-width: 1120px;
-  min-height: 0;
-  padding: clamp(1rem, 3vw, 2rem) clamp(0.6rem, 2vw, 1.2rem)
-    clamp(2rem, 5vw, 4rem);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.card-page--podcast::before {
-  display: none;
-}
-
-.card-page--podcast .back-link {
-  display: inline-block;
-  margin: 0 0 1.2rem;
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  background: var(--cream);
-  box-shadow: 0 4px 10px rgba(47, 39, 20, 0.12);
-  transform: rotate(-1deg);
-}
-
-/* Header note ------------------------------------------------------------- */
+/* Header ------------------------------------------------------------------ */
 
 .card-page--podcast .card-page-header {
   display: flow-root;
-  max-width: 980px;
-  margin: 0 auto clamp(2rem, 4vw, 2.8rem);
-  padding: clamp(1.5rem, 4vw, 2.6rem) clamp(1.3rem, 4vw, 2.8rem);
-  border: 1px solid var(--rule);
-  border-top: 0.55rem solid var(--nature-dark);
-  border-radius: 4px 16px 6px 12px;
-  background: var(--cream);
-  box-shadow: 0 22px 48px rgba(47, 39, 20, 0.24);
-  transform: none;
 }
 
-.card-page--podcast .card-page-header h1 {
-  font-size: clamp(2.9rem, 6vw, 4.8rem);
-}
-
+/* The cover floats beside the title, small enough that it does not make the
+   header taller than its text. */
 .card-page--podcast .card-page-logo {
   float: right;
-  width: clamp(160px, 19vw, 230px);
+  width: clamp(104px, 12vw, 148px);
   height: auto;
-  margin: -2rem -0.8rem 0.8rem 1.6rem;
+  margin: -0.2rem -0.1rem 0.8rem 1.2rem;
 }
 
 /* Intro and media --------------------------------------------------------- */
 
-.card-page--podcast .prose {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1.3rem, 2.5vw, 2.2rem);
-}
-
 .card-page--podcast .media-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: min(100%, 980px);
+  width: 100%;
   margin: 0 auto;
   gap: 1.6rem;
 }
@@ -88,48 +45,13 @@ body[data-page="podcast"] {
   transform: translateY(-4px);
 }
 
-.card-page--podcast .prose > p {
-  width: min(100%, 980px);
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 1.2rem 1.6rem;
-  border: 1px solid var(--rule);
-  border-radius: 4px 10px 5px 8px;
-  background: var(--cream);
-  box-shadow: 0 12px 26px rgba(47, 39, 20, 0.16);
-}
-
-.card-page--podcast .prose > p:nth-of-type(odd) {
-  transform: rotate(0.8deg);
-}
-
-.card-page--podcast .prose > p:nth-of-type(even) {
-  transform: rotate(-0.8deg);
-}
-
-.card-page--podcast .card-page-header,
-.card-page--podcast .back-link,
-.card-page--podcast .prose > p,
-.card-page--podcast .pager {
-  transition: box-shadow 180ms ease;
-}
-
-.card-page--podcast .card-page-header:hover,
-.card-page--podcast .back-link:hover,
-.card-page--podcast .back-link:focus-visible,
-.card-page--podcast .prose > p:hover,
-.card-page--podcast .pager:hover {
-  box-shadow: 0 0 0 0.22rem rgba(236, 182, 82, 0.55),
-    0 18px 38px rgba(47, 39, 20, 0.22);
-}
-
 /* Chapters ---------------------------------------------------------------- */
 
 .card-page--podcast .item-list {
   display: flex;
   flex-direction: column;
-  width: min(100%, 980px);
-  margin: 0 auto;
+  width: 100%;
+  margin: clamp(2.2rem, 4vw, 3rem) auto 0;
   padding: 0;
   border: none;
   list-style: none;
@@ -279,26 +201,12 @@ body[data-page="podcast"] {
   transform: translateY(-2px);
 }
 
-/* Pager ------------------------------------------------------------------- */
-
-.card-page--podcast .pager {
-  width: min(100%, 980px);
-  margin: 3.5rem auto 0;
-  padding: 1rem 1.2rem;
-  border: 1px solid var(--rule);
-  border-radius: 4px 10px 5px 8px;
-  background: var(--cream);
-  box-shadow: 0 12px 26px rgba(47, 39, 20, 0.16);
-  transform: rotate(-1deg);
-}
-
 /* Small screens ----------------------------------------------------------- */
 
 @media (max-width: 700px) {
   .card-page--podcast .card-page-logo {
-    float: none;
-    width: 140px;
-    margin: 0 0 0.8rem;
+    width: 96px;
+    margin: -0.1rem 0 0.6rem 0.8rem;
   }
 
   .card-page--podcast .media-grid {
@@ -354,9 +262,7 @@ body[data-page="podcast"] {
 
 @media (prefers-reduced-motion: reduce) {
   .card-page--podcast .media-card,
-  .card-page--podcast .item-list .item,
-  .card-page--podcast .prose > p,
-  .card-page--podcast .pager {
+  .card-page--podcast .item-list .item {
     transform: none;
     transition: none;
   }

@@ -761,13 +761,8 @@ def render_card_mark(card: dict, root: str) -> str:
             'alt="" aria-hidden="true">'
         )
     if mark == "ringing-station":
-        perch = read_template("partials/perch.html")
         return (
-            render_template(
-                perch,
-                {"ROBIN_STYLE": "--robin-tilt: 9deg", "ROOT": root},
-            )
-            + f'<img class="ring-band" src="{esc(asset_url(BIRD_RING, root))}" '
+            f'<img class="ring-band" src="{esc(asset_url(BIRD_RING, root))}" '
             'alt="" aria-hidden="true">'
         )
     if mark == "rescue":

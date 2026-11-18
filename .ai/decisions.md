@@ -159,15 +159,18 @@ data-driven, because it will be updated from time to time.
   `templates/index.html`, `assets/css/board.css`, `assets/js/board.js`, and the
   `board-card`/`perch`/`lanyard` partials. Every board card links to its page.
   Card pages use the shared board language through `theme.css` and `site.css`.
-- The **Podcast page** got its own treatment on 2026-11-10: dirty ink
-  background (`assets/general/dirty-background.jpg`), no full-page sheet, a
-  straight header note with the full circular podcast logo
-  (`assets/general/closing_on_birds_circle.png`), and each episode as a
-  floating card matching the header width, with the small robin/mic logo and
-  long, uncapped text lines. The cards alternate ±4° and overlap by `-1rem`;
-  the bottom padding keeps the text and platform links clear. Mobile uses ±3°
-  and `-0.5rem`. Hovering or focusing a card straightens it and brings it
-  forward; static text rectangles get a soft gold glow. The promo videos are
+- The **Podcast page** got its own treatment on 2026-11-10 and was unified
+  with the standard card sheet on 2026-11-18. It keeps the dirty ink
+  background (`assets/general/dirty-background.jpg`), but the header, summary
+  and `page.md` now sit inside the same cream sheet as every other page. The
+  circular podcast logo (`assets/general/closing_on_birds_circle.png`) floats
+  small at the header's top right, beside the title, small enough not to make
+  the header taller than its text. Each episode remains a floating card
+  inside the sheet, full width, with the small robin/mic logo and long,
+  uncapped text lines. The cards alternate ±4° and overlap by `-1rem`; the
+  bottom padding keeps the text and platform links clear. Mobile uses ±3° and
+  `-0.5rem`. Hovering or focusing a card straightens it and brings it forward.
+  The promo videos are
   straight and sit at the bottom. Episode titles are not links; the small
   robin/mic logo heads a narrow right-hand rail with the Spotify, Apple
   Podcasts and Pocket Casts logo links stacked tightly below it. The title and
@@ -289,30 +292,41 @@ data-driven, because it will be updated from time to time.
   mark and a document mark, not the `Open origin` text; `url` is the fallback
   origin icon when a talk has neither.
 - The **Ringing page** (`ringing`) got its field-sheet treatment on
-  2026-11-15. It keeps Podcast's dirty ink field and cream notes but uses the
-  nature-green accent and the board's robin perch: the bird sits on the branch
-  above the header note, whose top-left carries the perch. A **narrow, tall,
+  2026-11-15 and was folded back into the standard card sheet on 2026-11-18.
+  It keeps the dirty ink field and nature-green accent. A **narrow, tall,
   open silver** leg ring (`assets/icons/bird-ring.svg`) is the page artifact
-  at the top right, mimicking a real ringing band with its seam open. Intro
-  notes are straight with a green left rule.
-- **Ringing photos became species decks** on 2026-11-15. Each deck is one
-  photograph wide: a static cream base sits directly under the closed photo at
-  the same width and carries its name, photo count, visit date and one shared
-  note. The photograph is much larger than the note column; there are no
-  per-photo captions. The photos are a closed hand of cards above the base:
+  at the header's top right, mimicking a real ringing band with its seam open.
+  `page.md` is ordinary prose inside the same sheet, matching Rescues; the old
+  separate header note and intro-note cards are gone. The page robin was
+  removed for now; page robins return only with the all-pages pass.
+- **Ringing photos are species decks** (since 2026-11-15), two per row since
+  2026-11-18. Each deck fills one grid column: a static cream base sits
+  directly under the closed photo at the same width and carries its name,
+  photo count, visit date and one shared note; a trailing odd deck centers
+  under the row. This keeps the page width aligned with the other card pages
+  and aligns `page.md` with the decks. Decks in a row share the row height, so
+  the shorter base stretches with cream to meet the taller one. The photograph
+  is much larger than the note column; there are no per-photo captions. The
+  photos are a closed hand of cards above the base:
   the selected card is moved to the front of the deck and held upright, with
   the rest stacked behind it in one clean direction (not peeking out on both
   sides), their bottoms tucked behind the base. Selecting another card moves
   it to the front. Hover or keyboard focus fans the deck open **to one
-  side** — right, like a bird's wing — from a common bottom pivot; it is not a
-  symmetric fan. Losing hover closes it. Pressing a fanned card presents it,
-  and pressing the presented card returns it to the fan while the deck stays
-  open. One-photo decks are a single card and two-photo decks a shallow
+  side** from a common bottom pivot; it is not a symmetric fan. The left
+  column fans left, the right column and the centered last deck fan right.
+  Losing hover closes it. Pressing a fanned card presents it; pressing the
+  presented card advances to the next photo and wraps, matching the Rescues
+  stills. One-photo decks are a single card and two-photo decks a shallow
   one-way fan. The rules live in `assets/css/pages/ringing.css`, the state and
   interaction in `assets/js/site.js`, and the fan step is responsive
   (`--fan-step` with `--i` per card) so the one-way fan still fits a phone.
   The shared perch partial now takes a `{{ROOT}}` so it works on card pages as
   well as the hub.
+- **Focus rings are keyboard-only** on the photo controls (2026-11-18).
+  `pointerdown` adds `html.using-pointer`; `keydown` removes it; CSS suppresses
+  outlines in pointer mode. This stops a pointer click from leaving the global
+  dashed-ochre ring on a photo. Keyboard focus remains visible: deck and rescue
+  photo buttons use a solid gold outline instead of the dashed global style.
 - **Species notes are Markdown from the start.** `content/data/species.json`
   holds `id`, `collections`, `name` and `note_src`; the note text lives in
   `content/data/species/<id>.md`. Photos carry a `species` id and the photos

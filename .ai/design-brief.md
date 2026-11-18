@@ -204,18 +204,20 @@ block types.
 
 ### Podcast page
 
-Podcast gets a page-specific treatment in `assets/css/pages/podcast.css`,
-loaded only for that page. It follows the hub more closely than the generic
-card page:
+Podcast keeps its page-specific details in `assets/css/pages/podcast.css`,
+loaded only for that page, but follows the shared card-page rules:
 
 - The page background is the dirty ink texture
-  (`assets/general/dirty-background.jpg`), fixed on desktop. There is no
-  full-page cream sheet.
-- The header is one cream note with the full circular logo
-  (`assets/general/closing_on_birds_circle.png`) floating in its top-right.
-- The intro paragraphs are notes.
+  (`assets/general/dirty-background.jpg`), fixed on desktop. The page is the
+  standard cream card sheet, like Ringing and Rescues.
+- The header, summary and `page.md` live inside that sheet. The circular logo
+  (`assets/general/closing_on_birds_circle.png`) floats small at the header's
+  top right, beside the title, small enough not to make the header taller than
+  its text.
+- `page.md` is ordinary prose inside the sheet; there are no separate intro
+  notes.
 - The header and the promo-video cards are straight. The videos sit at the
-  bottom of the page, after the episode list.
+  bottom of the sheet, after the episode list.
 - Each episode is a compact cream card matching the header width, with a
   nature-green top edge. The title and date share the first line (date after
   the title); the description follows and uses the full width up to a narrow
@@ -229,8 +231,8 @@ card page:
   Chromium draws an opaque box around the transparent PNG in this context.
   Per-episode URLs live in `links` in `episodes.json`; missing direct links
   fall back to the show page.
-- Static text rectangles (header, intro notes, pager) get a soft gold glow on
-  hover; tilted episode cards straighten and lift instead.
+- Tilted episode cards straighten and lift on hover or focus; static text uses
+  the standard card styling.
 
 ### Public GitHub page
 
@@ -338,22 +340,31 @@ C++ & Standards; its rules live in `assets/css/pages/talks.css`.
 Ringing (`ringing`) is the first nature page with its own treatment. It shares
 Podcast's dirty field and cream notes and stays in the board's nature half.
 
-- The background is the dirty ink texture, fixed on desktop; there is no
-  full-page sheet.
-- The header is a landscape cream note with the nature-green top edge and the
-  board's robin perch at its top left: the same branch and twine, with the
-  bird above the note. A narrow, tall silver leg ring (`assets/icons/bird-ring.svg`),
-  open at its seam like a real ringing band, sits at the top right as the page
-  artifact. The
-  `Field work` kicker, the Patrick Hand title `Ringing` and the summary sit
-  under the perch.
-- Intro paragraphs are straight cream notes with a nature-green left rule,
-  matching the software pages' intro notes.
-- Each species is a **deck** one photograph wide. The static cream base sits
+- Each row contains two species decks. The two-column grid gives the page the
+  same width as the other card pages and aligns `page.md` with the decks; a
+  trailing odd deck centers itself under the row.
+- The background is the dirty ink texture, fixed on desktop. The page itself is
+  the standard cream card sheet, like Rescues, not a loose collection of notes.
+- The header lives inside that sheet. The back link stays at the top, then the
+  header. A narrow, tall silver leg ring (`assets/icons/bird-ring.svg`), open
+  at its seam like a real ringing band, sits at the header's top right as the
+  page artifact. The `Field work` kicker, the Patrick Hand title `Ringing` and
+  the summary sit below.
+- The robin perch is temporarily removed from the page header. The page robins
+  will return only when every nature page gets one; engineering pages need a
+  matching badge at the same time. This is deferred to the end.
+- `page.md` is ordinary prose inside the same sheet, matching the Rescues
+  format; there are no separate intro-note cards.
+- Each species is a **deck** one grid column wide. A deck in the left column
+  fans left; the right column fans right, and the centered last deck fans
+  right. The static cream base sits
   directly under the closed photo at the same width and carries the species
   name, photo count, visit date and one shared note — there is no per-photo
   caption. The photograph is the dominant element; the note is a narrow
   column beneath it.
+- Decks in the same row share the row's height: the shorter cream base
+  stretches until it meets the taller one, so the next row starts on a clean
+  line.
 - Above the base the photos sit as a closed hand of cards: the selected photo
   is moved to the front of the deck and faces the viewer perfectly upright,
   with the other photos stacked behind it in a clean single-sided stack.
@@ -362,14 +373,16 @@ Podcast's dirty field and cream notes and stays in the board's nature half.
   drawing any mechanism.
 - Hovering or keyboard focus fans the deck open to one side, like a bird's
   wing opened to one side rather than symmetrically. The cards share a bottom
-  pivot and swing right from the upright selected card; the fan may extend
-  past the base. Losing hover closes it again, with the selected card on top.
+  pivot and swing away from the page center: a left-column deck fans left, a
+  right-column deck fans right, and the centered last deck fans right. The fan
+  may extend past the base. Losing hover closes it again, with the selected
+  card on top.
   Pressing a fanned card presents it (replacing the previous facing card);
-  pressing the presented card returns it to the fan while leaving the deck
-  open. A one-photo deck is a one-card deck, and a two-photo deck opens into a
-  shallow one-way fan. Touch opens on tap and closes on a tap outside.
-- Static notes (header, back link, intro notes, pager) get a soft olive glow;
-  the pager and back link are cream tags on the dirty field.
+  pressing the presented card advances to the next photo and wraps at the end,
+  matching the Rescues stills. A one-photo deck is a one-card deck, and a
+  two-photo deck opens into a shallow one-way fan. Touch opens on tap and
+  closes on a tap outside.
+- Header, back link and pager use the standard card styling inside the sheet.
   `prefers-reduced-motion` keeps the deck states but removes the transitions.
 - The photos block groups by `"species"`. Each photo carries a species id;
   `content/data/species.json` holds the name and `note_src`, and the note
